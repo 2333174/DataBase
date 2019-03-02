@@ -54,7 +54,7 @@ namespace Login
                 string select = "manage";
                 PassWordWindow passWordWindow = new PassWordWindow(select);
                 passWordWindow.ShowDialog();
-                this.Hide();
+                this.Close();
             }
         }
 

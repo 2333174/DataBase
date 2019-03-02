@@ -45,21 +45,22 @@ namespace Login
             {
                 MessageBox.Show("请输入密码！");
             }
-            //判断账号密码是否正确try
+            //数据库判断账号密码是否正确try
             try 
             {
-                string sqlstr = "server = 192.168.154.70; uid = root; pwd = root; database = dbtest";
+                string sqlstr = "server = 192.168.137.195; uid = root; pwd = 959959; database = yjysystem";
                 MySqlConnection conn = new MySqlConnection(sqlstr);
                 conn.Open();
-                string UserNamestr = string.Format("SELECT * FROM Login where User = '{0}' and Password = {1};",
+                string UserNamestr = string.Format("SELECT * FROM Login where User = '{0}' and Password = '{1}';",
                     user.Text, password.Password);
+                Console.WriteLine(password .Password );
                 MySqlCommand comm = new MySqlCommand(UserNamestr, conn);
                 MySqlDataReader dr = comm.ExecuteReader();
                 if (dr.Read())
                 {
                     string name = dr.GetString(dr.GetOrdinal("User"));
                     string pwd = dr.GetString(dr.GetOrdinal("Password"));
-                    if (name == user.Text && pwd == password.Password)
+                    if (name.Equals(user.Text) && pwd.Equals(password.Password))
                     {
                         MessageBox.Show("登录成功");
                         return;
