@@ -48,7 +48,7 @@ namespace Login
             //数据库判断账号密码是否正确try
             try 
             {
-                string sqlstr = "server = 192.168.137.195; uid = root; pwd = 959959; database = yjysystem";
+                string sqlstr = "server = 192.168.154.70; uid = root; pwd = root; database = gymdb";
                 MySqlConnection conn = new MySqlConnection(sqlstr);
                 conn.Open();
                 string UserNamestr = string.Format("SELECT * FROM Login where User = '{0}' and Password = '{1}';",
