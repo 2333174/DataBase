@@ -1,0 +1,7 @@
+D:\ComputerWork\DataBase\Server\Server\bin\Debug\Server.exe.config
+D:\ComputerWork\DataBase\Server\Server\bin\Debug\Server.exe
+D:\ComputerWork\DataBase\Server\Server\bin\Debug\Server.pdb
+D:\ComputerWork\DataBase\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\ComputerWork\DataBase\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\ComputerWork\DataBase\Server\Server\obj\Debug\Server.exe
+D:\ComputerWork\DataBase\Server\Server\obj\Debug\Server.pdb
