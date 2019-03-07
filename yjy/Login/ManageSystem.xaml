@@ -7,7 +7,39 @@
         mc:Ignorable="d"
         Title="ManageSystem" Height="450" Width="800">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="241" Margin="0,180,0,-0.333" VerticalAlignment="Top" Width="793"/>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="images/hot.jpg" Opacity="0.75"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="233*"/>
+            <ColumnDefinition Width="465*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="添加" HorizontalAlignment="Left" Margin="369,156,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Height="19" Background="#FFCEC2F0"/>
+        <Button Content="删除" HorizontalAlignment="Left" Margin="369,195,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Height="19" Background="#FFE9BABA"/>
+        <Button Content="修改" HorizontalAlignment="Left" Margin="369,235,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Height="19" Background="#FFBDE4CA"/>
+        <DataGrid HorizontalAlignment="Left" Height="182" Margin="138.333,156,0,0" VerticalAlignment="Top" Width="452" Grid.Column="2" Grid.ColumnSpan="2">
+            <DataGrid.Background>
+                <SolidColorBrush Color="#7F7F99E9" Opacity="0.5"/>
+            </DataGrid.Background>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="代表队名称" Foreground="#FFEDA7A7" Width="150"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FF7A2323" Header="账号" Width="150"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="缺省密码" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="设置比赛类型" HorizontalAlignment="Left" Margin="4.333,27,0,0" VerticalAlignment="Top" Background="#CCFFC8C8" Grid.ColumnSpan="2" Grid.Column="1" Height="25" Width="82"/>
+        <Label Content="每个代表队分别在男子每个年龄组最多报名人数：" HorizontalAlignment="Left" Margin="138.333,18,0,0" VerticalAlignment="Top" Background="#CCC7F3F5" Grid.Column="2" Grid.ColumnSpan="2" Height="25" Width="274"/>
+        <ComboBox Name="manCount" HorizontalAlignment="Left" Margin="207,18,0,0" VerticalAlignment="Top" Width="46" Grid.Column="3" Height="21"/>
+        <Label Content="每个代表队分别在女子每个年龄组最多报名人数：" HorizontalAlignment="Left" Margin="138.333,48,0,0" VerticalAlignment="Top" Background="#FFF2D4E4" Grid.Column="2" Grid.ColumnSpan="2" Height="25" Width="274"/>
+        <ComboBox Name="womanCount" HorizontalAlignment="Left" Margin="207,48,0,0" VerticalAlignment="Top" Width="46" Grid.Column="3" Height="21"/>
+        <Label Content="每次比赛上场人数" HorizontalAlignment="Left" Margin="138.333,78,0,0" VerticalAlignment="Top" Width="274" Background="#FFB3CEEE" Grid.Column="2" Grid.ColumnSpan="2" Height="25"/>
+        <ComboBox Name="playCount" HorizontalAlignment="Left" Margin="207,78,0,0" VerticalAlignment="Top" Width="46" Grid.Column="3" Height="21"/>
+        <Label Content="计算前N名运动员地成绩" HorizontalAlignment="Left" Margin="138.333,108,0,0" VerticalAlignment="Top" Width="274" Background="#FFC7B5F7" Grid.Column="2" Grid.ColumnSpan="2" Height="25"/>
+        <ComboBox HorizontalAlignment="Left" Margin="207,108,0,0" VerticalAlignment="Top" Width="46" Grid.Column="3" Height="21"/>
+        <Button Content="保存设置" HorizontalAlignment="Left" Margin="369,48,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Background="#FFF2DEB0" BorderBrush="#FF1854E3" Grid.Column="3" Height="19"/>
+        <Label Content="设置代表队地&#xD;&#xA;名称、账号、密码" HorizontalAlignment="Left" Margin="4.333,156,0,0" VerticalAlignment="Top" Height="42" Width="114" Background="#FFBAE7CE" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Button Content="点击生成或查看预赛赛事表" HorizontalAlignment="Left" Margin="4.333,348,0,0" VerticalAlignment="Top" Width="160" Height="34" Background="#CCC7F3F5" BorderBrush="#FF0A96F1" Grid.ColumnSpan="2" Grid.Column="1"/>
     </Grid>
 </Window>

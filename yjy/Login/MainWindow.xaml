@@ -7,15 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="-42,-54,-43.667,-29.333">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/start.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="欢迎您！请选择：" HorizontalAlignment="Left" Margin="273,163,0,0" VerticalAlignment="Top" Height="32" Width="231"/>
-        <Button Content="确定" HorizontalAlignment="Left" Margin="289,386,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <RadioButton Content="报名系统" Name="radio_sign" HorizontalAlignment="Left" Margin="273,243,0,0" VerticalAlignment="Top" Checked="Radio_sign_Checked"/>
-        <RadioButton Content="管理系统" Name="radio_manage" HorizontalAlignment="Left" Margin="274,283,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
-        <RadioButton Content="打分系统" Name="radio_grade" HorizontalAlignment="Left" Margin="274,330,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+        <Label Content="欢迎您！请选择：" HorizontalAlignment="Left" Margin="273,148,0,0" VerticalAlignment="Top" Height="32" Width="231" Background="#FF1D1F1F" FontSize="18" Opacity="0.7" Foreground="White" FontWeight="Bold"/>
+        <Button Content="确定" HorizontalAlignment="Left" Margin="289,386,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Background="#FFE0F3F3" BorderBrush="#FF04236B" FontSize="16"/>
+        <RadioButton Content="报名系统" Name="radio_sign" HorizontalAlignment="Left" Margin="273,243,0,0" VerticalAlignment="Top" Checked="Radio_sign_Checked" Foreground="White" FontSize="16"/>
+        <RadioButton Content="管理系统" Name="radio_manage" HorizontalAlignment="Left" Margin="274,283,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1" Foreground="White" FontSize="16"/>
+        <RadioButton Content="打分系统" Name="radio_grade" HorizontalAlignment="Left" Margin="274,330,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked" Foreground="White" FontSize="16"/>
 
     </Grid>
 </Window>

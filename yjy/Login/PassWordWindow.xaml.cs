@@ -24,11 +24,17 @@ namespace Login
         public PassWordWindow()
         {
             InitializeComponent();
+           
         }
         public PassWordWindow(string s)
         {
             select = s;
             InitializeComponent();
+            //设置背景图片
+            Uri uri = new Uri(@"images/login.jpg", UriKind.Relative);
+            ImageBrush ib = new ImageBrush();
+            ib.ImageSource = new BitmapImage(uri);
+            this.Background = ib;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +67,33 @@ namespace Login
                     string pwd = dr.GetString(dr.GetOrdinal("Password"));
                     if (name == user.Text && pwd == password.Password)
                     {
-                        MessageBox.Show("登录成功");
+                        //MessageBox.Show("登录成功");
+                        if ("manage" == select)
+                        {
+                            ManageSystem manageWindow = new ManageSystem();
+                            manageWindow.ShowDialog();
+                            this.Hide();
+                        }
+                        //if ("grade" == select)
+                        //{
+                        //    if (账号是小组裁判)
+                        //    {
+                        //        GradeSystem gradeSystem = new GradeSystem();
+                        //        gradeSystem.ShowDialog();
+                        //        this.Hide();
+                        //    }
+                        //    else
+                        //    {
+                        //        GSForMajorJudge gSForMajorJudge = new GSForMajorJudge();
+                        //        gSForMajorJudge.ShowDialog();
+                        //        this.Hide();
+                        //    }
+                        //}
+                        if("signup"==select)
+                        {
+                            //打开打分系统并关闭本窗口
+                            this.Hide();
+                        }
                         return;
                     }
                 }
@@ -75,20 +107,7 @@ namespace Login
 
                 MessageBox.Show(ex.Message.ToString());
             }
-
-        //    if (user.Text.ToString() == "yjy" && password.Password.ToString() == "00000")
-        //    {
-        //        //正确，登陆成功
-        //        if ("manage" == select)
-        //        {
-        //            ManageSystem manageWindow = new ManageSystem();
-        //            manageWindow.ShowDialog();
-        //            this.Hide();
-        //        }
-                
-        //    }
-        //    else
-        //        MessageBox.Show("账号或密码有误！");
+            
         }
     }
 }
