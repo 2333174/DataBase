@@ -6,34 +6,37 @@ namespace DB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gymdb.athlete")]
-    public partial class athlete
+    [Table("gymdb.matchgroup")]
+    public partial class matchgroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public athlete()
+        public matchgroup()
         {
             peasonalresult = new HashSet<peasonalresult>();
         }
 
-        [Required]
-        [StringLength(20)]
-        public string name { get; set; }
-
         [Key]
         [StringLength(18)]
-        public string idNumber { get; set; }
-
-        public sbyte age { get; set; }
+        public string gounpID { get; set; }
 
         [Required]
-        [StringLength(5)]
-        public string gender { get; set; }
-
-        [StringLength(20)]
-        public string teamName { get; set; }
+        [StringLength(18)]
+        public string MajorJudge { get; set; }
 
         [StringLength(18)]
-        public string athleteID { get; set; }
+        public string judgeOne { get; set; }
+
+        [StringLength(18)]
+        public string judgeTwo { get; set; }
+
+        [StringLength(18)]
+        public string judgeThree { get; set; }
+
+        [StringLength(18)]
+        public string judgeFour { get; set; }
+
+        [StringLength(18)]
+        public string judgeFive { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<peasonalresult> peasonalresult { get; set; }

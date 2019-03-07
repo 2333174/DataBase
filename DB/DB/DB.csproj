@@ -68,16 +68,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminlogin.cs" />
     <Compile Include="athlete.cs" />
     <Compile Include="coach.cs" />
     <Compile Include="doctor.cs" />
-    <Compile Include="judge.cs" />
-    <Compile Include="leader.cs" />
-    <Compile Include="login.cs" />
     <Compile Include="GymDB.cs" />
+    <Compile Include="judge.cs" />
+    <Compile Include="judgelogin.cs" />
+    <Compile Include="leader.cs" />
+    <Compile Include="matchgroup.cs" />
+    <Compile Include="peasonalresult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="team.cs" />
+    <Compile Include="teamlogin.cs" />
+    <Compile Include="teamresult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
