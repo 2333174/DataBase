@@ -9,6 +9,11 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/start.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/plain.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/girls.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chairs.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/hot.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/tree.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/login.jpg")]
 
 
