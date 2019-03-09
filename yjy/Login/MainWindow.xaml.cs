@@ -49,17 +49,18 @@ namespace Login
         {
             //关闭当前窗口
             this.Hide();
-            //用参数select来传递数据，告知在登陆成功后应打开哪个窗口
-            string select;
+            //用参数select来传递数据,0报名,1管理,2打分
+            int select;
             //判断用户选择的是哪个窗口并显示该窗口
             if (radio_sign.IsChecked==true)
             {
-                select = "signup";
-
+                select = 0;
+                PassWordWindow passWordWindow = new PassWordWindow(select);
+                passWordWindow.ShowDialog();
             }
             if(radio_manage.IsChecked==true)
             {   
-                select = "manage";
+                select = 1;
                 //打开管理系统窗口
                 PassWordWindow passWordWindow = new PassWordWindow(select);
                 passWordWindow.ShowDialog();
@@ -68,7 +69,7 @@ namespace Login
             }
             if(radio_grade.IsChecked==true)
             {
-                select = "grade";
+                select = 2;
                 PassWordWindow passWordWindow = new PassWordWindow(select);
                 passWordWindow.ShowDialog();
                 

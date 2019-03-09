@@ -164,6 +164,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\bg-login.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\start.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
