@@ -17,16 +17,16 @@
             <ColumnDefinition Width="46*"/>
             <ColumnDefinition Width="747*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="队长" HorizontalAlignment="Left" Margin="43,36,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Label Content="队医" HorizontalAlignment="Left" Margin="43,78,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <DataGrid HorizontalAlignment="Left" Height="163" Margin="97,125,0,0" VerticalAlignment="Top" Width="273" Opacity="0.7" Grid.Column="1">
+        <Label Content="队长" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Background="#FFA69A8E" Grid.Column="1" Opacity="0.7"/>
+        <Label Content="队医" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Background="#FFA69A8E" Opacity="0.7" Grid.Column="1"/>
+        <DataGrid HorizontalAlignment="Left" Height="163" Margin="96,125,0,0" VerticalAlignment="Top" Width="273" Opacity="0.7" Grid.Column="1">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Name"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="IdNumber"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Age"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Group"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Item"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Score"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="姓名"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="身份证号"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="年龄"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="组别"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="成绩"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="97,40,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Column="1"/>
