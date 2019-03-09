@@ -68,7 +68,6 @@ namespace Login
                     string name = dr.GetString(dr.GetOrdinal("UName"));
                     string pwd = dr.GetString(dr.GetOrdinal("Password"));
                     string  role = dr.GetString(dr.GetOrdinal("Role"));
-                    string weight = dr.GetString(dr.GetOrdinal("Weight"));//weight为0是裁判，为1是主裁判
                     if (name.Equals(user.Text) && pwd.Equals(password.Password)&&role.Equals(select.ToString()))
                     {
                         //MessageBox.Show("登录成功");
@@ -80,6 +79,7 @@ namespace Login
                         }
                         if (2 == select)
                         {
+                            string weight = dr.GetString(dr.GetOrdinal("Weight"));//weight为0是裁判，为1是主裁判
                             if (weight=="0")
                             {
                                 GradeSystem gradeSystem = new GradeSystem();

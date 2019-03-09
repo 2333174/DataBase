@@ -149,12 +149,6 @@ C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\login.csproj.CopyComplete
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.exe
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.pdb
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\start.jpg
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\plain.jpg
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\girls.jpg
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\chairs.jpg
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\hot.jpg
-D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\tree.jpg
 D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\login.jpg
 D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.dll
 D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.SqlServer.dll
@@ -174,3 +168,4 @@ D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\GSForMajorJudge.baml
 D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\PreGameTable.baml
 D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\SignUp.baml
 D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\bg-login.jpg
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\bg-start.jpg

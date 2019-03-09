@@ -24,7 +24,7 @@ namespace Login
         {
             InitializeComponent();
             //设置背景图片
-            Uri uri = new Uri(@"images/start.jpg",UriKind.Relative);
+            Uri uri = new Uri(@"images/bg-start.jpg",UriKind.Relative);
             ImageBrush ib = new ImageBrush();
             ib.ImageSource = new BitmapImage(uri);
             this.Background = ib;
