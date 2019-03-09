@@ -149,3 +149,10 @@ C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\login.csproj.CopyComplete
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.exe
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.pdb
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\obj\Debug\SignUp.g.cs
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\bin\Debug\images\plain.jpg
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\bin\Debug\images\girls.jpg
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\bin\Debug\images\chairs.jpg
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\bin\Debug\images\hot.jpg
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\bin\Debug\images\tree.jpg
+C:\Users\yjy\Documents\GitHub\DataBase\yjy\Login\obj\Debug\SignUp.baml
