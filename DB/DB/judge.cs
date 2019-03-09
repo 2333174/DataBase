@@ -9,6 +9,12 @@ namespace DB
     [Table("gymdb.judge")]
     public partial class judge
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public judge()
+        {
+            matchgroup = new HashSet<matchgroup>();
+        }
+
         [Required]
         [StringLength(20)]
         public string name { get; set; }
@@ -22,9 +28,11 @@ namespace DB
         [StringLength(15)]
         public string telephone { get; set; }
 
-        [StringLength(18)]
-        public string judgeID { get; set; }
+        public int judgeID { get; set; }
 
-        public sbyte weight { get; set; }
+        public int weight { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<matchgroup> matchgroup { get; set; }
     }
 }

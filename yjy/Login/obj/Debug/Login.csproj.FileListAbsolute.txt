@@ -149,3 +149,23 @@ C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\login.csproj.CopyComplete
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.exe
 C:\Users\Administrator\Documents\Tencent Files\1741603127\FileRecv\yjy\Login\obj\Debug\Login.pdb
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\login.jpg
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.dll
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.SqlServer.dll
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\MySql.Data.EntityFramework.dll
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.xml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\EntityFramework.SqlServer.xml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\MySql.Data.Entity.EF6.xml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\MySql.Data.EntityFramework.xml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\GradeSystem.g.cs
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\GSForMajorJudge.g.cs
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\PreGameTable.g.cs
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\SignUp.g.cs
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\Login_Content.g.cs
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\GradeSystem.baml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\GSForMajorJudge.baml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\PreGameTable.baml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\obj\Debug\SignUp.baml
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\bg-login.jpg
+D:\ComputerWork\DataBase\DataBase\yjy\Login\bin\Debug\images\bg-start.jpg

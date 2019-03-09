@@ -20,13 +20,14 @@ namespace Login
     /// </summary>
     public partial class PassWordWindow : Window
     {
-        public string select { get; set; }
+        //0报名,1管理,2打分
+        public int select { get; set; }
         public PassWordWindow()
         {
             InitializeComponent();
            
         }
-        public PassWordWindow(string s)
+        public PassWordWindow(int s)
         {
             select = s;
             InitializeComponent();
@@ -54,46 +55,50 @@ namespace Login
             //数据库判断账号密码是否正确try
             try 
             {
-                string sqlstr = "server = 192.168.154.70; uid = root; pwd = root; database = gymdb";
+                string sqlstr = "server = 192.168.189.1; uid = root; pwd = root; database = gymdb";
                 MySqlConnection conn = new MySqlConnection(sqlstr);
                 conn.Open();
-                string UserNamestr = string.Format("SELECT * FROM Login where User = '{0}' and Password = '{1}';",
-                    user.Text, password.Password);
+                string UserNamestr = string.Format("SELECT * FROM Login where UName = '{0}' and Password = '{1}'and Role='{2}' ;",
+                    user.Text, password.Password,select.ToString());
                 Console.WriteLine(password .Password );
                 MySqlCommand comm = new MySqlCommand(UserNamestr, conn);
                 MySqlDataReader dr = comm.ExecuteReader();
                 if (dr.Read())
                 {
-                    string name = dr.GetString(dr.GetOrdinal("User"));
+                    string name = dr.GetString(dr.GetOrdinal("UName"));
                     string pwd = dr.GetString(dr.GetOrdinal("Password"));
-                    if (name.Equals(user.Text) && pwd.Equals(password.Password))
+                    string  role = dr.GetString(dr.GetOrdinal("Role"));
+                    if (name.Equals(user.Text) && pwd.Equals(password.Password)&&role.Equals(select.ToString()))
                     {
                         //MessageBox.Show("登录成功");
-                        if ("manage" == select)
+                        if (1 == select)
                         {
+                            this.Close();
                             ManageSystem manageWindow = new ManageSystem();
                             manageWindow.ShowDialog();
-                            this.Hide();
                         }
-                        //if ("grade" == select)
-                        //{
-                        //    if (账号是小组裁判)
-                        //    {
-                        //        GradeSystem gradeSystem = new GradeSystem();
-                        //        gradeSystem.ShowDialog();
-                        //        this.Hide();
-                        //    }
-                        //    else
-                        //    {
-                        //        GSForMajorJudge gSForMajorJudge = new GSForMajorJudge();
-                        //        gSForMajorJudge.ShowDialog();
-                        //        this.Hide();
-                        //    }
-                        //}
-                        if("signup"==select)
+                        if (2 == select)
+                        {
+                            string weight = dr.GetString(dr.GetOrdinal("Weight"));//weight为0是裁判，为1是主裁判
+                            if (weight=="0")
+                            {
+                                this.Close();
+                                GradeSystem gradeSystem = new GradeSystem();
+                                gradeSystem.ShowDialog();
+                            }
+                            else
+                            {
+                                this.Close();
+                                GSForMajorJudge gSForMajorJudge = new GSForMajorJudge();
+                                gSForMajorJudge.ShowDialog();
+                            }
+                        }
+                        if(0 ==select)
                         {
                             //打开打分系统并关闭本窗口
-                            this.Hide();
+                            this.Close();
+                            Window1 signup = new Window1();
+                            signup.ShowDialog();
                         }
                         return;
                     }
