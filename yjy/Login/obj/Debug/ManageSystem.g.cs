@@ -43,7 +43,7 @@ namespace Login {
         
         #line 38 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox manCount;
+        internal System.Windows.Controls.ComboBox baomingCount;
         
         #line default
         #line hidden
@@ -51,7 +51,7 @@ namespace Login {
         
         #line 40 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox womanCount;
+        internal System.Windows.Controls.ComboBox playerCount;
         
         #line default
         #line hidden
@@ -59,7 +59,7 @@ namespace Login {
         
         #line 42 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox playCount;
+        internal System.Windows.Controls.ComboBox qianjimingCount;
         
         #line default
         #line hidden
@@ -95,10 +95,10 @@ namespace Login {
             switch (connectionId)
             {
             case 1:
-            this.manCount = ((System.Windows.Controls.ComboBox)(target));
+            this.baomingCount = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 2:
-            this.womanCount = ((System.Windows.Controls.ComboBox)(target));
+            this.playerCount = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 3:
             this.playCount = ((System.Windows.Controls.ComboBox)(target));
