@@ -8,7 +8,7 @@
         Title="GSForMajorJudge" Height="450" Width="800">
     <Grid Opacity="0.8">
         <Grid.Background>
-            <ImageBrush ImageSource="images/hot.jpg"/>
+            <ImageBrush ImageSource="images/bg-GSF.PNG"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="299*"/>
