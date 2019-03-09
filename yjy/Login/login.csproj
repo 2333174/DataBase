@@ -168,9 +168,9 @@
     <Resource Include="images\bg-login.jpg" />
     <Resource Include="images\bg-grade.PNG" />
     <Resource Include="images\bg-pass.jpg" />
-    <Content Include="images\start.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg-start.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,17 +8,18 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="-42,-54,-43.667,-29.333">
         <Grid.Background>
-            <ImageBrush ImageSource="images/start.jpg"/>
+            <ImageBrush ImageSource="images/bg-start.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="欢迎您！请选择：" HorizontalAlignment="Left" Margin="273,148,0,0" VerticalAlignment="Top" Height="32" Width="231" Background="#FF1D1F1F" FontSize="18" Opacity="0.7" Foreground="White" FontWeight="Bold"/>
-        <Button Content="确定" HorizontalAlignment="Left" Margin="289,386,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Background="#FFE0F3F3" BorderBrush="#FF04236B" FontSize="16"/>
-        <RadioButton Content="报名系统" Name="radio_sign" HorizontalAlignment="Left" Margin="273,243,0,0" VerticalAlignment="Top" Checked="Radio_sign_Checked" Foreground="White" FontSize="16"/>
-        <RadioButton Content="管理系统" Name="radio_manage" HorizontalAlignment="Left" Margin="274,283,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1" Foreground="White" FontSize="16"/>
-        <RadioButton Content="打分系统" Name="radio_grade" HorizontalAlignment="Left" Margin="274,330,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked" Foreground="White" FontSize="16"/>
+        <Grid HorizontalAlignment="Left" Height="236" Margin="475,96,0,0" VerticalAlignment="Top" Width="271" Background="#FFB6B6B3" Opacity="0.6" Grid.ColumnSpan="2">
+            <Label Content="您好，请选择" HorizontalAlignment="Left" Margin="50,43,0,0" VerticalAlignment="Top" Foreground="#FF146581" FontSize="20" FontFamily="MisterEarl BT"/>
+            <RadioButton Content=" 报 名 系 统" HorizontalAlignment="Left" Margin="50,96,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 管 理 系 统" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 打 分 系 统" HorizontalAlignment="Left" Margin="50,172,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+        </Grid>
 
     </Grid>
 </Window>
