@@ -31,11 +31,7 @@ namespace Login
         {
             select = s;
             InitializeComponent();
-            //设置背景图片
-            Uri uri = new Uri(@"images/login.jpg", UriKind.Relative);
-            ImageBrush ib = new ImageBrush();
-            ib.ImageSource = new BitmapImage(uri);
-            this.Background = ib;
+            
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

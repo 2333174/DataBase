@@ -118,10 +118,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PreGameTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SignUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,9 +129,6 @@
     </Compile>
     <Compile Include="PassWordWindow.xaml.cs">
       <DependentUpon>PassWordWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PreGameTable.xaml.cs">
-      <DependentUpon>PreGameTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -171,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bg-start.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bg-manage.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
