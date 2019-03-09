@@ -5,10 +5,10 @@ namespace DB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model1 : DbContext
+    public partial class GymDB : DbContext
     {
-        public Model1()
-            : base("name=Model1")
+        public GymDB()
+            : base("name=GymDB")
         {
         }
 
