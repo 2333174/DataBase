@@ -22,6 +22,29 @@ namespace Login
         public ManageSystem()
         {
             InitializeComponent();
+            manCount.Items.Add(1);
+            manCount.Items.Add(2);
+            manCount.Items.Add(3);
+            manCount.Items.Add(4);
+            manCount.Items.Add(5);
+            manCount.Items.Add(6);
+            womanCount.Items.Add(1);
+            womanCount.Items.Add(2);
+            womanCount.Items.Add(3);
+            womanCount.Items.Add(4);
+            womanCount.Items.Add(5);
+            womanCount.Items.Add(6);
+            playCount.Items.Add(1);
+            playCount.Items.Add(2);
+            playCount.Items.Add(3);
+            playCount.Items.Add(4);
+            playCount.Items.Add(5);
+            playCount.Items.Add(6);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

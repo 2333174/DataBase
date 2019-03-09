@@ -14,7 +14,6 @@ namespace DB
         public string name { get; set; }
 
         [Key]
-        [Column(TypeName = "char")]
         [StringLength(18)]
         public string idNumber { get; set; }
 

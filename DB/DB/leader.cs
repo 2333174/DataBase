@@ -9,16 +9,18 @@ namespace DB
     [Table("gymdb.leader")]
     public partial class leader
     {
-        [Required]
+        [Key]
+        [Column(Order = 0)]
         [StringLength(20)]
         public string name { get; set; }
 
         [Key]
-        [Column(TypeName = "char")]
+        [Column(Order = 1)]
         [StringLength(18)]
         public string idNumber { get; set; }
 
-        [Required]
+        [Key]
+        [Column(Order = 2)]
         [StringLength(15)]
         public string telephone { get; set; }
     }

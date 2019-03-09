@@ -1,0 +1,34 @@
+﻿<Window x:Class="Login.GSForMajorJudge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login"
+        mc:Ignorable="d"
+        Title="GSForMajorJudge" Height="450" Width="800">
+    <Grid Opacity="0.8">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/hot.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="299*"/>
+            <ColumnDefinition Width="98*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="240" Margin="75,129,0,0" VerticalAlignment="Top" Width="474" Opacity="0.7">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="运动员名称" Foreground="#FFF9B3B3"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="编号"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="打分裁判"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分数"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="奖励分"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="惩罚分"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="总分"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="通过" HorizontalAlignment="Left" Margin="317,76,0,0" VerticalAlignment="Top" Width="75" Background="#CCC06071" BorderBrush="#FF5A0303"/>
+        <Button Content="更新" HorizontalAlignment="Left" Margin="195,76,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" BorderBrush="#FF620303"/>
+        <Button Content="修改" HorizontalAlignment="Left" Margin="75,76,0,0" VerticalAlignment="Top" Width="75" Foreground="Black" Background="#FFB37580" BorderBrush="#FF760404"/>
+
+    </Grid>
+</Window>

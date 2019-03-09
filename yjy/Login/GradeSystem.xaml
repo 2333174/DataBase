@@ -1,0 +1,30 @@
+﻿<Window x:Class="Login.GradeSystem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login"
+        mc:Ignorable="d"
+        Title="GradeSystem" Height="450" Width="800">
+    <Grid Margin="0,0,-6.667,-0.333" Opacity="0.8">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/hot.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="236" Margin="75,158,0,0" VerticalAlignment="Top" Width="456" Opacity="0.8">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="运动员名称"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="编号"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分数"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="修改" HorizontalAlignment="Left" Margin="75,121,0,0" VerticalAlignment="Top" Width="75" Background="#FFC57D7D"/>
+        <Button Content="提交" HorizontalAlignment="Left" Margin="185,121,0,0" VerticalAlignment="Top" Width="75" Background="#FFC57D7D"/>
+        <Label Content="请务必确认分数无误后再提交成绩！" HorizontalAlignment="Left" Margin="75,57,0,0" VerticalAlignment="Top" Height="30" Width="257" Background="#7FF64B4B" FontSize="16" FontWeight="Bold"/>
+
+    </Grid>
+</Window>
