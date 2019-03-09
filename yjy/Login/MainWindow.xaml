@@ -14,11 +14,12 @@
             <ColumnDefinition Width="36*"/>
             <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
-        <Grid HorizontalAlignment="Left" Height="236" Margin="475,96,0,0" VerticalAlignment="Top" Width="271" Background="#FFB6B6B3" Opacity="0.6" Grid.ColumnSpan="2">
+        <Grid HorizontalAlignment="Left" Height="289" Margin="475,96,0,0" VerticalAlignment="Top" Width="276" Background="#FFB6B6B3" Opacity="0.6" Grid.ColumnSpan="2">
             <Label Content="您好，请选择" HorizontalAlignment="Left" Margin="50,43,0,0" VerticalAlignment="Top" Foreground="#FF146581" FontSize="20" FontFamily="MisterEarl BT"/>
-            <RadioButton Content=" 报 名 系 统" HorizontalAlignment="Left" Margin="50,96,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
-            <RadioButton Content=" 管 理 系 统" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
-            <RadioButton Content=" 打 分 系 统" HorizontalAlignment="Left" Margin="50,172,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 报 名 系 统" Name="radio_sign" HorizontalAlignment="Left" Margin="50,96,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 管 理 系 统" Name="radio_manage" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 打 分 系 统" Name="radio_grade" HorizontalAlignment="Left" Margin="50,172,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <Button Content="确定&#xD;&#xA;" HorizontalAlignment="Left" Click="Button_Click" Margin="80,221,0,0" VerticalAlignment="Top" Width="91" Height="28" FontSize="20"/>
         </Grid>
 
     </Grid>
