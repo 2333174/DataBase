@@ -6,19 +6,19 @@ namespace DB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gymdb.doctor")]
-    public partial class doctor
+    [Table("gymdb.teamlogin")]
+    public partial class teamlogin
     {
         [Required]
         [StringLength(20)]
         public string name { get; set; }
 
         [Key]
-        [StringLength(18)]
-        public string idNumber { get; set; }
+        [StringLength(20)]
+        public string account { get; set; }
 
         [Required]
-        [StringLength(15)]
-        public string telephone { get; set; }
+        [StringLength(20)]
+        public string password { get; set; }
     }
 }

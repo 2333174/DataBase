@@ -6,22 +6,17 @@ namespace DB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gymdb.leader")]
-    public partial class leader
+    [Table("gymdb.judgelogin")]
+    public partial class judgelogin
     {
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
-        public string name { get; set; }
+        public string judgeName { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        [StringLength(18)]
-        public string idNumber { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
-        [StringLength(15)]
-        public string telephone { get; set; }
+        [StringLength(20)]
+        public string password { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace DB
         public string name { get; set; }
 
         [Key]
-        [Column(Order = 1, TypeName = "char")]
+        [Column(Order = 1)]
         [StringLength(18)]
         public string idNumber { get; set; }
 
@@ -27,6 +27,6 @@ namespace DB
         [Key]
         [Column(Order = 3)]
         [StringLength(2)]
-        public string sex { get; set; }
+        public string gender { get; set; }
     }
 }

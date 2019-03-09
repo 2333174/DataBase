@@ -13,13 +13,18 @@ namespace DB
         [StringLength(20)]
         public string name { get; set; }
 
-        [Key]
         [Column(TypeName = "char")]
+        [Required]
         [StringLength(18)]
         public string idNumber { get; set; }
 
         [Required]
         [StringLength(15)]
         public string telephone { get; set; }
+
+        [StringLength(18)]
+        public string judgeID { get; set; }
+
+        public sbyte weight { get; set; }
     }
 }
