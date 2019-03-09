@@ -164,12 +164,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\bg-grade.PNG" />
     <Resource Include="images\bg-GSF.PNG" />
     <Resource Include="images\bg-login.jpg" />
-    <Resource Include="images\bg-manage.PNG" />
-    <Resource Include="images\bg-start.jpg" />
-    <Content Include="images\login.jpg">
+    <Resource Include="images\bg-grade.PNG" />
+    <Resource Include="images\bg-pass.jpg" />
+    <Content Include="images\start.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

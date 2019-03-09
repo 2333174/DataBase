@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
         Title="GSForMajorJudge" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="images/bg-GSF.PNG"/>
+    </Window.Background>
     <Grid Opacity="0.8">
         <Grid.Background>
             <ImageBrush ImageSource="images/bg-GSF.PNG"/>
@@ -14,21 +17,21 @@
             <ColumnDefinition Width="299*"/>
             <ColumnDefinition Width="98*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid HorizontalAlignment="Left" Height="240" Margin="75,129,0,0" VerticalAlignment="Top" Width="474" Opacity="0.7">
+        <DataGrid HorizontalAlignment="Left" Height="251" Margin="133,89,0,0" VerticalAlignment="Top" Width="454" Opacity="0.7" SelectionChanged="DataGrid_SelectionChanged" BorderBrush="#FFB37580" Foreground="#FF060001">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="运动员名称" Foreground="#FFF9B3B3"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="编号"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="打分裁判"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分数"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="奖励分"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="惩罚分"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="总分"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  " Foreground="#FFF9B3B3"/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  性别  "/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  年龄  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  比赛项目  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  裁判  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="通过" HorizontalAlignment="Left" Margin="317,76,0,0" VerticalAlignment="Top" Width="75" Background="#CCC06071" BorderBrush="#FF5A0303"/>
-        <Button Content="更新" HorizontalAlignment="Left" Margin="195,76,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" BorderBrush="#FF620303"/>
-        <Button Content="修改" HorizontalAlignment="Left" Margin="75,76,0,0" VerticalAlignment="Top" Width="75" Foreground="Black" Background="#FFB37580" BorderBrush="#FF760404"/>
+        <Button Content="通过" HorizontalAlignment="Left" Margin="21.667,167,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" BorderBrush="#FFB37580" RenderTransformOrigin="2.04,2.672" Grid.Column="1" Foreground="#FFE4E4E5"/>
+        <Button Content="更新" HorizontalAlignment="Left" Margin="21.667,130,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" BorderBrush="#FFBF989F" Grid.Column="1" Foreground="#FFE4E5E5"/>
+        <Button Content="修改" HorizontalAlignment="Left" Margin="21.667,89,0,0" VerticalAlignment="Top" Width="75" Foreground="#FFE9D2D0" Background="#FFB37580" BorderBrush="#FFBA8891" Grid.Column="1"/>
 
     </Grid>
 </Window>
