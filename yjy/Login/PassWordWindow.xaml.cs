@@ -73,32 +73,32 @@ namespace Login
                         //MessageBox.Show("登录成功");
                         if (1 == select)
                         {
+                            this.Close();
                             ManageSystem manageWindow = new ManageSystem();
                             manageWindow.ShowDialog();
-                            this.Hide();
                         }
                         if (2 == select)
                         {
                             string weight = dr.GetString(dr.GetOrdinal("Weight"));//weight为0是裁判，为1是主裁判
                             if (weight=="0")
                             {
+                                this.Close();
                                 GradeSystem gradeSystem = new GradeSystem();
                                 gradeSystem.ShowDialog();
-                                this.Hide();
                             }
                             else
                             {
+                                this.Close();
                                 GSForMajorJudge gSForMajorJudge = new GSForMajorJudge();
                                 gSForMajorJudge.ShowDialog();
-                                this.Hide();
                             }
                         }
                         if(0 ==select)
                         {
                             //打开打分系统并关闭本窗口
+                            this.Close();
                             Window1 signup = new Window1();
                             signup.ShowDialog();
-                            this.Hide();
                         }
                         return;
                     }

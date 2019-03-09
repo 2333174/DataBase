@@ -47,8 +47,6 @@ namespace Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //关闭当前窗口
-            this.Hide();
             //用参数select来传递数据,0报名,1管理,2打分
             int select;
             //判断用户选择的是哪个窗口并显示该窗口
@@ -56,6 +54,8 @@ namespace Login
             {
                 select = 0;
                 PassWordWindow passWordWindow = new PassWordWindow(select);
+                //关闭当前窗口
+                this.Close();
                 passWordWindow.ShowDialog();
             }
             if(radio_manage.IsChecked==true)
@@ -63,14 +63,16 @@ namespace Login
                 select = 1;
                 //打开管理系统窗口
                 PassWordWindow passWordWindow = new PassWordWindow(select);
-                passWordWindow.ShowDialog();
                 //关闭当前窗口
-                
+                this.Close();
+                passWordWindow.ShowDialog();              
             }
             if(radio_grade.IsChecked==true)
             {
                 select = 2;
                 PassWordWindow passWordWindow = new PassWordWindow(select);
+                //关闭当前窗口
+                this.Close();
                 passWordWindow.ShowDialog();
                 
             }
