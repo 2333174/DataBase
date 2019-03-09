@@ -19,24 +19,11 @@ namespace DB
         [StringLength(18)]
         public string gounpID { get; set; }
 
-        [Required]
-        [StringLength(18)]
-        public string MajorJudge { get; set; }
+        public int judge { get; set; }
 
-        [StringLength(18)]
-        public string judgeOne { get; set; }
+        public sbyte Weight { get; set; }
 
-        [StringLength(18)]
-        public string judgeTwo { get; set; }
-
-        [StringLength(18)]
-        public string judgeThree { get; set; }
-
-        [StringLength(18)]
-        public string judgeFour { get; set; }
-
-        [StringLength(18)]
-        public string judgeFive { get; set; }
+        public virtual judge judge1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<peasonalresult> peasonalresult { get; set; }

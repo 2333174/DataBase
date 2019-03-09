@@ -9,18 +9,17 @@ namespace DB
     [Table("gymdb.peasonalresult")]
     public partial class peasonalresult
     {
-        [Key]
-        [Column(Order = 0, TypeName = "char")]
+        [Column(TypeName = "char")]
+        [Required]
         [StringLength(18)]
         public string playID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         [StringLength(20)]
         public string SportsEvent { get; set; }
 
-        [Key]
-        [Column(Order = 2, TypeName = "char")]
+        [Column(TypeName = "char")]
+        [Required]
         [StringLength(18)]
         public string Gounpid { get; set; }
 
@@ -31,6 +30,11 @@ namespace DB
         public short? Grade { get; set; }
 
         public short? Ranking { get; set; }
+
+        public bool? Suq { get; set; }
+
+        [Key]
+        public int PRid { get; set; }
 
         public virtual athlete athlete { get; set; }
 
