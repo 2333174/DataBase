@@ -16,7 +16,7 @@ namespace DB
         public virtual DbSet<judge> judge { get; set; }
         public virtual DbSet<login> login { get; set; }
         public virtual DbSet<matchgroup> matchgroup { get; set; }
-        public virtual DbSet<peasonalresult> peasonalresult { get; set; }
+        public virtual DbSet<personalresult> personalresult { get; set; }
         public virtual DbSet<staff> staff { get; set; }
         public virtual DbSet<team> team { get; set; }
         public virtual DbSet<teamresult> teamresult { get; set; }
@@ -24,42 +24,37 @@ namespace DB
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<athlete>()
-                .Property(e => e.name)
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<athlete>()
-                .Property(e => e.idNumber)
+                .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<athlete>()
-                .Property(e => e.gender)
+                .Property(e => e.Gender)
                 .IsUnicode(false);
 
             modelBuilder.Entity<athlete>()
-                .Property(e => e.athleteID)
+                .Property(e => e.AthleteID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<athlete>()
-                .HasMany(e => e.peasonalresult)
+                .HasMany(e => e.personalresult)
                 .WithRequired(e => e.athlete)
-                .HasForeignKey(e => e.playID);
+                .HasForeignKey(e => e.AthleteID);
 
             modelBuilder.Entity<judge>()
-                .Property(e => e.name)
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<judge>()
-                .Property(e => e.idNumber)
+                .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<judge>()
-                .Property(e => e.telephone)
+                .Property(e => e.Telephone)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<judge>()
-                .HasMany(e => e.matchgroup)
-                .WithRequired(e => e.judge1)
-                .HasForeignKey(e => e.judge);
 
             modelBuilder.Entity<login>()
                 .Property(e => e.UName)
@@ -70,18 +65,18 @@ namespace DB
                 .IsUnicode(false);
 
             modelBuilder.Entity<matchgroup>()
-                .Property(e => e.gounpID)
+                .Property(e => e.GounpID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<peasonalresult>()
-                .Property(e => e.playID)
+            modelBuilder.Entity<personalresult>()
+                .Property(e => e.AthleteID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<peasonalresult>()
+            modelBuilder.Entity<personalresult>()
                 .Property(e => e.SportsEvent)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<peasonalresult>()
+            modelBuilder.Entity<personalresult>()
                 .Property(e => e.Gounpid)
                 .IsUnicode(false);
 

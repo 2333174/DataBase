@@ -6,22 +6,22 @@ namespace DB
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gymdb.peasonalresult")]
-    public partial class peasonalresult
+    [Table("gymdb.personalresult")]
+    public partial class personalresult
     {
-        [Column(TypeName = "char")]
         [Required]
         [StringLength(18)]
-        public string playID { get; set; }
+        public string AthleteID { get; set; }
 
         [Required]
         [StringLength(20)]
         public string SportsEvent { get; set; }
 
-        [Column(TypeName = "char")]
         [Required]
         [StringLength(18)]
         public string Gounpid { get; set; }
+
+        public sbyte? Role { get; set; }
 
         public short? Bouns { get; set; }
 
