@@ -111,5 +111,12 @@ namespace Login
             }
             
         }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.ShowDialog();
+        }
     }
 }

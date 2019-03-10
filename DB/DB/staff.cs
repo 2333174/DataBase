@@ -9,6 +9,16 @@ namespace DB
     [Table("gymdb.staff")]
     public partial class staff
     {
+        public staff(string staffName, string staffIDnum, string staffGender, string staffTel, string staffRole,int tid)
+        {
+            Name = staffName;
+            IDNumber = staffIDnum;
+            Gender = staffGender;
+            Telephone = staffTel;
+            Role = staffRole;
+            Tid = tid;
+        }
+
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
