@@ -16,6 +16,14 @@ namespace DB
             Role = userRole;
         }
 
+        public login(string userName, string userPwd, int userRole, int userWeight)
+        {
+            UName = userName;
+            Password = userPwd;
+            Role = userRole;
+            Weight = (sbyte?)userWeight;
+        }
+
         [Key]
         public int UID { get; set; }
 

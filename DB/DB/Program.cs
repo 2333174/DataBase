@@ -115,6 +115,11 @@ namespace DB
             //}
             //Console.ReadKey();
             //Console.WriteLine("监听完毕，按任意键退出！");
+
+            // test code
+            var dbs = new GymDBService();
+            login login = new login("hhs", dbs.GetRandomPassword(10), 0, 2);
+            dbs.AddLoginAccount(login);
         }
     }
 }
