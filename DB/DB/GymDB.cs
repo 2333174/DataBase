@@ -65,7 +65,7 @@ namespace DB
                 .IsUnicode(false);
 
             modelBuilder.Entity<matchgroup>()
-                .Property(e => e.GounpID)
+                .Property(e => e.GroupID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<personalresult>()
@@ -77,7 +77,7 @@ namespace DB
                 .IsUnicode(false);
 
             modelBuilder.Entity<personalresult>()
-                .Property(e => e.Gounpid)
+                .Property(e => e.Groupid)
                 .IsUnicode(false);
 
             modelBuilder.Entity<staff>()

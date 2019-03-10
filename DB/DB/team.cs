@@ -17,6 +17,14 @@ namespace DB
             teamresult = new HashSet<teamresult>();
         }
 
+        public team(string teamName)
+        {
+            TName = teamName;
+            athlete = new HashSet<athlete>();
+            staff = new HashSet<staff>();
+            teamresult = new HashSet<teamresult>();
+        }
+
         [Key]
         public int TID { get; set; }
 

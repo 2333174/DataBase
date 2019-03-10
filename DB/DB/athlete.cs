@@ -15,12 +15,12 @@ namespace DB
             personalresult = new HashSet<personalresult>();
         }
 
-        public athlete(string aname, string aidnum, int age, string gender)
+        public athlete(string athleteName, string athleteIDnum, int athleteAge, string athleteGender)
         {
-            Name = aname;
-            IDNumber = aidnum;
-            Age = age;
-            Gender = gender;
+            Name = athleteName;
+            IDNumber = athleteIDnum;
+            Age = athleteAge;
+            Gender = athleteGender;
             personalresult = new HashSet<personalresult>();
         }
 

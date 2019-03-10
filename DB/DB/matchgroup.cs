@@ -15,9 +15,17 @@ namespace DB
             personalresult = new HashSet<personalresult>();
         }
 
+        public matchgroup(string groupID, int judgeID, int weight)
+        {
+            GroupID = groupID;
+            JudgeID = judgeID;
+            Weight = (sbyte)weight;
+            personalresult = new HashSet<personalresult>();
+        }
+
         [Key]
         [StringLength(18)]
-        public string GounpID { get; set; }
+        public string GroupID { get; set; }
 
         public int JudgeID { get; set; }
 

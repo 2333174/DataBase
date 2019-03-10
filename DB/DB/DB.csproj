@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="athlete.cs" />
     <Compile Include="GymDB.cs" />
+    <Compile Include="GymDBService.cs" />
     <Compile Include="judge.cs" />
     <Compile Include="login.cs" />
     <Compile Include="matchgroup.cs" />

@@ -15,6 +15,14 @@ namespace DB
             matchgroup = new HashSet<matchgroup>();
         }
 
+        public judge(string judgeName, string judgeIDnum, string judgeTel)
+        {
+            Name = judgeName;
+            IDNumber = judgeIDnum;
+            Telephone = judgeTel;
+            matchgroup = new HashSet<matchgroup>();
+        }
+
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
@@ -29,8 +37,6 @@ namespace DB
         public string Telephone { get; set; }
 
         public int JudgeID { get; set; }
-
-        public int Weight { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<matchgroup> matchgroup { get; set; }

@@ -9,6 +9,14 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class personalresult
     {
+        public personalresult(string athleteID, string sportsEvent, string groupID, int role)
+        {
+            AthleteID = athleteID;
+            SportsEvent = sportsEvent;
+            Groupid = groupID;
+            Role = (sbyte)role;
+        }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
@@ -19,9 +27,9 @@ namespace DB
 
         [Required]
         [StringLength(18)]
-        public string Gounpid { get; set; }
+        public string Groupid { get; set; }
 
-        public sbyte? Role { get; set; }
+        public sbyte Role { get; set; }
 
         public short? Bouns { get; set; }
 
