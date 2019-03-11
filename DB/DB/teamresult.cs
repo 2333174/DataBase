@@ -7,9 +7,9 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.teamresult")]
-    public partial class teamresult
+    public partial class TeamResult
     {
-        public teamresult(int teamid, string teamEvent)
+        public TeamResult(int teamid, string teamEvent)
         {
             TID = teamid;
             Event = teamEvent;
@@ -28,6 +28,6 @@ namespace DB
         [Key]
         public int TRid { get; set; }
 
-        public virtual team team { get; set; }
+        public virtual Team team { get; set; }
     }
 }

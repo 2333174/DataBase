@@ -7,21 +7,21 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.athlete")]
-    public partial class athlete
+    public partial class Athlete
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public athlete()
+        public Athlete()
         {
-            personalresult = new HashSet<personalresult>();
+            personalresult = new HashSet<PersonalResult>();
         }
 
-        public athlete(string athleteName, string athleteIDnum, int athleteAge, string athleteGender)
+        public Athlete(string athleteName, string athleteIDnum, int athleteAge, string athleteGender)
         {
             Name = athleteName;
             IDNumber = athleteIDnum;
             Age = athleteAge;
             Gender = athleteGender;
-            personalresult = new HashSet<personalresult>();
+            personalresult = new HashSet<PersonalResult>();
         }
 
         [Required]
@@ -43,9 +43,9 @@ namespace DB
         [StringLength(3)]
         public string AthleteID { get; set; }
 
-        public virtual team team { get; set; }
+        public virtual Team team { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personalresult> personalresult { get; set; }
+        public virtual ICollection<PersonalResult> personalresult { get; set; }
     }
 }

@@ -118,8 +118,9 @@ namespace DB
 
             // test code
             var dbs = new GymDBService();
-            login login = new login("hhs", dbs.GetRandomPassword(10), 0, 2);
-            dbs.AddLoginAccount(login);
+            string pwd = dbs.GetPassword("jack", 1);
+            Console.Write(pwd);
+            Console.ReadLine();
         }
     }
 }

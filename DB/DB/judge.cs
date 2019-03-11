@@ -7,20 +7,20 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.judge")]
-    public partial class judge
+    public partial class Judge
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public judge()
+        public Judge()
         {
-            matchgroup = new HashSet<matchgroup>();
+            matchgroup = new HashSet<MatchGroup>();
         }
 
-        public judge(string judgeName, string judgeIDnum, string judgeTel)
+        public Judge(string judgeName, string judgeIDnum, string judgeTel)
         {
             Name = judgeName;
             IDNumber = judgeIDnum;
             Telephone = judgeTel;
-            matchgroup = new HashSet<matchgroup>();
+            matchgroup = new HashSet<MatchGroup>();
         }
 
         [Required]
@@ -39,6 +39,6 @@ namespace DB
         public int JudgeID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<matchgroup> matchgroup { get; set; }
+        public virtual ICollection<MatchGroup> matchgroup { get; set; }
     }
 }

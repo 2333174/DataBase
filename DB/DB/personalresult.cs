@@ -7,9 +7,9 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.personalresult")]
-    public partial class personalresult
+    public partial class PersonalResult
     {
-        public personalresult(string athleteID, string sportsEvent, string groupID, int role)
+        public PersonalResult(string athleteID, string sportsEvent, string groupID, int role)
         {
             AthleteID = athleteID;
             SportsEvent = sportsEvent;
@@ -44,8 +44,8 @@ namespace DB
         [Key]
         public int PRid { get; set; }
 
-        public virtual athlete athlete { get; set; }
+        public virtual Athlete athlete { get; set; }
 
-        public virtual matchgroup matchgroup { get; set; }
+        public virtual MatchGroup matchgroup { get; set; }
     }
 }

@@ -7,22 +7,22 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.team")]
-    public partial class team
+    public partial class Team
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public team()
+        public Team()
         {
-            athlete = new HashSet<athlete>();
-            staff = new HashSet<staff>();
-            teamresult = new HashSet<teamresult>();
+            athlete = new HashSet<Athlete>();
+            staff = new HashSet<Staff>();
+            teamresult = new HashSet<TeamResult>();
         }
 
-        public team(string teamName)
+        public Team(string teamName)
         {
             TName = teamName;
-            athlete = new HashSet<athlete>();
-            staff = new HashSet<staff>();
-            teamresult = new HashSet<teamresult>();
+            athlete = new HashSet<Athlete>();
+            staff = new HashSet<Staff>();
+            teamresult = new HashSet<TeamResult>();
         }
 
         [Key]
@@ -33,12 +33,12 @@ namespace DB
         public string TName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<athlete> athlete { get; set; }
+        public virtual ICollection<Athlete> athlete { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<staff> staff { get; set; }
+        public virtual ICollection<Staff> staff { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<teamresult> teamresult { get; set; }
+        public virtual ICollection<TeamResult> teamresult { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace DB
             "abcdefghijklmnopqrstuvwxyz", "1234567890", ",./;:[]{}!@#$%&*()~" };
 
         // operation for generating random password
-        public string GetRandomPassword(int passwordLength)
+        public string GenerateRandomPassword(int passwordLength)
         {
             string tmpPwd = string.Empty;
             int randomNum1, randomNum2;
@@ -31,7 +31,7 @@ namespace DB
         }
 
         // Add an login account to the database
-        public void AddLoginAccount(login loginAccount)
+        public void AddLoginAccount(Login loginAccount)
         {
             using (var db = new GymDB())
             {
@@ -40,5 +40,96 @@ namespace DB
             }
         }
         
+        // Add a team with teamname
+        public void AddTeam(Team team)
+        {
+            using (var db = new GymDB())
+            {
+                db.team.Add(team);
+                db.SaveChanges();
+            }
+        }
+
+        // Add a staff to the team
+        public void AddStaff(Staff staff)
+        {
+            using (var db = new GymDB())
+            {
+                var targetTeam = db.team.Find(staff.Tid);
+                targetTeam.staff.Add(staff);
+                db.staff.Add(staff);
+                db.SaveChanges();
+            }
+        }
+
+        // Add a teamresult to the team
+        public void AddTeamResult(TeamResult teamresult)
+        {
+            using (var db = new GymDB())
+            {
+                var targetTeam = db.team.Find(teamresult.TID);
+                targetTeam.teamresult.Add(teamresult);
+                db.teamresult.Add(teamresult);
+                db.SaveChanges();
+            }
+        }
+
+        // Add an athlete to the team
+        public void AddAthlete(Athlete athlete)
+        {
+            using (var db = new GymDB())
+            {
+                var targetTeam = db.team.Find(athlete.TID);
+                targetTeam.athlete.Add(athlete);
+                db.athlete.Add(athlete);
+                db.SaveChanges();
+            }
+        }
+
+        // Add personalresult to the athlete
+        public void AddPersonalResult(PersonalResult personalResult)
+        {
+            using (var db = new GymDB())
+            {
+                var targetAthlete = db.athlete.Find(personalResult.AthleteID);
+                var targetGroup = db.matchgroup.Find(personalResult.Groupid);
+                targetAthlete.personalresult.Add(personalResult);
+                targetGroup.personalresult.Add(personalResult);
+                db.personalresult.Add(personalResult);
+                db.SaveChanges();
+            }
+        }
+
+        // Add match group to the judge
+        public void AddMatchGroup(MatchGroup matchGroup)
+        {
+            using (var db = new GymDB())
+            {
+                var targetJudge = db.judge.Find(matchGroup.JudgeID);
+                targetJudge.matchgroup.Add(matchGroup);
+                db.matchgroup.Add(matchGroup);
+                db.SaveChanges();
+            }
+        }
+
+        // Add a judge
+        public void AddJudge(Judge judge)
+        {
+            using (var db = new GymDB())
+            {
+                db.judge.Add(judge);
+                db.SaveChanges();
+            }
+        }
+
+        // Get the password by comparing username and role
+        public string GetPassword(string username, int role)
+        {
+            using (var db = new GymDB())
+            {
+                var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role).FirstOrDefault();
+                return account.Password;
+            }
+        }
     }
 }

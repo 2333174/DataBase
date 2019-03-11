@@ -7,20 +7,20 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.matchgroup")]
-    public partial class matchgroup
+    public partial class MatchGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public matchgroup()
+        public MatchGroup()
         {
-            personalresult = new HashSet<personalresult>();
+            personalresult = new HashSet<PersonalResult>();
         }
 
-        public matchgroup(string groupID, int judgeID, int weight)
+        public MatchGroup(string groupID, int judgeID, int weight)
         {
             GroupID = groupID;
             JudgeID = judgeID;
             Weight = (sbyte)weight;
-            personalresult = new HashSet<personalresult>();
+            personalresult = new HashSet<PersonalResult>();
         }
 
         [Key]
@@ -31,9 +31,9 @@ namespace DB
 
         public sbyte Weight { get; set; }
 
-        public virtual judge judge { get; set; }
+        public virtual Judge judge { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personalresult> personalresult { get; set; }
+        public virtual ICollection<PersonalResult> personalresult { get; set; }
     }
 }

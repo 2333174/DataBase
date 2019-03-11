@@ -7,9 +7,11 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.staff")]
-    public partial class staff
+    public partial class Staff
     {
-        public staff(string staffName, string staffIDnum, string staffGender, string staffTel, string staffRole,int tid)
+        public Staff() { }
+
+        public Staff(string staffName, string staffIDnum, string staffGender, string staffTel, string staffRole,int tid)
         {
             Name = staffName;
             IDNumber = staffIDnum;
@@ -41,6 +43,6 @@ namespace DB
 
         public int Tid { get; set; }
 
-        public virtual team team { get; set; }
+        public virtual Team team { get; set; }
     }
 }

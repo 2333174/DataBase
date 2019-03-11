@@ -12,104 +12,104 @@ namespace DB
         {
         }
 
-        public virtual DbSet<athlete> athlete { get; set; }
-        public virtual DbSet<judge> judge { get; set; }
-        public virtual DbSet<login> login { get; set; }
-        public virtual DbSet<matchgroup> matchgroup { get; set; }
-        public virtual DbSet<personalresult> personalresult { get; set; }
-        public virtual DbSet<staff> staff { get; set; }
-        public virtual DbSet<team> team { get; set; }
-        public virtual DbSet<teamresult> teamresult { get; set; }
+        public virtual DbSet<Athlete> athlete { get; set; }
+        public virtual DbSet<Judge> judge { get; set; }
+        public virtual DbSet<Login> login { get; set; }
+        public virtual DbSet<MatchGroup> matchgroup { get; set; }
+        public virtual DbSet<PersonalResult> personalresult { get; set; }
+        public virtual DbSet<Staff> staff { get; set; }
+        public virtual DbSet<Team> team { get; set; }
+        public virtual DbSet<TeamResult> teamresult { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<athlete>()
+            modelBuilder.Entity<Athlete>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<athlete>()
+            modelBuilder.Entity<Athlete>()
                 .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<athlete>()
+            modelBuilder.Entity<Athlete>()
                 .Property(e => e.Gender)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<athlete>()
+            modelBuilder.Entity<Athlete>()
                 .Property(e => e.AthleteID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<athlete>()
+            modelBuilder.Entity<Athlete>()
                 .HasMany(e => e.personalresult)
                 .WithRequired(e => e.athlete)
                 .HasForeignKey(e => e.AthleteID);
 
-            modelBuilder.Entity<judge>()
+            modelBuilder.Entity<Judge>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<judge>()
+            modelBuilder.Entity<Judge>()
                 .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<judge>()
+            modelBuilder.Entity<Judge>()
                 .Property(e => e.Telephone)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<login>()
+            modelBuilder.Entity<Login>()
                 .Property(e => e.UName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<login>()
+            modelBuilder.Entity<Login>()
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<matchgroup>()
+            modelBuilder.Entity<MatchGroup>()
                 .Property(e => e.GroupID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<personalresult>()
+            modelBuilder.Entity<PersonalResult>()
                 .Property(e => e.AthleteID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<personalresult>()
+            modelBuilder.Entity<PersonalResult>()
                 .Property(e => e.SportsEvent)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<personalresult>()
+            modelBuilder.Entity<PersonalResult>()
                 .Property(e => e.Groupid)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<staff>()
+            modelBuilder.Entity<Staff>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<staff>()
+            modelBuilder.Entity<Staff>()
                 .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<staff>()
+            modelBuilder.Entity<Staff>()
                 .Property(e => e.Gender)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<staff>()
+            modelBuilder.Entity<Staff>()
                 .Property(e => e.Telephone)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<staff>()
+            modelBuilder.Entity<Staff>()
                 .Property(e => e.Role)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<team>()
+            modelBuilder.Entity<Team>()
                 .Property(e => e.TName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<team>()
+            modelBuilder.Entity<Team>()
                 .HasMany(e => e.athlete)
                 .WithOptional(e => e.team)
                 .WillCascadeOnDelete();
 
-            modelBuilder.Entity<teamresult>()
+            modelBuilder.Entity<TeamResult>()
                 .Property(e => e.Event)
                 .IsUnicode(false);
         }

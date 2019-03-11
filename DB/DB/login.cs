@@ -7,16 +7,16 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.login")]
-    public partial class login
+    public partial class Login
     {
-        public login(string userName, string userPwd, int userRole)
+        public Login(string userName, string userPwd, int userRole)
         {
             UName = userName;
             Password = userPwd;
             Role = userRole;
         }
 
-        public login(string userName, string userPwd, int userRole, int userWeight)
+        public Login(string userName, string userPwd, int userRole, int userWeight)
         {
             UName = userName;
             Password = userPwd;
