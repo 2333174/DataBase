@@ -9,6 +9,12 @@ namespace DB
     [Table("gymdb.teamresult")]
     public partial class teamresult
     {
+        public teamresult(int teamid, string teamEvent)
+        {
+            TID = teamid;
+            Event = teamEvent;
+        }
+
         public int TID { get; set; }
 
         [Required]
