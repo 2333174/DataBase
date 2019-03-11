@@ -1,0 +1,25 @@
+﻿<Window x:Class="Login.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="-42,-54,-43.667,-29.333">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/bg-start.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Left" Height="236" Margin="475,96,0,0" VerticalAlignment="Top" Width="271" Background="#FFB6B6B3" Opacity="0.6" Grid.ColumnSpan="2">
+            <Label Content="您好，请选择" HorizontalAlignment="Left" Margin="50,43,0,0" VerticalAlignment="Top" Foreground="#FF146581" FontSize="20" FontFamily="MisterEarl BT"/>
+            <RadioButton Content=" 报 名 系 统" HorizontalAlignment="Left" Margin="50,96,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 管 理 系 统" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+            <RadioButton Content=" 打 分 系 统" HorizontalAlignment="Left" Margin="50,172,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20"/>
+        </Grid>
+
+    </Grid>
+</Window>
