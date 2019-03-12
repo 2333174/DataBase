@@ -117,10 +117,6 @@ namespace DB
             //Console.WriteLine("监听完毕，按任意键退出！");
 
             // test code
-            var dbs = new GymDBService();
-            string pwd = dbs.GetPassword("jack", 1);
-            Console.Write(pwd);
-            Console.ReadLine();
         }
     }
 }

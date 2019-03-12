@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Data.Entity;
 
 namespace DB
 {
@@ -31,7 +32,7 @@ namespace DB
         }
 
         // Add an login account to the database
-        public void AddLoginAccount(Login _loginAccount)
+        public void Add(Login _loginAccount)
         {
             using (var db = new GymDB())
             {
@@ -41,7 +42,7 @@ namespace DB
         }
         
         // Add a team with teamname
-        public void AddTeam(Team _team)
+        public void Add(Team _team)
         {
             using (var db = new GymDB())
             {
@@ -51,7 +52,7 @@ namespace DB
         }
 
         // Add a staff to the team
-        public void AddStaff(Staff _staff)
+        public void Add(Staff _staff)
         {
             using (var db = new GymDB())
             {
@@ -63,7 +64,7 @@ namespace DB
         }
 
         // Add a teamresult to the team
-        public void AddTeamResult(TeamResult _teamresult)
+        public void Add(TeamResult _teamresult)
         {
             using (var db = new GymDB())
             {
@@ -75,7 +76,7 @@ namespace DB
         }
 
         // Add an athlete to the team
-        public void AddAthlete(Athlete _athlete)
+        public void Add(Athlete _athlete)
         {
             using (var db = new GymDB())
             {
@@ -87,7 +88,7 @@ namespace DB
         }
 
         // Add personalresult to the athlete
-        public void AddPersonalResult(PersonalResult _personalResult)
+        public void Add(PersonalResult _personalResult)
         {
             using (var db = new GymDB())
             {
@@ -101,7 +102,7 @@ namespace DB
         }
 
         // Add match group to the judge
-        public void AddMatchGroup(MatchGroup _matchGroup)
+        public void Add(MatchGroup _matchGroup)
         {
             using (var db = new GymDB())
             {
@@ -113,7 +114,7 @@ namespace DB
         }
 
         // Add a judge
-        public void AddJudge(Judge _judge)
+        public void Add(Judge _judge)
         {
             using (var db = new GymDB())
             {
@@ -171,6 +172,217 @@ namespace DB
                     judges.Add(tmp);
                 }
                 return judges;
+            }
+        }
+
+        public List<MatchGroup> GetMatchGroupsJudgedByID(int _JudgeID)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(mg => mg.JudgeID == _JudgeID).ToList();
+        }
+
+        public Team GetTeamByTName(string _name)
+        {
+            using (var db = new GymDB())
+                return db.team.Where(t => t.TName.Equals(_name)).Single();
+        }
+
+        public List<Team> GetAllTeams()
+        {
+            using (var db = new GymDB())
+                return db.team.ToList();
+        }
+
+        public List<Athlete> GetAllAthletes()
+        {
+            using (var db = new GymDB())
+                return db.athlete.ToList();
+        }
+
+        public List<Athlete> GetAthletesByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                Team targetTeam = GetTeamByTName(_TName);
+                return db.athlete.Where(a => a.TID == targetTeam.TID).ToList();
+            }
+        }
+
+        public List<Staff> GetStaffsByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                Team targetTeam = GetTeamByTName(_TName);
+                return db.staff.Where(s => s.Tid == targetTeam.TID).ToList();
+            }
+        }
+
+        public List<TeamResult> GetTeamResultsByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                Team targetTeam = GetTeamByTName(_TName);
+                return db.teamresult.Where(tr => tr.TID == targetTeam.TID).ToList();
+            }
+        }
+
+        public void Delete(Login _login)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.login.Where(l => l.UID == _login.UID).Single();
+                db.login.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(Team _team)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.team.Where(t => t.TID == _team.TID).Single();
+                db.team.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(Judge _judge)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.judge.Where(j => j.JudgeID == _judge.JudgeID).Single();
+                db.judge.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(MatchGroup _matchgroup)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.matchgroup.Where(mg => mg.GroupID == _matchgroup.GroupID).Single();
+                db.matchgroup.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(PersonalResult _personalResult)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.personalresult.Where(pr => pr.PRid == _personalResult.PRid).Single();
+                db.personalresult.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(Athlete _athlete)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.athlete.Where(a => a.IDNumber == _athlete.IDNumber).Single();
+                db.athlete.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(Staff _staff)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.staff.Where(s => s.IDNumber == _staff.IDNumber).Single();
+                db.staff.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(TeamResult _teamResult)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.teamresult.Where(tr => tr.TRid == _teamResult.TRid).Single();
+                db.teamresult.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Login _login)
+        {
+            using (var db = new GymDB())
+            {
+                db.login.Attach(_login);
+                db.Entry(_login).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Judge _judge)
+        {
+            using (var db = new GymDB())
+            {
+                db.judge.Attach(_judge);
+                db.Entry(_judge).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(MatchGroup _matchgroup)
+        {
+            using (var db = new GymDB())
+            {
+                db.matchgroup.Attach(_matchgroup);
+                db.Entry(_matchgroup).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(PersonalResult _personalresult)
+        {
+            using (var db = new GymDB())
+            {
+                db.personalresult.Attach(_personalresult);
+                db.Entry(_personalresult).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Athlete _athlete)
+        {
+            using (var db = new GymDB())
+            {
+                db.athlete.Attach(_athlete);
+                db.Entry(_athlete).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Team _team)
+        {
+            using (var db = new GymDB())
+            {
+                db.team.Attach(_team);
+                db.Entry(_team).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Staff _staff)
+        {
+            using (var db = new GymDB())
+            {
+                db.staff.Attach(_staff);
+                db.Entry(_staff).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(TeamResult _teamresult)
+        {
+            using (var db = new GymDB())
+            {
+                db.teamresult.Attach(_teamresult);
+                db.Entry(_teamresult).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
     }
