@@ -41,7 +41,7 @@ namespace DB
 
             modelBuilder.Entity<Athlete>()
                 .HasMany(e => e.personalresult)
-                .WithRequired(e => e.athlete)
+                .WithRequired(e => e.Athlete)
                 .HasForeignKey(e => e.AthleteID);
 
             modelBuilder.Entity<Judge>()

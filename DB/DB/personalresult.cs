@@ -44,7 +44,7 @@ namespace DB
         [Key]
         public int PRid { get; set; }
 
-        public virtual Athlete athlete { get; set; }
+        public virtual Athlete Athlete { get; set; }
 
         public virtual MatchGroup matchgroup { get; set; }
     }

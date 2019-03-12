@@ -17,9 +17,10 @@ namespace DB
             teamresult = new HashSet<TeamResult>();
         }
 
-        public Team(string teamName)
+        public Team(string teamName, byte[] doc)
         {
             TName = teamName;
+            Docs = doc;
             athlete = new HashSet<Athlete>();
             staff = new HashSet<Staff>();
             teamresult = new HashSet<TeamResult>();
@@ -31,6 +32,10 @@ namespace DB
         [Required]
         [StringLength(20)]
         public string TName { get; set; }
+
+        [Column(TypeName = "mediumblob")]
+        [Required]
+        public byte[] Docs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Athlete> athlete { get; set; }
