@@ -132,12 +132,45 @@ namespace DB
             }
         }
 
-        public List<Athlete> GetAthlete(string _AthleteName)
+        public List<Athlete> GetAthleteByName(string _AthleteName)
         {
             using (var db = new GymDB())
             {
                 var athletes = db.athlete.Where(a => a.Name.Equals(_AthleteName));
                 return athletes.ToList();
+            }
+        }
+
+        public Athlete GetAthleteByID(string _AthleteID)
+        {
+            using (var db = new GymDB())
+                return db.athlete.Find(_AthleteID);
+        }
+
+        public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID)).ToList();
+        }
+
+        public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.Groupid.Equals(_Groupid)).ToList();
+        }
+
+        public List<Judge> GetJudgesByGroupid(string _Groupid)
+        {
+            using (var db = new GymDB())
+            {
+                var listofjudge = db.matchgroup.Where(mg => mg.GroupID.Equals(_Groupid));
+                List<Judge> judges = new List<Judge>();
+                foreach(var mgs in listofjudge)
+                {
+                    var tmp = db.judge.Where(j => j.JudgeID == mgs.JudgeID).Single();
+                    judges.Add(tmp);
+                }
+                return judges;
             }
         }
     }

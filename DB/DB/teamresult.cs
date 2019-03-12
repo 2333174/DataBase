@@ -9,6 +9,8 @@ namespace DB
     [Table("gymdb.teamresult")]
     public partial class TeamResult
     {
+        public TeamResult() { }
+
         public TeamResult(int teamid, string teamEvent)
         {
             TID = teamid;

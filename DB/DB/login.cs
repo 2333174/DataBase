@@ -9,6 +9,8 @@ namespace DB
     [Table("gymdb.login")]
     public partial class Login
     {
+        public Login() { }
+
         public Login(string userName, string userPwd, int userRole)
         {
             UName = userName;
