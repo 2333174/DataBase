@@ -48,23 +48,24 @@ namespace Login
             {
                 MessageBox.Show("请输入密码！");
             }
+            
             //数据库判断账号密码是否正确try
-            try 
+            try
             {
-                string sqlstr = "server = 192.168.189.1; uid = root; pwd = root; database = gymdb";
+                string sqlstr = "server = 10.132.89.16; uid = root; pwd = root; database = gymdb";
                 MySqlConnection conn = new MySqlConnection(sqlstr);
                 conn.Open();
                 string UserNamestr = string.Format("SELECT * FROM Login where UName = '{0}' and Password = '{1}'and Role='{2}' ;",
-                    user.Text, password.Password,select.ToString());
-                Console.WriteLine(password .Password );
+                    user.Text, password.Password, select.ToString());
+                //Console.WriteLine(password.Password);
                 MySqlCommand comm = new MySqlCommand(UserNamestr, conn);
                 MySqlDataReader dr = comm.ExecuteReader();
                 if (dr.Read())
                 {
                     string name = dr.GetString(dr.GetOrdinal("UName"));
                     string pwd = dr.GetString(dr.GetOrdinal("Password"));
-                    string  role = dr.GetString(dr.GetOrdinal("Role"));
-                    if (name.Equals(user.Text) && pwd.Equals(password.Password)&&role.Equals(select.ToString()))
+                    string role = dr.GetString(dr.GetOrdinal("Role"));
+                    if (name.Equals(user.Text) && pwd.Equals(password.Password) && role.Equals(select.ToString()))
                     {
                         //MessageBox.Show("登录成功");
                         if (1 == select)
@@ -76,7 +77,7 @@ namespace Login
                         if (2 == select)
                         {
                             string weight = dr.GetString(dr.GetOrdinal("Weight"));//weight为0是裁判，为1是主裁判
-                            if (weight=="0")
+                            if (weight == "0")
                             {
                                 this.Close();
                                 GradeSystem gradeSystem = new GradeSystem();
@@ -89,7 +90,7 @@ namespace Login
                                 gSForMajorJudge.ShowDialog();
                             }
                         }
-                        if(0 ==select)
+                        if (0 == select)
                         {
                             //打开打分系统并关闭本窗口
                             this.Close();
@@ -109,7 +110,7 @@ namespace Login
 
                 MessageBox.Show(ex.Message.ToString());
             }
-            
+
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
