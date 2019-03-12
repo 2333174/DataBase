@@ -12,31 +12,40 @@ namespace DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public athlete()
         {
-            peasonalresult = new HashSet<peasonalresult>();
+            personalresult = new HashSet<personalresult>();
+        }
+
+        public athlete(string athleteName, string athleteIDnum, int athleteAge, string athleteGender)
+        {
+            Name = athleteName;
+            IDNumber = athleteIDnum;
+            Age = athleteAge;
+            Gender = athleteGender;
+            personalresult = new HashSet<personalresult>();
         }
 
         [Required]
         [StringLength(20)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Key]
         [StringLength(18)]
-        public string idNumber { get; set; }
+        public string IDNumber { get; set; }
 
-        public int age { get; set; }
+        public int Age { get; set; }
 
         [Required]
         [StringLength(5)]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
         public int? TID { get; set; }
 
         [StringLength(3)]
-        public string athleteID { get; set; }
+        public string AthleteID { get; set; }
 
         public virtual team team { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<peasonalresult> peasonalresult { get; set; }
+        public virtual ICollection<personalresult> personalresult { get; set; }
     }
 }

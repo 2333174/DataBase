@@ -41,7 +41,7 @@ namespace Login {
     public partial class ManageSystem : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 25 "..\..\ManageSystem.xaml"
+        #line 28 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox baomingCount;
         
@@ -49,7 +49,7 @@ namespace Login {
         #line hidden
         
         
-        #line 28 "..\..\ManageSystem.xaml"
+        #line 31 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox playerCount;
         
@@ -57,7 +57,7 @@ namespace Login {
         #line hidden
         
         
-        #line 30 "..\..\ManageSystem.xaml"
+        #line 33 "..\..\ManageSystem.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox qianjimingCount;
         

@@ -115,11 +115,11 @@ namespace DB
             //}
             //Console.ReadKey();
             //Console.WriteLine("监听完毕，按任意键退出！");
-            string sqlstr = "server = 192.168.154.94; uid = root; pwd = root; database = gymdb";
-            MySqlConnection conn = new MySqlConnection(sqlstr);
-            conn.Open();
-            Console.Write("OK");
-            conn.Close();
+
+            // test code
+            var dbs = new GymDBService();
+            login login = new login("hhs", dbs.GetRandomPassword(10), 0, 2);
+            dbs.AddLoginAccount(login);
         }
     }
 }
