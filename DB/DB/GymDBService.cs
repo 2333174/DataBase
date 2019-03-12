@@ -31,104 +31,113 @@ namespace DB
         }
 
         // Add an login account to the database
-        public void AddLoginAccount(Login loginAccount)
+        public void AddLoginAccount(Login _loginAccount)
         {
             using (var db = new GymDB())
             {
-                db.login.Add(loginAccount);
+                db.login.Add(_loginAccount);
                 db.SaveChanges();
             }
         }
         
         // Add a team with teamname
-        public void AddTeam(Team team)
+        public void AddTeam(Team _team)
         {
             using (var db = new GymDB())
             {
-                db.team.Add(team);
+                db.team.Add(_team);
                 db.SaveChanges();
             }
         }
 
         // Add a staff to the team
-        public void AddStaff(Staff staff)
+        public void AddStaff(Staff _staff)
         {
             using (var db = new GymDB())
             {
-                var targetTeam = db.team.Find(staff.Tid);
-                targetTeam.staff.Add(staff);
-                db.staff.Add(staff);
+                var targetTeam = db.team.Find(_staff.Tid);
+                targetTeam.staff.Add(_staff);
+                db.staff.Add(_staff);
                 db.SaveChanges();
             }
         }
 
         // Add a teamresult to the team
-        public void AddTeamResult(TeamResult teamresult)
+        public void AddTeamResult(TeamResult _teamresult)
         {
             using (var db = new GymDB())
             {
-                var targetTeam = db.team.Find(teamresult.TID);
-                targetTeam.teamresult.Add(teamresult);
-                db.teamresult.Add(teamresult);
+                var targetTeam = db.team.Find(_teamresult.TID);
+                targetTeam.teamresult.Add(_teamresult);
+                db.teamresult.Add(_teamresult);
                 db.SaveChanges();
             }
         }
 
         // Add an athlete to the team
-        public void AddAthlete(Athlete athlete)
+        public void AddAthlete(Athlete _athlete)
         {
             using (var db = new GymDB())
             {
-                var targetTeam = db.team.Find(athlete.TID);
-                targetTeam.athlete.Add(athlete);
-                db.athlete.Add(athlete);
+                var targetTeam = db.team.Find(_athlete.TID);
+                targetTeam.athlete.Add(_athlete);
+                db.athlete.Add(_athlete);
                 db.SaveChanges();
             }
         }
 
         // Add personalresult to the athlete
-        public void AddPersonalResult(PersonalResult personalResult)
+        public void AddPersonalResult(PersonalResult _personalResult)
         {
             using (var db = new GymDB())
             {
-                var targetAthlete = db.athlete.Find(personalResult.AthleteID);
-                var targetGroup = db.matchgroup.Find(personalResult.Groupid);
-                targetAthlete.personalresult.Add(personalResult);
-                targetGroup.personalresult.Add(personalResult);
-                db.personalresult.Add(personalResult);
+                var targetAthlete = db.athlete.Find(_personalResult.AthleteID);
+                var targetGroup = db.matchgroup.Find(_personalResult.Groupid);
+                targetAthlete.personalresult.Add(_personalResult);
+                targetGroup.personalresult.Add(_personalResult);
+                db.personalresult.Add(_personalResult);
                 db.SaveChanges();
             }
         }
 
         // Add match group to the judge
-        public void AddMatchGroup(MatchGroup matchGroup)
+        public void AddMatchGroup(MatchGroup _matchGroup)
         {
             using (var db = new GymDB())
             {
-                var targetJudge = db.judge.Find(matchGroup.JudgeID);
-                targetJudge.matchgroup.Add(matchGroup);
-                db.matchgroup.Add(matchGroup);
+                var targetJudge = db.judge.Find(_matchGroup.JudgeID);
+                targetJudge.matchgroup.Add(_matchGroup);
+                db.matchgroup.Add(_matchGroup);
                 db.SaveChanges();
             }
         }
 
         // Add a judge
-        public void AddJudge(Judge judge)
+        public void AddJudge(Judge _judge)
         {
             using (var db = new GymDB())
             {
-                db.judge.Add(judge);
+                db.judge.Add(_judge);
                 db.SaveChanges();
             }
         }
 
         // Get the password by comparing username and role
-        public string GetPassword(string username, int role)
+        public string GetPassword(string _username, int _role)
         {
             using (var db = new GymDB())
             {
-                var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role).FirstOrDefault();
+                var account = db.login.Where(l => l.UName.Equals(_username) && l.Role == _role).FirstOrDefault();
                 return account.Password;
+            }
+        }
+
+        public List<Athlete> GetAthlete(string _AthleteName)
+        {
+            using (var db = new GymDB())
+            {
+                var athletes = db.athlete.Where(a => a.Name.Equals(_AthleteName));
+                return athletes.ToList();
             }
         }
     }
