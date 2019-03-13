@@ -393,19 +393,27 @@ namespace DB
         }
 
         // true means not null, false means null
-        public bool isPersonalResultNotNull(List<PersonalResult> _personalResults)
+        public bool isResultNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
-            foreach(var prs in _personalResults)
-                result = result && (prs.Punishment != null) && (prs.Bouns != null) && (prs.Grade != null);
+            foreach(var pr in _personalResults)
+                result = result && (pr.Punishment != null) && (pr.Bouns != null) && (pr.Grade != null);
+            return result;
+        }
+
+        public bool isResultNotNull(List<TeamResult> _teamResults)
+        {
+            bool result = true;
+            foreach (var tr in _teamResults)
+                result = result && (tr.Grade != null);
             return result;
         }
 
         public void Ranking(List<PersonalResult> _personalResults)
         {
-            if (isPersonalResultNotNull(_personalResults))
+            if (isResultNotNull(_personalResults))
             {
-                var query = (from prs in _personalResults orderby prs.Grade descending select prs).ToList();
+                var query = (from pr in _personalResults orderby pr.Grade descending select pr).ToList();
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
@@ -418,6 +426,25 @@ namespace DB
             }
             else
                 throw new Exception("There are empty items in the personalresult");
+        }
+
+        public void Ranking(List<TeamResult> _teamResults)
+        {
+            if (isResultNotNull(_teamResults))
+            {
+                var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
+                using (var db = new GymDB())
+                {
+                    GymDBService dbs = new GymDBService();
+                    foreach (var t in query)
+                    {
+                        t.Ranking = (short?)(query.IndexOf(t) + 1);
+                        dbs.Update(t);
+                    }
+                }
+            }
+            else
+                throw new Exception("There are empty items in the teamresult");
         }
 
         public bool isRankingNotNull(List<PersonalResult> _personalResults)
