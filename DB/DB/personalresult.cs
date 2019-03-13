@@ -41,7 +41,7 @@ namespace DB
 
         public short? Ranking { get; set; }
 
-        public bool? Suq { get; set; }
+        public sbyte Suq { get; set; }
 
         [Key]
         public int PRid { get; set; }

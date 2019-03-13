@@ -117,15 +117,8 @@ namespace DB
             //Console.WriteLine("监听完毕，按任意键退出！");
 
             // test code
-            int[] list = { 5, 6, 2, 39, 158 };
-            var query = from n in list orderby n descending select n;
-            var l = query.ToList();
-            foreach (var q in l)
-            {
-                int idx = l.IndexOf(q);
-                Console.WriteLine(idx);
-            }
-            Console.ReadLine();
+            GymDBService dbs = new GymDBService();
+            
         }
     }
 }

@@ -392,6 +392,21 @@ namespace DB
             }
         }
 
+        // Untested Code
+        public void SetSuq(List<PersonalResult> _personalResults)
+        {
+            Random random = new Random();
+            int length = _personalResults.Count();
+            for (int i = 0; i < length; i++)
+            {
+                int rnum = random.Next(_personalResults.Count());
+                var tmp = GetPersonalResultByAthleteIDAndGroupid(_personalResults[rnum].AthleteID, _personalResults[rnum].Groupid);
+                tmp.Suq = (sbyte)(i + 1);
+                Update(tmp);
+                _personalResults.Remove(_personalResults[rnum]);
+            }
+        }
+
         // true means not null, false means null
         public bool isResultNotNull(List<PersonalResult> _personalResults)
         {
