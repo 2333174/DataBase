@@ -160,6 +160,12 @@ namespace DB
                 return db.personalresult.Where(p => p.Groupid.Equals(_Groupid)).ToList();
         }
 
+        public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID) && p.Groupid.Equals(_Groupid)).Single();
+        }
+
         public List<Judge> GetJudgesByGroupid(string _Groupid)
         {
             using (var db = new GymDB())
@@ -384,6 +390,63 @@ namespace DB
                 db.Entry(_teamresult).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+
+        // true means not null, false means null
+        public bool isPersonalResultNotNull(List<PersonalResult> _personalResults)
+        {
+            bool result = true;
+            foreach(var prs in _personalResults)
+                result = result && (prs.Punishment != null) && (prs.Bouns != null) && (prs.Grade != null);
+            return result;
+        }
+
+        public void Ranking(List<PersonalResult> _personalResults)
+        {
+            if (isPersonalResultNotNull(_personalResults))
+            {
+                var query = (from prs in _personalResults orderby prs.Grade descending select prs).ToList();
+                using (var db = new GymDB())
+                {
+                    GymDBService dbs = new GymDBService();
+                    foreach(var t in query)
+                    {
+                        t.Ranking = (short?)(query.IndexOf(t) + 1);
+                        dbs.Update(t);
+                    }
+                }
+            }
+            else
+                throw new Exception("There are empty items in the personalresult");
+        }
+
+        public bool isRankingNotNull(List<PersonalResult> _personalResults)
+        {
+            bool result = true;
+            foreach (var prs in _personalResults)
+                result = result && (prs.Ranking != null);
+            return result;
+        }
+
+        public void Promote(List<PersonalResult> _personalResults, int NumofPromoted)
+        {
+            if (isRankingNotNull(_personalResults))
+            {
+                var query = (from prs in _personalResults where prs.Ranking <= NumofPromoted select prs).ToList();
+                using (var db = new GymDB())
+                {
+                    GymDBService dbs = new GymDBService();
+                    // Create a new match group
+                    foreach(var q in query)
+                    {
+                        // the Groupid of prs should be reset
+                        //var prs = new PersonalResult(q.AthleteID, q.SportsEvent, q.Groupid, 2);
+                        //dbs.Add(prs);
+                    }
+                }
+            }
+            else
+                throw new Exception("There are empty rankings in the personalresult");
         }
     }
 }
