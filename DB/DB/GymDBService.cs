@@ -133,7 +133,7 @@ namespace DB
             }
         }
 
-        public List<Athlete> GetAthleteByName(string _AthleteName)
+        public List<Athlete> GetAthletesByName(string _AthleteName)
         {
             using (var db = new GymDB())
             {
@@ -470,7 +470,7 @@ namespace DB
             return result;
         }
 
-        public void Promote(List<PersonalResult> _personalResults, int NumofPromoted)
+        public void Promote(List<PersonalResult> _personalResults, int NumofPromoted, int GroupSize)
         {
             if (isRankingNotNull(_personalResults))
             {
