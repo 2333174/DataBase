@@ -118,6 +118,7 @@ namespace DB
 
             // test code
             GymDBService dbs = new GymDBService();
+            dbs.Grouping(2);
             
         }
     }

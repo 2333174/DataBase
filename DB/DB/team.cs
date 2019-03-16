@@ -16,7 +16,6 @@ namespace DB
             staff = new HashSet<Staff>();
             teamresult = new HashSet<TeamResult>();
         }
-
         public Team(string teamName, byte[] doc)
         {
             TName = teamName;
@@ -34,7 +33,6 @@ namespace DB
         public string TName { get; set; }
 
         [Column(TypeName = "mediumblob")]
-        [Required]
         public byte[] Docs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

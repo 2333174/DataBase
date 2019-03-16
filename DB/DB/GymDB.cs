@@ -41,7 +41,7 @@ namespace DB
 
             modelBuilder.Entity<Athlete>()
                 .HasMany(e => e.personalresult)
-                .WithRequired(e => e.Athlete)
+                .WithRequired(e => e.athlete)
                 .HasForeignKey(e => e.AthleteID);
 
             modelBuilder.Entity<Judge>()
@@ -55,6 +55,11 @@ namespace DB
             modelBuilder.Entity<Judge>()
                 .Property(e => e.Telephone)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Judge>()
+                .HasMany(e => e.matchgroup)
+                .WithOptional(e => e.judge)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Login>()
                 .Property(e => e.UName)
@@ -77,7 +82,7 @@ namespace DB
                 .IsUnicode(false);
 
             modelBuilder.Entity<PersonalResult>()
-                .Property(e => e.Groupid)
+                .Property(e => e.GroupID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Staff>()

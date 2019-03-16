@@ -93,9 +93,9 @@ namespace DB
             using (var db = new GymDB())
             {
                 var targetAthlete = db.athlete.Find(_personalResult.AthleteID);
-                var targetGroup = db.matchgroup.Find(_personalResult.Groupid);
+                //var targetGroup = db.matchgroup.Find(_personalResult.GID);
                 targetAthlete.personalresult.Add(_personalResult);
-                targetGroup.personalresult.Add(_personalResult);
+                //targetGroup.personalresult.Add(_personalResult);
                 db.personalresult.Add(_personalResult);
                 db.SaveChanges();
             }
@@ -107,7 +107,7 @@ namespace DB
             using (var db = new GymDB())
             {
                 var targetJudge = db.judge.Find(_matchGroup.JudgeID);
-                targetJudge.matchgroup.Add(_matchGroup);
+                //targetJudge.matchgroup.Add(_matchGroup);
                 db.matchgroup.Add(_matchGroup);
                 db.SaveChanges();
             }
@@ -157,13 +157,17 @@ namespace DB
         public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
         {
             using (var db = new GymDB())
-                return db.personalresult.Where(p => p.Groupid.Equals(_Groupid)).ToList();
+                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
         }
-
+         public List<PersonalResult> GetPersonalResultsBySportEvent(string _sportEvent)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent)).ToList();
+        }
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
             using (var db = new GymDB())
-                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID) && p.Groupid.Equals(_Groupid)).Single();
+                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID) && p.GroupID.Equals(_Groupid)).Single();
         }
 
         public List<Judge> GetJudgesByGroupid(string _Groupid)
@@ -400,7 +404,7 @@ namespace DB
             for (int i = 0; i < length; i++)
             {
                 int rnum = random.Next(_personalResults.Count());
-                var tmp = GetPersonalResultByAthleteIDAndGroupid(_personalResults[rnum].AthleteID, _personalResults[rnum].Groupid);
+                var tmp = GetPersonalResultByAthleteIDAndGroupid(_personalResults[rnum].AthleteID, _personalResults[rnum].GroupID);
                 tmp.Suq = (sbyte)(i + 1);
                 Update(tmp);
                 _personalResults.Remove(_personalResults[rnum]);
@@ -443,6 +447,29 @@ namespace DB
                 throw new Exception("There are empty items in the personalresult");
         }
 
+        public void Grouping(int n)
+        {
+            using (var db = new GymDB())
+            {
+                var list1 = db.personalresult.ToList();
+                var query = list1.GroupBy(a => a.SportsEvent).Select(g => new { id = g.Key, count = g.Count() });
+                int i;
+                foreach (var l in query)
+                {
+                    i = 0;
+                    var list2 = GetPersonalResultsBySportEvent(l.id);
+                    foreach (var ll in list2)
+                    {
+                        MatchGroup m = new MatchGroup(l.id + (i / n).ToString());
+                        int tot = db.matchgroup.ToList().Count;
+                        Add(m);
+                        ll.GroupID = m.GroupID;
+                        Update(ll);
+                        i++;
+                    }
+                }
+            }
+        }
         public void Ranking(List<TeamResult> _teamResults)
         {
             if (isResultNotNull(_teamResults))

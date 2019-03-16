@@ -14,7 +14,6 @@ namespace DB
         {
             personalresult = new HashSet<PersonalResult>();
         }
-
         public Athlete(string athleteName, string athleteIDnum, int athleteAge, string athleteGender)
         {
             Name = athleteName;
@@ -23,6 +22,7 @@ namespace DB
             Gender = athleteGender;
             personalresult = new HashSet<PersonalResult>();
         }
+
 
         [Required]
         [StringLength(20)]

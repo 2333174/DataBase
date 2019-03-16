@@ -9,16 +9,16 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class PersonalResult
     {
+
         public PersonalResult() { }
 
         public PersonalResult(string athleteID, string sportsEvent, string groupID, int role)
         {
             AthleteID = athleteID;
             SportsEvent = sportsEvent;
-            Groupid = groupID;
+            GroupID = groupID;
             Role = (sbyte)role;
         }
-
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
@@ -27,11 +27,10 @@ namespace DB
         [StringLength(20)]
         public string SportsEvent { get; set; }
 
-        [Required]
-        [StringLength(18)]
-        public string Groupid { get; set; }
-
         public sbyte Role { get; set; }
+
+        [StringLength(18)]
+        public string GroupID { get; set; }
 
         public short? Bouns { get; set; }
 
@@ -41,13 +40,11 @@ namespace DB
 
         public short? Ranking { get; set; }
 
-        public sbyte Suq { get; set; }
+        public sbyte? Suq { get; set; }
 
         [Key]
         public int PRid { get; set; }
 
-        public virtual Athlete Athlete { get; set; }
-
-        public virtual MatchGroup matchgroup { get; set; }
+        public virtual Athlete athlete { get; set; }
     }
 }

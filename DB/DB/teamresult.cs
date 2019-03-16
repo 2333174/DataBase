@@ -16,7 +16,6 @@ namespace DB
             TID = teamid;
             Event = teamEvent;
         }
-
         public int TID { get; set; }
 
         [Required]

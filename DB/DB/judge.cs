@@ -14,7 +14,6 @@ namespace DB
         {
             matchgroup = new HashSet<MatchGroup>();
         }
-
         public Judge(string judgeName, string judgeIDnum, string judgeTel)
         {
             Name = judgeName;
@@ -22,7 +21,6 @@ namespace DB
             Telephone = judgeTel;
             matchgroup = new HashSet<MatchGroup>();
         }
-
         [Required]
         [StringLength(20)]
         public string Name { get; set; }

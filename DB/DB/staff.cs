@@ -11,7 +11,7 @@ namespace DB
     {
         public Staff() { }
 
-        public Staff(string staffName, string staffIDnum, string staffGender, string staffTel, string staffRole,int tid)
+        public Staff(string staffName, string staffIDnum, string staffGender, string staffTel, string staffRole, int tid)
         {
             Name = staffName;
             IDNumber = staffIDnum;
@@ -20,7 +20,6 @@ namespace DB
             Role = staffRole;
             Tid = tid;
         }
-
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
