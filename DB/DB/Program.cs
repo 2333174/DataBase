@@ -117,9 +117,6 @@ namespace DB
             //Console.WriteLine("监听完毕，按任意键退出！");
 
             // test code
-            GymDBService dbs = new GymDBService();
-            dbs.Grouping(2);
-            
         }
     }
 }

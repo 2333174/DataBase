@@ -209,6 +209,12 @@ namespace DB
                 return db.athlete.ToList();
         }
 
+        public List<TeamResult> GetAllTeamResults()
+        {
+            using (var db = new GymDB())
+                return db.teamresult.ToList();
+        }
+
         public List<Athlete> GetAthletesByTName(string _TName)
         {
             using (var db = new GymDB())
@@ -234,6 +240,24 @@ namespace DB
                 Team targetTeam = GetTeamByTName(_TName);
                 return db.teamresult.Where(tr => tr.TID == targetTeam.TID).ToList();
             }
+        }
+
+        public TeamResult GetTeamResultByTRid(int _trid)
+        {
+            using (var db = new GymDB())
+                return db.teamresult.Find(_trid);
+        }
+
+        public PersonalResult GetPersonalResultByPRid(int _prid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Find(_prid);
+        }
+
+        public List<PersonalResult> GetAllPersonalResults()
+        {
+            using (var db = new GymDB())
+                return db.personalresult.ToList();
         }
 
         public void Delete(Login _login)
@@ -396,7 +420,6 @@ namespace DB
             }
         }
 
-        // Untested Code
         public void SetSuq(List<PersonalResult> _personalResults)
         {
             Random random = new Random();
@@ -412,7 +435,7 @@ namespace DB
         }
 
         // true means not null, false means null
-        public bool isResultNotNull(List<PersonalResult> _personalResults)
+        public bool IsResultNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach(var pr in _personalResults)
@@ -420,7 +443,7 @@ namespace DB
             return result;
         }
 
-        public bool isResultNotNull(List<TeamResult> _teamResults)
+        public bool IsResultNotNull(List<TeamResult> _teamResults)
         {
             bool result = true;
             foreach (var tr in _teamResults)
@@ -430,7 +453,7 @@ namespace DB
 
         public void Ranking(List<PersonalResult> _personalResults)
         {
-            if (isResultNotNull(_personalResults))
+            if (IsResultNotNull(_personalResults))
             {
                 var query = (from pr in _personalResults orderby pr.Grade descending select pr).ToList();
                 using (var db = new GymDB())
@@ -438,8 +461,9 @@ namespace DB
                     GymDBService dbs = new GymDBService();
                     foreach(var t in query)
                     {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        dbs.Update(t);
+                        var target = dbs.GetPersonalResultByPRid(t.PRid);
+                        target.Ranking = (short?)(query.IndexOf(t) + 1);
+                        dbs.Update(target);
                     }
                 }
             }
@@ -470,9 +494,10 @@ namespace DB
                 }
             }
         }
+
         public void Ranking(List<TeamResult> _teamResults)
         {
-            if (isResultNotNull(_teamResults))
+            if (IsResultNotNull(_teamResults))
             {
                 var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
                 using (var db = new GymDB())
@@ -480,8 +505,9 @@ namespace DB
                     GymDBService dbs = new GymDBService();
                     foreach (var t in query)
                     {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        dbs.Update(t);
+                        var target = dbs.GetTeamResultByTRid(t.TRid);
+                        target.Ranking = (short?)(query.IndexOf(t) + 1);
+                        dbs.Update(target);
                     }
                 }
             }
@@ -489,7 +515,7 @@ namespace DB
                 throw new Exception("There are empty items in the teamresult");
         }
 
-        public bool isRankingNotNull(List<PersonalResult> _personalResults)
+        public bool IsRankingNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach (var prs in _personalResults)
@@ -499,13 +525,13 @@ namespace DB
 
         public void Promote(List<PersonalResult> _personalResults, int NumofPromoted, int GroupSize)
         {
-            if (isRankingNotNull(_personalResults))
+            if (IsRankingNotNull(_personalResults))
             {
                 var query = (from prs in _personalResults where prs.Ranking <= NumofPromoted select prs).ToList();
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    // Create a new match group
+                    // Create a new match group And Assign the judges
                     foreach(var q in query)
                     {
                         // the Groupid of prs should be reset
