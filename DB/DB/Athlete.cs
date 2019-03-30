@@ -43,6 +43,8 @@ namespace DB
         [StringLength(3)]
         public string AthleteID { get; set; }
 
+        public int? CulturalGrade { get; set; }
+
         public virtual Team team { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

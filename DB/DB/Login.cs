@@ -40,5 +40,7 @@ namespace DB
         public int Role { get; set; }
 
         public sbyte? Weight { get; set; }
+
+        public int? JudgeID { get; set; }
     }
 }

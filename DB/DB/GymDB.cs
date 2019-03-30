@@ -17,6 +17,7 @@ namespace DB
         public virtual DbSet<Login> login { get; set; }
         public virtual DbSet<MatchGroup> matchgroup { get; set; }
         public virtual DbSet<PersonalResult> personalresult { get; set; }
+        public virtual DbSet<Setting> setting { get; set; }
         public virtual DbSet<Staff> staff { get; set; }
         public virtual DbSet<Team> team { get; set; }
         public virtual DbSet<TeamResult> teamresult { get; set; }
