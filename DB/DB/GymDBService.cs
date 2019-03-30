@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace DB
 {
     // Database related operations
-    class GymDBService
+    public class GymDBService
     {
         // character set for generating random password
         private string[] CharacterSet = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -460,7 +460,7 @@ namespace DB
                     var list2 = GetPersonalResultsBySportEvent(l.id);
                     foreach (var ll in list2)
                     {
-                        MatchGroup m = new MatchGroup(l.id + (i / n).ToString());
+                        MatchGroup m = new MatchGroup(l.id + (i / n).ToString());//sportevent+小组
                         int tot = db.matchgroup.ToList().Count;
                         Add(m);
                         ll.GroupID = m.GroupID;
@@ -516,6 +516,28 @@ namespace DB
             }
             else
                 throw new Exception("There are empty rankings in the personalresult");
+        }
+        
+        //登录，返回-1为密码错误，返回0为验证成功,返回1为裁判，返回2为主裁判
+        public int loginf(string username,string password, int role)
+        {
+            using (var db=new GymDB())
+            {
+                var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
+                if (account == null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (role == 2)
+                    {
+                        if (account.Weight == 0) return 1;
+                        else return 2;
+                    }
+                    else return 0;
+                }
+            }
         }
     }
 }

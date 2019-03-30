@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DB;
 
 namespace Login
 {
@@ -36,6 +37,47 @@ namespace Login
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Loginf(object sender, RoutedEventArgs e)
+        {
+            var db = new GymDBService();
+            switch (db.loginf(user.Text, password.Password, select))
+            {
+                case -1:
+                    ShowMessageInfo("账户或密码有误");
+                    break;
+                case 0:
+                    if (select==0){
+                        ChangePage.Content = new Frame()
+                        { Content = new SignUpPage() };
+                    }
+                    else {
+                        ChangePage.Content = new Frame()
+                        { Content = new ManagePage() };
+                    }
+                    break;
+                case 1:
+                    ChangePage.Content = new Frame()
+                    {
+                        Content = new GradePage()
+                    };
+                    break;
+                default:
+                    ChangePage.Content = new Frame()
+                    {
+                        Content = new GSForMajorJudgePage()
+                    };
+                    break;
+            }
+        }
+        private async void ShowMessageInfo(string message)
+        {
+            MessageDialog samMessageDialog = new MessageDialog
+            {
+                Message = { Text = message }
+            };
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
         }
     }
 }
