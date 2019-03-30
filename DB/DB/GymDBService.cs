@@ -519,7 +519,7 @@ namespace DB
         }
         
         //登录，返回-1为密码错误，返回0为验证成功,返回1为裁判，返回2为主裁判
-        public int loginf(string username,string password, int role)
+        public int Loginf(string username,string password, int role)
         {
             using (var db=new GymDB())
             {
@@ -541,7 +541,7 @@ namespace DB
         }
 
         //设置三个参数:代表队男/女各年龄组最大报名人数
-        public void Set(String POne, String PTwo, String PThree)
+        public void Set(string POne, string PTwo, string PThree)
         {
             using (var db = new GymDB())
             {

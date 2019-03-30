@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Login.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,13 +25,13 @@ namespace Login
         {
             InitializeComponent();
             ChangePage.Content = new Frame()
-            { Content = new ManagePage()};
+            { Content = new GradePage(5)};
         }
         
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
