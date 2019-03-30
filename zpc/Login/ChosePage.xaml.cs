@@ -36,7 +36,7 @@ namespace Login
                 select = 2;
             else
             {
-                ShowMessageInfo("Your choice is incorrect!");
+                ShowMessageInfo("请选择一个系统");
                 return;
             }
             ChangePage.Content = new Frame()
