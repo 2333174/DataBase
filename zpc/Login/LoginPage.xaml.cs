@@ -60,13 +60,13 @@ namespace Login
                 case 1:
                     ChangePage.Content = new Frame()
                     {
-                        Content = new GradePage()
+                        Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
                     };
                     break;
                 default:
                     ChangePage.Content = new Frame()
                     {
-                        Content = new GSForMajorJudgePage()
+                        Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password))
                     };
                     break;
             }

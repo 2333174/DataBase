@@ -20,8 +20,10 @@ namespace Login
     /// </summary>
     public partial class GSForMajorJudgePage : Page
     {
-        public GSForMajorJudgePage()
+        int judgeID;
+        public GSForMajorJudgePage(int m)
         {
+            judgeID = m;
             InitializeComponent();
         }
     }

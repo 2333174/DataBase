@@ -20,8 +20,10 @@ namespace Login
     /// </summary>
     public partial class GradePage : Page
     {
-        public GradePage()
+        int judgeID;
+        public GradePage(int m)
         {
+            judgeID = m;
             InitializeComponent();
         }
     }

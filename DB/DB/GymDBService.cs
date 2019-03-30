@@ -123,13 +123,13 @@ namespace DB
             }
         }
 
-        // Get the password by comparing username and role
-        public string GetPassword(string _username, int _role)
+        // Get the judgeid by comparing username and role
+        public int GetJudgeID(string _username, string password)
         {
             using (var db = new GymDB())
             {
-                var account = db.login.Where(l => l.UName.Equals(_username) && l.Role == _role).FirstOrDefault();
-                return account.Password;
+                var account = db.login.Where(l => l.UName.Equals(_username) && l.Password.Equals(password)).FirstOrDefault();
+                return (int)account.JudgeID;
             }
         }
 
@@ -539,5 +539,29 @@ namespace DB
                 }
             }
         }
+
+        //设置三个参数:代表队男/女各年龄组最大报名人数
+        public void Set(String POne, String PTwo, String PThree)
+        {
+            using (var db = new GymDB())
+            {
+                if (db.setting.ToList().Count == 0)
+                {
+                    Setting setting = new Setting(int.Parse(POne), int.Parse(PTwo), int.Parse(PThree));
+                    db.setting.Add(setting);
+                }
+                else
+                {
+                    foreach (var a in db.setting)
+                    {
+                        db.setting.Remove(a);
+                        Setting setting = new Setting(int.Parse(POne), int.Parse(PTwo), int.Parse(PThree));
+                        db.setting.Add(setting);
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+
     }
 }

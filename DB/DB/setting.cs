@@ -15,6 +15,10 @@ namespace DB
             Ptwo = ptwo;
             Pthree = pthree;
         }
+        public Setting()
+        {
+
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Pone { get; set; }
