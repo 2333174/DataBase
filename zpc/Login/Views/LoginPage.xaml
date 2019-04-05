@@ -8,54 +8,33 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
-    <ContentControl x:Name="ChangePage">
+    <ContentControl x:Name="ChangePage" IsTabStop="False">
         <Grid>
-            <Label Name="label" Content="" HorizontalAlignment="Left" Margin="233,58,0,0" VerticalAlignment="Top" Width="159"/>
-            <Canvas HorizontalAlignment="Left" Height="100" Margin="178,421,0,-100.333" VerticalAlignment="Top" Width="100"/>
-            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" IsTabStop="False"
             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Height="210" Margin="233,125,234,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5"
                              Opacity="0.5">
                 <StackPanel>
                     <Grid Height="142" Margin="0,0,0,0">
-                        <PasswordBox materialDesign:HintAssist.Hint="Entering Password"
-                     materialDesign:HintAssist.Foreground="White"
-                     materialDesign:TextFieldAssist.UnderlineBrush="White"
-                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" x:Name="password" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="120" Margin="124,77,0,0"/>
-
-                        <materialDesign:PackIcon Kind="Key"
-                                 Foreground="{Binding BorderBrush, ElementName=password}" 
-                                 Height="25" Width="25" Canvas.Left="87" Canvas.Top="77" Margin="81,91,0,0" />
-                        <TextBox x:Name="user" materialDesign:HintAssist.Hint="Entering Username"
-                        materialDesign:HintAssist.Foreground="White"
-                        materialDesign:TextFieldAssist.UnderlineBrush="White"
+                        <TextBox x:Name="user" materialDesign:HintAssist.Hint="Entering Username" materialDesign:HintAssist.Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="White" TabIndex="0"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="39" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="124,32,0,0"/>
-                        <materialDesign:PackIcon Kind="Account" 
-                                 Foreground="{Binding BorderBrush, ElementName=user}" Width="25" Height="25" RenderTransformOrigin="5.696,1.848" Margin="81,46,0,0" />
+                        <materialDesign:PackIcon Kind="Account" Foreground="{Binding BorderBrush, ElementName=user}" Width="25" Height="25" RenderTransformOrigin="5.696,1.848" Margin="81,46,0,0" />
+                        <PasswordBox materialDesign:HintAssist.Hint="Entering Password" materialDesign:HintAssist.Foreground="White" materialDesign:TextFieldAssist.UnderlineBrush="White" TabIndex="1"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" x:Name="password" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="120" Margin="124,77,0,0"/>
+                        <materialDesign:PackIcon Kind="Key" Foreground="{Binding BorderBrush, ElementName=password}" Height="25" Width="25" Canvas.Left="87" Canvas.Top="77" Margin="81,91,0,0" />
                     </Grid>
                     <Grid Height="67" Margin="0,0,0,0">
-                        <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Button_Click_1"
-                        Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Margin="0,10,285.8,20" Height="37">
+                        <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Button_Click_1"
+                        Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Height="37" Margin="10,20,0,10" IsTabStop="False">
                             <materialDesign:PackIcon Kind="KeyboardBackspace" Height="37" Width="37"/>
                         </Button>
-                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="Login">
-                            <!--<materialDesign:DialogHost.DialogContent>
-                                <StackPanel Margin="16">
-                                    <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center"
-                                        Margin="16" IsIndeterminate="True" Value="0" />
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                        HorizontalAlignment="Center">
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </materialDesign:DialogHost.DialogContent>-->
-                            <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Button_Click"
-                        Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Height="37" Margin="0,10,25.8,20.2">
-                                <materialDesign:PackIcon Kind="Check" Width="37" Height="37" />
-                            </Button>
-                        </materialDesign:DialogHost>
+                        <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Button_Click"
+                        Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Height="37" Margin="0,20,25,10" IsTabStop="False">
+                            <materialDesign:PackIcon Kind="Check" Width="37" Height="37" />
+                        </Button>
                     </Grid>
                 </StackPanel>
             </materialDesign:Card>
+            <materialDesign:DialogHost CloseOnClickAway="True" x:Name="Login" IsTabStop="False"/>
         </Grid>
     </ContentControl>
 </Page>

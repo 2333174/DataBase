@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Login.Views
 {
     /// <summary>
-    /// SignUpPage.xaml 的交互逻辑
+    /// AddAthleteDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class SignUpPage : Page
+    public partial class AddAthleteDialog : UserControl
     {
-        public SignUpPage(int Tid)
+        public AddAthleteDialog()
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(Tid);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Login.Views
                 case 0:
                     if (select==0){
                         ChangePage.Content = new Frame()
-                        { Content = new SignUpPage() };
+                        { Content = new SignUpPage(5) };        // 传入Tid
                     }
                     else {
                         ChangePage.Content = new Frame()

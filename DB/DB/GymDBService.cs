@@ -412,7 +412,7 @@ namespace DB
         }
 
         // true means not null, false means null
-        public bool isResultNotNull(List<PersonalResult> _personalResults)
+        public bool IsResultNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach(var pr in _personalResults)
@@ -420,7 +420,7 @@ namespace DB
             return result;
         }
 
-        public bool isResultNotNull(List<TeamResult> _teamResults)
+        public bool IsResultNotNull(List<TeamResult> _teamResults)
         {
             bool result = true;
             foreach (var tr in _teamResults)
@@ -430,7 +430,7 @@ namespace DB
 
         public void Ranking(List<PersonalResult> _personalResults)
         {
-            if (isResultNotNull(_personalResults))
+            if (IsResultNotNull(_personalResults))
             {
                 var query = (from pr in _personalResults orderby pr.Grade descending select pr).ToList();
                 using (var db = new GymDB())
@@ -472,7 +472,7 @@ namespace DB
         }
         public void Ranking(List<TeamResult> _teamResults)
         {
-            if (isResultNotNull(_teamResults))
+            if (IsResultNotNull(_teamResults))
             {
                 var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
                 using (var db = new GymDB())
@@ -489,7 +489,7 @@ namespace DB
                 throw new Exception("There are empty items in the teamresult");
         }
 
-        public bool isRankingNotNull(List<PersonalResult> _personalResults)
+        public bool IsRankingNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach (var prs in _personalResults)
@@ -499,7 +499,7 @@ namespace DB
 
         public void Promote(List<PersonalResult> _personalResults, int NumofPromoted, int GroupSize)
         {
-            if (isRankingNotNull(_personalResults))
+            if (IsRankingNotNull(_personalResults))
             {
                 var query = (from prs in _personalResults where prs.Ranking <= NumofPromoted select prs).ToList();
                 using (var db = new GymDB())

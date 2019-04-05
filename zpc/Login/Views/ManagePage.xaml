@@ -75,7 +75,7 @@
                         <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="235.6,184,0,0" VerticalAlignment="Top" Width="108" Height="32" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Foreground="White" Opacity="0.7"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="决赛" Margin="0,-2,-130.667,0.333" Opacity="0.7" Background="#FF396561" HorizontalAlignment="Right" Width="112">
+                <TabItem Header="决赛" Margin="0,-2,-87.8,0.333" Opacity="0.7" Background="#FF46847F" HorizontalAlignment="Right" Width="112">
                     <Grid>
                         <Grid.Background>
                             <ImageBrush ImageSource="../images/bg-manage.PNG"/>
