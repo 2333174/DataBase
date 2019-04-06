@@ -27,7 +27,7 @@
         <TextBox  x:Name="ID" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="身份证号" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
         <TextBox  x:Name="PhoneNum" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="电话" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
 
-
+        <TextBox  x:Name="Age" Grid.Row="2" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="0,6,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="年龄" VerticalAlignment="Top" Width="120" Opacity="0.7" />
         <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Left" Margin="0,24,0,6" >
             性别
         </materialDesign:Chip>

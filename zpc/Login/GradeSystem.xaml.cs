@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Login.Models;
-using MaterialDesignThemes.Wpf;
 
-namespace Login.Views
+namespace Login
 {
     /// <summary>
-    /// SignUpPage.xaml 的交互逻辑
+    /// GradeSystem.xaml 的交互逻辑
     /// </summary>
-    public partial class SignUpPage : Page
+    public partial class GradeSystem : Window
     {
-        public SignUpPage(int Tid)
+        public GradeSystem()
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(Tid);
-            
         }
     }
 }

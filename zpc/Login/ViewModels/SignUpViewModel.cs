@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DB;
+using Login.Commands;
+using Login.Models;
+using Login.Views;
+using MaterialDesignThemes.Wpf;
 
 namespace Login.ViewModels
 {
@@ -14,13 +18,20 @@ namespace Login.ViewModels
         {
             Teamid = Tid;
             _Athletes = null;
+            DeleteItem = null;
+            _AthleteInfos = new ObservableCollection<DataGridItem>();
             AddCommand = new Commands.DelegateCommand();
             AddCommand.ExecuteAction = new Action<object>(Add);
+            AddDataGridCommand = new DelegateCommand();
+            AddDataGridCommand.ExecuteAction = new Action<object>(AddDataGrid);
+            DeleteCommand = new DelegateCommand();
+            DeleteCommand.ExecuteAction = new Action<object>(DeleteDataGrid);
         }
 
-        public Commands.DelegateCommand AddCommand { get; set; }
-        public Commands.DelegateCommand DeleteCommand { get; set; }
-        public Commands.DelegateCommand ConfirmCommand { get; set; }
+        public DelegateCommand AddDataGridCommand{ get; set; } //添加Datagrid数据
+        public DelegateCommand AddCommand { get; set; }
+        public DelegateCommand DeleteCommand { get; set; }
+        public DelegateCommand ConfirmCommand { get; set; }
 
         private int Teamid;
 
@@ -75,6 +86,24 @@ namespace Login.ViewModels
         private readonly ObservableCollection<AthleteEntryViewModel> _Athletes;
         public ObservableCollection<AthleteEntryViewModel> Athletes => _Athletes;
 
+        //datagrid行数据
+        private readonly ObservableCollection<DataGridItem> _AthleteInfos;
+        public ObservableCollection<DataGridItem> AthleteInfos => _AthleteInfos;
+
+        //删除行数据
+        private DataGridItem _DeleteItem;
+
+        public DataGridItem DeleteItem
+        {
+            get { return _DeleteItem; }
+            set
+            {
+                _DeleteItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private bool IsTeamInfoNull()
         {
             bool res = true;
@@ -90,6 +119,18 @@ namespace Login.ViewModels
             return res;
         }
 
+        //实现添加dataGrid数据
+        private void AddDataGrid(object parameter)
+        {
+            ShowAddDialog();
+        }
+
+        //实现删除数据
+        private void DeleteDataGrid(object parameter)
+        {
+            Console.WriteLine("删除数据");
+            AthleteInfos.Remove(DeleteItem);   
+        }
         private void Add(object parameter)
         {
             if (IsTeamInfoNull() != true) ShowMessageInfo("输入有空值！");
@@ -110,11 +151,38 @@ namespace Login.ViewModels
 
         private async void ShowMessageInfo(string message)
         {
+            DialogClosingEventHandler dialogClosingEventHandler=null;
             Views.MessageDialog samMessageDialog = new Views.MessageDialog
             {
                 Message = { Text = message }
             };
-            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+            var result =await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog,dialogClosingEventHandler);
+            Console.WriteLine(result.ToString());
+        }
+
+        //显示添加框 并进行处理
+        private async void ShowAddDialog()
+        {
+            DialogClosingEventHandler dialogClosingEventHandler = null;
+            AddAthleteDialog samMessageDialog = new AddAthleteDialog
+            {
+            };
+            var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
+            Console.WriteLine(result.ToString());
+            if (Equals(result,true))
+            {
+                if (!(string.IsNullOrWhiteSpace(samMessageDialog.ID.Text)
+                    || string.IsNullOrWhiteSpace(samMessageDialog.Name.Text)
+                    || string.IsNullOrWhiteSpace(samMessageDialog.Age.Text)
+                    || string.IsNullOrWhiteSpace(samMessageDialog.PhoneNum.Text))
+                    && (samMessageDialog.Gender.SelectedValue != null) && (samMessageDialog.SportEvent.SelectedValue != null))
+                {
+                    Athlete athlete = new Athlete(samMessageDialog.Name.Text, samMessageDialog.ID.Text, int.Parse(samMessageDialog.Age.Text), samMessageDialog.Gender.Text);
+                    DataGridItem dataGridItem = new DataGridItem(athlete, samMessageDialog.SportEvent.SelectedValue.ToString());
+                    AthleteInfos.Add(dataGridItem);
+                    Console.WriteLine("添加成功");
+                }
+            }
         }
     }
 }

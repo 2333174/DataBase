@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,9 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DB;
-using MaterialDesignThemes.Wpf;
 
-namespace Login.Views
+namespace Login
 {
     /// <summary>
     /// LoginPage.xaml 的交互逻辑
@@ -36,6 +34,11 @@ namespace Login.Views
             { Content = new ChosePage() };
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Loginf(object sender, RoutedEventArgs e)
         {
             var db = new GymDBService();
@@ -47,7 +50,7 @@ namespace Login.Views
                 case 0:
                     if (select==0){
                         ChangePage.Content = new Frame()
-                        { Content = new SignUpPage(5) };        // 传入Tid
+                        { Content = new SignUpPage() };
                     }
                     else {
                         ChangePage.Content = new Frame()
@@ -68,27 +71,13 @@ namespace Login.Views
                     break;
             }
         }
-
         private async void ShowMessageInfo(string message)
         {
             MessageDialog samMessageDialog = new MessageDialog
             {
                 Message = { Text = message }
             };
-            await DialogHost.Show(samMessageDialog);
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Dispatcher.Invoke(async () =>
-            {
-                await DialogHost.Show(new ProgressBox(), new DialogOpenedEventHandler((object Psender, DialogOpenedEventArgs args) =>
-                {
-                    Task.Delay(TimeSpan.FromSeconds(1))
-                    .ContinueWith((t, _) => args.Session.Close(false), null,
-                    TaskScheduler.FromCurrentSynchronizationContext());
-                }));
-            });
-            }
     }
 }

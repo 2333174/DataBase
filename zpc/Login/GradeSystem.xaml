@@ -1,0 +1,28 @@
+﻿<Window x:Class="Login.GradeSystem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login"
+        mc:Ignorable="d"
+        Title="GradeSystem" Height="450" Width="800">
+    <Grid Margin="0,0,-6.667,-0.333" Opacity="0.8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="209" Margin="96,140,0,0" VerticalAlignment="Top" Width="421" Opacity="0.8">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  编号  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
+                <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="  比赛类型  " SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" Background="#FFD5898E" BorderBrush="#FFD5898E" FontWeight="Bold"/>
+        <Button Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" Background="#FFC57D7D" BorderBrush="#FFD5898E" FontWeight="Bold"/>
+        <Label Content="    请务必确认分数无误后再提交成绩 " HorizontalAlignment="Left" Margin="170,74,0,0" VerticalAlignment="Top" Height="30" Width="283" FontSize="16" Background="#FFDBD1E5" FontFamily="Yu Gothic UI" FontWeight="Bold" Foreground="#FF293955"/>
+
+    </Grid>
+</Window>
