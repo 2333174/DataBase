@@ -27,6 +27,9 @@ namespace Login.Views
 
         private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {
+            MenEvent.Visibility = Visibility.Visible;
+            WomenEvent.Visibility = Visibility.Hidden;
+            warning.Visibility = Visibility.Hidden;
             SportEvent.Items.Clear();
             SportEvent.Items.Add("单杠");
             SportEvent.Items.Add("双杠");
@@ -39,6 +42,9 @@ namespace Login.Views
 
         private void ComboBoxItem_Selected_1(object sender, RoutedEventArgs e)
         {
+            WomenEvent.Visibility = Visibility.Visible;
+            MenEvent.Visibility = Visibility.Hidden;
+            warning.Visibility = Visibility.Hidden;
             SportEvent.Items.Clear();
             SportEvent.Items.Add("跳马");
             SportEvent.Items.Add("高低杠");

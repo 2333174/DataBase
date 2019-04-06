@@ -17,9 +17,32 @@ namespace Login.ViewModels
         public SignUpViewModel(int Tid)
         {
             Teamid = Tid;
+
+            //数据初始化
             _Athletes = null;
             DeleteItem = null;
             _AthleteInfos = new ObservableCollection<DataGridItem>();
+            _select = new List<int>();
+            for (int i = 0; i < 12; i++)
+            {
+                _select.Add(0);
+            }
+            sportEvents = new List<string>();
+            Events = new List<string>();
+            Events.Add("单杠");
+            Events.Add("双杠");
+            Events.Add("吊环");
+            Events.Add("跳马");
+            Events.Add("自由体操");
+            Events.Add("鞍马");
+            Events.Add("蹦床");
+            Events.Add("跳马");
+            Events.Add("高低杠");
+            Events.Add("平衡木");
+            Events.Add("自由体操");
+            Events.Add("蹦床");
+
+            //命令初始化
             AddCommand = new Commands.DelegateCommand();
             AddCommand.ExecuteAction = new Action<object>(Add);
             AddDataGridCommand = new DelegateCommand();
@@ -34,6 +57,22 @@ namespace Login.ViewModels
         public DelegateCommand ConfirmCommand { get; set; }
 
         private int Teamid;
+
+        //存储项目名称
+        public List<string> Events;
+
+        //存储运动员报名项目
+        public List<string> sportEvents;
+
+        //记录多选按钮
+        private List<int> _select;
+
+        public List<int> select
+        {
+            get { return _select; }
+            set { _select = value; OnPropertyChanged(); }
+        }
+
 
         private Staff _TeamLeader;
 
@@ -151,36 +190,56 @@ namespace Login.ViewModels
 
         private async void ShowMessageInfo(string message)
         {
-            DialogClosingEventHandler dialogClosingEventHandler=null;
             Views.MessageDialog samMessageDialog = new Views.MessageDialog
             {
                 Message = { Text = message }
             };
-            var result =await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog,dialogClosingEventHandler);
-            Console.WriteLine(result.ToString());
+           await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+           
         }
 
         //显示添加框 并进行处理
         private async void ShowAddDialog()
         {
+            //重置sportList
+            sportEvents.Clear();
+            //重置多选
+            for (int i = 0; i < 12; i++)
+            {
+                select[i] = 0;
+            }
+            //打开对话框
             DialogClosingEventHandler dialogClosingEventHandler = null;
             AddAthleteDialog samMessageDialog = new AddAthleteDialog
             {
             };
             var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
             Console.WriteLine(result.ToString());
+
+            //添加数据
             if (Equals(result,true))
             {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (select[i] == 1) sportEvents.Add(Events[i]);
+                }
                 if (!(string.IsNullOrWhiteSpace(samMessageDialog.ID.Text)
                     || string.IsNullOrWhiteSpace(samMessageDialog.Name.Text)
                     || string.IsNullOrWhiteSpace(samMessageDialog.Age.Text)
                     || string.IsNullOrWhiteSpace(samMessageDialog.PhoneNum.Text))
-                    && (samMessageDialog.Gender.SelectedValue != null) && (samMessageDialog.SportEvent.SelectedValue != null))
+                    && (samMessageDialog.Gender.SelectedValue != null) 
+                  //  && (samMessageDialog.SportEvent.SelectedValue != null)
+                    &&sportEvents.Count!=0)
                 {
                     Athlete athlete = new Athlete(samMessageDialog.Name.Text, samMessageDialog.ID.Text, int.Parse(samMessageDialog.Age.Text), samMessageDialog.Gender.Text);
-                    DataGridItem dataGridItem = new DataGridItem(athlete, samMessageDialog.SportEvent.SelectedValue.ToString());
+                    DataGridItem dataGridItem = new DataGridItem(athlete, sportEvents);
                     AthleteInfos.Add(dataGridItem);
+                    
                     Console.WriteLine("添加成功");
+                }
+                else
+                {
+                    ShowMessageInfo("请完善信息");
                 }
             }
         }

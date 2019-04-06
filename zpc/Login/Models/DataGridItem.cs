@@ -10,8 +10,8 @@ namespace Login.Models
     class DataGridItem
     {
         public Athlete Athlete{ get; set; }
-        public string sportEvent { get; set; }
-        public DataGridItem(Athlete athlete, string sportEvent)
+        public List<string>  sportEvent { get; set; }
+        public DataGridItem(Athlete athlete, List<string> sportEvent)
         {
             this.Athlete = athlete;
             this.sportEvent = sportEvent;

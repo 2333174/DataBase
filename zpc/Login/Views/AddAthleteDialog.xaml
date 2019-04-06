@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:Login.Views"
              mc:Ignorable="d" 
               xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="300" d:DesignWidth="600"
-             MaxWidth="700">
+             d:DesignHeight="300" d:DesignWidth="800"
+             MaxWidth="900">
     <Grid Margin="16">
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -18,7 +19,7 @@
         <TextBlock
                    TextAlignment="Center"
                    Margin="0 6 0 0"
-                   FontSize="13"
+                   FontSize="15"
                    FontWeight="Bold">
                 添加运动员信息
         </TextBlock>
@@ -27,23 +28,79 @@
         <TextBox  x:Name="ID" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="身份证号" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
         <TextBox  x:Name="PhoneNum" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="电话" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
 
-        <TextBox  x:Name="Age" Grid.Row="2" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="0,6,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="年龄" VerticalAlignment="Top" Width="120" Opacity="0.7" />
-        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Left" Margin="0,24,0,6" >
+        <TextBox  x:Name="Age" Grid.Row="2" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="年龄" VerticalAlignment="Top" Width="101" Opacity="0.7" />
+        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Center" Margin="229,24,290,6" >
             性别
         </materialDesign:Chip>
-        <ComboBox x:Name="Gender" Grid.Row="2"  materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" HorizontalAlignment="Left" Margin="65,16,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+        <ComboBox x:Name="Gender" Grid.Row="2" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别"  Margin="303,16,219,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
             <ComboBoxItem Selected="ComboBoxItem_Selected">男</ComboBoxItem>
             <ComboBoxItem Selected="ComboBoxItem_Selected_1">女</ComboBoxItem>
         </ComboBox>
-        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Center" Margin="229,24,290,6">
+        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="3" HorizontalAlignment="Left" Margin="10,16,0,10">
             项目
         </materialDesign:Chip>
-        <ComboBox x:Name="SportEvent" Grid.Row="2" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="项目"  Margin="303,16,219,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7"/>
+        <StackPanel
+            x:Name="MenEvent"
+            Visibility="Hidden"
+             Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Grid.Row="3" Margin="114,0,82,0" Width="572">
+            <CheckBox Grid.Row="3"  IsChecked="{Binding select[0]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                单杠
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[1]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                双杠
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[2]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                吊环
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[3]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                跳马
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[4]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                自由体操
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[5]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                鞍马
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[6]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                蹦床
+            </CheckBox>
+
+        </StackPanel>
+        <StackPanel
+            x:Name="WomenEvent"
+            Visibility="Hidden"
+             Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Grid.Row="3" Margin="196,0,158,0" Width="414">
+            <CheckBox Grid.Row="3"  IsChecked="{Binding select[7]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                跳马
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[8]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                高低杠
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[9]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                平衡木
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[10]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                自由体操
+            </CheckBox>
+            <CheckBox Grid.Row="3" IsChecked="{Binding select[11]}" Style="{StaticResource MaterialDesignCheckBox}" Width="80">
+                蹦床
+            </CheckBox>
+
+        </StackPanel>
+        
+            <TextBlock x:Name="warning" TextAlignment="Center"
+                   Margin="10,16,0,10"
+                   FontSize="14"
+                      Grid.Row="3">请先选择性别</TextBlock>
 
         <StackPanel
              Orientation="Horizontal"
             HorizontalAlignment="Right"
-            Grid.Row="3">
+            Grid.Row="4">
             <Button
                 Style="{StaticResource MaterialDesignFlatButton}"
                 IsDefault="True"

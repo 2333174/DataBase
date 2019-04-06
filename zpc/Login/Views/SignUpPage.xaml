@@ -27,7 +27,8 @@
                     <DataGridTextColumn Binding="{Binding Athlete.IDNumber}"  Header="  身份证号  "/>
                     <DataGridTextColumn Binding="{Binding Athlete.Age}" Header="  年龄  "/>
                     <DataGridTextColumn Binding="{Binding Athlete.Gender}"  Header="  性别  "/>
-                    <DataGridTextColumn Binding="{Binding sportEvent}"  Header="      项目      "/>
+                    <!--<DataGridTextColumn Binding="{Binding sportEvent}"  Header="      项目      "/>-->
+                    <materialDesign:MaterialDataGridComboBoxColumn Header="      项目      " SelectedItemBinding="{Binding sportEvent[0]}"  ItemsSourceBinding="{Binding sportEvent}" />
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox Text="{Binding TeamLeader.Name}" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37" Margin="96.6,26,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Column="1" />
