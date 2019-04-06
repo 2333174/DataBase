@@ -4,11 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Login.Views"
-             mc:Ignorable="d">
-    <Grid>
+             mc:Ignorable="d" 
+              xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="300" d:DesignWidth="600"
+             MaxWidth="700">
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
+        <TextBlock
+                   TextAlignment="Center"
+                   Margin="0 6 0 0"
+                   FontSize="13"
+                   FontWeight="Bold">
+                添加运动员信息
+        </TextBlock>
+
+        <TextBox  x:Name="Name" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" />
+        <TextBox  x:Name="ID" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="身份证号" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
+        <TextBox  x:Name="PhoneNum" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="电话" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
+
+
+        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Left" Margin="0,24,0,6" >
+            性别
+        </materialDesign:Chip>
+        <ComboBox x:Name="Gender" Grid.Row="2"  materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" HorizontalAlignment="Left" Margin="65,16,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+            <ComboBoxItem Selected="ComboBoxItem_Selected">男</ComboBoxItem>
+            <ComboBoxItem Selected="ComboBoxItem_Selected_1">女</ComboBoxItem>
+        </ComboBox>
+        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Center" Margin="229,24,290,6">
+            项目
+        </materialDesign:Chip>
+        <ComboBox x:Name="SportEvent" Grid.Row="2" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="项目"  Margin="303,16,219,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7"/>
+
+        <StackPanel
+             Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Grid.Row="3">
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                IsDefault="True"
+                Margin="0 8 8 0"
+                Command="materialDesign:DialogHost.CloseDialogCommand">
+                <Button.CommandParameter>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                        True
+                    </system:Boolean>
+                </Button.CommandParameter>
+                添加
+            </Button>
+            <Button
+                 Style="{StaticResource MaterialDesignFlatButton}"
+                 IsCancel="True"
+                 Margin="0 8 8 0"
+                 Command="materialDesign:DialogHost.CloseDialogCommand">
+                <Button.CommandParameter>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                        False
+                    </system:Boolean>
+                </Button.CommandParameter>
+                取消
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

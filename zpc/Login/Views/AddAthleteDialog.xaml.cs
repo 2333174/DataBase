@@ -24,5 +24,27 @@ namespace Login.Views
         {
             InitializeComponent();
         }
+
+        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            SportEvent.Items.Clear();
+            SportEvent.Items.Add("单杠");
+            SportEvent.Items.Add("双杠");
+            SportEvent.Items.Add("吊环");
+            SportEvent.Items.Add("跳马");
+            SportEvent.Items.Add("自由体操");
+            SportEvent.Items.Add("鞍马");
+            SportEvent.Items.Add("蹦床");
+        }
+
+        private void ComboBoxItem_Selected_1(object sender, RoutedEventArgs e)
+        {
+            SportEvent.Items.Clear();
+            SportEvent.Items.Add("跳马");
+            SportEvent.Items.Add("高低杠");
+            SportEvent.Items.Add("平衡木");
+            SportEvent.Items.Add("自由体操");
+            SportEvent.Items.Add("蹦床");
+        }
     }
 }

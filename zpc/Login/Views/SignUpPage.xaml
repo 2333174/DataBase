@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Login"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="800"
       Title="SignUpPage">
     <ContentControl x:Name="SignUp">
         <Grid>
@@ -14,6 +14,7 @@
                 <ColumnDefinition Width="46*"/>
                 <ColumnDefinition Width="747*"/>
             </Grid.ColumnDefinitions>
+            <materialDesign:DialogHost Grid.ColumnSpan="2" x:Name="add" DialogClosing="Add_DialogClosing"></materialDesign:DialogHost>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="42,35,698,0" Grid.ColumnSpan="2">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">队长</TextBlock>
             </materialDesign:Card>
@@ -25,9 +26,8 @@
                     <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  姓名  "/>
                     <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  身份证号  "/>
                     <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  年龄  "/>
-                    <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  组别  "/>
+                    <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  性别  "/>
                     <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="      项目      "/>
-                    <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  文化成绩  "/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox Text="{Binding TeamLeader.Name}" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37" Margin="96.6,26,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Column="1" />
@@ -51,7 +51,7 @@
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="36" Margin="95.6,336,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Column="1"/>
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="36" Margin="226.6,336,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="身份证号" VerticalAlignment="Top" Width="120" Opacity="0.7" Grid.Column="1"/>
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="36" Margin="391.6,336,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="电话" VerticalAlignment="Top" Width="120" Opacity="0.7" Grid.Column="1"/>
-            <Button Content="添加" HorizontalAlignment="Left" Margin="640.6,175,0,0" VerticalAlignment="Top" Width="68" AutomationProperties.Name="OK" Background="#FFB3947F" Grid.Column="1" BorderBrush="#FFB3947F"/>
+            <Button Content="添加" HorizontalAlignment="Left" Margin="640.6,175,0,0" VerticalAlignment="Top" Width="68" AutomationProperties.Name="OK" Background="#FFB3947F" Grid.Column="1" BorderBrush="#FFB3947F" Click="Button_Click"/>
             <Button Content="删除" HorizontalAlignment="Left" Margin="640.6,228,0,0" VerticalAlignment="Top" Width="68" AutomationProperties.Name="OK" Background="#FFB3947F" Grid.Column="1" BorderBrush="#FFB3947F"/>
             <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" Grid.Column="1" HorizontalAlignment="Left" Margin="559.6,304,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
                 <ComboBoxItem>男</ComboBoxItem>
@@ -66,7 +66,7 @@
                 <ComboBoxItem Content="男"/>
                 <ComboBoxItem Content="女"/>
             </ComboBox>
-            <materialDesign:DialogHost></materialDesign:DialogHost>
+            
         </Grid>
     </ContentControl>
 </Page>

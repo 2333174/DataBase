@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace Login.Views
 {
@@ -20,10 +21,41 @@ namespace Login.Views
     /// </summary>
     public partial class SignUpPage : Page
     {
+        bool close;
         public SignUpPage(int Tid)
         {
             InitializeComponent();
             DataContext = new ViewModels.SignUpViewModel(Tid);
+        }
+        private async void ShowAddDialog()
+        {
+            
+            AddAthleteDialog samMessageDialog = new AddAthleteDialog
+            {
+            };
+            await DialogHost.Show(samMessageDialog);
+            if (close)
+            {
+                if (!(string.IsNullOrWhiteSpace(samMessageDialog.ID.Text)
+                    || string.IsNullOrWhiteSpace(samMessageDialog.Name.Text)
+                    || string.IsNullOrWhiteSpace(samMessageDialog.PhoneNum.Text))
+                    &&(samMessageDialog.Gender.SelectedValue!=null)&&(samMessageDialog.SportEvent.SelectedValue!=null))
+                {
+
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAddDialog();
+            
+        }
+
+        private void Add_DialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            close = Equals(eventArgs.Parameter, true);
+            Console.WriteLine(close);
         }
     }
 }
