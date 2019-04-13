@@ -185,6 +185,15 @@ namespace DB
             }
         }
 
+        public List<Athlete> GetAthletesByTID(int _TID)
+        {
+            using (var db = new GymDB())
+            {
+                var athletes = db.athlete.Where(a => a.TID.Equals(_TID));
+                return athletes.ToList();
+            }
+        }
+
         public List<MatchGroup> GetMatchGroupsJudgedByID(int _JudgeID)
         {
             using (var db = new GymDB())

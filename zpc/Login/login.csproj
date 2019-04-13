@@ -89,10 +89,17 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Models\DataGridItem.cs" />
     <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
+    <Compile Include="ViewModels\AthleteInfoViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Views\AddAthleteDialog.xaml.cs">
       <DependentUpon>AddAthleteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AthleteInfoControl.xaml.cs">
+      <DependentUpon>AthleteInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AthleteInfoPage.xaml.cs">
+      <DependentUpon>AthleteInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChosePage.xaml.cs">
       <DependentUpon>ChosePage.xaml</DependentUpon>
@@ -122,6 +129,14 @@
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddAthleteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AthleteInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AthleteInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

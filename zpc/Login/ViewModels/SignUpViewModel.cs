@@ -43,7 +43,7 @@ namespace Login.ViewModels
             Events.Add("蹦床");
 
             //命令初始化
-            AddCommand = new Commands.DelegateCommand();
+            AddCommand = new DelegateCommand();
             AddCommand.ExecuteAction = new Action<object>(Add);
             AddDataGridCommand = new DelegateCommand();
             AddDataGridCommand.ExecuteAction = new Action<object>(AddDataGrid);

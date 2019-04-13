@@ -39,7 +39,7 @@ namespace Login.Views
         private void Loginf(object sender, RoutedEventArgs e)
         {
             var db = new GymDBService();
-            switch (db.loginf(user.Text, password.Password, select))
+            switch (db.Loginf(user.Text, password.Password, select))
             {
                 case -1:
                     ShowMessageInfo("账户或密码有误");

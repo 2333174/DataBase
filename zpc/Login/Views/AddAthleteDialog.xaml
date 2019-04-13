@@ -29,14 +29,11 @@
         <TextBox  x:Name="PhoneNum" Grid.Row="1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="电话" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
 
         <TextBox  x:Name="Age" Grid.Row="2" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="10,10,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="年龄" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="2" HorizontalAlignment="Center" Margin="229,24,290,6" >
-            性别
-        </materialDesign:Chip>
-        <ComboBox x:Name="Gender" Grid.Row="2" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别"  Margin="303,16,219,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+        <ComboBox x:Name="Gender" Grid.Row="2" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别"  Margin="329,15.8,319,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
             <ComboBoxItem Selected="ComboBoxItem_Selected">男</ComboBoxItem>
             <ComboBoxItem Selected="ComboBoxItem_Selected_1">女</ComboBoxItem>
         </ComboBox>
-        <materialDesign:Chip Height="Auto"  Width="49" Grid.Row="3" HorizontalAlignment="Left" Margin="10,16,0,10">
+        <materialDesign:Chip Height="Auto"  Width="52" Grid.Row="3" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,13.2,0,13.4">
             项目
         </materialDesign:Chip>
         <StackPanel
@@ -91,12 +88,8 @@
             </CheckBox>
 
         </StackPanel>
-        
-            <TextBlock x:Name="warning" TextAlignment="Center"
-                   Margin="10,16,0,10"
-                   FontSize="14"
-                      Grid.Row="3">请先选择性别</TextBlock>
 
+        <TextBlock x:Name="warning" TextAlignment="Center" Margin="10,17.2,0,8.4" FontSize="14" Grid.Row="3">请先选择性别</TextBlock>
         <StackPanel
              Orientation="Horizontal"
             HorizontalAlignment="Right"
