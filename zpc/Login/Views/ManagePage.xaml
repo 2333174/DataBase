@@ -61,18 +61,17 @@
                             <ColumnDefinition Width="95*"/>
                             <ColumnDefinition Width="262*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="236,241,0,0" VerticalAlignment="Top" Width="108" Height="28" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Opacity="0.7" Foreground="White"/>
-                        <Button Content="添加分裁判" HorizontalAlignment="Left" Margin="235.6,134,0,0" VerticalAlignment="Top" Width="108" Height="29" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Foreground="White" Opacity="0.7"/>
-                        <DataGrid HorizontalAlignment="Left" Height="259" Margin="75,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2" Grid.Column="1">
+                        <Button Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="292,241,0,0" VerticalAlignment="Top" Width="131" Height="28" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Opacity="0.7" Foreground="White" Click="Button_Click_3"/>
+                        <Button Content="添加分裁判" HorizontalAlignment="Left" Margin="292,134,0,0" VerticalAlignment="Top" Width="131" Height="29" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Foreground="White" Opacity="0.7" Click="Button_Click_2"/>
+                        <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="27,61,0,0" VerticalAlignment="Top" Width="434" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2" Grid.Column="1">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  出场顺序  "/>
+                                <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
+                                <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
+                                <DataGridTextColumn Binding="{Binding Path=team}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
+                                <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="235.6,184,0,0" VerticalAlignment="Top" Width="108" Height="32" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Foreground="White" Opacity="0.7"/>
+                        <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="292,184,0,0" VerticalAlignment="Top" Width="131" Height="32" Grid.Column="2" Background="#FF527C72" BorderBrush="#FF527C72" Foreground="White" Opacity="0.7"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="决赛" Margin="0,-2,-87.8,0.333" Opacity="0.7" Background="#FF46847F" HorizontalAlignment="Right" Width="112">
@@ -88,7 +87,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Content="生成决赛赛事表" HorizontalAlignment="Left" Margin="258.2,242,0,0" VerticalAlignment="Top" Width="131" Height="28" Background="#FF527C72" Opacity="0.695" Foreground="White" BorderBrush="#FF527C72" Grid.Column="3"/>
                         <Button Content="添加分裁判" HorizontalAlignment="Left" Margin="258.2,122,0,0" VerticalAlignment="Top" Width="131" Height="29" BorderBrush="#FF527C72" Background="#FF527C72" Opacity="0.7" Foreground="White" Grid.Column="3"/>
-                        <DataGrid HorizontalAlignment="Left" Height="287" Margin="33.4,63,0,0" VerticalAlignment="Top" Width="336" Grid.ColumnSpan="2" BorderBrush="#FF527C72" Opacity="0.7" Grid.Column="2">
+                        <DataGrid Name="finalMatchGrid" HorizontalAlignment="Left" Height="287" Margin="13,63,0,0" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="3" BorderBrush="#FF527C72" Opacity="0.7" Grid.Column="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
@@ -97,7 +96,7 @@
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  出场顺序  "/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="258.2,179,0,0" VerticalAlignment="Top" Width="131" Height="32" Foreground="White" BorderBrush="#FF527C72" Background="#FF527C72" OpacityMask="Black" Opacity="0.7" Grid.Column="3"/>
+                        <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="258.2,179,0,0" VerticalAlignment="Top" Width="131" Height="32" Foreground="White" BorderBrush="#FF527C72" Background="#FF527C72" OpacityMask="Black" Opacity="0.7" Grid.Column="3" Click="Button_Click_1"/>
                     </Grid>
                 </TabItem>
             </TabControl>

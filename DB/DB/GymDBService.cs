@@ -185,6 +185,7 @@ namespace DB
             }
         }
 
+
         public List<Athlete> GetAthletesByTID(int _TID)
         {
             using (var db = new GymDB())
@@ -200,10 +201,30 @@ namespace DB
                 return db.matchgroup.Where(mg => mg.JudgeID == _JudgeID).ToList();
         }
 
+        public List<MatchGroup> GetMatchGroups()
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.ToList();
+        }
+         
+        public List<PersonalResult> GetPersonalResultsByGroupID(string _Groupid)
+        {
+            using (var db = new GymDB())
+            {
+                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
+            }
+        }
+
         public Team GetTeamByTName(string _name)
         {
             using (var db = new GymDB())
                 return db.team.Where(t => t.TName.Equals(_name)).Single();
+        }
+
+        public Team GetTeamByTID(int _TID)
+        {
+            using (var db = new GymDB())
+                return db.team.Where(t => t.TID.Equals(_TID)).Single();
         }
 
         public List<Team> GetAllTeams()

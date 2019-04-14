@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Manage_DataGridRow.cs" />
     <Compile Include="Models\DataGridItem.cs" />
     <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
     <Compile Include="ViewModels\AthleteInfoViewModel.cs" />

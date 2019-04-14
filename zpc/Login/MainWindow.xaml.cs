@@ -26,6 +26,8 @@ namespace Login
             InitializeComponent();
             ChangePage.Content = new Frame()
             { Content = new SignUpPage(5)};
+            //ChangePage.Content = new Frame()
+            //{ Content = new ManagePage()};
         }
         
         protected override void OnClosed(EventArgs e)
