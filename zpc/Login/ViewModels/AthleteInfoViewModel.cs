@@ -13,10 +13,20 @@ namespace Login.ViewModels
         {
             AnAthlete = athlete;
             GymDBService dbs = new GymDBService();
-            PersonalResults = dbs.GetPersonalResultsByAthleteID(athlete.AthleteID);
+            var prs = dbs.GetPersonalResultsByAthleteID(athlete.AthleteID);
+            PersonalResults = new List<string>();
+            foreach (var pr in prs)
+            {
+                string tmpSport = null;
+                switch (pr.SportsEvent)
+                {
+                    
+                }
+                PersonalResults.Add(tmpSport);
+            }
         }
 
-        public List<PersonalResult> PersonalResults { set; get; }
+        public List<string> PersonalResults { set; get; }
 
         public Athlete AnAthlete { set; get; }
     }
