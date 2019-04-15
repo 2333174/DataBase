@@ -25,7 +25,7 @@ namespace Login
         {
             InitializeComponent();
             ChangePage.Content = new Frame()
-            { Content = new SignUpPage(5)};
+            { Content = new AthleteInfoPage(1)};
             //ChangePage.Content = new Frame()
             //{ Content = new ManagePage()};
         }

@@ -39,7 +39,7 @@
             </Grid>
         </materialDesign:Card>
         <Grid Grid.Row="1" HorizontalAlignment="Center">
-            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible" Width="768">
+            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Visible" Width="760">
                 <DockPanel x:Name="dockpanel" Height="320" ScrollViewer.VerticalScrollBarVisibility="Auto"></DockPanel>
             </ScrollViewer>
         </Grid>

@@ -190,12 +190,11 @@ namespace Login.ViewModels
 
         private async void ShowMessageInfo(string message)
         {
-            Views.MessageDialog samMessageDialog = new Views.MessageDialog
+            MessageDialog samMessageDialog = new MessageDialog
             {
                 Message = { Text = message }
             };
-           await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
-           
+           await DialogHost.Show(samMessageDialog);
         }
 
         //显示添加框 并进行处理
@@ -210,10 +209,8 @@ namespace Login.ViewModels
             }
             //打开对话框
             DialogClosingEventHandler dialogClosingEventHandler = null;
-            AddAthleteDialog samMessageDialog = new AddAthleteDialog
-            {
-            };
-            var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
+            AddAthleteDialog samMessageDialog = new AddAthleteDialog{};
+            var result = await DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
             Console.WriteLine(result.ToString());
 
             //添加数据

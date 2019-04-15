@@ -123,6 +123,53 @@ namespace DB
             }
         }
 
+        public string GetRealSportName(PersonalResult _personalResult)
+        {
+            string tmpSport = null;
+            switch (_personalResult.SportsEvent)
+            {
+                case "01":
+                    tmpSport = "单杠";
+                    break;
+                case "02":
+                    tmpSport = "双杠";
+                    break;
+                case "03":
+                    tmpSport = "吊环";
+                    break;
+                case "04":
+                    tmpSport = "跳马";
+                    break;
+                case "05":
+                    tmpSport = "自由体操";
+                    break;
+                case "06":
+                    tmpSport = "鞍马";
+                    break;
+                case "07":
+                    tmpSport = "蹦床";
+                    break;
+                case "08":
+                    tmpSport = "跳马";
+                    break;
+                case "09":
+                    tmpSport = "高低杠";
+                    break;
+                case "10":
+                    tmpSport = "平衡木";
+                    break;
+                case "11":
+                    tmpSport = "自由体操";
+                    break;
+                case "12":
+                    tmpSport = "蹦床";
+                    break;
+                default:
+                    throw new Exception("未找到相关项目。");
+            }
+            return tmpSport;
+        }
+
         // Get the judgeid by comparing username and role
         public int GetJudgeID(string _username, string password)
         {
@@ -151,7 +198,7 @@ namespace DB
         public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
         {
             using (var db = new GymDB())
-                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID)).ToList();
+                return db.personalresult.Where(p => p.AthleteID == _AthleteID).ToList();
         }
 
         public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
@@ -189,10 +236,7 @@ namespace DB
         public List<Athlete> GetAthletesByTID(int _TID)
         {
             using (var db = new GymDB())
-            {
-                var athletes = db.athlete.Where(a => a.TID.Equals(_TID));
-                return athletes.ToList();
-            }
+                return db.athlete.Where(a => a.TID == _TID).ToList();
         }
 
         public List<MatchGroup> GetMatchGroupsJudgedByID(int _JudgeID)
@@ -218,13 +262,13 @@ namespace DB
         public Team GetTeamByTName(string _name)
         {
             using (var db = new GymDB())
-                return db.team.Where(t => t.TName.Equals(_name)).Single();
+                return db.team.Where(t => t.TName == _name).Single();
         }
 
         public Team GetTeamByTID(int _TID)
         {
             using (var db = new GymDB())
-                return db.team.Where(t => t.TID.Equals(_TID)).Single();
+                return db.team.Where(t => t.TID == _TID).Single();
         }
 
         public List<Team> GetAllTeams()
