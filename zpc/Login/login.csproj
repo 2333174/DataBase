@@ -86,8 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\AddAcount.xaml.cs">
-      <DependentUpon>AddAcount.xaml</DependentUpon>
+    <Compile Include="Views\AddAcountDialog.xaml.cs">
+      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Manage_DataGridRow.cs" />
@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Views\AthleteInfoPage.xaml.cs">
       <DependentUpon>AthleteInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChooseJudge.xaml.cs">
+      <DependentUpon>ChooseJudge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChosePage.xaml.cs">
       <DependentUpon>ChosePage.xaml</DependentUpon>
@@ -132,7 +135,7 @@
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AddAcount.xaml">
+    <Page Include="Views\AddAcountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AthleteInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChooseJudge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

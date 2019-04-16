@@ -14,7 +14,7 @@
             <Grid Margin="37,52,-37,-52">
                 <RadioButton Content="裁判" HorizontalAlignment="Left" Margin="339,74,0,0" VerticalAlignment="Top"/>
                 <RadioButton Content="代表队" HorizontalAlignment="Left" Margin="339,116,0,0" VerticalAlignment="Top"/>
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="添加" HorizontalAlignment="Left" Margin="512,378,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
+                <Button  Content="添加" HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
                 <TextBlock
                 TextAlignment="Center"
                 Margin="0,26,32,376"
@@ -24,7 +24,7 @@
                 <TextBox  x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="156,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="队名/裁判名" VerticalAlignment="Top" Width="101" Opacity="0.7" />
                 <TextBox  x:Name="ID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="330,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
                 <TextBox  x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="512,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="取消" HorizontalAlignment="Left" Margin="637,378,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
+                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="取消" HorizontalAlignment="Left" Margin="608,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
 
             </Grid>
 
