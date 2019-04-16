@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="46*"/>
                 <ColumnDefinition Width="747*"/>
             </Grid.ColumnDefinitions>
-            <materialDesign:DialogHost Grid.ColumnSpan="2" x:Name="add"></materialDesign:DialogHost>
+            <materialDesign:DialogHost x:Name="add" Grid.Column="1" Margin="71.333,110,-118,-110"/>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="42,35,698,0" Grid.ColumnSpan="2">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">队长</TextBlock>
             </materialDesign:Card>
@@ -63,11 +63,11 @@
                 <ComboBoxItem Content="男"/>
                 <ComboBoxItem Content="女"/>
             </ComboBox>
-            <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" Grid.Column="1" HorizontalAlignment="Left" Margin="559.6,78,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+            <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" Grid.Column="1" HorizontalAlignment="Left" Margin="559.6,78,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7" IsEnabled="False">
                 <ComboBoxItem Content="男"/>
                 <ComboBoxItem Content="女"/>
             </ComboBox>
-            
+
         </Grid>
     </ContentControl>
 </Page>

@@ -34,8 +34,8 @@
                     <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="  比赛类型  " SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" Background="#FFD5898E" BorderBrush="#FFD5898E" FontWeight="Bold"/>
-            <Button Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" Background="#FFD5898E" BorderBrush="#FFD5898E" FontWeight="Bold"/>
+            <Button Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold"/>
+            <Button Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFD5898E" FontWeight="Bold"/>
             <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="176,78,0,0" Width="264" Height="46">
                 <materialDesign:Flipper.FrontContent>
                     <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
