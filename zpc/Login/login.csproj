@@ -86,9 +86,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAcount.xaml.cs">
+      <DependentUpon>AddAcount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChosePage.xaml.cs">
+      <DependentUpon>ChosePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="GradeSystem.xaml.cs">
+      <DependentUpon>GradeSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GSForMajorJudge.xaml.cs">
+      <DependentUpon>GSForMajorJudge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manage_DataGridRow.cs" />
+    <Compile Include="MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataGridItem.cs" />
+    <Compile Include="PassWordWindow.xaml.cs">
+      <DependentUpon>PassWordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
     <Compile Include="ViewModels\AthleteInfoViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -129,6 +153,38 @@
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAcount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChosePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GradeSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GSForMajorJudge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PassWordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SignUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AddAthleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
