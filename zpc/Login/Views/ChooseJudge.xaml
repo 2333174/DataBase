@@ -10,32 +10,33 @@
       Title="ChooseJudge">
 
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="288" Margin="105,75,0,0">
+        <DataGrid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="509" Margin="105,75,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="比赛类型"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="单项名称"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="性别"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="组号"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="主裁判"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分裁判"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="主裁判" HorizontalAlignment="Left" Margin="105,223,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="分裁判" HorizontalAlignment="Left" Margin="105,286,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid HorizontalAlignment="Left" Height="100" Margin="213,286,0,0" VerticalAlignment="Top" Width="199">
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="213,286,0,0" VerticalAlignment="Top" Width="144">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="账号" SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="姓名"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="身份证号"/>
             </DataGrid.Columns>
         </DataGrid>
 
 
         <TextBox Text="{Binding TeamLeader.Name}" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37" Margin="385,213,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-        <TextBox Text="{Binding TeamLeader.IDNumber}" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37" Margin="537,213,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="身份证号" VerticalAlignment="Top" Width="120" Opacity="0.7"/>
         <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账号" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
         </ComboBox>
         <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
-        <Button Content="添加" HorizontalAlignment="Left" Margin="460,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button Content="删除" HorizontalAlignment="Left" Margin="460,336,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button Content="添加" HorizontalAlignment="Left" Margin="402,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <Button Content="删除" HorizontalAlignment="Left" Margin="502,286,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="添加完成" HorizontalAlignment="Left" Margin="652,75,0,0" VerticalAlignment="Top" Width="99" />
 
 
     </Grid>

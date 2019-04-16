@@ -38,8 +38,8 @@
                         <ColumnDefinition Width="24*"/>
                         <ColumnDefinition Width="151*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.667,241,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="4"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加分裁判" HorizontalAlignment="Left" Margin="164.667,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="4" Foreground="White"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.667,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="4"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.667,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="4" Foreground="White"/>
                     <DataGrid HorizontalAlignment="Left" Height="259" Margin="62.333,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
@@ -49,7 +49,6 @@
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  出场顺序  "/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="添加总裁判" HorizontalAlignment="Left" Margin="164.667,185,0,0" VerticalAlignment="Top" Width="130" Height="32" Grid.Column="4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="决赛" Margin="0,-2,-131,0.333" Opacity="0.7" Background="{x:Null}" HorizontalAlignment="Right" Width="112" Height="21" VerticalAlignment="Bottom" RenderTransformOrigin="-0.376,0.595">
