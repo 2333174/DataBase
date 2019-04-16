@@ -10,11 +10,10 @@
       Title="ChooseJudge">
 
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="509" Margin="105,75,0,0">
+        <DataGrid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="比赛类型"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="单项名称"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="性别"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="组号"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="主裁判"/>
                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分裁判"/>
