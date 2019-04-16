@@ -27,10 +27,10 @@
         </DataGrid>
         <Button Content="通过" HorizontalAlignment="Left" Margin="52.4,253,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" Style="{StaticResource MaterialDesignRaisedButton}"
              BorderBrush="#FFB37580" RenderTransformOrigin="2.04,2.672" Grid.Column="1" Foreground="#FFE4E4E5"/>
-        <Button Content="更新" HorizontalAlignment="Left" Margin="52.4,196,0,0" VerticalAlignment="Top" Width="75" Background="#FFB37580" BorderBrush="#FFBF989F" Grid.Column="1" Foreground="#FFE4E5E5" Style="{StaticResource MaterialDesignRaisedButton}"
-            />
-        <Button Content="修改" HorizontalAlignment="Left" Margin="52.4,136,0,0" VerticalAlignment="Top" Width="75" Foreground="#FFE9D2D0" Background="#FFB37580" BorderBrush="#FFBA8891" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}"
-            />
-    </Grid>
+            <Button Content="通过" HorizontalAlignment="Left" Margin="52.4,253,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource MaterialDesignRaisedDarkButton}" RenderTransformOrigin="2.04,2.672" Grid.Column="1" />
+            <Button Content="更新" HorizontalAlignment="Left" Margin="52.4,196,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}"  />
+            <Button Content="修改" HorizontalAlignment="Left" Margin="52.4,136,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedLightButton}" Click="Button_Click"  />
+            <ProgressBar  IsIndeterminate="True" Grid.ColumnSpan="2" Margin="24,62,197,384" />
+        </Grid>
     </ContentControl>
 </Page>

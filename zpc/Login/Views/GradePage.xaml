@@ -34,18 +34,9 @@
                     <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="  比赛类型  " SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" Background="#FFD5898E" BorderBrush="#FFD5898E" FontWeight="Bold"/>
-            <Button Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" Background="#FFD5898E" BorderBrush="#FFD5898E" FontWeight="Bold"/>
-            <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="176,78,0,0" Width="264" Height="46">
-                <materialDesign:Flipper.FrontContent>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                        Margin="8" Width="184" HorizontalAlignment="Center">请确认分数无误后再提交</Button>
-                </materialDesign:Flipper.FrontContent>
-                <materialDesign:Flipper.BackContent>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                         Margin="8" Width="184">一定要确认哦~</Button>
-                </materialDesign:Flipper.BackContent>
-            </materialDesign:Flipper>
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" />
+            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" />
+            <Label Content="    请务必确认分数无误后再提交成绩 " HorizontalAlignment="Left" Margin="170,74,0,0" VerticalAlignment="Top" Height="30" Width="283" FontSize="16" FontFamily="Yu Gothic UI" FontWeight="Bold"/>
         </Grid>
     </ContentControl>
 </Page>

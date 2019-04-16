@@ -10,11 +10,11 @@
              MaxWidth="900">
     <Grid Margin="16">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="53*" />
+            <RowDefinition Height="53*" />
+            <RowDefinition Height="54" />
+            <RowDefinition Height="53*" />
+            <RowDefinition Height="54*" />
         </Grid.RowDefinitions>
         <TextBlock
                    TextAlignment="Center"
