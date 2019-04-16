@@ -21,6 +21,7 @@ namespace DB
             Telephone = judgeTel;
             matchgroup = new HashSet<MatchGroup>();
         }
+
         [Required]
         [StringLength(20)]
         public string Name { get; set; }

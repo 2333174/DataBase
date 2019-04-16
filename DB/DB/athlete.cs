@@ -23,7 +23,6 @@ namespace DB
             personalresult = new HashSet<PersonalResult>();
         }
 
-
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
@@ -42,6 +41,8 @@ namespace DB
 
         [StringLength(3)]
         public string AthleteID { get; set; }
+
+        public int? CulturalGrade { get; set; }
 
         public virtual Team team { get; set; }
 

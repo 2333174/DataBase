@@ -9,7 +9,6 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class PersonalResult
     {
-
         public PersonalResult() { }
 
         public PersonalResult(string athleteID, string sportsEvent, string groupID, int role)
