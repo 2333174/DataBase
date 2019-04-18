@@ -25,5 +25,34 @@ namespace Login.Views
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        //单组裁判添加完成按钮
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //分裁判添加按钮
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //分裁判删除按钮
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //确认按钮
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

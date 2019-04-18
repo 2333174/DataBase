@@ -23,19 +23,17 @@
         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="分裁判" HorizontalAlignment="Left" Margin="105,286,0,0" VerticalAlignment="Top" Width="75"/>
         <DataGrid HorizontalAlignment="Left" Height="100" Margin="213,286,0,0" VerticalAlignment="Top" Width="144">
             <DataGrid.Columns>
-                <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="账号" SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="姓名"/>
+                <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="姓名" SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="账号"/>
             </DataGrid.Columns>
         </DataGrid>
-
-
-        <TextBox Text="{Binding TeamLeader.Name}" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37" Margin="385,213,0,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="姓名" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-        <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账号" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+        <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
         </ComboBox>
-        <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
-        <Button Content="添加" HorizontalAlignment="Left" Margin="402,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}"/>
-        <Button Content="删除" HorizontalAlignment="Left" Margin="502,286,0,0" VerticalAlignment="Top" Width="65"/>
-        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="添加完成" HorizontalAlignment="Left" Margin="652,75,0,0" VerticalAlignment="Top" Width="99" />
+        <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_3"/>
+        <Button Content="添加" HorizontalAlignment="Left" Margin="402,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}" Click="Button_Click_1"/>
+        <Button Content="删除" HorizontalAlignment="Left" Margin="502,286,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click_2"/>
+        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="添加完成" HorizontalAlignment="Left" Margin="652,75,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click" />
+        <TextBox  x:Name="ID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,214,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
 
 
     </Grid>

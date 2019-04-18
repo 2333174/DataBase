@@ -40,7 +40,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.667,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="4"/>
                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.667,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="4" Foreground="White"/>
-                    <DataGrid HorizontalAlignment="Left" Height="259" Margin="62.333,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="2">
+                    <DataGrid HorizontalAlignment="Left" Height="259" Margin="62.333,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="2" SelectionChanged="DataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
