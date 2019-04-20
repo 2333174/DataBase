@@ -58,7 +58,6 @@
                 <ComboBoxItem>男</ComboBoxItem>
                 <ComboBoxItem>女</ComboBoxItem>
             </ComboBox>
-
             <Button Content="确认" Grid.Column="1" HorizontalAlignment="Left" Margin="640.6,386,0,0" VerticalAlignment="Top" Width="68" Background="#FF1791AC" BorderBrush="#FF1791AC" RenderTransformOrigin="0.969,0.583" Command="{Binding AddCommand}"/>
             <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" Grid.Column="1" HorizontalAlignment="Left" Margin="559.6,36,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7" Text="{Binding TeamLeader.Gender}">
                 <ComboBoxItem Content="男"/>

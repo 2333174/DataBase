@@ -21,7 +21,7 @@ namespace DB
             string tmpPwd = string.Empty;
             int randomNum1, randomNum2;
             Random random = new Random();
-            for(int i = 0; i < passwordLength; i++)
+            for (int i = 0; i < passwordLength; i++)
             {
                 randomNum1 = random.Next(CharacterSet.Length);
                 randomNum2 = random.Next(CharacterSet[randomNum1].Length);
@@ -40,7 +40,7 @@ namespace DB
                 db.SaveChanges();
             }
         }
-        
+
         // Add a team with teamname
         public void Add(Team _team)
         {
@@ -123,46 +123,95 @@ namespace DB
             }
         }
 
+        private bool CheckDuplicateRefereeScore(RefereeScore refereeScore)
+        {
+            using (var db = new GymDB())
+            {
+                var rss = db.refereescore.Where(rs => rs.PRid == refereeScore.PRid && rs.JudgeID == refereeScore.JudgeID);
+                if (rss.Count() == 0) return true;
+                else return false;
+            }
+        }
+
+        public bool Add(RefereeScore _refereeScore)
+        {
+            using (var db = new GymDB())
+            {
+                if (!CheckDuplicateRefereeScore(_refereeScore)) return false;
+                var targetPR = db.personalresult.Find(_refereeScore.PRid);
+                var targetJudge = db.judge.Find(_refereeScore.JudgeID);
+                db.refereescore.Add(_refereeScore);
+                targetPR.refereescore.Add(_refereeScore);
+                targetJudge.refereescore.Add(_refereeScore);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public void Add(Setting _setting)
+        {
+            using (var db = new GymDB())
+            {
+                db.setting.Add(_setting);
+                db.SaveChanges();
+            }
+        }
+
+        public string GetMatchType(PersonalResult _personalResult)
+        {
+            string tmpType = null;
+            switch (_personalResult.GroupID.Substring(3,1))
+            {
+                case "1":
+                    tmpType = "预赛";
+                    break;
+                case "2":
+                    tmpType = "决赛";
+                    break;
+            }
+            return tmpType;
+        }
+
         public string GetRealSportName(PersonalResult _personalResult)
         {
             string tmpSport = null;
-            switch (_personalResult.SportsEvent.Substring(1,2))
+            switch (_personalResult.SportsEvent.Substring(1, 2))
             {
                 case "01":
-                    tmpSport = "单杠";
+                    tmpSport = "男子单杠";
                     break;
                 case "02":
-                    tmpSport = "双杠";
+                    tmpSport = "男子双杠";
                     break;
                 case "03":
-                    tmpSport = "吊环";
+                    tmpSport = "男子吊环";
                     break;
                 case "04":
-                    tmpSport = "跳马";
+                    tmpSport = "男子跳马";
                     break;
                 case "05":
-                    tmpSport = "自由体操";
+                    tmpSport = "男子自由体操";
                     break;
                 case "06":
-                    tmpSport = "鞍马";
+                    tmpSport = "男子鞍马";
                     break;
                 case "07":
-                    tmpSport = "蹦床";
+                    tmpSport = "男子蹦床";
                     break;
                 case "08":
-                    tmpSport = "跳马";
+                    tmpSport = "女子跳马";
                     break;
                 case "09":
-                    tmpSport = "高低杠";
+                    tmpSport = "女子高低杠";
                     break;
                 case "10":
-                    tmpSport = "平衡木";
+                    tmpSport = "女子平衡木";
                     break;
                 case "11":
-                    tmpSport = "自由体操";
+                    tmpSport = "女子自由体操";
                     break;
                 case "12":
-                    tmpSport = "蹦床";
+                    tmpSport = "女子蹦床";
                     break;
                 default:
                     throw new Exception("未找到相关项目。");
@@ -189,10 +238,16 @@ namespace DB
             }
         }
 
-        public Athlete GetAthleteByID(string _AthleteID)
+        public RefereeScore GetRefereeScoreByPridAndJudgeID(int _Prid, int _judgeID)
         {
             using (var db = new GymDB())
-                return db.athlete.Find(_AthleteID);
+                return db.refereescore.Where(rs => rs.PRid == _Prid && rs.JudgeID == _judgeID).Single();
+        }
+
+        public Athlete GetAthleteByID(string _AthleteIDNum)
+        {
+            using (var db = new GymDB())
+                return db.athlete.Find(_AthleteIDNum);
         }
 
         public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
@@ -206,11 +261,13 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
         }
-         public List<PersonalResult> GetPersonalResultsBySportEvent(string _sportEvent)
+
+        public List<PersonalResult> GetPersonalResultsBySportEvent(string _sportEvent)
         {
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent)).ToList();
         }
+
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
             using (var db = new GymDB())
@@ -223,7 +280,7 @@ namespace DB
             {
                 var listofjudge = db.matchgroup.Where(mg => mg.GroupID.Equals(_Groupid));
                 List<Judge> judges = new List<Judge>();
-                foreach(var mgs in listofjudge)
+                foreach (var mgs in listofjudge)
                 {
                     var tmp = db.judge.Where(j => j.JudgeID == mgs.JudgeID).Single();
                     judges.Add(tmp);
@@ -231,7 +288,6 @@ namespace DB
                 return judges;
             }
         }
-
 
         public List<Athlete> GetAthletesByTID(int _TID)
         {
@@ -250,13 +306,17 @@ namespace DB
             using (var db = new GymDB())
                 return db.matchgroup.ToList();
         }
-         
+
         public List<PersonalResult> GetPersonalResultsByGroupID(string _Groupid)
         {
             using (var db = new GymDB())
-            {
-                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
-            }
+                return db.personalresult.Where(p => p.GroupID == _Groupid).ToList();
+        }
+
+        public PersonalResult GetPersonalResultByPRid(int _PRid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Find(_PRid);
         }
 
         public Team GetTeamByTName(string _name)
@@ -271,6 +331,12 @@ namespace DB
                 return db.team.Where(t => t.TID == _TID).Single();
         }
 
+        public string GetTeamNameByTID(int? _TID)
+        {
+            using (var db = new GymDB())
+                return db.team.Find(_TID).TName;
+        }
+
         public List<Team> GetAllTeams()
         {
             using (var db = new GymDB())
@@ -281,6 +347,12 @@ namespace DB
         {
             using (var db = new GymDB())
                 return db.athlete.ToList();
+        }
+
+        public MatchGroup GetMatchGroupByKey(int _key)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Find(_key);
         }
 
         public List<Athlete> GetAthletesByTName(string _TName)
@@ -307,6 +379,21 @@ namespace DB
             {
                 Team targetTeam = GetTeamByTName(_TName);
                 return db.teamresult.Where(tr => tr.TID == targetTeam.TID).ToList();
+            }
+        }
+
+        public Judge GetJudgeByJudgeID(int _judgeID)
+        {
+            using (var db = new GymDB())
+                return db.judge.Find(_judgeID);
+        }
+
+        public int GetTIDByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.team.Where(t => t.TName == _TName).Single();
+                return target.TID;
             }
         }
 
@@ -386,6 +473,16 @@ namespace DB
             {
                 var target = db.teamresult.Where(tr => tr.TRid == _teamResult.TRid).Single();
                 db.teamresult.Remove(target);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete(RefereeScore _refereeScore)
+        {
+            using (var db = new GymDB())
+            {
+                var target = db.refereescore.Where(rs => rs.Rsid == _refereeScore.Rsid).Single();
+                db.refereescore.Remove(target);
                 db.SaveChanges();
             }
         }
@@ -470,7 +567,26 @@ namespace DB
             }
         }
 
-        // Untested Code
+        public void Update(RefereeScore _refereeScore)
+        {
+            using (var db = new GymDB())
+            {
+                db.refereescore.Attach(_refereeScore);
+                db.Entry(_refereeScore).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Setting _setting)
+        {
+            using (var db = new GymDB())
+            {
+                db.setting.Attach(_setting);
+                db.Entry(_setting).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
         public void SetSuq(List<PersonalResult> _personalResults)
         {
             Random random = new Random();
