@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Login.Models;
-using MaterialDesignThemes.Wpf;
 
-namespace Login.Views
+namespace Login
 {
     /// <summary>
-    /// SignUpPage.xaml 的交互逻辑
+    /// MessageDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class SignUpPage : Page
+    public partial class MessageDialog : UserControl
     {
-        public SignUpPage(string _TName)
+        public MessageDialog()
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(_TName);
-            
         }
     }
 }

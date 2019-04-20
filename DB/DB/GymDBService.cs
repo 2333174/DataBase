@@ -126,7 +126,7 @@ namespace DB
         public string GetRealSportName(PersonalResult _personalResult)
         {
             string tmpSport = null;
-            switch (_personalResult.SportsEvent)
+            switch (_personalResult.SportsEvent.Substring(1,2))
             {
                 case "01":
                     tmpSport = "单杠";
@@ -198,7 +198,7 @@ namespace DB
         public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
         {
             using (var db = new GymDB())
-                return db.personalresult.Where(p => p.AthleteID == _AthleteID).ToList();
+                return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID)).ToList();
         }
 
         public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
@@ -614,8 +614,18 @@ namespace DB
             }
         }
 
+        //返回Tname
+        public string GetTName(string username, string password, int role)
+        {
+            using (var db = new GymDB())
+            {
+                var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
+                return account.TName;
+            }
+        }
+
         //设置三个参数:代表队男/女各年龄组最大报名人数
-        public void Set(string POne, string PTwo, string PThree)
+        public void Set(String POne, String PTwo, String PThree)
         {
             using (var db = new GymDB())
             {

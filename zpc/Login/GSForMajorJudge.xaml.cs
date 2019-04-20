@@ -10,23 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Login.Models;
-using MaterialDesignThemes.Wpf;
 
-namespace Login.Views
+namespace Login
 {
     /// <summary>
-    /// SignUpPage.xaml 的交互逻辑
+    /// GSForMajorJudge.xaml 的交互逻辑
     /// </summary>
-    public partial class SignUpPage : Page
+    public partial class GSForMajorJudge : Window
     {
-        public SignUpPage(string _TName)
+        public GSForMajorJudge()
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(_TName);
-            
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

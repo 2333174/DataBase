@@ -70,6 +70,10 @@ namespace DB
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Login>()
+                .Property(e => e.TName)
+                .IsUnicode(false);
+
             modelBuilder.Entity<MatchGroup>()
                 .Property(e => e.GroupID)
                 .IsUnicode(false);

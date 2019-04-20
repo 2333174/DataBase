@@ -25,9 +25,7 @@ namespace Login
         {
             InitializeComponent();
             ChangePage.Content = new Frame()
-            { Content = new AthleteInfoPage(1)};
-            //ChangePage.Content = new Frame()
-            //{ Content = new ManagePage()};
+            { Content = new SignUpPage("啦啦啦")};
         }
         
         protected override void OnClosed(EventArgs e)

@@ -14,11 +14,17 @@ namespace Login.ViewModels
 {
     class SignUpViewModel:BaseViewModel
     {
-        public SignUpViewModel(int Tid)
+        public SignUpViewModel(string TName)
         {
-            Teamid = Tid;
+
+            Teamid = dbs.GetTIDByTName(TName);
 
             //数据初始化
+            _TeamLeader = new Staff();
+            _Doctor = new Staff();
+            _Coach = new Staff();
+            _Judge = new Judge();
+
             _Athletes = null;
             DeleteItem = null;
             _AthleteInfos = new ObservableCollection<DataGridItem>();
@@ -63,6 +69,8 @@ namespace Login.ViewModels
 
         //存储运动员报名项目
         public List<string> sportEvents;
+
+        private GymDBService dbs = new GymDBService();
 
         //记录多选按钮
         private List<int> _select;
@@ -145,16 +153,13 @@ namespace Login.ViewModels
 
         private bool IsTeamInfoNull()
         {
+            Console.WriteLine(TeamLeader.Gender);
             bool res = true;
             res = res && (TeamLeader.Name != null) && (TeamLeader.IDNumber != null) && (TeamLeader.Telephone != null) && (TeamLeader.Gender != null);
             res = res && (Doctor.Name != null) && (Doctor.IDNumber != null) && (Doctor.Telephone != null) && (Doctor.Gender != null);
             res = res && (Coach.Name != null) && (Coach.IDNumber != null) && (Coach.Telephone != null) && (Coach.Gender != null);
             res = res && (Judge.Name != null) && (Judge.IDNumber != null) && (Judge.Telephone != null);
-            foreach(var a in Athletes)
-            {
-                res = res && (a.Athlete.Name != null) && (a.Athlete.IDNumber != null) && (!a.Athlete.Age.Equals(null)) && (a.Athlete.CulturalGrade != null) && (a.Athlete.Gender != null);
-                foreach(var e in a.Events) { } // 组别
-            }
+            res = res && (AthleteInfos != null);
             return res;
         }
 
@@ -173,28 +178,35 @@ namespace Login.ViewModels
         private void Add(object parameter)
         {
             if (IsTeamInfoNull() != true) ShowMessageInfo("输入有空值！");
-            GymDBService dbs = new GymDBService();
-            Staff leader = new Staff(TeamLeader.Name, TeamLeader.IDNumber, TeamLeader.Gender, TeamLeader.Telephone, "0", Teamid);
-            Staff doctor = new Staff(Doctor.Name, Doctor.IDNumber, Doctor.Gender, Doctor.Telephone, "1", Teamid);
-            Staff coach = new Staff(Coach.Name, Coach.IDNumber, Coach.Gender, Coach.Telephone, "2", Teamid);
-            dbs.Add(leader);
-            dbs.Add(doctor);
-            dbs.Add(coach);
-            foreach(var a in Athletes)
+            else
             {
-                Athlete athlete = new Athlete(a.Athlete.Name, a.Athlete.IDNumber, a.Athlete.Age, a.Athlete.Gender);
-                dbs.Add(athlete);
-                // 添加PersonalResult
+                GymDBService dbs = new GymDBService();
+                Staff leader = new Staff(TeamLeader.Name, TeamLeader.IDNumber, TeamLeader.Gender, TeamLeader.Telephone, "0", Teamid);
+                Staff doctor = new Staff(Doctor.Name, Doctor.IDNumber, Doctor.Gender, Doctor.Telephone, "1", Teamid);
+                Staff coach = new Staff(Coach.Name, Coach.IDNumber, Coach.Gender, Coach.Telephone, "2", Teamid);
+                dbs.Add(leader);
+                dbs.Add(doctor);
+                dbs.Add(coach);
+                dbs.Add(Judge);
+                foreach (var a in AthleteInfos)
+                {
+                    a.Athlete.TID = Teamid;
+                    dbs.Add(a.Athlete);
+
+                }
             }
         }
 
+        
+
         private async void ShowMessageInfo(string message)
         {
-            MessageDialog samMessageDialog = new MessageDialog
+            Views.MessageDialog samMessageDialog = new Views.MessageDialog
             {
                 Message = { Text = message }
             };
-           await DialogHost.Show(samMessageDialog);
+           await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+           
         }
 
         //显示添加框 并进行处理
@@ -209,8 +221,10 @@ namespace Login.ViewModels
             }
             //打开对话框
             DialogClosingEventHandler dialogClosingEventHandler = null;
-            AddAthleteDialog samMessageDialog = new AddAthleteDialog{};
-            var result = await DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
+            AddAthleteDialog samMessageDialog = new AddAthleteDialog
+            {
+            };
+            var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
             Console.WriteLine(result.ToString());
 
             //添加数据
