@@ -13,7 +13,6 @@ namespace Login.ViewModels
         {
             AnAthlete = athlete;
             GymDBService dbs = new GymDBService();
-            TeamName = dbs.GetTeamNameByTID(athlete.TID);
             var prs = dbs.GetPersonalResultsByAthleteID(athlete.IDNumber);
             PersonalResults = new List<string>();
             foreach (var pr in prs)
@@ -30,8 +29,6 @@ namespace Login.ViewModels
                 }
             }
         }
-
-        public string TeamName { set; get; }
 
         public List<string> PersonalResults { set; get; }
 
