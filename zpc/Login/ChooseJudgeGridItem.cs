@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Login
 {
@@ -13,8 +14,8 @@ namespace Login
         public string project { get; set; }
         public string groupID { get; set; }
         public string mainJudge { get; set; }
-        public List<string> groupJudges { get; set; }
-        public ChooseJudgeGridItem(string project, string groupID, string mainJudge, List<string> groupJudges)
+        public string groupJudges { get; set; }
+        public ChooseJudgeGridItem(string project, string groupID, string mainJudge, string groupJudges)
         {
             this.project = project;
             this.groupID = groupID;
