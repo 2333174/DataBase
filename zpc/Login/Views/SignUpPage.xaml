@@ -84,7 +84,7 @@
                 Visibility="{Binding Visibility2}"
                 x:Name="ButtonsDemoChip"
                 DeleteCommand="{Binding DeleteDosCommand}"
-                Grid.Column="1" Margin="100,385,0,83">
+                Grid.Column="2" Margin="100,385,0,83">
             </materialDesign:Chip>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="42,386,698,0" Grid.ColumnSpan="2">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run Text="资料"/></TextBlock>

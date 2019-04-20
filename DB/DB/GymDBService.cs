@@ -388,14 +388,7 @@ namespace DB
                 return db.judge.Find(_judgeID);
         }
 
-        public int GetTIDByTName(string _TName)
-        {
-            using (var db = new GymDB())
-            {
-                var target = db.team.Where(t => t.TName == _TName).Single();
-                return target.TID;
-            }
-        }
+
 
         public void Delete(Login _login)
         {
