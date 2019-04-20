@@ -9,19 +9,20 @@ namespace DB
     [Table("gymdb.matchgroup")]
     public partial class MatchGroup
     {
-        public MatchGroup()
-        {
-        }
+        public MatchGroup() { }
+
         public MatchGroup(string groupID)
         {
             GroupID = groupID;
         }
+
         public MatchGroup(string groupID, int judgeID, int weight)
         {
             GroupID = groupID;
             JudgeID = judgeID;
             Weight = (sbyte)weight;
         }
+
         [Key]
         public int Key { get; set; }
 

@@ -55,10 +55,10 @@ namespace Login.Views
                     }
                     break;
                 case 1:
-                    ChangePage.Content = new Frame()
-                    {
-                        Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
-                    };
+                    //ChangePage.Content = new Frame()
+                    //{
+                    //    Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
+                    //};
                     break;
                 default:
                     ChangePage.Content = new Frame()
