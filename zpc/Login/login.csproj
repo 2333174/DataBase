@@ -86,7 +86,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="Views\AddAcountDialog.xaml.cs">
+      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Manage_DataGridRow.cs" />
     <Compile Include="Models\DataGridItem.cs" />
     <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
     <Compile Include="ViewModels\AthleteInfoViewModel.cs" />
@@ -100,6 +105,9 @@
     </Compile>
     <Compile Include="Views\AthleteInfoPage.xaml.cs">
       <DependentUpon>AthleteInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChooseJudge.xaml.cs">
+      <DependentUpon>ChooseJudge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChosePage.xaml.cs">
       <DependentUpon>ChosePage.xaml</DependentUpon>
@@ -128,6 +136,10 @@
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddAcountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddAthleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AthleteInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChooseJudge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

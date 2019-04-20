@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="46*"/>
                 <ColumnDefinition Width="747*"/>
             </Grid.ColumnDefinitions>
-            <materialDesign:DialogHost Grid.ColumnSpan="2" x:Name="add"></materialDesign:DialogHost>
+            <materialDesign:DialogHost Grid.ColumnSpan="2" x:Name="add"/>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="42,35,698,0" Grid.ColumnSpan="2">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">队长</TextBlock>
             </materialDesign:Card>
@@ -58,6 +58,7 @@
                 <ComboBoxItem>男</ComboBoxItem>
                 <ComboBoxItem>女</ComboBoxItem>
             </ComboBox>
+
             <Button Content="确认" Grid.Column="1" HorizontalAlignment="Left" Margin="640.6,386,0,0" VerticalAlignment="Top" Width="68" Background="#FF1791AC" BorderBrush="#FF1791AC" RenderTransformOrigin="0.969,0.583" Command="{Binding AddCommand}"/>
             <ComboBox materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="性别" Grid.Column="1" HorizontalAlignment="Left" Margin="559.6,36,0,0" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.087,0.547" Opacity="0.7" Text="{Binding TeamLeader.Gender}">
                 <ComboBoxItem Content="男"/>
@@ -67,7 +68,28 @@
                 <ComboBoxItem Content="男"/>
                 <ComboBoxItem Content="女"/>
             </ComboBox>
-            
+            <Button Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    Command="{Binding AddDosCommand}"
+                  Visibility="{Binding Visibility1}" Margin="96,377,0,0" Height="46" Width="46" Background="#FF9567E8" BorderBrush="#FF9567E8">
+                <materialDesign:PackIcon
+                     Kind="Add"
+                     Height="24"
+                     Width="24" />
+            </Button>
+            <materialDesign:Chip
+                Content="{Binding fileName}"
+                IsDeletable="True"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"
+                Visibility="{Binding Visibility2}"
+                x:Name="ButtonsDemoChip"
+                DeleteCommand="{Binding DeleteDosCommand}"
+                Grid.Column="1" Margin="100,385,0,83">
+            </materialDesign:Chip>
+            <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" UniformCornerRadius="6" Margin="42,386,698,0" Grid.ColumnSpan="2">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run Text="资料"/></TextBlock>
+            </materialDesign:Card>
         </Grid>
     </ContentControl>
 </Page>

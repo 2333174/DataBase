@@ -13,21 +13,34 @@ namespace Login.ViewModels
         {
             AnAthlete = athlete;
             GymDBService dbs = new GymDBService();
-            var prs = dbs.GetPersonalResultsByAthleteID(athlete.AthleteID);
+            var prs = dbs.GetPersonalResultsByAthleteID(athlete.IDNumber);
             PersonalResults = new List<string>();
             foreach (var pr in prs)
             {
-                string tmpSport = null;
-                switch (pr.SportsEvent)
+                try
                 {
-                    
+                    string tmpSport = dbs.GetRealSportName(pr);
+                    PersonalResults.Add(tmpSport);
                 }
-                PersonalResults.Add(tmpSport);
+                catch (Exception e)
+                {
+                    //ShowMessageInfo(e.Message);
+                    throw e;
+                }
             }
         }
 
         public List<string> PersonalResults { set; get; }
 
         public Athlete AnAthlete { set; get; }
+
+        private async void ShowMessageInfo(string message)
+        {
+            Views.MessageDialog samMessageDialog = new Views.MessageDialog
+            {
+                Message = { Text = message }
+            };
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+        }
     }
 }

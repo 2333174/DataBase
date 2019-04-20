@@ -6,12 +6,12 @@
       xmlns:local="clr-namespace:Login"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="800"
       Title="LoginPage">
     <ContentControl x:Name="ChangePage" IsTabStop="False">
         <Grid>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" IsTabStop="False"
-            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Height="210" Margin="233,125,234,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Height="210" Margin="237,153,230,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5"
                              Opacity="0.5">
                 <StackPanel>
                     <Grid Height="142" Margin="0,0,0,0">

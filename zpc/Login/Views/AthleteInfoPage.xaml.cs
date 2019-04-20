@@ -13,12 +13,12 @@ namespace Login.Views
         {
             InitializeComponent();
             GymDBService dbs = new GymDBService();
-            //List<Athlete> athletes = dbs.GetAthletesByTID(TID);
-            //foreach (var athlete in athletes)
-            //{
-            //    AthleteInfoControl athleteInfo = new AthleteInfoControl(athlete);
-            //    dockpanel.Children.Add(athleteInfo);
-            //}
+            List<Athlete> athletes = dbs.GetAthletesByTID(TID);
+            foreach (var athlete in athletes)
+            {
+                AthleteInfoControl athleteInfo = new AthleteInfoControl(athlete);
+                dockpanel.Children.Add(athleteInfo);
+            }
         }
     }
 }

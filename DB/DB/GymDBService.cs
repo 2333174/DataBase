@@ -123,6 +123,53 @@ namespace DB
             }
         }
 
+        public string GetRealSportName(PersonalResult _personalResult)
+        {
+            string tmpSport = null;
+            switch (_personalResult.SportsEvent.Substring(1,2))
+            {
+                case "01":
+                    tmpSport = "单杠";
+                    break;
+                case "02":
+                    tmpSport = "双杠";
+                    break;
+                case "03":
+                    tmpSport = "吊环";
+                    break;
+                case "04":
+                    tmpSport = "跳马";
+                    break;
+                case "05":
+                    tmpSport = "自由体操";
+                    break;
+                case "06":
+                    tmpSport = "鞍马";
+                    break;
+                case "07":
+                    tmpSport = "蹦床";
+                    break;
+                case "08":
+                    tmpSport = "跳马";
+                    break;
+                case "09":
+                    tmpSport = "高低杠";
+                    break;
+                case "10":
+                    tmpSport = "平衡木";
+                    break;
+                case "11":
+                    tmpSport = "自由体操";
+                    break;
+                case "12":
+                    tmpSport = "蹦床";
+                    break;
+                default:
+                    throw new Exception("未找到相关项目。");
+            }
+            return tmpSport;
+        }
+
         // Get the judgeid by comparing username and role
         public int GetJudgeID(string _username, string password)
         {
@@ -140,15 +187,6 @@ namespace DB
                 var athletes = db.athlete.Where(a => a.Name.Equals(_AthleteName));
                 return athletes.ToList();
             }
-        }
-
-        public int GetTIDByTName(string _TName)
-        {
-            using (var db = new GymDB())
-            {
-                return db.team.Where(a => a.TName.Equals(_TName)).First().TID;
-            }
-                
         }
 
         public Athlete GetAthleteByID(string _AthleteID)
@@ -194,16 +232,43 @@ namespace DB
             }
         }
 
+
+        public List<Athlete> GetAthletesByTID(int _TID)
+        {
+            using (var db = new GymDB())
+                return db.athlete.Where(a => a.TID == _TID).ToList();
+        }
+
         public List<MatchGroup> GetMatchGroupsJudgedByID(int _JudgeID)
         {
             using (var db = new GymDB())
                 return db.matchgroup.Where(mg => mg.JudgeID == _JudgeID).ToList();
         }
 
+        public List<MatchGroup> GetMatchGroups()
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.ToList();
+        }
+         
+        public List<PersonalResult> GetPersonalResultsByGroupID(string _Groupid)
+        {
+            using (var db = new GymDB())
+            {
+                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
+            }
+        }
+
         public Team GetTeamByTName(string _name)
         {
             using (var db = new GymDB())
-                return db.team.Where(t => t.TName.Equals(_name)).Single();
+                return db.team.Where(t => t.TName == _name).Single();
+        }
+
+        public Team GetTeamByTID(int _TID)
+        {
+            using (var db = new GymDB())
+                return db.team.Where(t => t.TID == _TID).Single();
         }
 
         public List<Team> GetAllTeams()
@@ -421,7 +486,7 @@ namespace DB
         }
 
         // true means not null, false means null
-        public bool isResultNotNull(List<PersonalResult> _personalResults)
+        public bool IsResultNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach(var pr in _personalResults)
@@ -429,7 +494,7 @@ namespace DB
             return result;
         }
 
-        public bool isResultNotNull(List<TeamResult> _teamResults)
+        public bool IsResultNotNull(List<TeamResult> _teamResults)
         {
             bool result = true;
             foreach (var tr in _teamResults)
@@ -439,7 +504,7 @@ namespace DB
 
         public void Ranking(List<PersonalResult> _personalResults)
         {
-            if (isResultNotNull(_personalResults))
+            if (IsResultNotNull(_personalResults))
             {
                 var query = (from pr in _personalResults orderby pr.Grade descending select pr).ToList();
                 using (var db = new GymDB())
@@ -481,7 +546,7 @@ namespace DB
         }
         public void Ranking(List<TeamResult> _teamResults)
         {
-            if (isResultNotNull(_teamResults))
+            if (IsResultNotNull(_teamResults))
             {
                 var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
                 using (var db = new GymDB())
@@ -498,7 +563,7 @@ namespace DB
                 throw new Exception("There are empty items in the teamresult");
         }
 
-        public bool isRankingNotNull(List<PersonalResult> _personalResults)
+        public bool IsRankingNotNull(List<PersonalResult> _personalResults)
         {
             bool result = true;
             foreach (var prs in _personalResults)
@@ -508,7 +573,7 @@ namespace DB
 
         public void Promote(List<PersonalResult> _personalResults, int NumofPromoted, int GroupSize)
         {
-            if (isRankingNotNull(_personalResults))
+            if (IsRankingNotNull(_personalResults))
             {
                 var query = (from prs in _personalResults where prs.Ranking <= NumofPromoted select prs).ToList();
                 using (var db = new GymDB())
@@ -528,7 +593,7 @@ namespace DB
         }
         
         //登录，返回-1为密码错误，返回0为验证成功,返回1为裁判，返回2为主裁判
-        public int loginf(string username,string password, int role)
+        public int Loginf(string username,string password, int role)
         {
             using (var db=new GymDB())
             {
@@ -557,6 +622,15 @@ namespace DB
                 var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
                 return account.TName;
             }
+        }
+
+        public int GetTIDByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                return db.team.Where(a => a.TName.Equals(_TName)).First().TID;
+            }
+
         }
 
         //设置三个参数:代表队男/女各年龄组最大报名人数
