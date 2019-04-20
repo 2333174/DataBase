@@ -13,7 +13,6 @@ namespace DB
         public Judge()
         {
             matchgroup = new HashSet<MatchGroup>();
-            refereescore = new HashSet<RefereeScore>();
         }
         public Judge(string judgeName, string judgeIDnum, string judgeTel)
         {
@@ -21,7 +20,6 @@ namespace DB
             IDNumber = judgeIDnum;
             Telephone = judgeTel;
             matchgroup = new HashSet<MatchGroup>();
-            refereescore = new HashSet<RefereeScore>();
         }
 
         [Required]
@@ -41,8 +39,5 @@ namespace DB
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MatchGroup> matchgroup { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RefereeScore> refereescore { get; set; }
     }
 }
