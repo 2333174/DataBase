@@ -39,7 +39,7 @@ namespace Login.Views
         private void Loginf(object sender, RoutedEventArgs e)
         {
             var db = new GymDBService();
-            switch (db.loginf(user.Text, password.Password, select))
+            switch (db.Loginf(user.Text, password.Password, select))
             {
                 case -1:
                     ShowMessageInfo("账户或密码有误");
@@ -55,10 +55,10 @@ namespace Login.Views
                     }
                     break;
                 case 1:
-                    ChangePage.Content = new Frame()
-                    {
-                        Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
-                    };
+                    //ChangePage.Content = new Frame()
+                    //{
+                    //    Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
+                    //};
                     break;
                 default:
                     ChangePage.Content = new Frame()

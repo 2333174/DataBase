@@ -20,6 +20,7 @@ namespace DB
             Role = staffRole;
             Tid = tid;
         }
+
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
