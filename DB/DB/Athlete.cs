@@ -23,7 +23,6 @@ namespace DB
             personalresult = new HashSet<PersonalResult>();
         }
 
-
         [Required]
         [StringLength(20)]
         public string Name { get; set; }

@@ -42,5 +42,8 @@ namespace DB
         public sbyte? Weight { get; set; }
 
         public int? JudgeID { get; set; }
+
+        [StringLength(20)]
+        public string TName { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace DB
     [Table("gymdb.setting")]
     public partial class Setting
     {
-        public Setting(int pone,int ptwo,int pthree)
+        public Setting(int pone, int ptwo, int pthree)
         {
             Pone = pone;
             Ptwo = ptwo;

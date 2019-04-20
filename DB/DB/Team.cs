@@ -25,7 +25,6 @@ namespace DB
             teamresult = new HashSet<TeamResult>();
         }
 
-
         [Key]
         public int TID { get; set; }
 
