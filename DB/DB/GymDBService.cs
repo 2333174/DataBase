@@ -624,6 +624,15 @@ namespace DB
             }
         }
 
+        public int GetTIDByTName(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                return db.team.Where(a => a.TName.Equals(_TName)).First().TID;
+            }
+
+        }
+
         //设置三个参数:代表队男/女各年龄组最大报名人数
         public void Set(String POne, String PTwo, String PThree)
         {

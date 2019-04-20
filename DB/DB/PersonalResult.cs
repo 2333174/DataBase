@@ -18,6 +18,14 @@ namespace DB
             GroupID = groupID;
             Role = (sbyte)role;
         }
+
+        public PersonalResult(string athleteID, string sportsEvent,int role)
+        {
+            AthleteID = athleteID;
+            SportsEvent = sportsEvent;
+            Role = (sbyte)role;
+        }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }

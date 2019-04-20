@@ -25,8 +25,7 @@ namespace Login.Views
         public SignUpPage(string _TName)
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(_TName);
-            
+            DataContext = new ViewModels.SignUpViewModel(_TName);     
         }
     }
 }
