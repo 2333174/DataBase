@@ -32,15 +32,18 @@
             <TabItem Header="预赛" Margin="41,-2,-88,0.333" Background="{x:Null}" Opacity="0.7">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="28*"/>
-                        <ColumnDefinition Width="59*"/>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="151*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="22*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="177*"/>
+                        <ColumnDefinition Width="72*"/>
+                        <ColumnDefinition Width="453*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.667,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="4"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.667,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="4" Foreground="White"/>
-                    <DataGrid HorizontalAlignment="Left" Height="259" Margin="62.333,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="2" SelectionChanged="DataGrid_SelectionChanged">
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.333,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="7"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.333,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="7" Foreground="White" Click="Button_Click_4"/>
+                    <DataGrid Name="preMatchGrid" HorizontalAlignment="Left" Height="259" Margin="62,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>

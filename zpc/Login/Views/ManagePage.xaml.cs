@@ -160,5 +160,16 @@ namespace Login.Views
             //数据绑定
             preMatchGrid.ItemsSource = preMatch;
         }
+
+        //添加裁判按钮
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            //获取当前选中行
+            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
+            string project = row.project;
+            string group = row.groupID;
+            ManageSystem.Content = new Frame()
+            { Content = new ChooseJudge(project,group) };
+        }
     }
 }
