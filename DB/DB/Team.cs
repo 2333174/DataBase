@@ -16,6 +16,7 @@ namespace DB
             staff = new HashSet<Staff>();
             teamresult = new HashSet<TeamResult>();
         }
+
         public Team(string teamName, byte[] doc)
         {
             TName = teamName;

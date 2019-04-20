@@ -12,7 +12,7 @@ namespace Login
     /// App.xaml 的交互逻辑
     /// </summary>
     /// 
-    public partial class App : Application
+    public partial class Application : System.Windows.Application
     {
         
     }

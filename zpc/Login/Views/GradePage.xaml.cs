@@ -1,5 +1,4 @@
-﻿using Login.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,24 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login
+namespace Login.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// GradePage.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GradePage : Page
     {
-        public MainWindow()
+        public GradePage(int _judgeID, int _groupKey)
         {
             InitializeComponent();
-            ChangePage.Content = new Frame()
-            { Content = new GradePage(1,39)};
-        }
-        
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            System.Windows.Application.Current.Shutdown();
+            DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey);
         }
     }
 }

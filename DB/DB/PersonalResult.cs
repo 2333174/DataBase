@@ -9,8 +9,11 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class PersonalResult
     {
-
-        public PersonalResult() { }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PersonalResult()
+        {
+            refereescore = new HashSet<RefereeScore>();
+        }
 
         public PersonalResult(string athleteID, string sportsEvent, string groupID, int role)
         {
@@ -18,7 +21,9 @@ namespace DB
             SportsEvent = sportsEvent;
             GroupID = groupID;
             Role = (sbyte)role;
+            refereescore = new HashSet<RefereeScore>();
         }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
@@ -46,5 +51,8 @@ namespace DB
         public int PRid { get; set; }
 
         public virtual Athlete athlete { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RefereeScore> refereescore { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Login.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,21 +16,13 @@ using System.Windows.Shapes;
 namespace Login
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// AddAcount.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddAcount : Page
     {
-        public MainWindow()
+        public AddAcount()
         {
             InitializeComponent();
-            ChangePage.Content = new Frame()
-            { Content = new GradePage(1,39)};
-        }
-        
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            System.Windows.Application.Current.Shutdown();
         }
     }
 }

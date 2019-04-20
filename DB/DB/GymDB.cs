@@ -17,6 +17,8 @@ namespace DB
         public virtual DbSet<Login> login { get; set; }
         public virtual DbSet<MatchGroup> matchgroup { get; set; }
         public virtual DbSet<PersonalResult> personalresult { get; set; }
+        public virtual DbSet<RefereeScore> refereescore { get; set; }
+        public virtual DbSet<Setting> setting { get; set; }
         public virtual DbSet<Staff> staff { get; set; }
         public virtual DbSet<Team> team { get; set; }
         public virtual DbSet<TeamResult> teamresult { get; set; }
@@ -61,12 +63,21 @@ namespace DB
                 .WithOptional(e => e.judge)
                 .WillCascadeOnDelete();
 
+            modelBuilder.Entity<Judge>()
+                .HasMany(e => e.refereescore)
+                .WithOptional(e => e.Judge)
+                .WillCascadeOnDelete();
+
             modelBuilder.Entity<Login>()
                 .Property(e => e.UName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Login>()
                 .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Login>()
+                .Property(e => e.TName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MatchGroup>()
@@ -84,6 +95,11 @@ namespace DB
             modelBuilder.Entity<PersonalResult>()
                 .Property(e => e.GroupID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PersonalResult>()
+                .HasMany(e => e.refereescore)
+                .WithOptional(e => e.PersonalResult)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Staff>()
                 .Property(e => e.Name)

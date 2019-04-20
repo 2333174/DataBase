@@ -86,40 +86,95 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChosePage.xaml.cs">
+    <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="ViewModels\GradePageViewModel.cs" />
+    <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
+    <Compile Include="Views\AddAcountDialog.xaml.cs">
+      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Manage_DataGridRow.cs" />
+    <Compile Include="Models\DataGridItem.cs" />
+    <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
+    <Compile Include="ViewModels\AthleteInfoViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="Views\AddAthleteDialog.xaml.cs">
+      <DependentUpon>AddAthleteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AthleteInfoControl.xaml.cs">
+      <DependentUpon>AthleteInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AthleteInfoPage.xaml.cs">
+      <DependentUpon>AthleteInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChooseJudge.xaml.cs">
+      <DependentUpon>ChooseJudge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChosePage.xaml.cs">
       <DependentUpon>ChosePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GradePage.xaml.cs">
+    <Compile Include="Views\ComfirmDialog.xaml.cs">
+      <DependentUpon>ComfirmDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GradePage.xaml.cs">
       <DependentUpon>GradePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GSForMajorJudgePage.xaml.cs">
+    <Compile Include="Views\GSForMajorJudgePage.xaml.cs">
       <DependentUpon>GSForMajorJudgePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManagePage.xaml.cs">
+    <Compile Include="Views\ManagePage.xaml.cs">
       <DependentUpon>ManagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MessageDialog.xaml.cs">
+    <Compile Include="Views\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SignUpPage.xaml.cs">
+    <Compile Include="Views\ProgressBox.xaml.cs">
+      <DependentUpon>ProgressBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChosePage.xaml">
+    <Page Include="Views\AddAcountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GradePage.xaml">
+    <Page Include="Views\AddAthleteDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GSForMajorJudgePage.xaml">
+    <Page Include="Views\AthleteInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginPage.xaml">
+    <Page Include="Views\AthleteInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChooseJudge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChosePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComfirmDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GradePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GSForMajorJudgePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,15 +190,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ManagePage.xaml">
+    <Page Include="Views\ManagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MessageDialog.xaml">
+    <Page Include="Views\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SignUpPage.xaml">
+    <Page Include="Views\ProgressBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SignUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,5 +252,6 @@
       <Name>DB</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
