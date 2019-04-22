@@ -21,20 +21,57 @@ namespace Login.Views
     /// </summary>
     public partial class ManagePage : Page
     {
+        //记录是否编排过赛事表的变量
+        bool isPreArrange=false;
+        bool isFinalArrange = false;
         public ManagePage()
         {
             InitializeComponent();
-
-        }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var db = new GymDBService();
+            List<Manage_DataGridRow> prerows = new List<Manage_DataGridRow>();
+            List<Manage_DataGridRow> finalrows = new List<Manage_DataGridRow>();
             GymDBService gymDBService = new GymDBService();
-            gymDBService.Set(baomingCount.Text, playerCount.Text, qianjimingCount.Text);
-            ShowMessageInfo("保存成功");
+            List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
+            foreach(PersonalResult p in personalResults)
+            {
+                if(p.Role=='0')
+                {
+                    //获得Athlete
+                    Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
+                    //获得小组编号
+                    string groupID = p.GroupID;
+                    //根据小组编号得到项目名称
+                    string pName = GetPName(groupID, 0);
+                    //获得Athlete所在的Team
+                    Team team = gymDBService.GetTeamByTID((int)athlete.TID);
+                    //获得队名
+                    string tName = team.TName;
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    prerows.Add(manage_DataGridRow);
+                }else{
+                    //获得Athlete
+                    Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
+                    //获得小组编号
+                    string groupID = p.GroupID;
+                    //根据小组编号得到项目名称
+                    string pName = GetPName(groupID, 1);
+                    //获得Athlete所在的Team
+                    Team team = gymDBService.GetTeamByTID((int)athlete.TID);
+                    //获得队名
+                    string tName = team.TName;
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    finalrows.Add(manage_DataGridRow);
+                }
+            }
+            preMatchGrid.ItemsSource = prerows;
+            finalMatchGrid.ItemsSource = finalrows;
         }
+
+
+
 
         private async void ShowMessageInfo(string message)
         {
@@ -44,12 +81,7 @@ namespace Login.Views
             };
             await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
         }
-
-        //决赛添加总裁判的按钮
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         //根据组号获得预赛项目名称 年龄+赛事+决预赛小组号
         public string GetPName(string groupID,int flag)
@@ -218,13 +250,25 @@ namespace Login.Views
             { Content = new ChooseJudge(project,group) };
         }
 
+        //生成预赛赛事表
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            //设计算法自动编排预赛赛事
+           if(isPreArrange==true)
+            {
+                ShowMessageInfo("不可重复生成预赛赛事表！");
+            }
+            GymDBService gymDBService = new GymDBService();
             //存放预赛表信息的List
             List<Manage_DataGridRow> preMatch = new List<Manage_DataGridRow>();
-
-            GymDBService gymDBService = new GymDBService();
+            //自动分组
+            gymDBService.Grouping(8);
+            //List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
+            //foreach(PersonalResult p in personalResults)
+            //{
+            //    //根据sportsevent自动编排
+            //    //gymDBService.AutoArrangeGroup(p.SportsEvent, 12 , 0);
+                
+            //}
             //获得所有的小组
             List<MatchGroup> groups = gymDBService.GetMatchGroups();
             //根据GroupID获得AthleteID
@@ -257,6 +301,7 @@ namespace Login.Views
 
             //数据绑定
             preMatchGrid.ItemsSource = preMatch;
+            isPreArrange = true;
         }
 
         //生成决赛赛事表
@@ -310,6 +355,16 @@ namespace Login.Views
             string group = row.groupID;
             ManageSystem.Content = new Frame()
             { Content = new ChooseJudge(project, group) };
+        }
+
+
+        //保存
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var db = new GymDBService();
+            GymDBService gymDBService = new GymDBService();
+            gymDBService.Set(baomingCount.Text, playerCount.Text, qianjimingCount.Text);
+            ShowMessageInfo("保存成功");
         }
     }
 }

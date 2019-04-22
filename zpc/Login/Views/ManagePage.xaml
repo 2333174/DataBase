@@ -25,7 +25,7 @@
                         <ComboBoxItem Content="1"/>
                     </ComboBox>
                     <ComboBox Name="playerCount" HorizontalAlignment="Left" Margin="78.333,139,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="保存" Grid.Column="3" HorizontalAlignment="Left" Margin="203.333,276,0,0" VerticalAlignment="Top" Width="75" />
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="保存" Grid.Column="3" HorizontalAlignment="Left" Margin="203.333,276,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" />
                     <ComboBox Name="qianjimingCount" Grid.Column="3" HorizontalAlignment="Left" Margin="78.333,195,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
@@ -37,13 +37,14 @@
                         <ColumnDefinition Width="35*"/>
                         <ColumnDefinition Width="22*"/>
                         <ColumnDefinition Width="26*"/>
-                        <ColumnDefinition Width="177*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="160*"/>
                         <ColumnDefinition Width="72*"/>
                         <ColumnDefinition Width="453*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.333,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="7" Click="Button_Click_5"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.333,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="7" Foreground="White" Click="Button_Click_4"/>
-                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="62,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="5" >
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.333,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="8" Click="Button_Click_5"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.333,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="8" Foreground="White" Click="Button_Click_4"/>
+                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="44.833,61,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="6" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
