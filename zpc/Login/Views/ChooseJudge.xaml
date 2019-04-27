@@ -11,25 +11,25 @@
       Title="ChooseJudge">
 
     <ContentControl x:Name="ChangePage">
-        <Grid>
+        <Grid Margin="-10,52,10,-52">
             <DataGrid Name="judgegrid" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
+                    <DataGridTextColumn x:Name="groupID" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
                     <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="主裁判"/>
                     <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="分裁判"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Style="{StaticResource MaterialDesignFlatButton}" Content="主裁判" HorizontalAlignment="Left" Margin="105,223,0,0" VerticalAlignment="Top" Width="75"/>
             <Button Style="{StaticResource MaterialDesignFlatButton}" Content="分裁判" HorizontalAlignment="Left" Margin="105,286,0,0" VerticalAlignment="Top" Width="75"/>
-            <ComboBox Name="MainJudgeName" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+            <ComboBox Name="MainJudgeName" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7" SelectionChanged="MainJudgeName_SelectionChanged">
             </ComboBox>
-            <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_3"/>
-            <Button Content="添加" HorizontalAlignment="Left" Margin="545,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}" Click="Button_Click_1"/>
+            <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click_3" AutomationProperties.Name="OK"  Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
+            <Button Content="添加" HorizontalAlignment="Left" Margin="545,286,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click_1" Style="{StaticResource MaterialDesignRaisedLightButton}"/>
             <Button Content="删除" HorizontalAlignment="Left" Margin="652,286,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click_2"/>
-            <TextBox  x:Name="ID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,214,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
+            <TextBox  x:Name="MainID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,214,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
             <ComboBox Name="GroupJudgeName" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,286,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7"/>
-            <TextBox  x:Name="ID1" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,276,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
+            <TextBox  x:Name="GroupID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,276,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" TextChanged="GroupID_TextChanged" />
 
 
         </Grid>
