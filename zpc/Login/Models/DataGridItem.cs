@@ -11,12 +11,10 @@ namespace Login.Models
     {
         public Athlete Athlete{ get; set; }
         public List<string>  sportEvent { get; set; }
-        public  List<string> sportEventsID { get; set; }
-        public DataGridItem(Athlete athlete, List<string> sportEvent, List<string> sportEventsID)
+        public DataGridItem(Athlete athlete, List<string> sportEvent)
         {
             this.Athlete = athlete;
             this.sportEvent = sportEvent;
-            this.sportEventsID = sportEventsID;
         }
     }
 }
