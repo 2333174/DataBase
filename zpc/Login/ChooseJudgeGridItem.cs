@@ -9,7 +9,6 @@ namespace Login
 {
     class ChooseJudgeGridItem
     {
-
         //项目 小组编号 总裁判 分裁判
         public string project { get; set; }
         public string groupID { get; set; }

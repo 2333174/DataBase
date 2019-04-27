@@ -23,8 +23,8 @@ namespace DB
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Pone { get; set; }
 
-        public int Ptwo { get; set; }
+        public int? Ptwo { get; set; }
 
-        public int Pthree { get; set; }
+        public int? Pthree { get; set; }
     }
 }
