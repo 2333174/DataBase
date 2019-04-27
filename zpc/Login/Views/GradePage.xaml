@@ -41,7 +41,7 @@
                     </Grid>
                 </materialDesign:Card>
                 <Grid Margin="0,0,0,-0.4" Opacity="0.8" Grid.Row="1">
-                    <DataGrid HorizontalAlignment="Left" Height="209" Margin="138,140,0,0" VerticalAlignment="Top" Width="Auto" Opacity="0.8" ItemsSource="{Binding RefereeScoresItems}" AutoGenerateColumns="False">
+                    <DataGrid HorizontalAlignment="Left" Height="209" Margin="142,97,0,0" VerticalAlignment="Top" Width="Auto" Opacity="0.8" ItemsSource="{Binding RefereeScoresItems}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding AthleteName}" IsReadOnly="True" Header="运动员姓名"/>
                             <DataGridTextColumn Binding="{Binding AthleteID}" IsReadOnly="True" Header="编号"/>
@@ -50,8 +50,8 @@
                             <DataGridTextColumn Binding="{Binding MatchType}" IsReadOnly="True" Header="比赛类型"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="提 交" HorizontalAlignment="Left" Margin="624,317,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFD5898E" FontWeight="Bold" Command="{Binding SubmitCommand}"/>
-                    <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="181,68,0,0" Width="264" Height="46">
+                    <Button Content="提 交" HorizontalAlignment="Left" Margin="597,275,0,-0.2" VerticalAlignment="Top" Width="75" BorderBrush="#FFD5898E" FontWeight="Bold" Command="{Binding SubmitCommand}"/>
+                    <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="177,46,0,0" Width="264" Height="46">
                         <materialDesign:Flipper.FrontContent>
                             <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
                         Margin="8" Width="184" HorizontalAlignment="Center">请确认分数无误后再提交</Button>

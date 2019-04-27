@@ -99,7 +99,6 @@ namespace Login.ViewModels
             }
         }
 
-
         //存储项目名称
         public List<string> Events;
 
@@ -201,7 +200,6 @@ namespace Login.ViewModels
                 OnPropertyChanged();
             }
         }
-
 
         private bool IsTeamInfoNull()
         {

@@ -4,30 +4,50 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Login"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GSForMajorJudgePage">
     <ContentControl x:Name="MajorJudgePage">
         <Grid Opacity="0.8">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="299*"/>
-            <ColumnDefinition Width="98*"/>
-        </Grid.ColumnDefinitions>
-        <DataGrid HorizontalAlignment="Left" Height="251" Margin="24,89,0,0" VerticalAlignment="Top" Width="574" Opacity="0.7"  BorderBrush="#FFB37580" Foreground="#FF060001"
-                  ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.ColumnSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  " Foreground="#FFF9B3B3"/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  性别  "/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  年龄  "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  比赛项目  "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="通过" HorizontalAlignment="Left" Margin="52.4,253,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="2.04,2.672" Grid.Column="1" />
-            <Button Content="更新" HorizontalAlignment="Left" Margin="52.4,196,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"  Style="{StaticResource MaterialDesignRaisedButton}"/>
-            <Button Content="修改" HorizontalAlignment="Left" Margin="52.4,136,0,0" VerticalAlignment="Top" Width="75"  Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="299*"/>
+                <ColumnDefinition Width="98*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="PrimaryTable" Height="430" Width="Auto" Opacity="0.7" BorderBrush="#FFB37580" Foreground="#FF060001"
+                  ItemsSource="{Binding GridItems}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="序号" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding index}" Expanded="Expander_Expanded" Collapsed="Expander_Collapsed" Foreground="{StaticResource MaterialDesignBody}" materialDesign:ExpanderAssist.DownHeaderPadding="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding AthleteName}" IsReadOnly="True" Header="运动员姓名"/>
+                    <DataGridTextColumn Binding="{Binding SportEvent}" IsReadOnly="True" Header="比赛项目"/>
+                    <DataGridTextColumn Binding="{Binding MatchType}" IsReadOnly="True" Header="比赛类型"/>
+                    <DataGridTextColumn Binding="{Binding Bouns}" Header="奖励分"/>
+                    <DataGridTextColumn Binding="{Binding Punishment}" Header="惩罚分"/>
+                    <DataGridTextColumn Binding="{Binding TotalScores}" IsReadOnly="True" Header="分数"/>
+                </DataGrid.Columns>
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DataGrid x:Name="DetailsTable" ItemsSource="{Binding Details}" AutoGenerateColumns="False" Visibility="{Binding IsVisibility}" CanUserAddRows="False"
+                                  ColumnWidth="Auto" RowHeaderWidth="0" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}},Path=ActualWidth}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="裁判编号" IsReadOnly="True" Binding="{Binding JudgeID}" Width="Auto"/>
+                                <DataGridTextColumn Header="打分" IsReadOnly="True" Binding="{Binding TBDScores}" Width="Auto"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+            <Grid Grid.Column="1">
+                <Button Content="预览" HorizontalAlignment="Left" Margin="60,162,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="2.04,2.672" Command="{Binding PreviewCommand}"/>
+                <Button Content="提交" HorizontalAlignment="Left" Margin="60,240,0,0" VerticalAlignment="Top" Width="75" Style="{StaticResource MaterialDesignRaisedButton}" RenderTransformOrigin="2.04,2.672" Command="{Binding SubmitCommand}"/>
+            </Grid>
         </Grid>
     </ContentControl>
 </Page>

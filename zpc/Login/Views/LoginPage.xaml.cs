@@ -71,7 +71,7 @@ namespace Login.Views
                 default:
                     ChangePage.Content = new Frame()
                     {
-                        Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password))
+                        Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password).ToString())
                     };
                     break;
             }

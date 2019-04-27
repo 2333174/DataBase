@@ -45,7 +45,7 @@ namespace DB
         [Column(TypeName = "mediumblob")]
         public byte[] Docs { get; set; }
 
-        //0±íÊ¾Î´±¨Ãû£¬1±íÊ¾ÒÑ±¨Ãû
+        //0ï¿½ï¿½Ê¾Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½Ê¾ï¿½Ñ±ï¿½ï¿½ï¿½
         public int isSignUp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

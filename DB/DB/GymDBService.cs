@@ -162,10 +162,10 @@ namespace DB
             string tmpType = null;
             switch (_personalResult.GroupID.Substring(3,1))
             {
-                case "1":
+                case "0":
                     tmpType = "预赛";
                     break;
-                case "2":
+                case "1":
                     tmpType = "决赛";
                     break;
             }
@@ -250,22 +250,10 @@ namespace DB
                 return db.athlete.Find(_AthleteIDNum);
         }
 
-        public List<PersonalResult> GetPersonalResults()
-        {
-            using (var db = new GymDB())
-                return db.personalresult.ToList();
-        }
-
         public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
         {
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID)).ToList();
-        }
-
-        public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
-        {
-            using (var db = new GymDB())
-                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
         }
 
         public List<PersonalResult> GetPersonalResultsBySportEvent(string _sportEvent)
@@ -299,6 +287,12 @@ namespace DB
                 }
                 return judges;
             }
+        }
+
+        public List<RefereeScore> GetRefereeScoresByPRid(int PRid)
+        {
+            using (var db = new GymDB())
+                return db.refereescore.Where(rs => rs.PRid == PRid).ToList();
         }
 
         public List<Athlete> GetAthletesByTID(int _TID)
@@ -850,9 +844,9 @@ namespace DB
             }
 
         }
-
+        
         //设置三个参数:代表队男/女各年龄组最大报名人数
-        public void Set(String POne, String PTwo, String PThree)
+        public void Set(string POne, string PTwo, string PThree)
         {
             using (var db = new GymDB())
             {
