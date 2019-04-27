@@ -295,6 +295,7 @@ namespace Login.ViewModels
                     {
                         s = t;
                         s = s + q;
+                        s = s + "0";
                         Console.WriteLine(s);
                         PersonalResult personalResult = new PersonalResult(a.Athlete.IDNumber, s, 0);//初赛为0 决赛为1
                         dbs.Add(personalResult);
