@@ -87,6 +87,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
+    <Compile Include="ViewModels\GradePageViewModel.cs" />
+    <Compile Include="ViewModels\GSFMPViewModel.cs" />
+    <Compile Include="ViewModels\PRDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PRItemsViewModel.cs" />
+    <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
     <Compile Include="Views\AddAcountDialog.xaml.cs">
       <DependentUpon>AddAcountDialog.xaml</DependentUpon>
     </Compile>

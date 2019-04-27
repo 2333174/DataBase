@@ -25,7 +25,7 @@ namespace Login
         {
             InitializeComponent();
             ChangePage.Content = new Frame()
-            { Content = new SignUpPage("啦啦啦")};
+            { Content = new GSForMajorJudgePage("01112") };
         }
         
         protected override void OnClosed(EventArgs e)

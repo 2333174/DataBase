@@ -98,7 +98,6 @@ namespace Login.ViewModels
             }
         }
 
-
         //存储项目名称
         public List<string> Events;
 
@@ -201,7 +200,6 @@ namespace Login.ViewModels
             }
         }
 
-
         private bool IsTeamInfoNull()
         {
             Console.WriteLine(TeamLeader.Gender);
@@ -257,6 +255,7 @@ namespace Login.ViewModels
             if (IsTeamInfoNull() != true) ShowMessageInfo("输入有空值！");
             else
             {
+                ShowMessageInfo("保存成功");
                 GymDBService dbs = new GymDBService();
                 Staff leader = new Staff(TeamLeader.Name, TeamLeader.IDNumber, TeamLeader.Gender, TeamLeader.Telephone, "0", Teamid);
                 Staff doctor = new Staff(Doctor.Name, Doctor.IDNumber, Doctor.Gender, Doctor.Telephone, "1", Teamid);

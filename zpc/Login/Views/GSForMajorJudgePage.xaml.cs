@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Login.ViewModels;
 
 namespace Login.Views
 {
@@ -20,11 +9,23 @@ namespace Login.Views
     /// </summary>
     public partial class GSForMajorJudgePage : Page
     {
-        int judgeID;
-        public GSForMajorJudgePage(int m)
+        private GSFMPViewModel viewModel;
+
+        public GSForMajorJudgePage(string groupid)
         {
-            judgeID = m;
             InitializeComponent();
+            viewModel = new GSFMPViewModel(groupid);
+            DataContext = viewModel;
+        }
+
+        private void Expander_Expanded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.DetailExpanded(PrimaryTable.SelectedIndex);
+        }
+
+        private void Expander_Collapsed(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.DetailCollapsed(PrimaryTable.SelectedIndex);
         }
     }
 }

@@ -20,31 +20,49 @@
         </ResourceDictionary>
     </Page.Resources>
     <ContentControl x:Name="GradePage1">
-        <Grid Margin="0,0,-6.667,-0.333" Opacity="0.8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0*"/>
-            </Grid.ColumnDefinitions>
-            <DataGrid HorizontalAlignment="Left" Height="209" Margin="96,140,0,0" VerticalAlignment="Top" Width="421" Opacity="0.8">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  编号  "/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
-                    <DataGridComboBoxColumn ClipboardContentBinding="{x:Null}" Header="  比赛类型  " SelectedValueBinding="{x:Null}" SelectedItemBinding="{x:Null}" TextBinding="{x:Null}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button Content="修 改" HorizontalAlignment="Left" Margin="578,272,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold"/>
-            <Button Content="提 交" HorizontalAlignment="Left" Margin="578,317,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FFD5898E" FontWeight="Bold"/>
-            <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="176,78,0,0" Width="264" Height="46">
-                <materialDesign:Flipper.FrontContent>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
+        <Grid>
+            <materialDesign:DialogHost></materialDesign:DialogHost>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <materialDesign:Card Grid.Row="0" Margin="5,5,5,5" Background="#03a9f4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" Width="Auto" Height="50">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" VerticalAlignment="Center" Margin="5">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Kind="Account" Width="40" Height="40" Margin="10,1,0,3.8"/>
+                            <TextBlock Margin="16 8 16 4" Style="{StaticResource MaterialDesignHeadlineTextBlock}" TextAlignment="Center" Text="{Binding JudgeName}"/>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+                <Grid Margin="0,0,0,-0.4" Opacity="0.8" Grid.Row="1">
+                    <DataGrid HorizontalAlignment="Left" Height="209" Margin="142,97,0,0" VerticalAlignment="Top" Width="Auto" Opacity="0.8" ItemsSource="{Binding RefereeScoresItems}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding AthleteName}" IsReadOnly="True" Header="运动员姓名"/>
+                            <DataGridTextColumn Binding="{Binding AthleteID}" IsReadOnly="True" Header="编号"/>
+                            <DataGridTextColumn Binding="{Binding SportsEvent}" IsReadOnly="True" Header="项目"/>
+                            <DataGridTextColumn Binding="{Binding Referee.Scores}" Header="分数"/>
+                            <DataGridTextColumn Binding="{Binding MatchType}" IsReadOnly="True" Header="比赛类型"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="提 交" HorizontalAlignment="Left" Margin="597,275,0,-0.2" VerticalAlignment="Top" Width="75" BorderBrush="#FFD5898E" FontWeight="Bold" Command="{Binding SubmitCommand}"/>
+                    <materialDesign:Flipper Style="{DynamicResource MaterialDesignCardFlipper}" Margin="177,46,0,0" Width="264" Height="46">
+                        <materialDesign:Flipper.FrontContent>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
                         Margin="8" Width="184" HorizontalAlignment="Center">请确认分数无误后再提交</Button>
-                </materialDesign:Flipper.FrontContent>
-                <materialDesign:Flipper.BackContent>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}"
                          Margin="8" Width="184">一定要确认哦~</Button>
-                </materialDesign:Flipper.BackContent>
-            </materialDesign:Flipper>        </Grid>
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                </Grid>
+            </Grid>
+        </Grid>
     </ContentControl>
 </Page>

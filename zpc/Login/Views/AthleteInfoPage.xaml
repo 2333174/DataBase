@@ -34,7 +34,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center" Margin="5">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="UserGroup" Width="40" Height="40" Margin="10,1,0,3.8"/>
-                    <TextBlock Margin="16 8 16 4" Style="{StaticResource MaterialDesignHeadlineTextBlock}" TextAlignment="Center">Ezio</TextBlock>
+                    <TextBlock Margin="16 8 16 4" Style="{StaticResource MaterialDesignHeadlineTextBlock}" TextAlignment="Center" Text="{Binding TeamName}"/>
                 </Grid>
             </Grid>
         </materialDesign:Card>
