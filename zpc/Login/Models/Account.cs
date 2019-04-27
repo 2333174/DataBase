@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Login.Models
 {
-    class Account
+    public class Account
     {
-        public string userName;
-        public string password;
-        public string accountRole;
-        public string name;
+        public string userName { get; set; }
+        public string password { get; set; }
+        public string accountRole { get; set; }
+        public string name { get; set; }
         public Account(string _userName, string _password, string _accountRole, string _name)
         {
             userName = _userName;

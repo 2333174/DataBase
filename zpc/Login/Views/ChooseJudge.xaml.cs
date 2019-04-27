@@ -61,6 +61,8 @@ namespace Login.Views
                 g_judges.Add(GroupJudgeName.Text);
                 items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last<string>(); 
                 items[0].mainJudge = MainJudgeName.Text;
+                judgegrid.ItemsSource = null;
+                judgegrid.ItemsSource = items;
             }
             else
                 MessageBox.Show("未选择");
@@ -71,6 +73,8 @@ namespace Login.Views
         {
             g_judges.Clear();
             items[0].groupJudges = null;
+            judgegrid.ItemsSource = null;
+            judgegrid.ItemsSource = items;
 
         }
 

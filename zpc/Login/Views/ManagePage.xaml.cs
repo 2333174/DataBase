@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DB;
 using Login.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace Login.Views
 {
@@ -27,7 +28,8 @@ namespace Login.Views
         bool isFinalArrange = false;
         bool isAddAccount = false;
         Account account;
-        List<Account> accounts;
+        public List<Account> accounts;
+        List<DB.Login> logins;
         public ManagePage()
         {
             InitializeComponent();
@@ -35,7 +37,9 @@ namespace Login.Views
             List<Manage_DataGridRow> prerows = new List<Manage_DataGridRow>();
             List<Manage_DataGridRow> finalrows = new List<Manage_DataGridRow>();
             GymDBService gymDBService = new GymDBService();
-            List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
+            GymDB db = new GymDB();
+            logins = db.login.ToList();
+           List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
             foreach(PersonalResult p in personalResults)
             {
                 if(p.Role=='0')
@@ -79,13 +83,13 @@ namespace Login.Views
 
 
 
-        private async void ShowMessageInfo(string message)
+        private async void ShowMessageInfo(string message,DialogHost dialog)
         {
             MessageDialog samMessageDialog = new MessageDialog
             {
                 Message = { Text = message }
             };
-            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+            await dialog.ShowDialog(samMessageDialog);
         }
         
 
@@ -248,7 +252,7 @@ namespace Login.Views
             var row = preMatchGrid.SelectedItem as Manage_DataGridRow;
             if (row == null)
             {
-                ShowMessageInfo("未选中行！");
+                ShowMessageInfo("未选中行！",prehost);
             }
             else
             {
@@ -264,7 +268,7 @@ namespace Login.Views
         {
            if(isPreArrange==true)
             {
-                ShowMessageInfo("不可重复生成预赛赛事表！");
+                ShowMessageInfo("不可重复生成预赛赛事表！",prehost);
             }
             GymDBService gymDBService = new GymDBService();
             //存放预赛表信息的List
@@ -324,7 +328,7 @@ namespace Login.Views
         {
             if (isFinalArrange == true)
             {
-                ShowMessageInfo("不可重复生成决赛赛事表！");
+                ShowMessageInfo("不可重复生成决赛赛事表！",finalhost);
             }
             GymDBService gymDBService = new GymDBService();
             //存放预赛表信息的List
@@ -399,15 +403,22 @@ namespace Login.Views
             var db = new GymDBService();
             GymDBService gymDBService = new GymDBService();
             gymDBService.Set(baomingCount.Text, playerCount.Text, qianjimingCount.Text);
-            ShowMessageInfo("保存成功");
+            ShowMessageInfo("保存成功",sethost);
         }
 
         private void deleteGrid_Click(object sender, RoutedEventArgs e)
         {
-
+            accounts.Remove((Account)accountGrid.SelectedItem);
+            accountGrid.ItemsSource = null;
+            accountGrid.ItemsSource = accounts;
         }
 
         private void addGrid_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAddAccount();
+        }
+ 
+        private void addAccount_Click(object sender, RoutedEventArgs e)
         {
             ShowAddAccount();
         }
@@ -416,11 +427,23 @@ namespace Login.Views
             AddAccountDialog samMessageDialog = new AddAccountDialog
             {
             };
-            isAddAccount= Equals(await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog), true);
+            isAddAccount = Equals(await add.ShowDialog(samMessageDialog), true);
             if (isAddAccount)
             {
-                account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.Name.Text);
-                accounts.Add(account);
+                bool isNotExist = true;
+                foreach (var login in logins)
+                {
+                    if (login.UName == samMessageDialog.UserName.Text) { ShowMessageInfo("用户名重复", addFail); isNotExist = false; }
+                    else if (login.TName == samMessageDialog.Name.Text && login.Role == 1 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
+                    else if (login.JudgeID.ToString() == samMessageDialog.Name.Text && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
+                }
+                if (isNotExist)
+                {
+                    account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.Name.Text);
+                    accounts.Add(account);
+                    accountGrid.ItemsSource = null;
+                    accountGrid.ItemsSource = accounts;
+                }
             }
         }
     }

@@ -88,13 +88,12 @@
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModel.cs" />
     <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
     <Compile Include="Views\AddAccountDialog.xaml.cs">
       <DependentUpon>AddAccountDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddAcountDialog.xaml.cs">
-      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Manage_DataGridRow.cs" />
@@ -139,14 +138,13 @@
     <Compile Include="Views\ProgressBox.xaml.cs">
       <DependentUpon>ProgressBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ShowGrade.xaml.cs">
+      <DependentUpon>ShowGrade.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddAccountDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddAcountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +207,10 @@
     <Page Include="Views\ProgressBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowGrade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SignUpPage.xaml">
       <SubType>Designer</SubType>
