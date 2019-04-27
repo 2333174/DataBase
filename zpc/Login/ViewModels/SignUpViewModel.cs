@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using DB;
 using Login.Commands;
 using Login.Models;
@@ -17,11 +18,10 @@ namespace Login.ViewModels
 {
     class SignUpViewModel:BaseViewModel
     {
-        public SignUpViewModel(string TName)
+        public SignUpViewModel(string TName,SignUpPage signUp)
         {
-
             Teamid = dbs.GetTIDByTName(TName);
-
+            this.signUp = signUp;
             //数据初始化
             _TeamLeader = new Staff();
             _Doctor = new Staff();
@@ -75,6 +75,7 @@ namespace Login.ViewModels
         public DelegateCommand DeleteDosCommand { get; set; }
 
         private int Teamid;
+        private SignUpPage signUp;
 
         //控件显示
         private Visibility _Visibility1;
@@ -294,12 +295,14 @@ namespace Login.ViewModels
                     {
                         s = t;
                         s = s + q;
-                        s = s + "0";
                         Console.WriteLine(s);
                         PersonalResult personalResult = new PersonalResult(a.Athlete.IDNumber, s, 0);//初赛为0 决赛为1
                         dbs.Add(personalResult);
                     }
+                    
                 }
+                signUp.SignUp.Content = new Frame()
+                { Content = new AthleteInfoPage(Teamid) };
             }
             //01:男子单杠；02：男子双杠；03：男子吊环；04男子跳马；05：男子自由体操；06：男子鞍马；07：男子蹦床
             //08：女子跳马；09：女子高低杠；10：女子平衡木；11：女子自由体操；12：女子蹦床

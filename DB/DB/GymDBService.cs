@@ -101,7 +101,7 @@ namespace DB
             }
         }
 
-        // Add judge to the match group 
+        // Add match group to the judge
         public void Add(MatchGroup _matchGroup)
         {
             using (var db = new GymDB())
