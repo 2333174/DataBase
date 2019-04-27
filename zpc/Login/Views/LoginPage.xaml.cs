@@ -46,8 +46,16 @@ namespace Login.Views
                     break;
                 case 0:
                     if (select==0){
-                        ChangePage.Content = new Frame()
-                        { Content = new SignUpPage(db.GetTName(user.Text, password.Password, select)) };        // 传入Tname
+                        string _TName = db.GetTName(user.Text, password.Password, select);
+                        if (db.GetIsSignUp(_TName) == 0)
+                        {
+                            ChangePage.Content = new Frame()
+                            { Content = new SignUpPage(_TName) };
+                        }
+                        else
+                        {
+                            ChangePage.Content = new Frame() { Content = new AthleteInfoPage(db.GetTIDByTName(_TName)) };
+                        }
                     }
                     else {
                         ChangePage.Content = new Frame()

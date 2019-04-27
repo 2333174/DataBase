@@ -10,7 +10,6 @@ namespace DB
     public partial class Login
     {
         public Login() { }
-
         public Login(string userName, string userPwd, int userRole)
         {
             UName = userName;
@@ -18,14 +17,21 @@ namespace DB
             Role = userRole;
         }
 
-        public Login(string userName, string userPwd, int userRole, int userWeight)
+        public Login(string userName, string userPwd, int userRole, int _judgeID)
         {
             UName = userName;
             Password = userPwd;
             Role = userRole;
-            Weight = (sbyte?)userWeight;
+            JudgeID = _judgeID;
         }
 
+        public Login(string userName, string userPwd, int userRole, string _TName)
+        {
+            UName = userName;
+            Password = userPwd;
+            Role = userRole;
+            TName = _TName;
+        }
         [Key]
         public int UID { get; set; }
 
@@ -38,8 +44,6 @@ namespace DB
         public string Password { get; set; }
 
         public int Role { get; set; }
-
-        public sbyte? Weight { get; set; }
 
         public int? JudgeID { get; set; }
 

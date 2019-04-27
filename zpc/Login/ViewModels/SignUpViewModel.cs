@@ -269,6 +269,7 @@ namespace Login.ViewModels
                 dbs.Add(Judge);
                 Team team = dbs.GetTeamByTID(Teamid);
                 team.Docs = bytes;
+                team.isSignUp = 1;
                 dbs.Update(team);
                 foreach (var a in AthleteInfos)
                 {

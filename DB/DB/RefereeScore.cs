@@ -16,7 +16,6 @@ namespace DB
             PRid = _Prid;
             JudgeID = _judgeid;
         }
-
         [Key]
         public int Rsid { get; set; }
 
@@ -26,8 +25,8 @@ namespace DB
 
         public int? Scores { get; set; }
 
-        public virtual Judge Judge { get; set; }
+        public virtual Judge judge { get; set; }
 
-        public virtual PersonalResult PersonalResult { get; set; }
+        public virtual PersonalResult personalresult { get; set; }
     }
 }

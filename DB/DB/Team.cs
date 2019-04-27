@@ -17,6 +17,15 @@ namespace DB
             teamresult = new HashSet<TeamResult>();
         }
 
+        public Team(string teamName)
+        {
+            TName = teamName;
+            isSignUp = 0;
+            athlete = new HashSet<Athlete>();
+            staff = new HashSet<Staff>();
+            teamresult = new HashSet<TeamResult>();
+        }
+
         public Team(string teamName, byte[] doc)
         {
             TName = teamName;
@@ -35,6 +44,9 @@ namespace DB
 
         [Column(TypeName = "mediumblob")]
         public byte[] Docs { get; set; }
+
+        //0表示未报名，1表示已报名
+        public int isSignUp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Athlete> athlete { get; set; }

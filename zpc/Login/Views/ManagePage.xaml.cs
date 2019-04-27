@@ -29,6 +29,7 @@ namespace Login.Views
         bool isAddAccount = false;
         Account account;
         public List<Account> accounts;
+        GymDBService gymDBService;
         List<DB.Login> logins;
         public ManagePage()
         {
@@ -36,7 +37,7 @@ namespace Login.Views
             accounts = new List<Account>();
             List<Manage_DataGridRow> prerows = new List<Manage_DataGridRow>();
             List<Manage_DataGridRow> finalrows = new List<Manage_DataGridRow>();
-            GymDBService gymDBService = new GymDBService();
+            gymDBService = new GymDBService();
             GymDB db = new GymDB();
             logins = db.login.ToList();
            List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
@@ -420,7 +421,33 @@ namespace Login.Views
  
         private void addAccount_Click(object sender, RoutedEventArgs e)
         {
-            ShowAddAccount();
+            foreach (var acc in accounts)
+            {
+                int userRole;
+                switch (acc.accountRole)
+                {
+                    case "代表队":
+                        userRole = 1;
+                        break;
+                    default:
+                        userRole = 2;
+                        break;
+                }
+                if (userRole == 1)
+                {
+                    gymDBService.Add(new Team(acc.name));
+                    gymDBService.Add(new DB.Login(acc.userName, acc.password, userRole, acc.name));
+                }
+                else if (userRole == 2)
+                {
+                    gymDBService.Add(new DB.Login(acc.userName, acc.password, userRole, int.Parse(acc.name)));
+                }
+            }
+            ShowMessageInfo("添加成功", add);
+            accounts.Clear();
+            accountGrid.ItemsSource = null;
+            accountGrid.ItemsSource = accounts;
+
         }
         private async void ShowAddAccount()
         {

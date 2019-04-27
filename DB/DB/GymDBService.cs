@@ -817,18 +817,9 @@ namespace DB
             {
                 var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
                 if (account == null)
-                {
                     return -1;
-                }
                 else
-                {
-                    if (role == 2)
-                    {
-                        if (account.Weight == 0) return 1;
-                        else return 2;
-                    }
-                    else return 0;
-                }
+                     return 0;                
             }
         }
 
@@ -839,6 +830,15 @@ namespace DB
             {
                 var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
                 return account.TName;
+            }
+        }
+        //返回isSignUp
+        public int GetIsSignUp(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                var account = db.team.Where(l => l.TName.Equals(_TName)).SingleOrDefault();
+                return account.isSignUp;
             }
         }
 
