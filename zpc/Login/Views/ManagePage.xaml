@@ -18,15 +18,36 @@
                         <ColumnDefinition Width="158*"/>
                         <ColumnDefinition Width="457*"/>
                     </Grid.ColumnDefinitions>
+                    <materialDesign:DialogHost Name="sethost" Grid.Column="3"></materialDesign:DialogHost>
                     <Label Content="代表队男/女各年龄组最大报名人数" HorizontalAlignment="Left" Margin="144,86,0,0" VerticalAlignment="Top" Width="193" Grid.ColumnSpan="4"/>
                     <Label Content="代表队单个比赛最大上场人数" HorizontalAlignment="Left" Margin="144,139,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
                     <Label Content="团体比赛计算前几名的成绩&#xD;&#xA;" HorizontalAlignment="Left" Margin="144,190,0,0" VerticalAlignment="Top" Width="171" Height="26" Grid.ColumnSpan="3"/>
                     <ComboBox Name="baomingCount" HorizontalAlignment="Left" Margin="78.333,86,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3">
                         <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
                     </ComboBox>
-                    <ComboBox Name="playerCount" HorizontalAlignment="Left" Margin="78.333,139,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"/>
+                    <ComboBox Name="playerCount" HorizontalAlignment="Left" Margin="78.333,139,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                    </ComboBox>
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="保存" Grid.Column="3" HorizontalAlignment="Left" Margin="203.333,276,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" />
-                    <ComboBox Name="qianjimingCount" Grid.Column="3" HorizontalAlignment="Left" Margin="78.333,195,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox Name="qianjimingCount" Grid.Column="3" HorizontalAlignment="Left" Margin="78.333,195,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
             <TabItem Header="预赛" Margin="41,-2,-88,0.333" Background="{x:Null}" Opacity="0.7">
@@ -42,6 +63,7 @@
                         <ColumnDefinition Width="72*"/>
                         <ColumnDefinition Width="453*"/>
                     </Grid.ColumnDefinitions>
+                    <materialDesign:DialogHost Name="prehost" Grid.Column="3"></materialDesign:DialogHost>
                     <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.333,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="8" Click="Button_Click_5"/>
                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.333,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="8" Foreground="White" Click="Button_Click_4"/>
                     <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="0.333,61,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="6" >
@@ -61,6 +83,7 @@
                         <ColumnDefinition Width="175*"/>
                         <ColumnDefinition Width="521*"/>
                     </Grid.ColumnDefinitions>
+                    <materialDesign:DialogHost Name="finalhost" Grid.Column="3"></materialDesign:DialogHost>
                     <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成决赛赛事表" HorizontalAlignment="Left" Margin="258.333,242,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="2" Click="Button_Click_3"/>
                     <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="0,63,0,0" VerticalAlignment="Top" Width="auto" Grid.ColumnSpan="2" BorderBrush="#FF527C72" Opacity="0.7" Grid.Column="1">
                         <DataGrid.Columns>
