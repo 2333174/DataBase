@@ -22,11 +22,10 @@ namespace Login.Views
     /// </summary>
     public partial class SignUpPage : Page
     {
-        public SignUpPage(int Tid)
+        public SignUpPage(string _TName)
         {
             InitializeComponent();
-            DataContext = new ViewModels.SignUpViewModel(Tid);
-            
+            DataContext = new ViewModels.SignUpViewModel(_TName);     
         }
     }
 }

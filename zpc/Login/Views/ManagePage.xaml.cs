@@ -51,7 +51,7 @@ namespace Login.Views
 
         }
 
-        //根据组号获得项目名称 年龄+赛事+小组号
+        //根据组号获得预赛项目名称 年龄+赛事+决预赛小组号
         public string GetPName(string groupID)
         {
             //01:男子单杠；02：男子双杠；03：男子吊环；04男子跳马；05：男子自由体操；06：男子鞍马；07：男子蹦床
@@ -59,58 +59,73 @@ namespace Login.Views
             //0:7-8岁；1：9-10岁；2：11-12岁
             string age=null;
             char a = groupID[0];
-            switch(a)
+            string project = null;
+            if (groupID[3]==0)
             {
-                case '0':
-                    age = "7-8岁";
-                    break;
-                case '1':
-                    age = "9-10岁";
-                    break;
-                case '2':
-                    age = "11-12岁";
-                    break;
+                switch (a)
+                {
+                    case '0':
+                        age = "7-8岁";
+                        break;
+                    case '1':
+                        age = "9-10岁";
+                        break;
+                    case '2':
+                        age = "11-12岁";
+                        break;
+                }
+                char b = groupID[1];
+                char c = groupID[2];
+                if (b == '0' && c == '1')
+                {
+                    project = "男子单杠";
+                }
+                else if (b == '0' && c == '2')
+                {
+                    project = "男子双杠";
+                }
+                else if (b == '0' && c == '3')
+                {
+                    project = "男子吊环";
+                }
+                else if (b == '0' && c == '4')
+                {
+                    project = "男子跳马";
+                }
+                else if (b == '0' && c == '5')
+                {
+                    project = "男子自由体操";
+                }
+                else if (b == '0' && c == '6')
+                {
+                    project = "男子鞍马";
+                }
+                else if (b == '0' && c == '7')
+                {
+                    project = "男子蹦床";
+                }
+                else if (b == '0' && c == '8')
+                {
+                    project = "女子跳马";
+                }
+                else if (b == '0' && c == '9')
+                {
+                    project = "女子高低杠";
+                }
+                else if (b == '1' && c == '0')
+                {
+                    project = "女子平衡木";
+                }
+                else if (b == '1' && c == '1')
+                {
+                    project = "女子自由体操";
+                }
+                else if (b == '1' && c == '2')
+                {
+                    project = "女子蹦床";
+                }
             }
-            char b = groupID[1];
-            char c = groupID[2];
-            string project=null;
-            if (b == '0' && c == '1')
-            {
-                project = "男子单杠";
-            } else if (b == '0' && c == '2')
-            {
-                project = "男子双杠";
-            } else if (b == '0' && c == '3')
-            {
-                project = "男子吊环";
-            } else if (b == '0' && c == '4')
-            {
-                project = "男子跳马";
-            } else if (b == '0' && c == '5')
-            {
-                project = "男子自由体操";
-            }else if (b == '0' && c == '6')
-            {
-                project = "男子鞍马";
-            }else if (b == '0' && c == '7')
-            {
-                project = "男子蹦床";
-            }else if (b == '0' && c == '8')
-            {
-                project = "女子跳马";
-            }else if (b == '0' && c == '9')
-            {
-                project = "女子高低杠";
-            }else if (b == '1' && c == '0')
-            {
-                project = "女子平衡木";
-            }else if (b == '1' && c == '1')
-            {
-                project = "女子自由体操";
-            }else if (b == '1' && c == '2')
-            {
-                project = "女子蹦床";
-            }
+            
             return age + project;
         }
         //预赛添加分裁判的按钮
@@ -119,8 +134,19 @@ namespace Login.Views
             
         }
 
-        //点击生成预赛赛事表的按钮
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+
+        //添加裁判按钮
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            //获取当前选中行
+            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
+            string project = row.project;
+            string group = row.groupID;
+            ManageSystem.Content = new Frame()
+            { Content = new ChooseJudge(project,group) };
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             //设计算法自动编排预赛赛事
             //存放预赛表信息的List
@@ -159,17 +185,6 @@ namespace Login.Views
 
             //数据绑定
             preMatchGrid.ItemsSource = preMatch;
-        }
-
-        //添加裁判按钮
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            //获取当前选中行
-            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
-            string project = row.project;
-            string group = row.groupID;
-            ManageSystem.Content = new Frame()
-            { Content = new ChooseJudge(project,group) };
         }
     }
 }

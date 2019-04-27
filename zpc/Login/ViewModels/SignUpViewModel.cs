@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using DB;
 using Login.Commands;
 using Login.Models;
 using Login.Views;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 
 namespace Login.ViewModels
 {
     class SignUpViewModel:BaseViewModel
     {
-        public SignUpViewModel(int Tid)
+        public SignUpViewModel(string TName)
         {
-            Teamid = Tid;
+
+            Teamid = dbs.GetTIDByTName(TName);
 
             //数据初始化
+            _TeamLeader = new Staff();
+            _Doctor = new Staff();
+            _Coach = new Staff();
+            _Judge = new Judge();
+            _fileName = "";
+
+            _Visibility1 = Visibility.Visible;
+            _Visibility2 = Visibility.Hidden;
+
             _Athletes = null;
             DeleteItem = null;
             _AthleteInfos = new ObservableCollection<DataGridItem>();
@@ -27,20 +40,19 @@ namespace Login.ViewModels
             {
                 _select.Add(0);
             }
-            sportEvents = new List<string>();
             Events = new List<string>();
-            Events.Add("单杠");
-            Events.Add("双杠");
-            Events.Add("吊环");
-            Events.Add("跳马");
-            Events.Add("自由体操");
-            Events.Add("鞍马");
-            Events.Add("蹦床");
-            Events.Add("跳马");
-            Events.Add("高低杠");
-            Events.Add("平衡木");
-            Events.Add("自由体操");
-            Events.Add("蹦床");
+            Events.Add("男子单杠");
+            Events.Add("男子双杠");
+            Events.Add("男子吊环");
+            Events.Add("男子跳马");
+            Events.Add("男子自由体操");
+            Events.Add("男子鞍马");
+            Events.Add("男子蹦床");
+            Events.Add("女子跳马");
+            Events.Add("女子高低杠");
+            Events.Add("女子平衡木");
+            Events.Add("女子自由体操");
+            Events.Add("女子蹦床");
 
             //命令初始化
             AddCommand = new DelegateCommand();
@@ -49,20 +61,67 @@ namespace Login.ViewModels
             AddDataGridCommand.ExecuteAction = new Action<object>(AddDataGrid);
             DeleteCommand = new DelegateCommand();
             DeleteCommand.ExecuteAction = new Action<object>(DeleteDataGrid);
+            AddDosCommand = new DelegateCommand();
+            AddDosCommand.ExecuteAction = new Action<object>(AddDos);
+            DeleteDosCommand = new DelegateCommand();
+            DeleteDosCommand.ExecuteAction = new Action<object>(DeleteDos);
         }
 
         public DelegateCommand AddDataGridCommand{ get; set; } //添加Datagrid数据
         public DelegateCommand AddCommand { get; set; }
+        public DelegateCommand AddDosCommand { get; set; }
         public DelegateCommand DeleteCommand { get; set; }
         public DelegateCommand ConfirmCommand { get; set; }
+        public DelegateCommand DeleteDosCommand { get; set; }
 
         private int Teamid;
+
+        //控件显示
+        private Visibility _Visibility1;
+        private Visibility _Visibility2;
+        public Visibility Visibility1
+        {
+            get { return _Visibility1; }
+            set
+            {
+                _Visibility1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public Visibility Visibility2
+        {
+            get { return _Visibility2; }
+            set
+            {
+                _Visibility2 = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         //存储项目名称
         public List<string> Events;
 
+        //存储文件信息
+        byte[] bytes;
+
+        private string _fileName;
+        public string fileName
+        {
+            get { return _fileName; }
+            set
+            {
+                _fileName = value;
+                OnPropertyChanged();
+            }
+        }
+
         //存储运动员报名项目
         public List<string> sportEvents;
+        private List<string> sportEventsID;
+
+
+        private GymDBService dbs = new GymDBService();
 
         //记录多选按钮
         private List<int> _select;
@@ -145,17 +204,40 @@ namespace Login.ViewModels
 
         private bool IsTeamInfoNull()
         {
+            Console.WriteLine(TeamLeader.Gender);
             bool res = true;
             res = res && (TeamLeader.Name != null) && (TeamLeader.IDNumber != null) && (TeamLeader.Telephone != null) && (TeamLeader.Gender != null);
             res = res && (Doctor.Name != null) && (Doctor.IDNumber != null) && (Doctor.Telephone != null) && (Doctor.Gender != null);
             res = res && (Coach.Name != null) && (Coach.IDNumber != null) && (Coach.Telephone != null) && (Coach.Gender != null);
             res = res && (Judge.Name != null) && (Judge.IDNumber != null) && (Judge.Telephone != null);
-            foreach(var a in Athletes)
-            {
-                res = res && (a.Athlete.Name != null) && (a.Athlete.IDNumber != null) && (!a.Athlete.Age.Equals(null)) && (a.Athlete.CulturalGrade != null) && (a.Athlete.Gender != null);
-                foreach(var e in a.Events) { } // 组别
-            }
+            res = res && (AthleteInfos != null)&&(bytes!=null);
             return res;
+        }
+
+        private void AddDos(object parameter)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            
+            if (file.ShowDialog() == true)
+            {
+                Visibility1 = Visibility.Hidden;
+                Visibility2 = Visibility.Visible;
+                fileName = System.IO.Path.GetFileName(file.FileName);
+                Console.WriteLine(fileName);
+                FileInfo fi = new FileInfo(file.FileName);
+                FileStream fs = fi.OpenRead();
+                bytes = new byte[fs.Length];
+                fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
+            }
+        }
+
+        private void DeleteDos(object parameter)
+        {
+            Visibility1 = Visibility.Visible;
+            Visibility2 = Visibility.Hidden;
+            bytes = null;
+            Console.WriteLine("删除文件");
+
         }
 
         //实现添加dataGrid数据
@@ -168,40 +250,80 @@ namespace Login.ViewModels
         private void DeleteDataGrid(object parameter)
         {
             Console.WriteLine("删除数据");
-            AthleteInfos.Remove(DeleteItem);   
+            _AthleteInfos.Remove(DeleteItem);   
         }
         private void Add(object parameter)
         {
             if (IsTeamInfoNull() != true) ShowMessageInfo("输入有空值！");
-            GymDBService dbs = new GymDBService();
-            Staff leader = new Staff(TeamLeader.Name, TeamLeader.IDNumber, TeamLeader.Gender, TeamLeader.Telephone, "0", Teamid);
-            Staff doctor = new Staff(Doctor.Name, Doctor.IDNumber, Doctor.Gender, Doctor.Telephone, "1", Teamid);
-            Staff coach = new Staff(Coach.Name, Coach.IDNumber, Coach.Gender, Coach.Telephone, "2", Teamid);
-            dbs.Add(leader);
-            dbs.Add(doctor);
-            dbs.Add(coach);
-            foreach(var a in Athletes)
+            else
             {
-                Athlete athlete = new Athlete(a.Athlete.Name, a.Athlete.IDNumber, a.Athlete.Age, a.Athlete.Gender);
-                dbs.Add(athlete);
-                // 添加PersonalResult
+                ShowMessageInfo("保存成功");
+                GymDBService dbs = new GymDBService();
+                Staff leader = new Staff(TeamLeader.Name, TeamLeader.IDNumber, TeamLeader.Gender, TeamLeader.Telephone, "0", Teamid);
+                Staff doctor = new Staff(Doctor.Name, Doctor.IDNumber, Doctor.Gender, Doctor.Telephone, "1", Teamid);
+                Staff coach = new Staff(Coach.Name, Coach.IDNumber, Coach.Gender, Coach.Telephone, "2", Teamid);
+                dbs.Add(leader);
+                dbs.Add(doctor);
+                dbs.Add(coach);
+                dbs.Add(Judge);
+                Team team = dbs.GetTeamByTID(Teamid);
+                team.Docs = bytes;
+                dbs.Update(team);
+                foreach (var a in AthleteInfos)
+                {
+                    a.Athlete.TID = Teamid;
+                    dbs.Add(a.Athlete);
+                    string s = null;
+                    switch (a.Athlete.Age)
+                    {
+                        case 7:
+                        case 8:
+                            s = s + "0";
+                            break;
+                        case 9:
+                        case 10:
+                            s = s + "1";
+                            break;
+                        case 11:
+                        case 12:
+                            s = s + "2";
+                            break;
+                    }
+                    string t = s;
+                    foreach (var q in a.sportEventsID)
+                    {
+                        s = t;
+                        s = s + q;
+                        s = s + "0";
+                        Console.WriteLine(s);
+                        PersonalResult personalResult = new PersonalResult(a.Athlete.IDNumber, s, 0);//初赛为0 决赛为1
+                        dbs.Add(personalResult);
+                    }
+                }
             }
+            //01:男子单杠；02：男子双杠；03：男子吊环；04男子跳马；05：男子自由体操；06：男子鞍马；07：男子蹦床
+            //08：女子跳马；09：女子高低杠；10：女子平衡木；11：女子自由体操；12：女子蹦床
+            //0:7-8岁；1：9-10岁；2：11-12岁
         }
+
+
 
         private async void ShowMessageInfo(string message)
         {
-            MessageDialog samMessageDialog = new MessageDialog
+            Views.MessageDialog samMessageDialog = new Views.MessageDialog
             {
                 Message = { Text = message }
             };
-           await DialogHost.Show(samMessageDialog);
+           await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+           
         }
 
         //显示添加框 并进行处理
         private async void ShowAddDialog()
         {
             //重置sportList
-            sportEvents.Clear();
+            sportEvents = new List<string>();
+            sportEventsID = new List<string>();
             //重置多选
             for (int i = 0; i < 12; i++)
             {
@@ -209,8 +331,10 @@ namespace Login.ViewModels
             }
             //打开对话框
             DialogClosingEventHandler dialogClosingEventHandler = null;
-            AddAthleteDialog samMessageDialog = new AddAthleteDialog{};
-            var result = await DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
+            AddAthleteDialog samMessageDialog = new AddAthleteDialog
+            {
+            };
+            var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog, dialogClosingEventHandler);
             Console.WriteLine(result.ToString());
 
             //添加数据
@@ -218,7 +342,11 @@ namespace Login.ViewModels
             {
                 for (int i = 0; i < 12; i++)
                 {
-                    if (select[i] == 1) sportEvents.Add(Events[i]);
+                    if (select[i] == 1)
+                    {
+                        sportEvents.Add(Events[i]);
+                        sportEventsID.Add(string.Format("{0:D2}", i + 1));
+                    }
                 }
                 if (!(string.IsNullOrWhiteSpace(samMessageDialog.ID.Text)
                     || string.IsNullOrWhiteSpace(samMessageDialog.Name.Text)
@@ -229,10 +357,14 @@ namespace Login.ViewModels
                     &&sportEvents.Count!=0)
                 {
                     Athlete athlete = new Athlete(samMessageDialog.Name.Text, samMessageDialog.ID.Text, int.Parse(samMessageDialog.Age.Text), samMessageDialog.Gender.Text);
-                    DataGridItem dataGridItem = new DataGridItem(athlete, sportEvents);
-                    AthleteInfos.Add(dataGridItem);
-                    
+                    DataGridItem dataGridItem = new DataGridItem(athlete, sportEvents,sportEventsID);
+                    _AthleteInfos.Add(dataGridItem);
+            
                     Console.WriteLine("添加成功");
+                    foreach (var q in sportEventsID)
+                    {
+                        Console.WriteLine(q);
+                    }
                 }
                 else
                 {

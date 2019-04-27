@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login.Views
+namespace Login
 {
     /// <summary>
-    /// GradePage.xaml 的交互逻辑
+    /// GradeSystem.xaml 的交互逻辑
     /// </summary>
-    public partial class GradePage : Page
+    public partial class GradeSystem : Window
     {
-        public GradePage(int _judgeID, int _groupKey)
+        public GradeSystem()
         {
             InitializeComponent();
-            DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey);
         }
     }
 }
