@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DB;
+using Login.Models;
 
 namespace Login.Views
 {
@@ -24,9 +25,13 @@ namespace Login.Views
         //记录是否编排过赛事表的变量
         bool isPreArrange=false;
         bool isFinalArrange = false;
+        bool isAddAccount = false;
+        Account account;
+        List<Account> accounts;
         public ManagePage()
         {
             InitializeComponent();
+            accounts = new List<Account>();
             List<Manage_DataGridRow> prerows = new List<Manage_DataGridRow>();
             List<Manage_DataGridRow> finalrows = new List<Manage_DataGridRow>();
             GymDBService gymDBService = new GymDBService();
@@ -40,10 +45,10 @@ namespace Login.Views
                     //获得运动员姓名
                     string athName = athlete.Name;
                     //获得小组编号
-                    string groupID = p.GroupID;
-                    //根据小组编号得到项目名称
-                    string pName = GetPName(groupID, 0);
-                    //获得Athlete所在的Team
+                    string groupID = null;
+                    ////根据小组编号得到项目名称
+                    string pName = null;//GetPName(groupID, 0);
+                    ////获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
@@ -68,6 +73,7 @@ namespace Login.Views
             }
             preMatchGrid.ItemsSource = prerows;
             finalMatchGrid.ItemsSource = finalrows;
+            accountGrid.ItemsSource = accounts;
         }
 
 
@@ -364,6 +370,28 @@ namespace Login.Views
             GymDBService gymDBService = new GymDBService();
             gymDBService.Set(baomingCount.Text, playerCount.Text, qianjimingCount.Text);
             ShowMessageInfo("保存成功");
+        }
+
+        private void deleteGrid_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addGrid_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAddAccount();
+        }
+        private async void ShowAddAccount()
+        {
+            AddAccountDialog samMessageDialog = new AddAccountDialog
+            {
+            };
+            isAddAccount= Equals(await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog), true);
+            if (isAddAccount)
+            {
+                account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.Name.Text);
+                accounts.Add(account);
+            }
         }
     }
 }
