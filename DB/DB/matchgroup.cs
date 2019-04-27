@@ -7,38 +7,33 @@ namespace DB
     using System.Data.Entity.Spatial;
 
     [Table("gymdb.matchgroup")]
-    public partial class matchgroup
+    public partial class MatchGroup
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public matchgroup()
+        public MatchGroup() { }
+
+        public MatchGroup(string groupID)
         {
-            peasonalresult = new HashSet<peasonalresult>();
+            GroupID = groupID;
+        }
+
+        public MatchGroup(string groupID, int judgeID, int weight)
+        {
+            GroupID = groupID;
+            JudgeID = judgeID;
+            Weight = (sbyte)weight;
         }
 
         [Key]
-        [StringLength(18)]
-        public string gounpID { get; set; }
+        public int Key { get; set; }
 
         [Required]
         [StringLength(18)]
-        public string MajorJudge { get; set; }
+        public string GroupID { get; set; }
 
-        [StringLength(18)]
-        public string judgeOne { get; set; }
+        public int? JudgeID { get; set; }
 
-        [StringLength(18)]
-        public string judgeTwo { get; set; }
+        public sbyte? Weight { get; set; }
 
-        [StringLength(18)]
-        public string judgeThree { get; set; }
-
-        [StringLength(18)]
-        public string judgeFour { get; set; }
-
-        [StringLength(18)]
-        public string judgeFive { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<peasonalresult> peasonalresult { get; set; }
+        public virtual Judge judge { get; set; }
     }
 }

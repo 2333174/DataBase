@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace DB
 {
@@ -93,27 +94,32 @@ namespace DB
         static Socket ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         static void Main(String[] args)
         {
-            try
-            {
-                int Port = 8222;
-                IPAddress IP = IPAddress.Parse("192.168.154.70");
-                ServerSocket.Bind(new IPEndPoint(IP, Port));
-                ServerSocket.Listen(10);
-                Console.WriteLine("启动监听成功！");
-                Console.WriteLine("监听本地{0}成功", ServerSocket.LocalEndPoint.ToString());
-                Thread ThreadListen = new Thread(ListenConnection);
-                ThreadListen.IsBackground = true;
-                ThreadListen.Start();
-                Thread.Sleep(20000);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("监听异常!!!");
-                ServerSocket.Shutdown(SocketShutdown.Both);
-                ServerSocket.Close();
-            }
-            Console.ReadKey();
-            Console.WriteLine("监听完毕，按任意键退出！");
+            //try
+            //{
+            //    int Port = 8222;
+            //    IPAddress IP = IPAddress.Parse("192.168.154.94");
+            //    ServerSocket.Bind(new IPEndPoint(IP, Port));
+            //    ServerSocket.Listen(10);
+            //    Console.WriteLine("启动监听成功！");
+            //    Console.WriteLine("监听本地{0}成功", ServerSocket.LocalEndPoint.ToString());
+            //    Thread ThreadListen = new Thread(ListenConnection);
+            //    ThreadListen.IsBackground = true;
+            //    ThreadListen.Start();
+            //    Thread.Sleep(20000);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("监听异常!!!");
+            //    ServerSocket.Shutdown(SocketShutdown.Both);
+            //    ServerSocket.Close();
+            //}
+            //Console.ReadKey();
+            //Console.WriteLine("监听完毕，按任意键退出！");
+
+            // test code
+            GymDBService dbs = new GymDBService();
+            dbs.Grouping(2);
+            
         }
     }
 }
