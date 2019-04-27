@@ -45,10 +45,10 @@ namespace Login.Views
                     //获得运动员姓名
                     string athName = athlete.Name;
                     //获得小组编号
-                    string groupID = null;
-                    ////根据小组编号得到项目名称
-                    string pName = null;//GetPName(groupID, 0);
-                    ////获得Athlete所在的Team
+                    string groupID = p.GroupID;
+                    //得到项目名称
+                    string pName = gymDBService.GetRealSportName(p);
+                    //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
@@ -61,8 +61,8 @@ namespace Login.Views
                     string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
-                    //根据小组编号得到项目名称
-                    string pName = GetPName(groupID, 1);
+                    //得到项目名称
+                    string pName = gymDBService.GetRealSportName(p);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -90,148 +90,148 @@ namespace Login.Views
         
 
         //根据组号获得预赛项目名称 年龄+赛事+决预赛小组号
-        public string GetPName(string groupID,int flag)
-        {
-            //01:男子单杠；02：男子双杠；03：男子吊环；04男子跳马；05：男子自由体操；06：男子鞍马；07：男子蹦床
-            //08：女子跳马；09：女子高低杠；10：女子平衡木；11：女子自由体操；12：女子蹦床
-            //0:7-8岁；1：9-10岁；2：11-12岁
-            string age=null;
-            char a = groupID[0];
-            string project = null;
-            //flag为0选择预赛信息，1选择决赛信息
-            if (flag == 0 && groupID[3] == '0')
-            {
-                switch (a)
-                {
-                    case '0':
-                        age = "7-8岁";
-                        break;
-                    case '1':
-                        age = "9-10岁";
-                        break;
-                    case '2':
-                        age = "11-12岁";
-                        break;
-                }
-                char b = groupID[1];
-                char c = groupID[2];
-                if (b == '0' && c == '1')
-                {
-                    project = "男子单杠";
-                }
-                else if (b == '0' && c == '2')
-                {
-                    project = "男子双杠";
-                }
-                else if (b == '0' && c == '3')
-                {
-                    project = "男子吊环";
-                }
-                else if (b == '0' && c == '4')
-                {
-                    project = "男子跳马";
-                }
-                else if (b == '0' && c == '5')
-                {
-                    project = "男子自由体操";
-                }
-                else if (b == '0' && c == '6')
-                {
-                    project = "男子鞍马";
-                }
-                else if (b == '0' && c == '7')
-                {
-                    project = "男子蹦床";
-                }
-                else if (b == '0' && c == '8')
-                {
-                    project = "女子跳马";
-                }
-                else if (b == '0' && c == '9')
-                {
-                    project = "女子高低杠";
-                }
-                else if (b == '1' && c == '0')
-                {
-                    project = "女子平衡木";
-                }
-                else if (b == '1' && c == '1')
-                {
-                    project = "女子自由体操";
-                }
-                else if (b == '1' && c == '2')
-                {
-                    project = "女子蹦床";
-                }
-            }
-            else if (flag == 1 && groupID[3] == '1')
-            {
-                switch (a)
-                {
-                    case '0':
-                        age = "7-8岁";
-                        break;
-                    case '1':
-                        age = "9-10岁";
-                        break;
-                    case '2':
-                        age = "11-12岁";
-                        break;
-                }
-                char b = groupID[1];
-                char c = groupID[2];
-                if (b == '0' && c == '1')
-                {
-                    project = "男子单杠";
-                }
-                else if (b == '0' && c == '2')
-                {
-                    project = "男子双杠";
-                }
-                else if (b == '0' && c == '3')
-                {
-                    project = "男子吊环";
-                }
-                else if (b == '0' && c == '4')
-                {
-                    project = "男子跳马";
-                }
-                else if (b == '0' && c == '5')
-                {
-                    project = "男子自由体操";
-                }
-                else if (b == '0' && c == '6')
-                {
-                    project = "男子鞍马";
-                }
-                else if (b == '0' && c == '7')
-                {
-                    project = "男子蹦床";
-                }
-                else if (b == '0' && c == '8')
-                {
-                    project = "女子跳马";
-                }
-                else if (b == '0' && c == '9')
-                {
-                    project = "女子高低杠";
-                }
-                else if (b == '1' && c == '0')
-                {
-                    project = "女子平衡木";
-                }
-                else if (b == '1' && c == '1')
-                {
-                    project = "女子自由体操";
-                }
-                else if (b == '1' && c == '2')
-                {
-                    project = "女子蹦床";
-                }
+        //public string GetPName(string groupID,int flag)
+        //{
+        //    //01:男子单杠；02：男子双杠；03：男子吊环；04男子跳马；05：男子自由体操；06：男子鞍马；07：男子蹦床
+        //    //08：女子跳马；09：女子高低杠；10：女子平衡木；11：女子自由体操；12：女子蹦床
+        //    //0:7-8岁；1：9-10岁；2：11-12岁
+        //    string age=null;
+        //    string project = null;
+        //    char a = groupID[0];
+        //    //flag为0选择预赛信息，1选择决赛信息
+        //    if (flag == 0 && groupID[3] == '0')
+        //    {
+        //        switch (a)
+        //        {
+        //            case '0':
+        //                age = "7-8岁";
+        //                break;
+        //            case '1':
+        //                age = "9-10岁";
+        //                break;
+        //            case '2':
+        //                age = "11-12岁";
+        //                break;
+        //        }
+        //        char b = groupID[1];
+        //        char c = groupID[2];
+        //        if (b == '0' && c == '1')
+        //        {
+        //            project = "男子单杠";
+        //        }
+        //        else if (b == '0' && c == '2')
+        //        {
+        //            project = "男子双杠";
+        //        }
+        //        else if (b == '0' && c == '3')
+        //        {
+        //            project = "男子吊环";
+        //        }
+        //        else if (b == '0' && c == '4')
+        //        {
+        //            project = "男子跳马";
+        //        }
+        //        else if (b == '0' && c == '5')
+        //        {
+        //            project = "男子自由体操";
+        //        }
+        //        else if (b == '0' && c == '6')
+        //        {
+        //            project = "男子鞍马";
+        //        }
+        //        else if (b == '0' && c == '7')
+        //        {
+        //            project = "男子蹦床";
+        //        }
+        //        else if (b == '0' && c == '8')
+        //        {
+        //            project = "女子跳马";
+        //        }
+        //        else if (b == '0' && c == '9')
+        //        {
+        //            project = "女子高低杠";
+        //        }
+        //        else if (b == '1' && c == '0')
+        //        {
+        //            project = "女子平衡木";
+        //        }
+        //        else if (b == '1' && c == '1')
+        //        {
+        //            project = "女子自由体操";
+        //        }
+        //        else if (b == '1' && c == '2')
+        //        {
+        //            project = "女子蹦床";
+        //        }
+        //    }
+        //    else if (flag == 1 && groupID[3] == '1')
+        //    {
+        //        switch (a)
+        //        {
+        //            case '0':
+        //                age = "7-8岁";
+        //                break;
+        //            case '1':
+        //                age = "9-10岁";
+        //                break;
+        //            case '2':
+        //                age = "11-12岁";
+        //                break;
+        //        }
+        //        char b = groupID[1];
+        //        char c = groupID[2];
+        //        if (b == '0' && c == '1')
+        //        {
+        //            project = "男子单杠";
+        //        }
+        //        else if (b == '0' && c == '2')
+        //        {
+        //            project = "男子双杠";
+        //        }
+        //        else if (b == '0' && c == '3')
+        //        {
+        //            project = "男子吊环";
+        //        }
+        //        else if (b == '0' && c == '4')
+        //        {
+        //            project = "男子跳马";
+        //        }
+        //        else if (b == '0' && c == '5')
+        //        {
+        //            project = "男子自由体操";
+        //        }
+        //        else if (b == '0' && c == '6')
+        //        {
+        //            project = "男子鞍马";
+        //        }
+        //        else if (b == '0' && c == '7')
+        //        {
+        //            project = "男子蹦床";
+        //        }
+        //        else if (b == '0' && c == '8')
+        //        {
+        //            project = "女子跳马";
+        //        }
+        //        else if (b == '0' && c == '9')
+        //        {
+        //            project = "女子高低杠";
+        //        }
+        //        else if (b == '1' && c == '0')
+        //        {
+        //            project = "女子平衡木";
+        //        }
+        //        else if (b == '1' && c == '1')
+        //        {
+        //            project = "女子自由体操";
+        //        }
+        //        else if (b == '1' && c == '2')
+        //        {
+        //            project = "女子蹦床";
+        //        }
 
-            }
-            return age + project;
-        }
+        //    }
+        //    return age + project;
+        //}
         //预赛添加分裁判的按钮
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -242,12 +242,21 @@ namespace Login.Views
         //预赛-添加裁判按钮
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            string project = null;
+            string group = null;
             //获取当前选中行
-            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
-            string project = row.project;
-            string group = row.groupID;
+            var row = preMatchGrid.SelectedItem as Manage_DataGridRow;
+            if (row == null)
+            {
+                ShowMessageInfo("未选中行！");
+            }
+            else
+            {
+                project = row.project;
+                group = row.groupID;
+            }
             ManageSystem.Content = new Frame()
-            { Content = new ChooseJudge(project,group) };
+            { Content = new ChooseJudge(project, group) };
         }
 
         //生成预赛赛事表
@@ -261,7 +270,7 @@ namespace Login.Views
             //存放预赛表信息的List
             List<Manage_DataGridRow> preMatch = new List<Manage_DataGridRow>();
             //自动分组
-            gymDBService.Grouping(8);
+            gymDBService.Grouping(2);
             //List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
             //foreach(PersonalResult p in personalResults)
             //{
@@ -275,9 +284,15 @@ namespace Login.Views
             int i = 0;
             //创建存放每个组的personalResult的数组
             List<PersonalResult>[] personalResult = new List<PersonalResult>[groups.Count];
+            SortedSet<string> groupids = new SortedSet<string>(); 
             foreach (MatchGroup group in groups)
             {
-                personalResult[i] = gymDBService.GetPersonalResultsByGroupID(group.GroupID);
+                groupids.Add(group.GroupID);
+                
+            }
+            foreach(string groupid in groupids)
+            {
+                personalResult[i] = gymDBService.GetPersonalResultsByGroupID(groupid);
                 //对于每个组
                 foreach (PersonalResult p in personalResult[i])
                 {
@@ -287,8 +302,8 @@ namespace Login.Views
                     string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
-                    //根据小组编号得到项目名称
-                    string pName = GetPName(groupID,0);
+                    //得到项目名称
+                    string pName = gymDBService.GetRealSportName(p);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -298,7 +313,7 @@ namespace Login.Views
                 }
                 i++;
             }
-
+            
             //数据绑定
             preMatchGrid.ItemsSource = preMatch;
             isPreArrange = true;
@@ -323,9 +338,15 @@ namespace Login.Views
             int i = 0;
             //创建存放每个组的personalResult的数组
             List<PersonalResult>[] personalResult = new List<PersonalResult>[groups.Count];
+            SortedSet<string> groupids = new SortedSet<string>();
             foreach (MatchGroup group in groups)
             {
-                personalResult[i] = gymDBService.GetPersonalResultsByGroupID(group.GroupID);
+                groupids.Add(group.GroupID);
+
+            }
+            foreach (string groupid in groupids)
+            {
+                personalResult[i] = gymDBService.GetPersonalResultsByGroupID(groupid);
                 //对于每个组
                 foreach (PersonalResult p in personalResult[i])
                 {
@@ -335,8 +356,8 @@ namespace Login.Views
                     string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
-                    //根据小组编号得到项目名称
-                    string pName = GetPName(groupID,1);
+                    //得到项目名称
+                    string pName = gymDBService.GetRealSportName(p);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -354,10 +375,19 @@ namespace Login.Views
         //决赛-添加裁判
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            string project=null;
+            string group=null;
             //获取当前选中行
-            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
-            string project = row.project;
-            string group = row.groupID;
+            var row = finalMatchGrid.SelectedItem as Manage_DataGridRow;
+            if (row == null)
+            {
+                //ShowMessageInfo("未选中行！");
+            }
+            else
+            {
+                project = row.project;
+                group = row.groupID;
+            }
             ManageSystem.Content = new Frame()
             { Content = new ChooseJudge(project, group) };
         }
