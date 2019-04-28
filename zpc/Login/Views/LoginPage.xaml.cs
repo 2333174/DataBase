@@ -36,7 +36,7 @@ namespace Login.Views
             { Content = new ChosePage() };
         }
 
-        private void Loginf(object sender, RoutedEventArgs e)
+        private void Loginf()
         {
             var db = new GymDBService();
             switch (db.Loginf(user.Text, password.Password, select))
@@ -93,7 +93,11 @@ namespace Login.Views
                 await DialogHost.Show(new ProgressBox(), new DialogOpenedEventHandler((object Psender, DialogOpenedEventArgs args) =>
                 {
                     Task.Delay(TimeSpan.FromSeconds(1))
-                    .ContinueWith((t, _) => args.Session.Close(false), null,
+                    .ContinueWith((t, _) => 
+                    {
+                        Loginf();
+                        args.Session.Close(false);
+                    }, null,
                     TaskScheduler.FromCurrentSynchronizationContext());
                 }));
             });
