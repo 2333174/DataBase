@@ -124,6 +124,9 @@
     <Compile Include="Views\ComfirmDialog.xaml.cs">
       <DependentUpon>ComfirmDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GradeBeforeFinal.xaml.cs">
+      <DependentUpon>GradeBeforeFinal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GradePage.xaml.cs">
       <DependentUpon>GradePage.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ComfirmDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GradeBeforeFinal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
