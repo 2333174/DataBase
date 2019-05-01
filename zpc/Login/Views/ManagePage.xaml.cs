@@ -43,7 +43,7 @@ namespace Login.Views
            List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
             foreach(PersonalResult p in personalResults)
             {
-                if(p.Role=='0')
+                if(p.Role=='0'&&p.SportsEvent[3]=='0')
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
@@ -59,7 +59,8 @@ namespace Login.Views
                     string tName = team.TName;
                     Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
                     prerows.Add(manage_DataGridRow);
-                }else{
+                }else if(p.Role == '1' && p.SportsEvent[3] == '1')
+                {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
                     //获得运动员姓名
@@ -276,13 +277,6 @@ namespace Login.Views
             List<Manage_DataGridRow> preMatch = new List<Manage_DataGridRow>();
             //自动分组
             gymDBService.Grouping(2);
-            //List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
-            //foreach(PersonalResult p in personalResults)
-            //{
-            //    //根据sportsevent自动编排
-            //    //gymDBService.AutoArrangeGroup(p.SportsEvent, 12 , 0);
-                
-            //}
             //获得所有的小组
             List<MatchGroup> groups = gymDBService.GetMatchGroups();
             //根据GroupID获得AthleteID
@@ -386,7 +380,7 @@ namespace Login.Views
             var row = finalMatchGrid.SelectedItem as Manage_DataGridRow;
             if (row == null)
             {
-                //ShowMessageInfo("未选中行！");
+                ShowMessageInfo("未选中行！", finalhost);
             }
             else
             {

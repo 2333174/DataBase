@@ -10,14 +10,14 @@
       Title="ShowGrade">
 
     <Grid>
-        <DataGrid Name="gradegrid" HorizontalAlignment="Left" Height="269" Margin="106,132,0,0" VerticalAlignment="Top" Width="435" Opacity="0.7"  BorderBrush="#FFB37580" Foreground="#FF060001"
+        <DataGrid Name="gradegrid" HorizontalAlignment="Left" Height="269" Margin="106,132,0,0" VerticalAlignment="Top" Width="419" Opacity="0.7"  BorderBrush="#FFB37580" Foreground="#FF060001"
             ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  排名 "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>                
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
+                <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="  排名 "/>
+                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>                
+                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
+                <DataGridCheckBoxColumn Binding="{Binding  Path=tname}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
+                <DataGridTextColumn Binding="{Binding Path=grade}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
             </DataGrid.Columns>
         </DataGrid>
 
