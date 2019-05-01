@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="ShowGrageGridItem.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
     <Compile Include="Views\AddAcountDialog.xaml.cs">
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Views\ProgressBox.xaml.cs">
       <DependentUpon>ProgressBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowGrade.xaml.cs">
+      <DependentUpon>ShowGrade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
@@ -201,6 +205,10 @@
     <Page Include="Views\ProgressBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowGrade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SignUpPage.xaml">
       <SubType>Designer</SubType>

@@ -349,7 +349,7 @@ namespace Login.Views
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             //获取当前选中行
-            var row = (Manage_DataGridRow)preMatchGrid.SelectedItem;
+            var row = (Manage_DataGridRow)finalMatchGrid.SelectedItem;
             string project = row.project;
             string group = row.groupID;
             ManageSystem.Content = new Frame()

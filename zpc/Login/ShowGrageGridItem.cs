@@ -16,7 +16,7 @@ namespace Login
         public float atheletegrade { get; set; }
         public string game { get; set; }
         public string type { get; set; }
-        public ShowGradeGridItem(float rank,string name, string atheleteID, string groupname, float atheletegrade, string game, string type)
+        public ShowGradeGridItem(float rank, string name, string atheleteID, string groupname, float atheletegrade, string game, string type)
         {
             this.rank = rank;
             this.name = name;
