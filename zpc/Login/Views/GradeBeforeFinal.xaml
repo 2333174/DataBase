@@ -18,7 +18,7 @@
                             <ColumnDefinition Width="187*"/>
                             <ColumnDefinition Width="607*"/>
                         </Grid.ColumnDefinitions>
-                        <DataGrid Name="projectofteamgrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="287" Margin="110,93,0,0" Grid.ColumnSpan="2">
+                        <DataGrid Name="teamgrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="287" Margin="110,93,0,0" Grid.ColumnSpan="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目名"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="排名"/>

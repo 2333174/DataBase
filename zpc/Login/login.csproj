@@ -89,6 +89,7 @@
     <Compile Include="ChooseJudgeGridItem.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="ShowGradeGridItem.cs" />
+    <Compile Include="TeamResultGridItem.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\GSFMPViewModel.cs" />

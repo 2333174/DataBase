@@ -261,7 +261,7 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent)).ToList();
         }
-
+       
         public List<PersonalResult> GetPersonalResultsBySportEventAndRole(string _sportEvent, int role)
         {
             using (var db = new GymDB())
