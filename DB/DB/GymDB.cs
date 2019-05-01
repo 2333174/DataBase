@@ -65,7 +65,7 @@ namespace DB
 
             modelBuilder.Entity<Judge>()
                 .HasMany(e => e.refereescore)
-                .WithOptional(e => e.Judge)
+                .WithOptional(e => e.judge)
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Login>()
@@ -98,7 +98,7 @@ namespace DB
 
             modelBuilder.Entity<PersonalResult>()
                 .HasMany(e => e.refereescore)
-                .WithOptional(e => e.PersonalResult)
+                .WithOptional(e => e.personalresult)
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Staff>()

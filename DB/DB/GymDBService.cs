@@ -162,10 +162,10 @@ namespace DB
             string tmpType = null;
             switch (_personalResult.GroupID.Substring(3,1))
             {
-                case "1":
+                case "0":
                     tmpType = "预赛";
                     break;
-                case "2":
+                case "1":
                     tmpType = "决赛";
                     break;
             }
@@ -250,22 +250,10 @@ namespace DB
                 return db.athlete.Find(_AthleteIDNum);
         }
 
-        public List<PersonalResult> GetPersonalResults()
-        {
-            using (var db = new GymDB())
-                return db.personalresult.ToList();
-        }
-
         public List<PersonalResult> GetPersonalResultsByAthleteID(string _AthleteID)
         {
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.AthleteID.Equals(_AthleteID)).ToList();
-        }
-
-        public List<PersonalResult> GetPersonalResultsByGroupid(string _Groupid)
-        {
-            using (var db = new GymDB())
-                return db.personalresult.Where(p => p.GroupID.Equals(_Groupid)).ToList();
         }
 
         public List<PersonalResult> GetPersonalResultsBySportEvent(string _sportEvent)
@@ -278,6 +266,11 @@ namespace DB
         {
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role).ToList();
+        }
+        public List<PersonalResult> GetPersonalResults()
+        {
+            using (var db = new GymDB())
+                return db.personalresult.ToList();
         }
 
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
@@ -299,6 +292,12 @@ namespace DB
                 }
                 return judges;
             }
+        }
+
+        public List<RefereeScore> GetRefereeScoresByPRid(int PRid)
+        {
+            using (var db = new GymDB())
+                return db.refereescore.Where(rs => rs.PRid == PRid).ToList();
         }
 
         public List<Athlete> GetAthletesByTID(int _TID)
@@ -817,18 +816,9 @@ namespace DB
             {
                 var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
                 if (account == null)
-                {
                     return -1;
-                }
                 else
-                {
-                    if (role == 2)
-                    {
-                        if (account.Weight == 0) return 1;
-                        else return 2;
-                    }
-                    else return 0;
-                }
+                     return 0;                
             }
         }
 
@@ -841,6 +831,15 @@ namespace DB
                 return account.TName;
             }
         }
+        //返回isSignUp
+        public int GetIsSignUp(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                var account = db.team.Where(l => l.TName.Equals(_TName)).SingleOrDefault();
+                return account.isSignUp;
+            }
+        }
 
         public int GetTIDByTName(string _TName)
         {
@@ -850,9 +849,9 @@ namespace DB
             }
 
         }
-
+        
         //设置三个参数:代表队男/女各年龄组最大报名人数
-        public void Set(String POne, String PTwo, String PThree)
+        public void Set(string POne, string PTwo, string PThree)
         {
             using (var db = new GymDB())
             {

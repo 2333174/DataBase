@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login
+namespace Login.Views
 {
     /// <summary>
-    /// AddAcount.xaml 的交互逻辑
+    /// AddAccountDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class AddAcount : Page
+    public partial class AddAccountDialog : UserControl
     {
-        public AddAcount()
+        public AddAccountDialog()
         {
             InitializeComponent();
         }

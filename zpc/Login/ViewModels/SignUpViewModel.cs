@@ -99,7 +99,6 @@ namespace Login.ViewModels
             }
         }
 
-
         //存储项目名称
         public List<string> Events;
 
@@ -202,7 +201,6 @@ namespace Login.ViewModels
             }
         }
 
-
         private bool IsTeamInfoNull()
         {
             Console.WriteLine(TeamLeader.Gender);
@@ -269,6 +267,7 @@ namespace Login.ViewModels
                 dbs.Add(Judge);
                 Team team = dbs.GetTeamByTID(Teamid);
                 team.Docs = bytes;
+                team.isSignUp = 1;
                 dbs.Update(team);
                 foreach (var a in AthleteInfos)
                 {

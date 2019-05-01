@@ -8,24 +8,48 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="500" d:DesignWidth="800"
       Title="ManagePage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <ContentControl x:Name="ManageSystem">
         <TabControl HorizontalAlignment="Left" Height="424" Margin="0,0,-6.667,-3.333" VerticalAlignment="Top" Width="800" RenderTransformOrigin="0.5,0.498" >
             <TabItem Header="添加账号" HorizontalAlignment="Left" Width="112" Margin="-2,-2,-40.667,0.333" Background="{x:Null}" Opacity="0.7">
                 <Grid>
-                    <Grid Margin="0,0,0,-0.4">
-                        <RadioButton Content="裁判" HorizontalAlignment="Left" Margin="339,74,0,0" VerticalAlignment="Top"/>
-                        <RadioButton Content="代表队" HorizontalAlignment="Left" Margin="339,116,0,0" VerticalAlignment="Top"/>
-                        <Button  Content="添加" HorizontalAlignment="Left" Margin="491,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
+                    <Grid Height="397" VerticalAlignment="Top">
+                        <materialDesign:Card
+                         Background="{DynamicResource PrimaryHueLightBrush}"
+                         Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                          Padding="8" Margin="205,26,289,0">
+                            <TextBlock FontSize="16" HorizontalAlignment="Center">
+                                  请确认账号信息后再提交
+                            </TextBlock>
+                        </materialDesign:Card>
+                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="add" Identifier="addAccount" IsTabStop="False"/>
+                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="addFail" Identifier="addAccount" IsTabStop="False"/>
+                        <DataGrid Name="accountGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="190,77,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=userName}" ClipboardContentBinding="{x:Null}" Header="  账号  "/>
+                                <DataGridTextColumn Binding="{Binding Path=password}" ClipboardContentBinding="{x:Null}" Header="  密码  "/>
+                                <DataGridTextColumn Binding="{Binding Path=accountRole}" ClipboardContentBinding="{x:Null}" Header="  账号类型  "/>
+                                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="  队名/裁判ID  "/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button  Content="添加" HorizontalAlignment="Left" Margin="641,245,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addGrid_Click"/>
+                        <Button  Content="删除" HorizontalAlignment="Left" Margin="641,304,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="deleteGrid_Click"/>
                         <TextBlock
-                TextAlignment="Center"
-                Margin="0,26,32,376"
-                FontSize="15"
-                FontWeight="Bold" Text="添加账号信息"/>
-
-                        <TextBox  x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="156,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="队名/裁判名" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-                        <TextBox  x:Name="ID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="330,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-                        <TextBox  x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="512,189,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="取消" HorizontalAlignment="Left" Margin="608,287,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32"/>
+                             TextAlignment="Center"
+                             Margin="0,26,32,376"
+                            FontSize="15"
+                            FontWeight="Bold" Text="添加账号信息"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="确定" HorizontalAlignment="Left" Margin="321,341,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addAccount_Click"/>
 
                     </Grid>
 
@@ -33,57 +57,61 @@
             </TabItem>
             <TabItem Header="设置比赛类型" HorizontalAlignment="Left"  Margin="-2,-2,-40.667,0.333" Background="{x:Null}" Opacity="0.7" Width="112">
                 <Grid Margin="0,-2,0,1.667">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="158*"/>
-                        <ColumnDefinition Width="21*"/>
-                        <ColumnDefinition Width="158*"/>
-                        <ColumnDefinition Width="457*"/>
-                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:DialogHost Name="sethost" Identifier="sethost" Grid.Column="3"></materialDesign:DialogHost>
                     <Label Content="代表队男/女各年龄组最大报名人数" HorizontalAlignment="Left" Margin="144,86,0,0" VerticalAlignment="Top" Width="193" Grid.ColumnSpan="4"/>
                     <Label Content="代表队单个比赛最大上场人数" HorizontalAlignment="Left" Margin="144,139,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
                     <Label Content="团体比赛计算前几名的成绩&#xD;&#xA;" HorizontalAlignment="Left" Margin="144,190,0,0" VerticalAlignment="Top" Width="171" Height="26" Grid.ColumnSpan="3"/>
-                    <ComboBox Name="baomingCount" HorizontalAlignment="Left" Margin="78.333,86,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3">
+                    <ComboBox Name="baomingCount" HorizontalAlignment="Left" Margin="410,84,0,0" VerticalAlignment="Top" Width="120">
                         <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
                     </ComboBox>
-                    <ComboBox Name="playerCount" HorizontalAlignment="Left" Margin="78.333,139,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="保存" Grid.Column="3" HorizontalAlignment="Left" Margin="203.333,276,0,0" VerticalAlignment="Top" Width="75" />
-                    <ComboBox Name="qianjimingCount" Grid.Column="3" HorizontalAlignment="Left" Margin="78.333,195,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox Name="playerCount" HorizontalAlignment="Left" Margin="410,137,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                    </ComboBox>
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="保存" HorizontalAlignment="Left" Margin="327,279,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" />
+                    <ComboBox Name="qianjimingCount" HorizontalAlignment="Left" Margin="410,190,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.801,0.094">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
             <TabItem Header="预赛" Margin="0,-2,-88,0" Background="{x:Null}" Opacity="0.7" HorizontalAlignment="Left" Width="112">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="9*"/>
-                        <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="35*"/>
-                        <ColumnDefinition Width="22*"/>
-                        <ColumnDefinition Width="26*"/>
-                        <ColumnDefinition Width="17*"/>
-                        <ColumnDefinition Width="160*"/>
-                        <ColumnDefinition Width="72*"/>
-                        <ColumnDefinition Width="453*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="164.333,196,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="8" Click="Button_Click_5"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="164.333,134,0,0" VerticalAlignment="Top" Width="130" Height="29" Grid.Column="8" Foreground="White" Click="Button_Click_4"/>
-                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="0.333,61,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" Grid.Column="6" >
+                    <materialDesign:DialogHost Name="prehost" Identifier="prehost"></materialDesign:DialogHost>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="503,259,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_5"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="503,178,0,0" VerticalAlignment="Top" Width="130" Height="29" Foreground="White" Click="Button_Click_4"/>
+                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="73,67,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
-                            <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
-                            <DataGridTextColumn Binding="{Binding Path=team}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
-                            <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  出场顺序  "/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="决赛" Margin="0,-2,-131,0.333" Opacity="0.7" Background="{x:Null}" HorizontalAlignment="Left" Width="112"  RenderTransformOrigin="-0.376,0.595">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="98*"/>
-                        <ColumnDefinition Width="175*"/>
-                        <ColumnDefinition Width="521*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成决赛赛事表" HorizontalAlignment="Left" Margin="258.333,242,0,0" VerticalAlignment="Top" Width="130" Height="28" Grid.Column="2" Click="Button_Click_3"/>
-                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="0,63,0,0" VerticalAlignment="Top" Width="auto" Grid.ColumnSpan="2" BorderBrush="#FF527C72" Opacity="0.7" Grid.Column="1">
+
+                    <materialDesign:DialogHost Name="finalhost" Identifier="finalhost" Grid.Column="3"></materialDesign:DialogHost>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成决赛赛事表" HorizontalAlignment="Left" Margin="532,253,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_3"/>
+                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="139,58,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
@@ -91,7 +119,7 @@
                             <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="添加裁判" HorizontalAlignment="Left" Margin="258.333,179,0,0" VerticalAlignment="Top" Width="130" Height="32" Grid.Column="2" Click="Button_Click_6"/>
+                    <Button Content="添加裁判" HorizontalAlignment="Left" Margin="532,182,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_6"/>
                 </Grid>
             </TabItem>
 

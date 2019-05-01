@@ -14,7 +14,6 @@ namespace DB
         {
             refereescore = new HashSet<RefereeScore>();
         }
-
         public PersonalResult(string athleteID, string sportsEvent, string groupID, int role)
         {
             AthleteID = athleteID;
@@ -24,7 +23,7 @@ namespace DB
             refereescore = new HashSet<RefereeScore>();
         }
 
-        public PersonalResult(string athleteID, string sportsEvent,int role)
+        public PersonalResult(string athleteID, string sportsEvent, int role)
         {
             AthleteID = athleteID;
             SportsEvent = sportsEvent;

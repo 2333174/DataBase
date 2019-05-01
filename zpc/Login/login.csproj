@@ -87,11 +87,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
-    <Compile Include="ShowGrageGridItem.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="ShowGradeGridItem.cs" />
+    <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
+    <Compile Include="ViewModels\GSFMPViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModel.cs" />
+    <Compile Include="ViewModels\PRDetailsViewModel.cs" />
+    <Compile Include="ViewModels\PRItemsViewModel.cs" />
     <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
-    <Compile Include="Views\AddAcountDialog.xaml.cs">
-      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
+    <Compile Include="Views\AddAccountDialog.xaml.cs">
+      <DependentUpon>AddAccountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Manage_DataGridRow.cs" />
@@ -142,7 +148,7 @@
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AddAcountDialog.xaml">
+    <Page Include="Views\AddAccountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

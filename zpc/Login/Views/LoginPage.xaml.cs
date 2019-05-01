@@ -36,7 +36,7 @@ namespace Login.Views
             { Content = new ChosePage() };
         }
 
-        private void Loginf(object sender, RoutedEventArgs e)
+        private void Loginf()
         {
             var db = new GymDBService();
             switch (db.Loginf(user.Text, password.Password, select))
@@ -46,8 +46,16 @@ namespace Login.Views
                     break;
                 case 0:
                     if (select==0){
-                        ChangePage.Content = new Frame()
-                        { Content = new SignUpPage(db.GetTName(user.Text, password.Password, select)) };        // 传入Tname
+                        string _TName = db.GetTName(user.Text, password.Password, select);
+                        if (db.GetIsSignUp(_TName) == 0)
+                        {
+                            ChangePage.Content = new Frame()
+                            { Content = new SignUpPage(_TName) };
+                        }
+                        else
+                        {
+                            ChangePage.Content = new Frame() { Content = new AthleteInfoPage(db.GetTIDByTName(_TName)) };
+                        }
                     }
                     else {
                         ChangePage.Content = new Frame()
@@ -63,7 +71,7 @@ namespace Login.Views
                 default:
                     ChangePage.Content = new Frame()
                     {
-                        Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password))
+                        Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password).ToString())
                     };
                     break;
             }
@@ -85,7 +93,11 @@ namespace Login.Views
                 await DialogHost.Show(new ProgressBox(), new DialogOpenedEventHandler((object Psender, DialogOpenedEventArgs args) =>
                 {
                     Task.Delay(TimeSpan.FromSeconds(1))
-                    .ContinueWith((t, _) => args.Session.Close(false), null,
+                    .ContinueWith((t, _) => 
+                    {
+                        Loginf();
+                        args.Session.Close(false);
+                    }, null,
                     TaskScheduler.FromCurrentSynchronizationContext());
                 }));
             });
