@@ -1,14 +1,11 @@
-﻿<Page x:Class="Login.Views.FinalGradeShow"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Login.Views"
-      mc:Ignorable="d"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="FinalGradeShow">
-
+﻿<Window x:Class="Login.Views.AllPreGrades"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login.Views"
+        mc:Ignorable="d"
+        Title="AllPreGrades" Height="450" Width="800">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="424" Margin="0,0,-6.667,-3.333" VerticalAlignment="Top" Width="800" RenderTransformOrigin="0.5,0.498" >
             <TabItem Header="团体成绩">
@@ -20,10 +17,10 @@
                         </Grid.ColumnDefinitions>
                         <DataGrid Name="teamgrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="287" Margin="110,93,0,0" Grid.ColumnSpan="2">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目名"/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="排名"/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="队伍名称"/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
+                                <DataGridTextColumn Binding="{Binding Path=Event}" ClipboardContentBinding="{x:Null}" Header="项目名"/>
+                                <DataGridTextColumn Binding="{Binding Path=Ranking}" ClipboardContentBinding="{x:Null}" Header="排名"/>
+                                <DataGridTextColumn Binding="{Binding Path=team.TName}" ClipboardContentBinding="{x:Null}" Header="队伍名称"/>
+                                <DataGridTextColumn Binding="{Binding Path=Grade}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -39,7 +36,7 @@
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="排名"/>
-                                
+
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -61,6 +58,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
-</Page>
+</Window>

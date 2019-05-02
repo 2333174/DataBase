@@ -15,14 +15,14 @@ using DB;
 namespace Login.Views
 {
     /// <summary>
-    /// GradeBeforeFinal.xaml 的交互逻辑
+    /// AllPreGrades.xaml 的交互逻辑
     /// </summary>
-    public partial class GradeBeforeFinal : Window
+    public partial class AllPreGrades : Window
     {
         GymDB dB = new GymDB();
         GymDBService gymDBService = new GymDBService();
-        List<TeamResultGridItem> teamResultGridItems = new List<TeamResultGridItem>();
-        public GradeBeforeFinal()
+        List<TeamResult> teamResults = new List<TeamResult>();
+        public AllPreGrades()
         {
             InitializeComponent();
             //num:团体比赛计算前几名的成绩
@@ -32,10 +32,20 @@ namespace Login.Views
                     //该队的所有运动员
                     ICollection<Athlete> athletes = t.athlete;
                     //存放该队该赛事的PersonalResults的list
-                    List<PersonalResult> prs1 = new List<PersonalResult>();                    foreach (Athlete ath in athletes)                    {                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent == a).ToList();                        foreach (PersonalResult b in results)                        {                            prs1.Add(b);                        }                    }                    for (int i = 0; i < num; i++)                    {                        grade += (float)prs1.ElementAt(i).Grade;                    }                    TeamResultGridItem teamResultGridItem = new TeamResultGridItem(a, 0, t.TName, grade);                    teamResultGridItems.Add(teamResultGridItem);                }
-
+                    List<PersonalResult> prs1 = new List<PersonalResult>();                    foreach (Athlete ath in athletes)                    {                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent == a).ToList();                        foreach (PersonalResult b in results)                        {                            prs1.Add(b);                        }                    }                    for (int i = 0; i < num; i++)                    {                        grade += (float)prs1.ElementAt(i).Grade;                    }
+                    //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
+                    //向数据库添加teamresult
+                    TeamResult teamResult = new TeamResult(t.TID, a, grade,t);
+                    gymDBService.Add(teamResult);                }
+                gymDBService.Ranking(gymDBService.GetTeamResultsByEvent(a));
+                foreach (Team t in teams)
+                {
+                    TeamResult tr = dB.teamresult.Where(p => p.TID.Equals(t.TID) && p.Event.Equals(a)).Single();
+                    //向数据源添加Teamresult
+                    teamResults.Add(tr);
+                }
+                teamgrid.ItemsSource = teamResults;
             }
-            
         }
     }
 }

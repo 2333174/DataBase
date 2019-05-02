@@ -360,6 +360,18 @@ namespace DB
                 return db.athlete.ToList();
         }
 
+        public List<TeamResult> GetTeamResults()
+        {
+            using (var db = new GymDB())
+                return db.teamresult.ToList();
+        }
+
+        public List<TeamResult> GetTeamResultsByEvent(string _event)
+        {
+            using (var db = new GymDB())
+                return db.teamresult.Where(p=>p.Event.Equals(_event)).ToList();
+        }
+
         public MatchGroup GetMatchGroupByKey(int _key)
         {
             using (var db = new GymDB())
@@ -737,7 +749,24 @@ namespace DB
             else
                 throw new Exception("There are empty items in the personalresult");
         }
-
+        public void Ranking(List<TeamResult> _teamResults)
+        {
+            if (IsResultNotNull(_teamResults))
+            {
+                var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
+                using (var db = new GymDB())
+                {
+                    GymDBService dbs = new GymDBService();
+                    foreach (var t in query)
+                    {
+                        t.Ranking = (short?)(query.IndexOf(t) + 1);
+                        dbs.Update(t);
+                    }
+                }
+            }
+            else
+                throw new Exception("There are empty items in the teamresult");
+        }
         public void Grouping(int n)
         {
             using (var db = new GymDB())
@@ -760,24 +789,6 @@ namespace DB
                     }
                 }
             }
-        }
-        public void Ranking(List<TeamResult> _teamResults)
-        {
-            if (IsResultNotNull(_teamResults))
-            {
-                var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
-                using (var db = new GymDB())
-                {
-                    GymDBService dbs = new GymDBService();
-                    foreach (var t in query)
-                    {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        dbs.Update(t);
-                    }
-                }
-            }
-            else
-                throw new Exception("There are empty items in the teamresult");
         }
 
         public bool IsRankingNotNull(List<PersonalResult> _personalResults)
