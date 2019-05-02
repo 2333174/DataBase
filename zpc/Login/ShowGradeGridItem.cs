@@ -9,7 +9,7 @@ namespace Login
     class ShowGradeGridItem
     {
         //排名 姓名 号码 年龄 分数
-        public float rank { get; set; }
+        public short? rank { get; set; }
         public string name { get; set; }
         public string atheleteID { get; set; }
         public string tname { get; set; }
@@ -17,7 +17,7 @@ namespace Login
         public string game { get; set; }
         public string type { get; set; }
         public sbyte suq { get; set; }
-        public ShowGradeGridItem(float rank,string name, string atheleteID, sbyte suq, string tname,float atheletegrade, string game, string type)
+        public ShowGradeGridItem(short? rank,string name, string atheleteID, sbyte suq, string tname,float atheletegrade, string game, string type)
         {
             this.rank = rank;
             this.name = name;
@@ -27,6 +27,13 @@ namespace Login
             this.atheletegrade = atheletegrade;
             this.game = game;
             this.type = type;
+        }
+        public ShowGradeGridItem(short? rank, string name, sbyte suq, string game)
+        {
+            this.rank = rank;
+            this.name = name;
+            this.suq = suq;
+            this.game = game;
         }
     }
 }

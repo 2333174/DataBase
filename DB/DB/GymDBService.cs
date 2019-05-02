@@ -218,7 +218,65 @@ namespace DB
             }
             return tmpSport;
         }
-
+        public string GetFullSportName(string sportsevent)
+        {
+            string age = null;
+            string tmpSport = null;
+            switch(sportsevent.Substring(0, 1))
+            {
+                case "0":
+                     age = "7-8岁";
+                     break;
+                case "1":
+                     age = "9-10岁";
+                    break;
+                case "2":
+                    age = "11-12岁";
+                    break;
+            }
+            switch (sportsevent.Substring(1, 2))
+            {
+                case "01":
+                    tmpSport = "男子单杠";
+                    break;
+                case "02":
+                    tmpSport = "男子双杠";
+                    break;
+                case "03":
+                    tmpSport = "男子吊环";
+                    break;
+                case "04":
+                    tmpSport = "男子跳马";
+                    break;
+                case "05":
+                    tmpSport = "男子自由体操";
+                    break;
+                case "06":
+                    tmpSport = "男子鞍马";
+                    break;
+                case "07":
+                    tmpSport = "男子蹦床";
+                    break;
+                case "08":
+                    tmpSport = "女子跳马";
+                    break;
+                case "09":
+                    tmpSport = "女子高低杠";
+                    break;
+                case "10":
+                    tmpSport = "女子平衡木";
+                    break;
+                case "11":
+                    tmpSport = "女子自由体操";
+                    break;
+                case "12":
+                    tmpSport = "女子蹦床";
+                    break;
+                default:
+                    throw new Exception("未找到相关项目。");
+            }
+            return age+tmpSport;
+        }
         // Get the judgeid by comparing username and role
         public int GetJudgeID(string _username, string password)
         {

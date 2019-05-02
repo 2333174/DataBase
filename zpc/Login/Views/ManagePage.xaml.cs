@@ -52,7 +52,7 @@ namespace Login.Views
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
-                    string pName = gymDBService.GetRealSportName(p);
+                    string pName = gymDBService.GetFullSportName(p.SportsEvent);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -68,7 +68,7 @@ namespace Login.Views
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
-                    string pName = gymDBService.GetRealSportName(p);
+                    string pName = gymDBService.GetFullSportName(p.SportsEvent);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -302,7 +302,7 @@ namespace Login.Views
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
-                    string pName = gymDBService.GetRealSportName(p);
+                    string pName = gymDBService.GetFullSportName(p.SportsEvent);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
@@ -356,7 +356,7 @@ namespace Login.Views
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
-                    string pName = gymDBService.GetRealSportName(p);
+                    string pName = gymDBService.GetFullSportName(p.SportsEvent);
                     //获得Athlete所在的Team
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
