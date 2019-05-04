@@ -37,6 +37,15 @@ namespace DB
             Role = (sbyte)role;
             Suq = (sbyte)suq;
         }
+
+        public PersonalResult(string athleteID, string sportsEvent, float grade, short ranking)
+        {
+            AthleteID = athleteID;
+            SportsEvent = sportsEvent;
+            Grade = grade;
+            Ranking = ranking;
+        }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }

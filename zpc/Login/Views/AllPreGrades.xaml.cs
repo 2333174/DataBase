@@ -27,6 +27,8 @@ namespace Login.Views
         List<ShowGradeGridItem> f_items = new List<ShowGradeGridItem>();
         //events:初赛所有赛事
         SortedSet<string> events = new SortedSet<string>();
+        //个人全能成绩
+        List<ShowGradeGridItem> p_items = new List<ShowGradeGridItem>();
         public AllPreGrades()
         {
             InitializeComponent();
@@ -38,20 +40,54 @@ namespace Login.Views
             ComputeFinalSuq();
             //给rankgrid绑定数据源
             rankgrid.ItemsSource = f_items;
+            //给atheltegrid数据的函数
+            AtheleteGrid();
+            //给atheltegrid绑定数据源
+            athletegrid.ItemsSource = p_items;
         }
 
         public void TeamGrid()
         {
             //num:团体比赛计算前几名的成绩
-            int num = gymDBService.GetSettingPthree();            List<PersonalResult> personalResults = new List<PersonalResult>();            personalResults = gymDBService.GetPersonalResults();            foreach (PersonalResult p in personalResults)            {                events.Add(p.SportsEvent);            }            //计算团体成绩            foreach (string a in events)            {                string game = gymDBService.GetFullSportName(a);                List<Team> teams = gymDBService.GetAllTeams();                foreach (Team t in teams)                {                    float grade = 0;
+            int num = gymDBService.GetSettingPthree();
+            List<PersonalResult> personalResults = new List<PersonalResult>();
+            personalResults = gymDBService.GetPersonalResults();
+            foreach (PersonalResult p in personalResults)
+            {
+                events.Add(p.SportsEvent);
+            }
+            //计算团体成绩
+            foreach (string a in events)
+            {
+                string game = gymDBService.GetFullSportName(a);
+                List<Team> teams = gymDBService.GetAllTeams();
+                foreach (Team t in teams)
+                {
+                    float grade = 0;
                     //该队的所有运动员
                     ICollection<Athlete> athletes = t.athlete;
                     //存放该队该赛事的PersonalResults的list
-                    List<PersonalResult> prs1 = new List<PersonalResult>();                    foreach (Athlete ath in athletes)                    {                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent == a).ToList();                        foreach (PersonalResult b in results)                        {                            prs1.Add(b);                        }                    }                    //给这些运动员的成绩排序                    gymDBService.Ranking(prs1);                    //计算前n名运动员的成绩                    for (int i = 0; i < num; i++)                    {                        grade += (float)prs1.Where(p=>p.Ranking.Equals(i+1)).Single().Grade;                    }
+                    List<PersonalResult> prs1 = new List<PersonalResult>();
+                    foreach (Athlete ath in athletes)
+                    {
+                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent == a).ToList();
+                        foreach (PersonalResult b in results)
+                        {
+                            prs1.Add(b);
+                        }
+                    }
+                    //给这些运动员的成绩排序
+                    gymDBService.Ranking(prs1);
+                    //计算前n名运动员的成绩
+                    for (int i = 0; i < num; i++)
+                    {
+                        grade += (float)prs1.Where(p=>p.Ranking.Equals(i+1)).Single().Grade;
+                    }
                     //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
                     //向数据库添加teamresult
                     TeamResult teamResult = new TeamResult(t.TID, a, grade, t);
-                    gymDBService.Add(teamResult);                }
+                    gymDBService.Add(teamResult);
+                }
                 gymDBService.Ranking(gymDBService.GetTeamResultsByEvent(a));
                 foreach (Team t in teams)
                 {
@@ -107,6 +143,30 @@ namespace Login.Views
                         f_prs.Add(pr1);
                         gymDBService.Add(pr1);
                     }
+                }
+            }
+        }
+
+        //个人全能成绩
+        public void AtheleteGrid()
+        {
+            List<Athlete> athletes = new List<Athlete>();
+            athletes = gymDBService.GetAllAthletes();
+           
+            foreach (Athlete a in athletes)
+            {
+                List<PersonalResult> personalResults = new List<PersonalResult>();
+                personalResults = gymDBService.GetPersonalResultsByAthleteID(a.AthleteID);
+                foreach(PersonalResult pr in personalResults)
+                {
+                    string athName = a.Name;
+                    string atheleteID = a.AthleteID;
+                    string game = pr.SportsEvent;
+                    float atheletegrade = (float)pr.Grade;
+                    short rank = (short)pr.Ranking;
+
+                    ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athName, atheleteID, game, atheletegrade, rank);
+                    p_items.Add(showGradeGridItem);
                 }
             }
         }

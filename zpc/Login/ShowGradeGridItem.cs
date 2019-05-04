@@ -35,5 +35,14 @@ namespace Login
             this.suq = suq;
             this.game = game;
         }
+        public ShowGradeGridItem(string name, string atheleteID,string game, float atheletegrade, short rank)
+        {
+            
+            this.name = name;
+            this.atheleteID = atheleteID;
+            this.game = game;
+            this.atheletegrade = atheletegrade;
+            this.rank = rank;
+        }
     }
 }
