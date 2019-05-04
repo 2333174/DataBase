@@ -8,6 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/mysql.data.entityframework.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-gsf.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-login.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-grade.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-pass.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-manage.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg-start.jpg")]
 
 
