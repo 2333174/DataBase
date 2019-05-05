@@ -64,14 +64,16 @@ namespace DB
         }
 
         // Add a teamresult to the team
-        public void Add(TeamResult _teamresult)
+        public bool Add(TeamResult _teamresult)
         {
             using (var db = new GymDB())
             {
+                if (!CheckDuplicateTeamResult(_teamresult)) return false;
                 var targetTeam = db.team.Find(_teamresult.TID);
                 targetTeam.teamresult.Add(_teamresult);
                 db.teamresult.Add(_teamresult);
                 db.SaveChanges();
+                return true;
             }
         }
 
@@ -132,7 +134,24 @@ namespace DB
                 else return false;
             }
         }
-
+        private bool CheckDuplicateTeamResult(TeamResult tr)
+        {
+            using (var db = new GymDB())
+            {
+                var rss = db.teamresult.Where(rs => rs.TID == tr.TID && rs.Event == tr.Event);
+                if (rss.Count() == 0) return true;
+                else return false;
+            }
+        }
+        public bool CheckDuplicateTeamResult(int tid,string _event)
+        {
+            using (var db = new GymDB())
+            {
+                var rss = db.teamresult.Where(rs => rs.TID == tid && rs.Event == _event);
+                if (rss.Count() == 0) return true;
+                else return false;
+            }
+        }
         public bool Add(RefereeScore _refereeScore)
         {
             using (var db = new GymDB())

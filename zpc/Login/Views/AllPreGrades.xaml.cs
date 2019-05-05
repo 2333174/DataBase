@@ -50,19 +50,23 @@ namespace Login.Views
         {
             //num:团体比赛计算前几名的成绩
             int num = gymDBService.GetSettingPthree();
+            //先记录所有的赛事
             List<PersonalResult> personalResults = new List<PersonalResult>();
             personalResults = gymDBService.GetPersonalResults();
             foreach (PersonalResult p in personalResults)
             {
                 events.Add(p.SportsEvent);
             }
-            //计算团体成绩
+            //取前num名计算团体成绩
             foreach (string a in events)
             {
                 string game = gymDBService.GetFullSportName(a);
                 List<Team> teams = gymDBService.GetAllTeams();
                 foreach (Team t in teams)
                 {
+                    //查询tid和sportsevent是否已经在数据库的teamresult表中 如果在 不做操作
+                    if (!gymDBService.CheckDuplicateTeamResult(t.TID, a))
+                        continue;
                     float grade = 0;
                     //该队的所有运动员
                     ICollection<Athlete> athletes = t.athlete;
@@ -70,7 +74,7 @@ namespace Login.Views
                     List<PersonalResult> prs1 = new List<PersonalResult>();
                     foreach (Athlete ath in athletes)
                     {
-                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent == a).ToList();
+                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent.Equals(a)).ToList();
                         foreach (PersonalResult b in results)
                         {
                             prs1.Add(b);
@@ -85,7 +89,7 @@ namespace Login.Views
                     }
                     //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
                     //向数据库添加teamresult
-                    TeamResult teamResult = new TeamResult(t.TID, a, grade, t);
+                    TeamResult teamResult = new TeamResult(t.TID, a, grade,t);
                     gymDBService.Add(teamResult);
                 }
                 gymDBService.Ranking(gymDBService.GetTeamResultsByEvent(a));
