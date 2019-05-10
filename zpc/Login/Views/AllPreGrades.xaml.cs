@@ -69,12 +69,12 @@ namespace Login.Views
                         continue;
                     float grade = 0;
                     //该队的所有运动员
-                    ICollection<Athlete> athletes = t.athlete;
+                    ICollection<Athlete> athletes = gymDBService.GetAthletesByTName(t.TName);
                     //存放该队该赛事的PersonalResults的list
                     List<PersonalResult> prs1 = new List<PersonalResult>();
                     foreach (Athlete ath in athletes)
                     {
-                        List<PersonalResult> results = ath.personalresult.Where(p => p.SportsEvent.Equals(a)).ToList();
+                        List<PersonalResult> results = dB.personalresult.Where(p => p.SportsEvent.Equals(a)&&p.AthleteID.Equals(ath.AthleteID)).ToList();
                         foreach (PersonalResult b in results)
                         {
                             prs1.Add(b);
@@ -83,9 +83,19 @@ namespace Login.Views
                     //给这些运动员的成绩排序
                     gymDBService.Ranking(prs1);
                     //计算前n名运动员的成绩
-                    for (int i = 0; i < num; i++)
+                    if(num>=prs1.Count)
                     {
-                        grade += (float)prs1.Where(p=>p.Ranking.Equals(i+1)).Single().Grade;
+                        for (int i = 0; i < num; i++)
+                        {
+                            grade += (float)prs1.Where(p => p.Ranking.Equals(i + 1)).Single().Grade;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < prs1.Count; i++)
+                        {
+                            grade += (float)prs1.Where(p => p.Ranking.Equals(i + 1)).Single().Grade;
+                        }
                     }
                     //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
                     //向数据库添加teamresult
