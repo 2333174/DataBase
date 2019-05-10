@@ -66,14 +66,5 @@ namespace Login.Views
             gradegrid.ItemsSource = items;
         }
 
-        private void Item_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Game.Text = iteminform.First <string>();
-        }
-
-        private void Type_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Game.Text = iteminform.Last <string>();
-        }
     }
 }
