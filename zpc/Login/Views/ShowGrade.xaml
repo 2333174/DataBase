@@ -21,8 +21,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox  x:Name="Game" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="106,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="项目" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541" TextChanged="Item_TextChanged" />
-        <TextBox  x:Name="Type" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="292,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="比赛类型" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541" TextChanged="Type_TextChanged" />
+        <TextBox  x:Name="Game" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="106,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="项目" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541"  />
+        <TextBox  x:Name="Type" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="292,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="比赛类型" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541"  />
 
     </Grid>
 </Page>

@@ -29,11 +29,10 @@
             <TabItem Header="个人全能成绩">
                 <Grid>
                     <Grid Height="397" VerticalAlignment="Top">
-                        <DataGrid Name="athletegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="355" Margin="101,81,0,0">
+                        <DataGrid Name="athletegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="299" Margin="101,81,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="编号"/>
-                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="项目"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
                                 <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="排名"/>
 

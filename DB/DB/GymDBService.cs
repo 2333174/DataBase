@@ -844,6 +844,7 @@ namespace DB
             else
                 throw new Exception("There are empty items in the teamresult");
         }
+
         public void Grouping(int n)
         {
             using (var db = new GymDB())

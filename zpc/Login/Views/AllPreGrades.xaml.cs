@@ -74,7 +74,7 @@ namespace Login.Views
                     List<PersonalResult> prs1 = new List<PersonalResult>();
                     foreach (Athlete ath in athletes)
                     {
-                        List<PersonalResult> results = dB.personalresult.Where(p => p.SportsEvent.Equals(a)&&p.AthleteID.Equals(ath.AthleteID)).ToList();
+                        List<PersonalResult> results = dB.personalresult.Where(p => p.SportsEvent.Equals(a) && p.AthleteID.Equals(ath.AthleteID)).ToList();
                         foreach (PersonalResult b in results)
                         {
                             prs1.Add(b);
@@ -83,7 +83,7 @@ namespace Login.Views
                     //给这些运动员的成绩排序
                     gymDBService.Ranking(prs1);
                     //计算前n名运动员的成绩
-                    if(num>=prs1.Count)
+                    if (num >= prs1.Count)
                     {
                         for (int i = 0; i < num; i++)
                         {
@@ -99,7 +99,7 @@ namespace Login.Views
                     }
                     //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
                     //向数据库添加teamresult
-                    TeamResult teamResult = new TeamResult(t.TID, a, grade,t);
+                    TeamResult teamResult = new TeamResult(t.TID, a, grade, t);
                     gymDBService.Add(teamResult);
                 }
                 gymDBService.Ranking(gymDBService.GetTeamResultsByEvent(a));
@@ -110,48 +110,50 @@ namespace Login.Views
                     //向数据源添加Teamresult
                     teamResults.Add(tr);
                 }
-                
+
             }
         }
-        //计算单项决赛次序 当一个项目运动员数大于等于10时，一半的运动员晋级决赛
-        //7、8或9个运动员晋级五个，四、五或六个运动员晋级4个，三个及三个一下不进行决赛
+        /*计算单项决赛次序 当一个项目运动员数大于等于10时，一半的运动员晋级决赛
+        7、8或9个运动员晋级五个，四、五或六个运动员晋级4个，三个及三个一下不进行决赛*/
         public void ComputeFinalSuq()
         {
-            foreach(string s in events)
+            foreach (string s in events)
             {
-                string game= gymDBService.GetFullSportName(s);
+                string game = gymDBService.GetFullSportName(s);
                 List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 0).ToList();
                 int athnum = personalResults.Count;
                 gymDBService.Ranking(personalResults);
-                if(athnum>=10)
+                if (athnum >= 10)
                 {
-                    for(int i=1; i <= athnum/2; i++)
+                    for (int i = 1; i <= athnum / 2; i++)
                     {
                         PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID,pr.SportsEvent,1,i);
+                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, pr.SportsEvent, 1, i);
                         ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
                         f_items.Add(item);
                         f_prs.Add(pr1);
                         gymDBService.Add(pr1);
                     }
-                     
-                }else if(athnum>=7&&athnum<10)
+
+                }
+                else if (athnum >= 7 && athnum < 10)
                 {
                     for (int i = 1; i <= 5; i++)
                     {
                         PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, pr.SportsEvent, 1,i);
+                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, pr.SportsEvent, 1, i);
                         ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
                         f_items.Add(item);
                         f_prs.Add(pr1);
                         gymDBService.Add(pr1);
                     }
-                }else if(athnum>=4&&athnum<=7)
+                }
+                else if (athnum >= 4 && athnum <= 7)
                 {
                     for (int i = 1; i <= 4; i++)
                     {
                         PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, pr.SportsEvent, 1,i);
+                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, pr.SportsEvent, 1, i);
                         ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
                         f_items.Add(item);
                         f_prs.Add(pr1);
@@ -164,25 +166,27 @@ namespace Login.Views
         //个人全能成绩
         public void AtheleteGrid()
         {
+            //取数据库所有运动员
             List<Athlete> athletes = new List<Athlete>();
             athletes = gymDBService.GetAllAthletes();
-           
+
             foreach (Athlete a in athletes)
             {
                 List<PersonalResult> personalResults = new List<PersonalResult>();
                 personalResults = gymDBService.GetPersonalResultsByAthleteID(a.AthleteID);
-                foreach(PersonalResult pr in personalResults)
-                {
-                    string athName = a.Name;
-                    string atheleteID = a.AthleteID;
-                    string game = pr.SportsEvent;
-                    float atheletegrade = (float)pr.Grade;
-                    short rank = (short)pr.Ranking;
-
-                    ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athName, atheleteID, game, atheletegrade, rank);
-                    p_items.Add(showGradeGridItem);
+                string athName = a.Name;
+                string atheleteID = a.AthleteID;
+                float atheletegrade=0;
+                //将单个运动员成绩相加
+                foreach (PersonalResult pr in personalResults)
+                {                     
+                    atheletegrade += (float)pr.Grade;                        
                 }
+                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athName, atheleteID, atheletegrade, null);
+                p_items.Add(showGradeGridItem);
+                
             }
+            
         }
     }
 }
