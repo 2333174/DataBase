@@ -819,6 +819,8 @@ namespace DB
                     foreach(var t in query)
                     {
                         t.Ranking = (short?)(query.IndexOf(t) + 1);
+                        if (query.IndexOf(t) != 0 && t.Grade == query[query.IndexOf(t) - 1].Grade)
+                            t.Ranking = query[query.IndexOf(t) - 1].Ranking;
                         dbs.Update(t);
                     }
                 }
@@ -837,6 +839,8 @@ namespace DB
                     foreach (var t in query)
                     {
                         t.Ranking = (short?)(query.IndexOf(t) + 1);
+                        if (query.IndexOf(t) != 0 && t.Grade == query[query.IndexOf(t) - 1].Grade)
+                            t.Ranking = query[query.IndexOf(t) - 1].Ranking;
                         dbs.Update(t);
                     }
                 }
@@ -906,7 +910,7 @@ namespace DB
                 if (account == null)
                     return -1;
                 else
-                     return 0;                
+                     return 0;
             }
         }
 
