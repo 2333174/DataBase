@@ -163,7 +163,7 @@ namespace Login.Views
             }
         }
 
-        //个人全能成绩
+        //个人全能成绩:将运动员总成绩算出来
         public void AtheleteGrid()
         {
             //取数据库所有运动员
@@ -186,7 +186,7 @@ namespace Login.Views
                 p_items.Add(showGradeGridItem);
                 
             }
-            //p_items.OrderBy();
+  
         }
     }
 }

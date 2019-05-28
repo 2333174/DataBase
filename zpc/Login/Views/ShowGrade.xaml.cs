@@ -27,11 +27,13 @@ namespace Login.Views
         //ShowGradeGridItem item { get; set; }
         GymDB db = new GymDB();
         GymDBService gymDBService = new GymDBService();
+        string _groupID;
 
         public ShowGrade(string groupID, string game,string type)
         {
             InitializeComponent();
             items = new ObservableCollection<ShowGradeGridItem>();
+            _groupID = groupID;
             //iteminform = new ObservableCollection<string>();
             //this.iteminform.Add(game);
             //this.iteminform.Add(type);
@@ -64,6 +66,12 @@ namespace Login.Views
             }
             
             gradegrid.ItemsSource = items;
+
+        }
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ChangePage.Content = new Frame()
+            { Content = new GSForMajorJudgePage(_groupID) };
         }
 
     }

@@ -31,8 +31,8 @@ namespace Login
             using (var db = new DB.GymDB())
                 prs = db.personalresult.ToList();
             dbs.Ranking(prs);
-            //ChangePage.Content = new Frame()
-            //{ Content = new ChosePage()};
+            ChangePage.Content = new Frame()
+            { Content = new AllPreGrades()};
         }
         
         protected override void OnClosed(EventArgs e)
