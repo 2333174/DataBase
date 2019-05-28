@@ -37,7 +37,7 @@ namespace Login.Views
             item = new ChooseJudgeGridItem(project, group, null, null);
             items.Add(item);
             judgegrid.ItemsSource = items;
-            groupid = project + group;
+            groupid = group;
 
             //获取全部的裁判信息
             List<Judge> judges = db.judge.ToList();
@@ -95,7 +95,7 @@ namespace Login.Views
                         {
                             MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
                             gymDBService.Add(match);
-                            Client1.run(judge.JudgeID + "," + groupid);
+                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
                         }
                     }
                 }

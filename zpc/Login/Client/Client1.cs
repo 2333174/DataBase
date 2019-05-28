@@ -160,7 +160,7 @@ namespace Login
         public static void ClientSendMsg(string sendMsg)
         {
             //将输入的内容字符串转换为机器可以识别的字节数组  
-            byte[] arrClientSendMsg = Encoding.UTF8.GetBytes(sendMsg);
+             byte[] arrClientSendMsg = Encoding.UTF8.GetBytes(sendMsg);
             //调用客户端套接字发送字节数组     
             SocketClient.Send(arrClientSendMsg);
         }

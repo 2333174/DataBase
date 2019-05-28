@@ -107,7 +107,7 @@ namespace Server
                 }
                 catch (Exception ex)
                 {
-                    //提示套接字监听异常     
+                    //提示套接字监听异常
                     Console.WriteLine(ex.Message);
                     break;
                 }
@@ -120,8 +120,14 @@ namespace Server
                 int length = connection.Receive(arrServerRecMsg);
                 //将机器接受到的字节数组转换为人可以读懂的字符串     
                 string strSRecMsg = Encoding.UTF8.GetString(arrServerRecMsg, 0, length);
-                if (strSRecMsg == "管理") { ManagerSockets.Add(connection); }
-                else Judges.Add(int.Parse(strSRecMsg), connection);
+                if (strSRecMsg == "管理")
+                {
+                    ManagerSockets.Add(connection);
+                }
+                else
+                {
+                    Judges.Add(int.Parse(strSRecMsg), connection);
+                }
                 //显示与客户端连接情况
                 Console.WriteLine("\r\n[客户端\"" + remoteEndPoint + strSRecMsg + "\"建立连接成功！ 客户端数量：" + ClientConnectionItems.Count + "]");
 
@@ -146,7 +152,7 @@ namespace Server
         /// <summary>
         /// 接收客户端发来的信息，客户端套接字对象
         /// </summary>
-        /// <param name="socketclientpara"></param>    
+        /// <param name="socketclientpara"></param>
         static void recv(object socketclientpara)
         {
             Socket socketServer = socketclientpara as Socket;
@@ -167,7 +173,7 @@ namespace Server
                         string[] introductions = strSRecMsg.Split(',');
                         for (int i = 0; i < introductions.Length - 1; i++)
                         {
-                            Judges[int.Parse(introductions[i])].Send(Encoding.UTF8.GetBytes("打分：" + introductions[introductions.Length - 1]));
+                            Judges[int.Parse(introductions[i])].Send(Encoding.UTF8.GetBytes("打分:" + introductions[introductions.Length - 1]));
                         }
                     }
                     //将发送的字符串信息附加到文本框txtMsg上     

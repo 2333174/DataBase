@@ -61,7 +61,7 @@ namespace Login.Views
                         }
                     }
                     else if (select==1){
-                        Client.run("管理");   
+                        Client1.run("管理");
                         ChangePage.Content = new Frame()
                         { Content = new ManagePage() };
                     }

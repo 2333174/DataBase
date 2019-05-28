@@ -402,7 +402,7 @@ namespace DB
         public int GetGroupKeyByJG(int _judgeID,string Groupid)
         {
             using (var db = new GymDB())
-                return db.matchgroup.Where(s=>s.JudgeID==_judgeID&&s.GroupID==Groupid).Single().Key;
+                return db.matchgroup.Where(s=>s.JudgeID==_judgeID&&s.GroupID==Groupid).SingleOrDefault().Key;
         }
 
         public int GetSettingPone()
