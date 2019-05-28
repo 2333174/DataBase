@@ -20,10 +20,10 @@ namespace Login.Views
     /// </summary>
     public partial class GradePage : Page
     {
-        public GradePage(int _judgeID)
+        public GradePage(int _judgeID, int _groupKey)
         {
             InitializeComponent();
-            //DataContext = new ViewModels.GradePageViewModel(_judgeID);
+            DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey);
         }
     }
 }

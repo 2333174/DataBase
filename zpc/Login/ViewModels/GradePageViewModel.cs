@@ -12,8 +12,8 @@ namespace Login.ViewModels
     {
         public GradePageViewModel(int judgeID, int groupKey)
         {
-            SubmitCommand = new Commands.DelegateCommand
-            { ExecuteAction = new Action<object>(Submit) };
+            SubmitCommand = new Commands.DelegateCommand();
+            SubmitCommand.ExecuteAction = new Action<object>(Submit);
             GymDBService dbs = new GymDBService();
             var target = dbs.GetMatchGroupByKey(groupKey);
             var judge = dbs.GetJudgeByJudgeID(judgeID);
