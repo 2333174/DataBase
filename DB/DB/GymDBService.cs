@@ -406,7 +406,11 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.Find(_PRid);
         }
-
+        public PersonalResult GetPersonalResultsBySportEventAndRoleAndAID(string _sportsevent,sbyte _role,string _aid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => (p.SportsEvent == _sportsevent)&&(p.Role==_role)&&p.AthleteID==_aid).Single();
+        }
         public Team GetTeamByTName(string _name)
         {
             using (var db = new GymDB())

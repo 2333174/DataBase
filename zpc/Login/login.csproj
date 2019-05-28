@@ -110,8 +110,8 @@
     <Compile Include="Views\AddAthleteDialog.xaml.cs">
       <DependentUpon>AddAthleteDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AllPreGrades.xaml.cs">
-      <DependentUpon>AllPreGrades.xaml</DependentUpon>
+    <Compile Include="Views\AllPrePage.xaml.cs">
+      <DependentUpon>AllPrePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AthleteInfoControl.xaml.cs">
       <DependentUpon>AthleteInfoControl.xaml</DependentUpon>
@@ -160,7 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AllPreGrades.xaml">
+    <Page Include="Views\AllPrePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
