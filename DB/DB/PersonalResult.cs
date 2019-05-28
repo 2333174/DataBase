@@ -46,9 +46,20 @@ namespace DB
             Ranking = ranking;
         }
 
+        public PersonalResult(string athleteID, string athelteName, float grade)
+        {
+            AthleteID = athleteID;
+            AthelteName = athelteName;
+            Grade = grade;
+        }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
+
+        [Required]
+        [StringLength(18)]
+        public string AthelteName { get; set; }
 
         [Required]
         [StringLength(20)]

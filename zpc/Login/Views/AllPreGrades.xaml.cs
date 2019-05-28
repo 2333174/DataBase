@@ -27,6 +27,7 @@ namespace Login.Views
         List<ShowGradeGridItem> f_items = new List<ShowGradeGridItem>();
         //events:初赛所有赛事
         SortedSet<string> events = new SortedSet<string>();
+
         //个人全能成绩
         List<ShowGradeGridItem> p_items = new List<ShowGradeGridItem>();
         public AllPreGrades()
@@ -169,7 +170,7 @@ namespace Login.Views
             //取数据库所有运动员
             List<Athlete> athletes = new List<Athlete>();
             athletes = gymDBService.GetAllAthletes();
-
+            List<PersonalResult> prs2 = new List<PersonalResult>();
             foreach (Athlete a in athletes)
             {
                 List<PersonalResult> personalResults = new List<PersonalResult>();
@@ -182,11 +183,20 @@ namespace Login.Views
                 {                     
                     atheletegrade += (float)pr.Grade;                        
                 }
-                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athName, atheleteID, atheletegrade, null);
-                p_items.Add(showGradeGridItem);
-                
+
+                PersonalResult presult = new PersonalResult(atheleteID, athName, atheletegrade);
+                prs2.Add(presult);
+                                
             }
-  
+            //给个人全能成绩排序
+            gymDBService.Ranking(prs2);
+            short rank = 0;
+            foreach(PersonalResult pr in prs2)
+            {
+                rank++;
+                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(pr.AthelteName, pr.AthleteID, (float)pr.Grade,rank);
+                p_items.Add(showGradeGridItem);
+            }
         }
     }
 }

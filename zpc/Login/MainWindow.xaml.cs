@@ -32,7 +32,7 @@ namespace Login
                 prs = db.personalresult.ToList();
             dbs.Ranking(prs);
             ChangePage.Content = new Frame()
-            { Content = new AllPreGrades()};
+            { Content = new ManagePage()};
         }
         
         protected override void OnClosed(EventArgs e)

@@ -38,16 +38,16 @@ namespace Login
             this.suq = suq;
             this.game = game;
         }
-        public ShowGradeGridItem(string name, string atheleteID,float atheletegrade, short rank)
+        public ShowGradeGridItem(string name, string atheleteID,float atheletegrade)
         {
             
             this.name = name;
             this.atheleteID = atheleteID;
             this.atheletegrade = atheletegrade;
-            this.rank = rank;
+           
         }
 
-        public ShowGradeGridItem(string athName, string atheleteID, float atheletegrade, object rank1)
+        public ShowGradeGridItem(string athName, string atheleteID, float atheletegrade, short rank1)
         {
             this.athName = athName;
             this.atheleteID = atheleteID;
