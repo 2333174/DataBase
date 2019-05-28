@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Login.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="welcomePage">
@@ -11,7 +12,7 @@
         <Grid>
             <Label Content="欢迎您进入打分系统" Margin="302,185,102,230" FontSize="20"/>
             <Label Content="正在等待打分指令........" HorizontalAlignment="Left" Margin="329,255,0,0" VerticalAlignment="Top"/>
-
+            <materialDesign:DialogHost Grid.ColumnSpan="2" x:Name="error"/>
         </Grid>
     </ContentControl>
 </Page>

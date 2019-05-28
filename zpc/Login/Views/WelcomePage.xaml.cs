@@ -27,9 +27,10 @@ namespace Login.Views
         Thread thread = null;
         public welcomePage(int GudgeID)
         {
-            Client1._welcomePage = this;
             this.GudgeID = GudgeID;
             InitializeComponent();
+            Client1._welcomePage = this;
+            Client1.run(GudgeID.ToString());
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Login.Views
                     }
                     else
                     {
-                        Client1.run(db.GetJudgeID(user.Text, password.Password).ToString());
+                        
                         ChangePage.Content = new Frame()
                         {
                             Content = new welcomePage(db.GetJudgeID(user.Text, password.Password))

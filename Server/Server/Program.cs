@@ -165,23 +165,10 @@ namespace Server
                     if (ManagerSockets.IndexOf(socketServer) != -1)
                     {
                         string[] introductions = strSRecMsg.Split(',');
-                        int mainJudge = int.Parse(introductions[0]);
-                        
-                        //int judge1 = int.Parse(introductions[1]);
-                        //int judge2 = int.Parse(introductions[2]);
-                        //int judge3 = int.Parse(introductions[3]);
-                        //int judge4 = int.Parse(introductions[4]);
-                        //int judge5 = int.Parse(introductions[5]);
-                        string GroupID = introductions[1];
-                        Judges[mainJudge].Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
-                        //foreach (var socketTemp in ClientConnectionItems)
-                        //{
-                        //    if (socketTemp.Value == Judges[mainJudge])
-                        //    {
-                        //        socketTemp.Value.Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
-                        //        break;
-                        //    }
-                        //}
+                        for (int i = 0; i < introductions.Length - 1; i++)
+                        {
+                            Judges[int.Parse(introductions[i])].Send(Encoding.UTF8.GetBytes("打分：" + introductions[introductions.Length - 1]));
+                        }
                     }
                     //将发送的字符串信息附加到文本框txtMsg上     
                     Console.WriteLine("\r\n[客户端：" + socketServer.RemoteEndPoint + " 时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "]\r\n" + strSRecMsg);
@@ -193,7 +180,7 @@ namespace Server
                     {
                         foreach (var socketTemp in ClientConnectionItems)
                         {
-                            socketTemp.Value.Send(Encoding.UTF8.GetBytes("[" + socketServer.RemoteEndPoint + "]：" + strSRecMsg));
+                            socketTemp.Value.Send(Encoding.UTF8.GetBytes(strSRecMsg));
                         }
                     }
                 }
@@ -203,8 +190,11 @@ namespace Server
                     if (ManagerSockets.IndexOf(socketServer) != -1) ManagerSockets.Remove(socketServer);
                     foreach (var socketTemp in Judges)
                     {
-                        if (socketTemp.Value == socketServer) t = socketTemp.Key;
-                        break;
+                        if (socketTemp.Value == socketServer)
+                        {
+                            t = socketTemp.Key;
+                            break;
+                        }
                     }
                     if (t != -1) Judges.Remove(t);
                     ClientConnectionItems.Remove(socketServer.RemoteEndPoint.ToString());
