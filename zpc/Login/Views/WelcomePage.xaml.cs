@@ -1,8 +1,10 @@
 ﻿using Custom;
+using DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,10 +23,12 @@ namespace Login.Views
     /// </summary>
     public partial class welcomePage : Page
     {
+        public int GudgeID { get; set; }
+        Thread thread = null;
         public welcomePage(int GudgeID)
         {
-            //Client client = new Client();
-            //client.run(GudgeID.ToString());
+            Client1._welcomePage = this;
+            this.GudgeID = GudgeID;
             InitializeComponent();
         }
     }
