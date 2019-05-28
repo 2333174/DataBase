@@ -1,0 +1,7 @@
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\obj\Debug\Custom.csprojAssemblyReference.cache
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\obj\Debug\Custom.csproj.CoreCompileInputs.cache
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\bin\Debug\Custom.dll.config
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\bin\Debug\Custom.dll
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\bin\Debug\Custom.pdb
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\obj\Debug\Custom.dll
+D:\ComputerWork\DataBase\DataBase\zpc\Custom\obj\Debug\Custom.pdb
