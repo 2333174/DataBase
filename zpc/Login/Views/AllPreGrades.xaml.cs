@@ -186,7 +186,7 @@ namespace Login.Views
                 p_items.Add(showGradeGridItem);
                 
             }
-            
+            //p_items.OrderBy();
         }
     }
 }
