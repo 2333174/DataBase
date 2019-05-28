@@ -166,20 +166,22 @@ namespace Server
                     {
                         string[] introductions = strSRecMsg.Split(',');
                         int mainJudge = int.Parse(introductions[0]);
+                        
                         //int judge1 = int.Parse(introductions[1]);
                         //int judge2 = int.Parse(introductions[2]);
                         //int judge3 = int.Parse(introductions[3]);
                         //int judge4 = int.Parse(introductions[4]);
                         //int judge5 = int.Parse(introductions[5]);
                         string GroupID = introductions[1];
-                        foreach (var socketTemp in ClientConnectionItems)
-                        {
-                            if (socketTemp.Value == Judges[mainJudge])
-                            {
-                                socketTemp.Value.Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
-                                break;
-                            }
-                        }
+                        Judges[mainJudge].Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
+                        //foreach (var socketTemp in ClientConnectionItems)
+                        //{
+                        //    if (socketTemp.Value == Judges[mainJudge])
+                        //    {
+                        //        socketTemp.Value.Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
+                        //        break;
+                        //    }
+                        //}
                     }
                     //将发送的字符串信息附加到文本框txtMsg上     
                     Console.WriteLine("\r\n[客户端：" + socketServer.RemoteEndPoint + " 时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "]\r\n" + strSRecMsg);

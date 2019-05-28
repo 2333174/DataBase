@@ -399,6 +399,12 @@ namespace DB
                 return db.judge.Find(_judgeID);
         }
 
+        public int GetGroupKeyByJG(int _judgeID,string Groupid)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(s=>s.JudgeID==_judgeID&&s.GroupID==Groupid).Single().Key;
+        }
+
         public int GetSettingPone()
         {
             using (var db = new GymDB())

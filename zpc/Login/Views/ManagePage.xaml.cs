@@ -31,6 +31,7 @@ namespace Login.Views
         public List<Account> accounts;
         GymDBService gymDBService;
         List<DB.Login> logins;
+
         public ManagePage()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace Login.Views
             gymDBService = new GymDBService();
             GymDB db = new GymDB();
             logins = db.login.ToList();
-           List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
+            List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
             foreach(PersonalResult p in personalResults)
             {
                 if(p.Role=='0')
@@ -80,9 +81,6 @@ namespace Login.Views
             finalMatchGrid.ItemsSource = finalrows;
             accountGrid.ItemsSource = accounts;
         }
-
-
-
 
         private async void ShowMessageInfo(string message,DialogHost dialog)
         {
@@ -238,13 +236,10 @@ namespace Login.Views
         //    return age + project;
         //}
         //预赛添加分裁判的按钮
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
 
         //预赛-添加裁判按钮
+
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             string project = null;
@@ -293,7 +288,6 @@ namespace Login.Views
             foreach (MatchGroup group in groups)
             {
                 groupids.Add(group.GroupID);
-                
             }
             foreach(string groupid in groupids)
             {
@@ -449,6 +443,7 @@ namespace Login.Views
             accountGrid.ItemsSource = accounts;
 
         }
+
         private async void ShowAddAccount()
         {
             AddAccountDialog samMessageDialog = new AddAccountDialog
@@ -463,6 +458,7 @@ namespace Login.Views
                     if (login.UName == samMessageDialog.UserName.Text) { ShowMessageInfo("用户名重复", addFail); isNotExist = false; }
                     else if (login.TName == samMessageDialog.Name.Text && login.Role == 1 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
                     else if (login.JudgeID.ToString() == samMessageDialog.Name.Text && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
+                    
                 }
                 if (isNotExist)
                 {

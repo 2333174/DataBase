@@ -13,7 +13,7 @@ namespace Login.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (this.CanExecuteFunc == null)
+            if (CanExecuteFunc == null)
                 return true;
             return CanExecuteFunc(parameter);
         }

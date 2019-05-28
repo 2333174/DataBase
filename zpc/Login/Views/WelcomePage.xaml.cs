@@ -1,4 +1,5 @@
 ﻿using Custom;
+using DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,25 @@ namespace Login.Views
     /// </summary>
     public partial class welcomePage : Page
     {
+        public int GudgeID;
         public welcomePage(int GudgeID)
         {
-            //Client client = new Client();
-            //client.run(GudgeID.ToString());
+            this.GudgeID = GudgeID;
             InitializeComponent();
+        }
+        public void isRec()
+        {
+            GymDBService dBService = new GymDBService();
+            while (true)
+            {
+                if (Client1.GroupID != null)
+                {
+                    this.Content = new Frame
+                    {
+                        Content = new GradePage(GudgeID, dBService.GetGroupKeyByJG(GudgeID, Client1.GroupID))
+                    };
+                }
+            }
         }
     }
 }

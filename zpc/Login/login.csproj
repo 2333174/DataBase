@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="Client\Client1.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />

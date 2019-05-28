@@ -27,15 +27,17 @@ namespace Login.Views
         ChooseJudgeGridItem item { get; set; }
         GymDB db = new GymDB();
         GymDBService gymDBService = new GymDBService();
-        public ChooseJudge(String project,string group)
+        private readonly string groupid;
+        public ChooseJudge(string project,string group)
         {
             InitializeComponent();
             items = new ObservableCollection<ChooseJudgeGridItem>();
             g_judges = new ObservableCollection<string>();
             //根据所选行初始化datagrid
-            this.item = new ChooseJudgeGridItem(project, group, null, null);
-            this.items.Add(item);
+            item = new ChooseJudgeGridItem(project, group, null, null);
+            items.Add(item);
             judgegrid.ItemsSource = items;
+            groupid = project + group;
 
             //获取全部的裁判信息
             List<Judge> judges = db.judge.ToList();
@@ -47,25 +49,24 @@ namespace Login.Views
             }
         }
 
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         //分裁判添加按钮
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (GroupJudgeName.SelectedItem!=null)
             {
+                if (g_judges.Contains(GroupJudgeName.Text))
+                {
+                    ShowMessageInfo("已存在该教练!");
+                    return;
+                }
                 g_judges.Add(GroupJudgeName.Text);
-                items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last<string>(); 
+                items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last(); 
                 items[0].mainJudge = MainJudgeName.Text;
                 judgegrid.ItemsSource = null;
                 judgegrid.ItemsSource = items;
             }
             else
-                MessageBox.Show("未选择");
+                ShowMessageInfo("未选择");
         }
 
         //分裁判删除按钮
@@ -94,13 +95,14 @@ namespace Login.Views
                         {
                             MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
                             gymDBService.Add(match);
+                            Client1.run(judge.JudgeID + "," + groupid);
                         }
                     }
                 }
             }
             else
             {
-                MessageBox.Show("信息未填写完整！");
+                ShowMessageInfo("信息未填写完整！");
             }
 
 
@@ -134,6 +136,15 @@ namespace Login.Views
                 if (judge.Name == GroupJudgeName.SelectedItem.ToString())
                     GroupID.Text = judge.JudgeID.ToString();
             }
+        }
+
+        private async void ShowMessageInfo(string message)
+        {
+            MessageDialog samMessageDialog = new MessageDialog
+            {
+                Message = { Text = message }
+            };
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Login.Views
     /// </summary>
     public partial class LoginPage : Page
     {
+        public delegate void DeleFunc(string s);
         public int select { get; set; }
         public LoginPage(int s)
         {
@@ -60,12 +61,13 @@ namespace Login.Views
                         }
                     }
                     else if (select==1){
+                        Client.run("管理");   
                         ChangePage.Content = new Frame()
                         { Content = new ManagePage() };
                     }
                     else
                     {
-                        Client.run(db.GetJudgeID(user.Text, password.Password).ToString());
+                        Client1.run(db.GetJudgeID(user.Text, password.Password).ToString());
                         ChangePage.Content = new Frame()
                         {
                             Content = new welcomePage(db.GetJudgeID(user.Text, password.Password))
@@ -104,7 +106,10 @@ namespace Login.Views
                 await DialogHost.Show(new ProgressBox(), new DialogOpenedEventHandler((object Psender, DialogOpenedEventArgs args) =>
                 {
                     Task.Delay(TimeSpan.FromSeconds(1))
-                    .ContinueWith((t, _) => args.Session.Close(false), null,
+                    .ContinueWith((t, _) =>
+                    {
+                        args.Session.Close(false);
+                    }, null,
                     TaskScheduler.FromCurrentSynchronizationContext());
                 }));
             });

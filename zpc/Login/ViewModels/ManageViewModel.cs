@@ -26,6 +26,7 @@ namespace Login.ViewModels
         }
 
 
+
         //命令
         public DelegateCommand AddDataGridCommand { get; set; } //添加Datagrid数据
         public DelegateCommand DeleteDataGridCommand { get; set; }//删除Datagrid数据

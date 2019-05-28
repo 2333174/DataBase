@@ -12,6 +12,7 @@
 
     <ContentControl x:Name="ChangePage">
         <Grid>
+            <materialDesign:DialogHost x:Name="dialog"></materialDesign:DialogHost>
             <DataGrid Name="judgegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="项目"/>
