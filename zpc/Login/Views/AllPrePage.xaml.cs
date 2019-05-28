@@ -38,8 +38,7 @@ namespace Login.Views
             TeamGrid();
             //给teamgrid绑定数据源
             teamgrid.ItemsSource = team_items;
-            //编排决赛
-            ComputeFinalSuq();
+            ShowFinalSuq();
             //给rankgrid绑定数据源
             rankgrid.ItemsSource = f_items;
             //给atheltegrid数据的函数
@@ -143,60 +142,74 @@ namespace Login.Views
 
             }
         }
-        //计算单项决赛次序 当一个项目运动员数大于等于10时，一半的运动员晋级决赛
-        //7、8或9个运动员晋级五个，四、五或六个运动员晋级4个，三个及三个一下不进行决赛
-        public void ComputeFinalSuq()
+        //显示决赛次序
+        public void ShowFinalSuq()
         {
             foreach (string s in events)
             {
                 string game = gymDBService.GetFullSportName(s);
-                string sportsevent = s.Substring(0,3) + "1";
-                List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 0).ToList();
-                int athnum = personalResults.Count;
-                gymDBService.Ranking(personalResults);
-                if (athnum >= 10)
+                List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 1).ToList();
+                foreach(PersonalResult pr in personalResults)
                 {
-                    for (int i = 1; i <= athnum / 2; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                        gymDBService.Grouping(3);
-                    }
-
-                }
-                else if (athnum >= 7 && athnum < 10)
-                {
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                        gymDBService.Grouping(3);
-                    }
-                }
-                else if (athnum >= 4 && athnum <= 7)
-                {
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                    }
+                    ShowGradeGridItem item = new ShowGradeGridItem(game, pr.athlete.Name,pr.GroupID,(sbyte)pr.Suq);
+                    f_items.Add(item);
                 }
             }
         }
+        //计算单项决赛次序 当一个项目运动员数大于等于10时，一半的运动员晋级决赛
+        //7、8或9个运动员晋级五个，四、五或六个运动员晋级4个，三个及三个一下不进行决赛
+        //public void ComputeFinalSuq()
+        //{
+        //    foreach (string s in events)
+        //    {
+        //        string game = gymDBService.GetFullSportName(s);
+        //        string sportsevent = s.Substring(0,3) + "1";
+        //        List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 0).ToList();
+        //        int athnum = personalResults.Count;
+        //        gymDBService.Ranking(personalResults);
+        //        if (athnum >= 10)
+        //        {
+        //            for (int i = 1; i <= athnum / 2; i++)
+        //            {
+        //                PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+        //                PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+        //                ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+        //                f_items.Add(item);
+        //                f_prs.Add(pr1);
+        //                gymDBService.Add(pr1);
+        //                gymDBService.Grouping(3);
+        //            }
 
-       //个人全能成绩:将运动员总成绩算出来
+        //        }
+        //        else if (athnum >= 7 && athnum < 10)
+        //        {
+        //            for (int i = 1; i <= 5; i++)
+        //            {
+        //                PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+        //                PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+        //                ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+        //                f_items.Add(item);
+        //                f_prs.Add(pr1);
+        //                gymDBService.Add(pr1);
+        //                gymDBService.Grouping(3);
+        //            }
+        //        }
+        //        else if (athnum >= 4 && athnum <= 7)
+        //        {
+        //            for (int i = 1; i <= 4; i++)
+        //            {
+        //                PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+        //                PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+        //                ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+        //                f_items.Add(item);
+        //                f_prs.Add(pr1);
+        //                gymDBService.Add(pr1);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //个人全能成绩:将运动员总成绩算出来
         public void AtheleteGrid()
         {
             //取数据库所有运动员
