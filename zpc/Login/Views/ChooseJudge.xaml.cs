@@ -47,12 +47,6 @@ namespace Login.Views
             }
         }
 
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         //分裁判添加按钮
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -99,11 +93,7 @@ namespace Login.Views
                 }
             }
             else
-            {
-                MessageBox.Show("信息未填写完整！");
-            }
-
-
+                ShowMessageInfo("信息未填写完整！");
         }
 
         private void MainJudgeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -134,6 +124,16 @@ namespace Login.Views
                 if (judge.Name == GroupJudgeName.SelectedItem.ToString())
                     GroupID.Text = judge.JudgeID.ToString();
             }
+        }
+
+        private async void ShowMessageInfo(string message)
+        {
+            Views.MessageDialog samMessageDialog = new Views.MessageDialog
+            {
+                Message = { Text = message }
+            };
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+
         }
     }
 }

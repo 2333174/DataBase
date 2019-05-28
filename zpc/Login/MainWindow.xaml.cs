@@ -25,7 +25,14 @@ namespace Login
         {
             InitializeComponent();
             ChangePage.Content = new Frame()
-            { Content = new ChosePage()};
+            { Content = new ChosePage() };
+            DB.GymDBService dbs = new DB.GymDBService();
+            List<DB.PersonalResult> prs = new List<DB.PersonalResult>();
+            using (var db = new DB.GymDB())
+                prs = db.personalresult.ToList();
+            dbs.Ranking(prs);
+            //ChangePage.Content = new Frame()
+            //{ Content = new ChosePage()};
         }
         
         protected override void OnClosed(EventArgs e)

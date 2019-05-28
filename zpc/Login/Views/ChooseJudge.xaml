@@ -12,6 +12,7 @@
 
     <ContentControl x:Name="ChangePage">
         <Grid>
+            <materialDesign:DialogHost></materialDesign:DialogHost>
             <DataGrid Name="judgegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="项目"/>
@@ -30,8 +31,6 @@
             <TextBox  x:Name="MainID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,214,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
             <ComboBox Name="GroupJudgeName" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,286,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7" SelectionChanged="GroupJudgeName_SelectionChanged"/>
             <TextBox  x:Name="GroupID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,276,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />
-
-
         </Grid>
     </ContentControl>
 </Page>
