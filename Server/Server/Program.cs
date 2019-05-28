@@ -1,117 +1,218 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.Text;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Server
 {
     class Program
     {
-        public static void ListenConnection()
+        //创建一个和客户端通信的套接字
+        static Socket SocketWatch = null;
+        //定义一个集合，存储客户端信息
+        static Dictionary<string, Socket> ClientConnectionItems = new Dictionary<string, Socket> { };
+        static Dictionary<int, Socket> Judges = new Dictionary<int, Socket>();//对应的客户端地址
+        static Dictionary<int, string> MatchGroups = new Dictionary<int, string>();//发消息次数
+        static List<Socket> ManagerSockets = new List<Socket>();
+
+        static void Main(string[] args)
         {
-            Socket ConnectionSocket = null;
-            while (true)
-            {
-                try
-                {
-                    ConnectionSocket = ServerSocket.Accept();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("监听套接字异常{0}", ex.Message);
-                    break;
-                }
-                //获取客户端端口号和IP
-                IPAddress ClientIP = (ConnectionSocket.RemoteEndPoint as IPEndPoint).Address;
-                int ClientPort = (ConnectionSocket.RemoteEndPoint as IPEndPoint).Port;
-                string SendMessage = "连接服务器成功\r\n" + "本地IP:" + ClientIP +
-                    ",本地端口:" + ClientPort.ToString();
-                //Console.WriteLine(SendMessage);
-                ConnectionSocket.Send(Encoding.Unicode .GetBytes(SendMessage));
-                string remotePoint = ConnectionSocket.RemoteEndPoint.ToString();
-                Console.WriteLine("成功与客户端{0}建立连接!\t\n", remotePoint);
-                ClientInformation.Add(remotePoint, ConnectionSocket);
-                Thread thread = new Thread(ReceiveMessage);
-                thread.IsBackground = true;
-                thread.Start(ConnectionSocket);
-            }
-        }
-        public static void ReceiveMessage(Object SocketClient)
-        {
-            Socket ReceiveSocket = (Socket)SocketClient;
-            while (true)
-            {
-                byte[] result = new byte[1024 * 1024];
-                try
-                {
-                    IPAddress ClientIP = (ReceiveSocket.RemoteEndPoint as IPEndPoint).Address;
-                    int ClientPort = (ReceiveSocket.RemoteEndPoint as IPEndPoint).Port;
-                    int ReceiveLength = ReceiveSocket.Receive(result);
-                    string ReceiveMessage = Encoding.Unicode .GetString(result, 0, ReceiveLength);
-                    Console.WriteLine("接收客户端:" + ReceiveSocket.RemoteEndPoint.ToString() +
-                        "时间：" + DateTime.Now.ToString() + "\r\n" + "消息：" + ReceiveMessage + "\r\n\n");
-                    foreach (string key in new List<string>(ClientInformation.Keys))
-                    {
-                        string s = ReceiveSocket.RemoteEndPoint.ToString();
-                        if (key != s)
-                        {
-                            Socket socket = ClientInformation[key];
-                            Console.WriteLine("向客户端{0}发送消息：", key);
-                            socket.Send(Encoding.Unicode.GetBytes(ReceiveMessage));
-                        }
-                    }
-                    //Console.WriteLine("向客户端{0}发送消息：", ReceiveSocket.RemoteEndPoint.ToString());
-                    //string sb = Console.ReadLine();
-                    //ReceiveSocket.Send(Encoding.UTF8.GetBytes(sb));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("监听出现异常!!!");
-                    Console.WriteLine("客户端" + ReceiveSocket.RemoteEndPoint + "已经连接中断" + "\r\n" +
-                        ex.Message + "\r\n" + ex.StackTrace + "\r\n");
-                    foreach (string key in new List<string>(ClientInformation.Keys))
-                    {
-                        string s = ReceiveSocket.RemoteEndPoint.ToString();
-                        if (key.Equals(s))
-                        {
-                            ClientInformation.Remove(key);
-                        }
-                    }
-                    ReceiveSocket.Shutdown(SocketShutdown.Both);
-                    ReceiveSocket.Close();
-                    break;
-                }
-            }
-        }
-        //private static byte[] result = new byte[1024];
-        //List<Socket> list = new List<Socket>();
-        static Dictionary<string, Socket> ClientInformation = new Dictionary<string, Socket> { };
-        static Socket ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        static void Main(String[] args)
-        {
-            try
-            {
-                int Port = 8222;
-                IPAddress IP = IPAddress.Parse("192.168.154.70");
-                ServerSocket.Bind(new IPEndPoint(IP, Port));
-                ServerSocket.Listen(10);
-                Console.WriteLine("启动监听成功！");
-                Console.WriteLine("监听本地{0}成功", ServerSocket.LocalEndPoint.ToString());
-                Thread ThreadListen = new Thread(ListenConnection);
-                ThreadListen.IsBackground = true;
-                ThreadListen.Start();
-                Thread.Sleep(20000);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("监听异常!!!");
-                ServerSocket.Shutdown(SocketShutdown.Both);
-                ServerSocket.Close();
-            }
+            //端口号（用来监听的）
+            int port = 6000;
+
+            //string host = "127.0.0.1";
+            //IPAddress ip = IPAddress.Parse(host);
+            IPAddress ip = IPAddress.Any;
+
+            //将IP地址和端口号绑定到网络节点point上  
+            IPEndPoint ipe = new IPEndPoint(ip, port);
+
+            //定义一个套接字用于监听客户端发来的消息，包含三个参数（IP4寻址协议，流式连接，Tcp协议）  
+            SocketWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //监听绑定的网络节点  
+            SocketWatch.Bind(ipe);
+            //将套接字的监听队列长度限制为20  
+            SocketWatch.Listen(20);
+
+
+            //负责监听客户端的线程:创建一个监听线程  
+            Thread threadwatch = new Thread(WatchConnecting);
+            //将窗体线程设置为与后台同步，随着主线程结束而结束  
+            threadwatch.IsBackground = true;
+            //启动线程     
+            threadwatch.Start();
+
+            Console.WriteLine("开启监听......");
+            Console.WriteLine("点击输入任意数据回车退出程序......");
             Console.ReadKey();
-            Console.WriteLine("监听完毕，按任意键退出！");
+
+            SocketWatch.Close();
+
+            //Socket serverSocket = null;
+
+            //int i=1;
+            //while (true)
+            //{
+            //    //receive message
+            //    serverSocket = SocketWatch.Accept();
+            //    Console.WriteLine("连接已经建立！");
+            //    string recStr = "";
+            //    byte[] recByte = new byte[4096];
+            //    int bytes = serverSocket.Receive(recByte, recByte.Length, 0);
+            //    //recStr += Encoding.ASCII.GetString(recByte, 0, bytes);
+            //    recStr += Encoding.GetEncoding("utf-8").GetString(recByte, 0, bytes);
+
+            //    //send message
+            //    Console.WriteLine(recStr);
+
+            //    Console.Write("请输入内容：");
+            //    string sendStr = Console.ReadLine();
+
+            //    //byte[] sendByte = Encoding.ASCII.GetBytes(sendStr);
+            //    byte[] sendByte = Encoding.GetEncoding("utf-8").GetBytes(sendStr);
+
+            //    //Thread.Sleep(4000);
+
+            //    serverSocket.Send(sendByte, sendByte.Length, 0);
+            //    serverSocket.Close();
+            //    if (i >= 100)
+            //    {
+            //        break;
+            //    }
+            //    i++;
+            //}
+
+            //sSocket.Close();
+            //Console.WriteLine("连接关闭！");
+
+
+            //Console.ReadLine();
+        }
+
+        //监听客户端发来的请求  
+        static void WatchConnecting()
+        {
+            Socket connection = null;
+
+            //持续不断监听客户端发来的请求     
+            while (true)
+            {
+                try
+                {
+                    connection = SocketWatch.Accept();
+                }
+                catch (Exception ex)
+                {
+                    //提示套接字监听异常     
+                    Console.WriteLine(ex.Message);
+                    break;
+                }
+
+                //客户端网络结点号  
+                string remoteEndPoint = connection.RemoteEndPoint.ToString();
+                //添加客户端信息  
+                ClientConnectionItems.Add(remoteEndPoint, connection);
+                byte[] arrServerRecMsg = new byte[1024 * 1024];
+                int length = connection.Receive(arrServerRecMsg);
+                //将机器接受到的字节数组转换为人可以读懂的字符串     
+                string strSRecMsg = Encoding.UTF8.GetString(arrServerRecMsg, 0, length);
+                if (strSRecMsg == "管理") { ManagerSockets.Add(connection); }
+                else Judges.Add(int.Parse(strSRecMsg), connection);
+                //显示与客户端连接情况
+                Console.WriteLine("\r\n[客户端\"" + remoteEndPoint + strSRecMsg + "\"建立连接成功！ 客户端数量：" + ClientConnectionItems.Count + "]");
+
+                //获取客户端的IP和端口号  
+                IPAddress clientIP = (connection.RemoteEndPoint as IPEndPoint).Address;
+                int clientPort = (connection.RemoteEndPoint as IPEndPoint).Port;
+
+                //让客户显示"连接成功的"的信息  
+                string sendmsg = "[" + "本地IP：" + clientIP + " 本地端口：" + clientPort.ToString() + " 连接服务端成功！]";
+                byte[] arrSendMsg = Encoding.UTF8.GetBytes(sendmsg);
+                connection.Send(arrSendMsg);
+
+                //创建一个通信线程      
+                Thread thread = new Thread(recv);
+                //设置为后台线程，随着主线程退出而退出 
+                thread.IsBackground = true;
+                //启动线程     
+                thread.Start(connection);
+            }
+        }
+
+        /// <summary>
+        /// 接收客户端发来的信息，客户端套接字对象
+        /// </summary>
+        /// <param name="socketclientpara"></param>    
+        static void recv(object socketclientpara)
+        {
+            Socket socketServer = socketclientpara as Socket;
+
+            while (true)
+            {
+                //创建一个内存缓冲区，其大小为1024*1024字节  即1M     
+                byte[] arrServerRecMsg = new byte[1024 * 1024];
+                //将接收到的信息存入到内存缓冲区，并返回其字节数组的长度    
+                try
+                {
+                    int length = socketServer.Receive(arrServerRecMsg);
+
+                    //将机器接受到的字节数组转换为人可以读懂的字符串     
+                    string strSRecMsg = Encoding.UTF8.GetString(arrServerRecMsg, 0, length);
+                    if (ManagerSockets.IndexOf(socketServer) != -1)
+                    {
+                        string[] introductions = strSRecMsg.Split(',');
+                        int mainJudge = int.Parse(introductions[0]);
+                        //int judge1 = int.Parse(introductions[1]);
+                        //int judge2 = int.Parse(introductions[2]);
+                        //int judge3 = int.Parse(introductions[3]);
+                        //int judge4 = int.Parse(introductions[4]);
+                        //int judge5 = int.Parse(introductions[5]);
+                        string GroupID = introductions[1];
+                        foreach (var socketTemp in ClientConnectionItems)
+                        {
+                            if (socketTemp.Value == Judges[mainJudge])
+                            {
+                                socketTemp.Value.Send(Encoding.UTF8.GetBytes("裁判:" + mainJudge + "     打分：" + GroupID));
+                                break;
+                            }
+                        }
+                    }
+                    //将发送的字符串信息附加到文本框txtMsg上     
+                    Console.WriteLine("\r\n[客户端：" + socketServer.RemoteEndPoint + " 时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "]\r\n" + strSRecMsg);
+
+                    //Thread.Sleep(3000);
+                    //socketServer.Send(Encoding.UTF8.GetBytes("[" + socketServer.RemoteEndPoint + "]："+strSRecMsg));
+                    //发送客户端数据
+                    if (ClientConnectionItems.Count > 0)
+                    {
+                        foreach (var socketTemp in ClientConnectionItems)
+                        {
+                            socketTemp.Value.Send(Encoding.UTF8.GetBytes("[" + socketServer.RemoteEndPoint + "]：" + strSRecMsg));
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    int t = -1;
+                    if (ManagerSockets.IndexOf(socketServer) != -1) ManagerSockets.Remove(socketServer);
+                    foreach (var socketTemp in Judges)
+                    {
+                        if (socketTemp.Value == socketServer) t = socketTemp.Key;
+                        break;
+                    }
+                    if (t != -1) Judges.Remove(t);
+                    ClientConnectionItems.Remove(socketServer.RemoteEndPoint.ToString());
+                    //提示套接字监听异常  
+                    Console.WriteLine("\r\n[客户端\"" + socketServer.RemoteEndPoint + "\"已经中断连接！ 客户端数量：" + ClientConnectionItems.Count + "]");
+                    //关闭之前accept出来的和客户端进行通信的套接字 
+                    socketServer.Close();
+                    break;
+                }
+            }
         }
     }
 }
