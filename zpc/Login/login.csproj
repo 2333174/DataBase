@@ -87,14 +87,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="Client\Client1.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\GSFMPViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModel.cs" />
     <Compile Include="ViewModels\PRDetailsViewModel.cs" />
     <Compile Include="ViewModels\PRItemsViewModel.cs" />
     <Compile Include="ViewModels\RefereeScoresItemsViewModel.cs" />
-    <Compile Include="Views\AddAcountDialog.xaml.cs">
-      <DependentUpon>AddAcountDialog.xaml</DependentUpon>
+    <Compile Include="Views\AddAccountDialog.xaml.cs">
+      <DependentUpon>AddAccountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Manage_DataGridRow.cs" />
@@ -139,10 +143,16 @@
     <Compile Include="Views\ProgressBox.xaml.cs">
       <DependentUpon>ProgressBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ShowGrade.xaml.cs">
+      <DependentUpon>ShowGrade.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AddAcountDialog.xaml">
+    <Compile Include="Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AddAccountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,7 +216,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ShowGrade.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +272,10 @@
     <ProjectReference Include="..\..\DB\DB\DB.csproj">
       <Project>{764be4f0-31e4-48b5-9419-47c3d20f541c}</Project>
       <Name>DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Custom\Custom.csproj">
+      <Project>{79e7c88e-6c76-4413-8a60-809259b83375}</Project>
+      <Name>Custom</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

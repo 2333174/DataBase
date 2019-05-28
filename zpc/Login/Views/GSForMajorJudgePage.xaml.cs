@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
+using Custom;
 using Login.ViewModels;
 
 namespace Login.Views
@@ -9,6 +10,7 @@ namespace Login.Views
     /// </summary>
     public partial class GSForMajorJudgePage : Page
     {
+        
         private GSFMPViewModel viewModel;
 
         public GSForMajorJudgePage(string groupid)
@@ -16,6 +18,7 @@ namespace Login.Views
             InitializeComponent();
             viewModel = new GSFMPViewModel(groupid);
             DataContext = viewModel;
+           
         }
 
         private void Expander_Expanded(object sender, System.Windows.RoutedEventArgs e)

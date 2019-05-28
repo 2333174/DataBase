@@ -12,12 +12,13 @@
 
     <ContentControl x:Name="ChangePage">
         <Grid>
-            <DataGrid Name="judgegrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
+            <materialDesign:DialogHost x:Name="dialog"></materialDesign:DialogHost>
+            <DataGrid Name="judgegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="项目"/>
                     <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
-                    <DataGridTextColumn Binding="{Binding Path=mainJudge}" ClipboardContentBinding="{x:Null}" Header="主裁判"/>
-                    <DataGridTextColumn Binding="{Binding Path=groupJudges}" ClipboardContentBinding="{x:Null}" Header="分裁判"/>
+                    <DataGridTextColumn Binding="{Binding Path=mainJudge, UpdateSourceTrigger=PropertyChanged}" ClipboardContentBinding="{x:Null}" Header="主裁判"/>
+                    <DataGridTextColumn Binding="{Binding Path=groupJudges, UpdateSourceTrigger=PropertyChanged}" ClipboardContentBinding="{x:Null}" Header="分裁判"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Style="{StaticResource MaterialDesignFlatButton}" Content="主裁判" HorizontalAlignment="Left" Margin="105,223,0,0" VerticalAlignment="Top" Width="75"/>

@@ -262,6 +262,17 @@ namespace DB
                 return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent)).ToList();
         }
 
+        public List<PersonalResult> GetPersonalResultsBySportEventAndRole(string _sportEvent, int role)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role).ToList();
+        }
+        public List<PersonalResult> GetPersonalResults()
+        {
+            using (var db = new GymDB())
+                return db.personalresult.ToList();
+        }
+
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
             using (var db = new GymDB())
@@ -388,7 +399,36 @@ namespace DB
                 return db.judge.Find(_judgeID);
         }
 
+        public int GetGroupKeyByJG(int _judgeID,string Groupid)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(s=>s.JudgeID==_judgeID&&s.GroupID==Groupid).Single().Key;
+        }
 
+        public int GetSettingPone()
+        {
+            using (var db = new GymDB())
+            {
+                Setting setting = db.setting.Single();
+                return setting.Pone;
+            }
+        }
+        public int GetSettingPtwo()
+        {
+            using (var db = new GymDB())
+            {
+                Setting setting = db.setting.Single();
+                return (int)setting.Ptwo;
+            }
+        }
+        public int GetSettingPthree()
+        {
+            using (var db = new GymDB())
+            {
+                Setting setting = db.setting.Single();
+                return (int)setting.Pthree;
+            }
+        }
 
         public void Delete(Login _login)
         {
@@ -593,7 +633,81 @@ namespace DB
                 _personalResults.Remove(_personalResults[rnum]);
             }
         }
+        //设置组号
+        public void SetGroup(PersonalResult p, int group)
+        {
+            string groupID = p.GroupID[0] + p.GroupID[1] + p.GroupID[2] + p.GroupID[3] + group.ToString();
+            p.GroupID = groupID;
+            Update(p);
+        }
 
+        //自动分组
+        //public void AutoArrangeGroup(string sportsevent, int eachCount, int flag)
+        //{
+        //    //sportsevent 年龄+赛事
+        //    GymDBService gymDBService = new GymDBService();
+        //    //获取参加此赛事初赛的所有运动员
+        //    List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(sportsevent, 0);
+        //    //参加此赛事的运动员数量
+        //    int count = personalResults.Count;
+        //    //小组数
+        //    int gcount = count / eachCount;
+        //    //定义一个数组 存放每个小组是否满人
+        //    char[] isFull = new char[9] { '0','0', '0', '0', '0', '0', '0', '0', '0' };
+        //    //如果不能均分 就增加组数或减少组数看能不能均分 只加减一次 还是不行就算了
+        //    if (count % eachCount != 0)
+        //    {
+        //        if (count % (eachCount - 1) == 0)
+        //        {
+        //            eachCount--;
+        //            gcount = count / eachCount;
+        //        }
+        //        else if (count % (eachCount + 1) == 0)
+        //        {
+        //            eachCount++;
+        //            gcount = count / eachCount;
+        //        }
+        //        else
+        //        {
+        //            gcount++;
+        //        }
+        //    }
+        //    //对每个运动员，给他们随机分配小组。
+        //    foreach (PersonalResult p in personalResults)
+        //    {
+        //        Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+        //        //运动员年龄
+        //        //int age = athlete.Age;
+        //        //运动员性别
+        //        // gender = athlete.Gender;
+        //        //生成随机组号
+        //        Random random = new Random();
+        //        //1-小组数的随机数 
+        //        int group = random.Next(1, gcount + 1);
+        //        string groupid = sportsevent + flag.ToString() + group;
+        //        //如果给这个小组分配的运动员超过规定的数量 就换个组
+        //        //如需换组 从第一组开始尝试
+        //        if(isFull[group-1]=='0')
+        //        {
+        //            if (gymDBService.GetPersonalResultsByGroupID(groupid).Count < eachCount)
+        //            {
+        //                gymDBService.SetGroup(p, group);
+        //            }
+        //            else
+        //            {
+        //                isFull[group - 1] = '1';
+        //                for(int i=0;i<group;i++)
+        //                {
+        //                    if(isFull[i]=='0')
+        //                    {
+        //                        gymDBService.SetGroup(p, i);
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //    }
+        //}
         // true means not null, false means null
         public bool IsResultNotNull(List<PersonalResult> _personalResults)
         {
@@ -708,18 +822,9 @@ namespace DB
             {
                 var account = db.login.Where(l => l.UName.Equals(username) && l.Role == role && l.Password.Equals(password)).SingleOrDefault();
                 if (account == null)
-                {
                     return -1;
-                }
                 else
-                {
-                    if (role == 2)
-                    {
-                        if (account.Weight == 0) return 1;
-                        else return 2;
-                    }
-                    else return 0;
-                }
+                     return 0;                
             }
         }
 
@@ -732,6 +837,15 @@ namespace DB
                 return account.TName;
             }
         }
+        //返回isSignUp
+        public int GetIsSignUp(string _TName)
+        {
+            using (var db = new GymDB())
+            {
+                var account = db.team.Where(l => l.TName.Equals(_TName)).SingleOrDefault();
+                return account.isSignUp;
+            }
+        }
 
         public int GetTIDByTName(string _TName)
         {
@@ -741,7 +855,12 @@ namespace DB
             }
 
         }
-        
+        public PersonalResult GetPersonalResultsBySportEventAndRoleAndAID(string _sportEvent, int role, string _AthleteID)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role && p.AthleteID.Equals(_AthleteID)).Single();
+        }
+
         //设置三个参数:代表队男/女各年龄组最大报名人数
         public void Set(string POne, string PTwo, string PThree)
         {

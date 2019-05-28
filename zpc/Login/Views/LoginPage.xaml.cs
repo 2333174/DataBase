@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DB;
 using MaterialDesignThemes.Wpf;
+using Custom;
 
 namespace Login.Views
 {
@@ -23,6 +24,7 @@ namespace Login.Views
     /// </summary>
     public partial class LoginPage : Page
     {
+        public delegate void DeleFunc(string s);
         public int select { get; set; }
         public LoginPage(int s)
         {
@@ -39,6 +41,7 @@ namespace Login.Views
         private void Loginf(object sender, RoutedEventArgs e)
         {
             var db = new GymDBService();
+            Client client = new Client();
             switch (db.Loginf(user.Text, password.Password, select))
             {
                 case -1:
@@ -46,12 +49,29 @@ namespace Login.Views
                     break;
                 case 0:
                     if (select==0){
-                        ChangePage.Content = new Frame()
-                        { Content = new SignUpPage(db.GetTName(user.Text, password.Password, select)) };        // 传入Tname
+                        string _TName = db.GetTName(user.Text, password.Password, select);
+                        if (db.GetIsSignUp(_TName) == 0)
+                        {
+                            ChangePage.Content = new Frame()
+                            { Content = new SignUpPage(_TName) };
+                        }
+                        else
+                        {
+                            ChangePage.Content = new Frame() { Content = new AthleteInfoPage(db.GetTIDByTName(_TName)) };
+                        }
                     }
-                    else {
+                    else if (select==1){
+                        Client.run("管理");   
                         ChangePage.Content = new Frame()
                         { Content = new ManagePage() };
+                    }
+                    else
+                    {
+                        Client1.run(db.GetJudgeID(user.Text, password.Password).ToString());
+                        ChangePage.Content = new Frame()
+                        {
+                            Content = new welcomePage(db.GetJudgeID(user.Text, password.Password))
+                        };
                     }
                     break;
                 case 1:
@@ -61,6 +81,7 @@ namespace Login.Views
                     //};
                     break;
                 default:
+                    Client.run(db.GetJudgeID(user.Text, password.Password).ToString());
                     ChangePage.Content = new Frame()
                     {
                         Content = new GSForMajorJudgePage(db.GetJudgeID(user.Text, password.Password).ToString())
@@ -85,7 +106,10 @@ namespace Login.Views
                 await DialogHost.Show(new ProgressBox(), new DialogOpenedEventHandler((object Psender, DialogOpenedEventArgs args) =>
                 {
                     Task.Delay(TimeSpan.FromSeconds(1))
-                    .ContinueWith((t, _) => args.Session.Close(false), null,
+                    .ContinueWith((t, _) =>
+                    {
+                        args.Session.Close(false);
+                    }, null,
                     TaskScheduler.FromCurrentSynchronizationContext());
                 }));
             });
