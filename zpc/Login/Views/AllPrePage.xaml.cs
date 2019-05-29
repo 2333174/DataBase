@@ -33,18 +33,18 @@ namespace Login.Views
         public AllPrePage()
         {
             InitializeComponent();
-            //AllEvents();
+            AllEvents();
             //给teamgrid数据的函数
-            //TeamGrid();
+           // TeamGrid();
             //给teamgrid绑定数据源
             //teamgrid.ItemsSource = team_items;
             //ShowFinalSuq();
             //给rankgrid绑定数据源
             //rankgrid.ItemsSource = f_items;
             //给atheltegrid数据的函数
-            //AtheleteGrid();
+            AtheleteGrid();
             //给atheltegrid绑定数据源
-            //athletegrid.ItemsSource = p_items;
+            athletegrid.ItemsSource = p_items;
         }
         public void AllEvents()
         {
@@ -209,7 +209,8 @@ namespace Login.Views
         //    }
         //}
 
-        //个人全能成绩:将运动员总成绩算出来
+        //个人全能
+
         public void AtheleteGrid()
         {
             //取数据库所有运动员
@@ -222,25 +223,30 @@ namespace Login.Views
                 personalResults = gymDBService.GetPersonalResultsByAthleteID(a.AthleteID);
                 string athName = a.Name;
                 string atheleteID = a.AthleteID;
-                float atheletegrade=0;
+                int atheletegrade = 0;
                 //将单个运动员成绩相加
                 foreach (PersonalResult pr in personalResults)
-                {                     
-                    atheletegrade += (float)pr.Grade;                        
+                {
+                    atheletegrade += (int)pr.Grade;
                 }
 
-                //PersonalResult presult = new PersonalResult(atheleteID, athName, atheletegrade);
-                //prs2.Add(presult);
-                                
+                //ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athName, atheleteID, (short)atheletegrade,1);
+                // p_items.Add(showGradeGridItem);
+
+                PersonalResult presult = new PersonalResult(atheleteID, atheletegrade);
+                prs2.Add(presult);
+
             }
+
             //给个人全能成绩排序
             gymDBService.Ranking(prs2);
             short rank = 0;
-            foreach(PersonalResult pr in prs2)
+            foreach (PersonalResult pr in prs2)
             {
                 rank++;
-                //ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(pr.AthelteName, pr.AthleteID, (float)pr.Grade,rank);
-                //p_items.Add(showGradeGridItem);
+                Athlete athe = gymDBService.GetAthleteByID(pr.AthleteID);
+                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athe.Name, pr.AthleteID, pr.Grade, rank);
+                p_items.Add(showGradeGridItem);
             }
         }
 
