@@ -11,6 +11,7 @@ namespace Login
         private string v;
         private string athleteID;
         private float grade;
+        private short? grade1;
 
         //排名 姓名 号码 年龄 分数
         public short? rank { get; set; }
@@ -58,13 +59,12 @@ namespace Login
             this.atheletegrade = atheletegrade;
             this.rank = rank;
         }
-        public ShowGradeGridItem(string name, string atheleteID, int atheletegrade, short rank)
-        {
 
+        public ShowGradeGridItem(string name, string athleteID, short? grade1, short rank)
+        {
             this.name = name;
-            this.atheleteID = atheleteID;
-            this.game = game;
-            this.atheletegrade = atheletegrade;
+            this.athleteID = athleteID;
+            this.grade1 = grade1;
             this.rank = rank;
         }
     }
