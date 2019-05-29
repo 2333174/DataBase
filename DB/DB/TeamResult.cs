@@ -37,7 +37,7 @@ namespace DB
         public TeamResult(int tid, string _event,short? grade,Team team)
         {
             this.TID = tid;
-            this.Event = Event;
+            this.Event = _event;
             this.Grade=grade;
             this.team = team;
         }

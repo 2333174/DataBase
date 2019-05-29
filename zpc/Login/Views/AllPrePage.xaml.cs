@@ -33,14 +33,14 @@ namespace Login.Views
         public AllPrePage()
         {
             InitializeComponent();
-            //AllEvents();
+            AllEvents();
             //给teamgrid数据的函数
-            //TeamGrid();
+            TeamGrid();
             //给teamgrid绑定数据源
-            //teamgrid.ItemsSource = team_items;
-            //ShowFinalSuq();
+            teamgrid.ItemsSource = team_items;
+            ShowFinalSuq();
             //给rankgrid绑定数据源
-            //rankgrid.ItemsSource = f_items;
+            rankgrid.ItemsSource = f_items;
             //给atheltegrid数据的函数
             //AtheleteGrid();
             //给atheltegrid绑定数据源
@@ -234,6 +234,8 @@ namespace Login.Views
                                 
             }
             //给个人全能成绩排序
+            if (prs2.Count == 0)
+                return;
             gymDBService.Ranking(prs2);
             short rank = 0;
             foreach(PersonalResult pr in prs2)

@@ -51,8 +51,8 @@ namespace DB
 
         public PersonalResult(string atheleteID, int atheletegrade)
         {
-            this.atheleteID = atheleteID;
-            this.atheletegrade = atheletegrade;
+            AthleteID = atheleteID;
+            Grade = (short)atheletegrade;
         }
 
         [Required]

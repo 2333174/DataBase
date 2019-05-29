@@ -70,8 +70,8 @@ namespace DB
             {
                 if (!CheckDuplicateTeamResult(_teamresult)) return false;
                 var targetTeam = db.team.Find(_teamresult.TID);
-                targetTeam.teamresult.Add(_teamresult);
                 db.teamresult.Add(_teamresult);
+                targetTeam.teamresult.Add(_teamresult);
                 db.SaveChanges();
                 return true;
             }
