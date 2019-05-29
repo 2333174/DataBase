@@ -57,7 +57,7 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID,tName,athName);
                     prerows.Add(manage_DataGridRow);
                 }else if(p.Role == 1 && p.SportsEvent[3] == '1')
                 {
@@ -105,9 +105,15 @@ namespace Login.Views
             if (row == null)
             {
                 ShowMessageInfo("未选中行！",prehost);
+                return;
             }
             else
             {
+                if (row.groupID == null)
+                {
+                    ShowMessageInfo("请先生成赛事表再添加裁判！", prehost);
+                    return;
+                }
                 project = row.project;
                 group = row.groupID;
             }

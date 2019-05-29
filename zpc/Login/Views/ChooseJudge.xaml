@@ -12,9 +12,7 @@
 
     <ContentControl x:Name="ChangePage">
         <Grid>
-            <materialDesign:DialogHost>
-                <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_3"/>
-            </materialDesign:DialogHost>
+            <materialDesign:DialogHost/>
             <DataGrid Name="judgegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="431" Margin="105,75,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="项目"/>
@@ -27,8 +25,9 @@
             <Button Style="{StaticResource MaterialDesignFlatButton}" Content="分裁判" HorizontalAlignment="Left" Margin="105,286,0,0" VerticalAlignment="Top" Width="75"/>
             <ComboBox Name="MainJudgeName" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Left" Margin="230,223,0,0" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.087,0.547" Opacity="0.7" SelectionChanged="MainJudgeName_SelectionChanged">
             </ComboBox>
-            <Button Content="确认" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_3"/>
-            <Button Content="返回" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="Back" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_4"/>
+            <Button Content="确认" HorizontalAlignment="Left" Margin="545,383,0,0" VerticalAlignment="Top" Width="83" AutomationProperties.Name="OK" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_3" RenderTransformOrigin="0.5,0.5">
+            </Button>
+            <Button Content="返回" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="65" AutomationProperties.Name="Back" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_4"/>
             <Button Content="添加" HorizontalAlignment="Left" Margin="545,286,0,0" VerticalAlignment="Top" Width="65" Style="{StaticResource MaterialDesignRaisedLightButton}" Click="Button_Click_1"/>
             <Button Content="删除" HorizontalAlignment="Left" Margin="652,286,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click_2"/>
             <TextBox  x:Name="MainID" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="388,214,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账号" VerticalAlignment="Top" Width="101" Opacity="0.7" />

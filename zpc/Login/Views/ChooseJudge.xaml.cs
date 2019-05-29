@@ -22,7 +22,9 @@ namespace Login.Views
     /// </summary>
     public partial class ChooseJudge : Page
     {
+        int mainjudgeid;
         ObservableCollection<string> g_judges { get; set; }
+        ObservableCollection<string> g_judgeids { get; set; }
         ObservableCollection<ChooseJudgeGridItem> items { get; set; }
         ChooseJudgeGridItem item { get; set; }
         GymDB db = new GymDB();
@@ -32,6 +34,7 @@ namespace Login.Views
             InitializeComponent();
             items = new ObservableCollection<ChooseJudgeGridItem>();
             g_judges = new ObservableCollection<string>();
+            g_judgeids = new ObservableCollection<string>();
             //根据所选行初始化datagrid
             this.item = new ChooseJudgeGridItem(project, group, null, null);
             this.items.Add(item);
@@ -47,14 +50,16 @@ namespace Login.Views
             }
         }
 
-        //分裁判添加按钮
+        //判添加按钮
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (GroupJudgeName.SelectedItem!=null)
             {
                 g_judges.Add(GroupJudgeName.Text);
+                g_judgeids.Add(GroupID.Text);
                 items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last<string>(); 
                 items[0].mainJudge = MainJudgeName.Text;
+                mainjudgeid = Convert.ToInt32(MainID.Text);
                 judgegrid.ItemsSource = null;
                 judgegrid.ItemsSource = items;
             }
@@ -66,6 +71,8 @@ namespace Login.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             g_judges.Clear();
+            g_judgeids.Clear();
+            mainjudgeid = -1;
             items[0].groupJudges = null;
             judgegrid.ItemsSource = null;
             judgegrid.ItemsSource = items;
@@ -75,21 +82,31 @@ namespace Login.Views
         //确认按钮
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (MainID.Text != null && item.groupID != null && g_judges != null && GroupJudgeName.SelectedItem != null)
+            if (MainID.Text != null && item.groupID != null && mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
-                MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
-                gymDBService.Add(mainmatch);
-                List<Judge> judges = db.judge.ToList();
-                foreach (String groupjudge in g_judges)
+                //添加裁判信息到数据库
+                List<MatchGroup> mgs=gymDBService.GetMatchGroupsByGroupID(item.groupID);
+                if(mgs.Count>1)
                 {
-                    foreach (Judge judge in judges)
-                    {
-                        if (judge.Name == GroupJudgeName.SelectedItem.ToString())
-                        {
-                            MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
-                            gymDBService.Add(match);
-                        }
-                    }
+                    ShowMessageInfo("已经添加过裁判信息！");
+                }
+                else
+                {
+                    //先添加总裁判
+                    MatchGroup group = mgs.First();
+                    group.Weight = 0;
+                    group.JudgeID = mainjudgeid;
+                    gymDBService.Update(group);
+                }
+           
+                //MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
+                //gymDBService.Add(mainmatch);
+                List<Judge> judges = db.judge.ToList();
+                foreach (String groupjudge in g_judgeids)
+                {
+                    Judge judge = gymDBService.GetJudgeByJudgeID(Convert.ToInt32(groupjudge));
+                    MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
+                    gymDBService.Add(match);
                 }
             }
             else

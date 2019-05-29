@@ -20,5 +20,10 @@ namespace Login
             this.team = team;
             this.athlete = athlete;
         }
+        public Manage_DataGridRow(string project, string groupID)
+        {
+            this.project = project;
+            this.groupID = groupID;
+        }
     }
 }
