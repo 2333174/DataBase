@@ -85,6 +85,7 @@ namespace Login.Views
             if (MainID.Text != null && item.groupID != null && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
                 MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
+                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) +","+ groupid);
                 gymDBService.Add(mainmatch);
                 List<Judge> judges = db.judge.ToList();
                 foreach (string groupjudge in g_judges)

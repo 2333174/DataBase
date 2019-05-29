@@ -42,9 +42,10 @@ namespace Login.ViewModels
 
         public DelegateCommand PreviewCommand { set; get; }
         public DelegateCommand SubmitCommand { set; get; }
-
+        public string groupid;
         public GSFMPViewModel(string groupid)
         {
+            this.groupid = groupid;
             GymDBService dbs = new GymDBService();
             List<PersonalResult> prs = dbs.GetPersonalResultsByGroupID(groupid);
             GridItems = new ObservableCollection<PRItemsViewModel>();
@@ -94,6 +95,7 @@ namespace Login.ViewModels
                 prs.Add(pr);
             }
             dbs.Ranking(prs);
+            Client1.ClientSendMsg("主裁判打完分:"+groupid);
         }
     }
 }

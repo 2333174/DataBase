@@ -16,8 +16,10 @@ namespace Server
         //定义一个集合，存储客户端信息
         static Dictionary<string, Socket> ClientConnectionItems = new Dictionary<string, Socket> { };
         static Dictionary<int, Socket> Judges = new Dictionary<int, Socket>();//对应的客户端地址
-        static Dictionary<int, string> MatchGroups = new Dictionary<int, string>();//发消息次数
-        static List<Socket> ManagerSockets = new List<Socket>();
+        static Dictionary<int, string> MatchGroups = new Dictionary<int, string>();
+        static Dictionary<string, int> MJudgesNum = new Dictionary<string, int>();//小组裁判数
+        static Dictionary<string, int> MajorJudge = new Dictionary<string, int>();//小组主裁判 
+        static List<Socket> ManagerSockets = new List<Socket>();//管理员
 
         static void Main(string[] args)
         {
@@ -51,46 +53,6 @@ namespace Server
             Console.ReadKey();
 
             SocketWatch.Close();
-
-            //Socket serverSocket = null;
-
-            //int i=1;
-            //while (true)
-            //{
-            //    //receive message
-            //    serverSocket = SocketWatch.Accept();
-            //    Console.WriteLine("连接已经建立！");
-            //    string recStr = "";
-            //    byte[] recByte = new byte[4096];
-            //    int bytes = serverSocket.Receive(recByte, recByte.Length, 0);
-            //    //recStr += Encoding.ASCII.GetString(recByte, 0, bytes);
-            //    recStr += Encoding.GetEncoding("utf-8").GetString(recByte, 0, bytes);
-
-            //    //send message
-            //    Console.WriteLine(recStr);
-
-            //    Console.Write("请输入内容：");
-            //    string sendStr = Console.ReadLine();
-
-            //    //byte[] sendByte = Encoding.ASCII.GetBytes(sendStr);
-            //    byte[] sendByte = Encoding.GetEncoding("utf-8").GetBytes(sendStr);
-
-            //    //Thread.Sleep(4000);
-
-            //    serverSocket.Send(sendByte, sendByte.Length, 0);
-            //    serverSocket.Close();
-            //    if (i >= 100)
-            //    {
-            //        break;
-            //    }
-            //    i++;
-            //}
-
-            //sSocket.Close();
-            //Console.WriteLine("连接关闭！");
-
-
-            //Console.ReadLine();
         }
 
         //监听客户端发来的请求  
@@ -171,16 +133,38 @@ namespace Server
                     if (ManagerSockets.IndexOf(socketServer) != -1)
                     {
                         string[] introductions = strSRecMsg.Split(',');
-                        for (int i = 0; i < introductions.Length - 1; i++)
+                        if (introductions[0] != "主裁判")
                         {
-                            Judges[int.Parse(introductions[i])].Send(Encoding.UTF8.GetBytes("打分:" + introductions[introductions.Length - 1]));
+                            MJudgesNum.Add(introductions[introductions.Length - 1], introductions.Length - 1);//记录分裁判数
+                            for (int i = 0; i < introductions.Length - 1; i++)
+                            {
+                                Judges[int.Parse(introductions[i])].Send(Encoding.UTF8.GetBytes("打分:" + introductions[introductions.Length - 1]));
+                            }
+                        }
+                        else if((introductions[0] == "主裁判"))
+                        {
+                            MajorJudge.Add(introductions[2], int.Parse(introductions[1]));//管理发送“主裁判，1,010101”
+                        }
+                    }
+                    else
+                    {
+                        string[] introductions = strSRecMsg.Split(':');//分裁判打完分 发送“分裁判打完分:010101”
+                        if (introductions[0]== "分裁判打完分")
+                        {
+                            MJudgesNum[introductions[1]] = MJudgesNum[introductions[1]] - 1;
+                            if (MJudgesNum[introductions[1]] == 0)
+                            {
+                                Judges[MajorJudge[introductions[1]]].Send(Encoding.UTF8.GetBytes("打分:" + introductions[1]));
+                            }
+                        }else if (introductions[0] == "主裁判打完分")
+                        {
+                            MajorJudge.Remove(introductions[1]);
                         }
                     }
                     //将发送的字符串信息附加到文本框txtMsg上     
                     Console.WriteLine("\r\n[客户端：" + socketServer.RemoteEndPoint + " 时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "]\r\n" + strSRecMsg);
 
-                    //Thread.Sleep(3000);
-                    //socketServer.Send(Encoding.UTF8.GetBytes("[" + socketServer.RemoteEndPoint + "]："+strSRecMsg));
+              
                     //发送客户端数据
                     if (ClientConnectionItems.Count > 0)
                     {

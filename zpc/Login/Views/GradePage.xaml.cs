@@ -25,5 +25,7 @@ namespace Login.Views
             InitializeComponent();
             DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey);
         }
+
+
     }
 }

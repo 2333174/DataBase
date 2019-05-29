@@ -140,10 +140,10 @@ namespace Login
                 catch (Exception ex)
                 {
                     Console.WriteLine("远程服务器已经中断连接！" + ex.Message + "\r\n");
-                    if (_welcomePage.error != null)
-                    {
-                        ShowMessageInfo("远程服务器中断连接", _welcomePage.error);
-                    }
+                    //if (_welcomePage.error != null)
+                    //{
+                    //    ShowMessageInfo("远程服务器中断连接", _welcomePage.error);
+                    //}
                     break;
                 }
             }
@@ -151,10 +151,22 @@ namespace Login
         public static void jumpTo()
         {
             GymDBService dBService = new GymDBService();
-            _welcomePage.welcome.Content = new Frame
+            int key = dBService.GetGroupKeyByJG(_welcomePage.GudgeID, GroupID);
+            MatchGroup m = dBService.GetMatchGroupByKey(key);
+            if (m.Weight == 0)//主裁判
             {
-                Content = new GradePage(_welcomePage.GudgeID, dBService.GetGroupKeyByJG(_welcomePage.GudgeID, GroupID))
-            };
+                _welcomePage.welcome.Content = new Frame
+                {
+                    Content = new GSForMajorJudgePage(GroupID)
+                };
+            }
+            else
+            {
+                _welcomePage.welcome.Content = new Frame
+                {
+                    Content = new GradePage(_welcomePage.GudgeID, key)
+                };
+            }
         }
         //发送字符信息到服务端的方法  
         public static void ClientSendMsg(string sendMsg)
