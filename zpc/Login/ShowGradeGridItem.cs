@@ -22,13 +22,8 @@ namespace Login
         public string game { get; set; }
         public string type { get; set; }
         public sbyte suq { get; set; }
-        public ShowGradeGridItem(string game,short? rank,string tname,int teamgrade)
-        {
-            this.game = game;
-            this.rank = rank;
-            this.tname = tname;
-            this.teamgrade = teamgrade;
-        }
+        public string groupid { get; set; }
+        
         public ShowGradeGridItem(short? rank,string name, string atheleteID, sbyte suq, string tname,int atheletegrade, string game, string type)
         {
             this.rank = rank;
@@ -40,9 +35,16 @@ namespace Login
             this.game = game;
             this.type = type;
         }
-        public ShowGradeGridItem(short? rank, string name, sbyte suq, string game)
+        public ShowGradeGridItem(string game, short? rank, string tname, int teamgrade)
         {
+            this.game = game;
             this.rank = rank;
+            this.tname = tname;
+            this.teamgrade = teamgrade;
+        }
+        public ShowGradeGridItem(string game,string name, string groupid,sbyte suq)
+        {
+            this.groupid = groupid;
             this.name = name;
             this.suq = suq;
             this.game = game;

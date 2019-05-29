@@ -61,7 +61,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="比赛项目"/>
                                 <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
-                                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="预赛排名"/>
+                                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
                                 <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="决赛次序"/>
                             </DataGrid.Columns>
                         </DataGrid>

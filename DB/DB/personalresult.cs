@@ -46,12 +46,6 @@ namespace DB
             Ranking = ranking;
         }
 
-        public PersonalResult(string athleteID, float grade)
-        {
-            AthleteID = athleteID;
-            Grade = grade;
-        }
-
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
@@ -69,7 +63,7 @@ namespace DB
 
         public short? Punishment { get; set; }
 
-        public float? Grade { get; set; }
+        public short? Grade { get; set; }
 
         public short? Ranking { get; set; }
 
