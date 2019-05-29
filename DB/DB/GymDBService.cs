@@ -733,10 +733,17 @@ namespace DB
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    foreach(var t in query)
+                    //foreach(var t in query)
+                    //{
+                    //    t.Ranking = (short?)(query.IndexOf(t) + 1);
+                    //    dbs.Update(t);
+                    //}
+                    for (int i = 0; i < query.Count(); i++)
                     {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        dbs.Update(t);
+                        query[i].Ranking = (short?)(i + 1);
+                        if (i != 0 && query[i - 1].Grade == query[i].Grade)
+                            query[i].Ranking = query[i - 1].Ranking;
+                        dbs.Update(query[i]);
                     }
                 }
             }
@@ -775,10 +782,17 @@ namespace DB
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    foreach (var t in query)
+                    //foreach (var t in query)
+                    //{
+                    //    t.Ranking = (short?)(query.IndexOf(t) + 1);
+                    //    dbs.Update(t);
+                    //}
+                    for (int i = 0; i < query.Count(); i++)
                     {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        dbs.Update(t);
+                        query[i].Ranking = (short?)(i + 1);
+                        if (i != 0 && query[i - 1].Grade == query[i].Grade)
+                            query[i].Ranking = query[i - 1].Ranking;
+                        dbs.Update(query[i]);
                     }
                 }
             }
@@ -802,12 +816,26 @@ namespace DB
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    // Create a new match group
-                    foreach(var q in query)
+                    if (query.Count() < GroupSize)
                     {
-                        // the Groupid of prs should be reset
-                        //var prs = new PersonalResult(q.AthleteID, q.SportsEvent, q.Groupid, 2);
-                        //dbs.Add(prs);
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0, 3) + 11.ToString());
+                        dbs.Add(mg);
+                        for (int j = 0; j < query.Count(); j++)
+                        {
+                            PersonalResult pr = new PersonalResult(query[j].AthleteID, query[j].SportsEvent,mg.GroupID, 1);
+                            dbs.Add(pr);
+                        }
+                    }
+                    for (int i = 0; i < query.Count() / GroupSize; i++)
+                    {
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0,3)+1.ToString()+(i+1).ToString());
+                        dbs.Add(mg);
+                        for (int j = 0; j < GroupSize; j++)
+                        {
+                            PersonalResult pr = new PersonalResult(query[i * GroupSize + j].AthleteID, query[i * GroupSize + j].SportsEvent,
+                                mg.GroupID, 1);
+                            dbs.Add(pr);
+                        }
                     }
                 }
             }
@@ -884,5 +912,18 @@ namespace DB
             }
         }
 
+        public List<string> GetGroupidBySportsEvent(string _SportsEvent)
+        {
+            using (var db = new GymDB())
+            {
+                List<MatchGroup> mgs = db.matchgroup.Where(mg => mg.GroupID.Substring(0, 4) == _SportsEvent).ToList();
+                HashSet<string> res = new HashSet<string>();
+                foreach (var item in mgs)
+                {
+                    res.Add(item.GroupID);
+                }
+                return res.ToList();
+            }
+        }
     }
 }

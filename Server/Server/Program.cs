@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DB;
 
 namespace Server
 {
@@ -20,6 +21,7 @@ namespace Server
         static Dictionary<string, int> MJudgesNum = new Dictionary<string, int>();//小组裁判数
         static Dictionary<string, int> MajorJudge = new Dictionary<string, int>();//小组主裁判 
         static List<Socket> ManagerSockets = new List<Socket>();//管理员
+        static Dictionary<string, List<string>> SEJudgedGroup = new Dictionary<string, List<string>>(); // 项目被打分过的数目
 
         static void Main(string[] args)
         {
@@ -159,6 +161,23 @@ namespace Server
                         }else if (introductions[0] == "主裁判打完分")
                         {
                             MajorJudge.Remove(introductions[1]);
+                            if (!SEJudgedGroup.ContainsKey(introductions[1].Substring(0,4)))
+                            {
+                                SEJudgedGroup.Add(introductions[1].Substring(0, 4), new List<string>());
+                                SEJudgedGroup[introductions[1].Substring(0, 4)].Add(introductions[1]);
+                            }
+                            else
+                            {
+                                string res = IsMatchGroupIn(introductions[1]);
+                                if (res != null)
+                                    SEJudgedGroup[res].Add(introductions[1]);
+                                else
+                                    throw new Exception("重复打分!");
+                            }
+                            if(CheckSEIsJudgesOver(introductions[1].Substring(0, 4)))
+                            {
+                                Promote(introductions[1].Substring(0, 4));
+                            }
                         }
                     }
                     //将发送的字符串信息附加到文本框txtMsg上     
@@ -174,8 +193,9 @@ namespace Server
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     int t = -1;
                     if (ManagerSockets.IndexOf(socketServer) != -1) ManagerSockets.Remove(socketServer);
                     foreach (var socketTemp in Judges)
@@ -195,6 +215,43 @@ namespace Server
                     break;
                 }
             }
+        }
+
+        private static string IsMatchGroupIn(string mgid)
+        {
+            List<string> keys = SEJudgedGroup.Keys.ToList();
+            for (int i = 0; i < keys.Count(); i++)
+            {
+                if (SEJudgedGroup[keys[i]].Contains(mgid))
+                    return keys[i];
+            }
+            return null;
+        }
+
+        private static bool CheckSEIsJudgesOver(string se)
+        {
+            GymDBService dbs = new GymDBService();
+            List<string> target = dbs.GetGroupidBySportsEvent(se);
+            target.Sort();
+            List<string> query = SEJudgedGroup[se];
+            query.Sort();
+            if (target.SequenceEqual(query))
+                return true;
+            return false;
+        }
+
+        private static void Promote(string se)
+        {
+            List<string> targetMGids = SEJudgedGroup[se];
+            GymDBService dbs = new GymDBService();
+            List<PersonalResult> prs = new List<PersonalResult>();
+            foreach (var item in targetMGids)
+            {
+                List<PersonalResult> tpr = dbs.GetPersonalResultsByGroupID(item);
+                prs.AddRange(tpr);
+            }
+            dbs.Ranking(prs);
+            dbs.Promote(prs, 8, 8);
         }
     }
 }
