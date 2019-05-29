@@ -388,7 +388,11 @@ namespace DB
             using (var db = new GymDB())
                 return db.matchgroup.Where(mg => mg.JudgeID == _JudgeID).ToList();
         }
-
+        public List<MatchGroup> GetMatchGroupsByGroupID(string _groupID)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(mg => mg.GroupID == _groupID).ToList();
+        }
         public List<MatchGroup> GetMatchGroups()
         {
             using (var db = new GymDB())

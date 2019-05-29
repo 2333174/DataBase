@@ -33,7 +33,7 @@ namespace Login.Views
         public AllPrePage()
         {
             InitializeComponent();
-            AllEvents();
+            //AllEvents();
             //给teamgrid数据的函数
             //TeamGrid();
             //给teamgrid绑定数据源
@@ -222,15 +222,15 @@ namespace Login.Views
                 personalResults = gymDBService.GetPersonalResultsByAthleteID(a.AthleteID);
                 string athName = a.Name;
                 string atheleteID = a.AthleteID;
-                int atheletegrade=0;
+                float atheletegrade=0;
                 //将单个运动员成绩相加
                 foreach (PersonalResult pr in personalResults)
                 {                     
-                    atheletegrade += (int)pr.Grade;                        
+                    atheletegrade += (float)pr.Grade;                        
                 }
 
-                PersonalResult presult = new PersonalResult(atheleteID, atheletegrade);
-                prs2.Add(presult);
+                //PersonalResult presult = new PersonalResult(atheleteID, athName, atheletegrade);
+                //prs2.Add(presult);
                                 
             }
             //给个人全能成绩排序
@@ -239,9 +239,8 @@ namespace Login.Views
             foreach(PersonalResult pr in prs2)
             {
                 rank++;
-                Athlete athe = gymDBService.GetAthleteByID(pr.AthleteID);
-                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athe.Name, pr.AthleteID, pr.Grade,rank);
-                p_items.Add(showGradeGridItem);
+                //ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(pr.AthelteName, pr.AthleteID, (float)pr.Grade,rank);
+                //p_items.Add(showGradeGridItem);
             }
         }
 
