@@ -166,7 +166,7 @@ namespace Login.Views
                     //获得队名
                     string tName = team.TName;
                     Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
-                    finalMatch.Add(manage_DataGridRow);
+                    preMatch.Add(manage_DataGridRow);
                 }
                 i++;
             }

@@ -65,6 +65,7 @@ namespace Login.Views
                 g_judges.Add(GroupJudgeName.Text);
                 items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last(); 
                 items[0].mainJudge = MainJudgeName.Text;
+                mainjudgeid = Convert.ToInt32(MainID.Text);
                 judgegrid.ItemsSource = null;
                 judgegrid.ItemsSource = items;
             }
@@ -90,38 +91,37 @@ namespace Login.Views
             if ( mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
                 MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
-                gymDBService.Add(mainmatch);
                 List<Judge> judges = db.judge.ToList();
-                foreach (string groupjudge in g_judges)
+                //先添加总裁判
+                List<MatchGroup> mgs = gymDBService.GetMatchGroupsByGroupID(item.groupID);
+                foreach(MatchGroup gp in mgs)
                 {
                     if (gp.JudgeID != null)
                     {
                         ShowMessageInfo("已经添加过裁判信息！");
                         return;
-                    }else  if (judge.Name == GroupJudgeName.SelectedItem.ToString())
-                    {
-                            MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
-                            gymDBService.Add(match);
-                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
                     }
-                        
                 }
-                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) +","+ groupid);
-                //先添加总裁判
+                gymDBService.Add(mainmatch);
                 MatchGroup group = mgs.First();
                 group.Weight = 0;
                 group.JudgeID = mainjudgeid;
                 gymDBService.Update(group);
-
+                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) + "," + groupid);
+                foreach (string groupjudge in g_judges)
+                {
+                    foreach (Judge judge in judges)
+                    {
+                        if (judge.Name == GroupJudgeName.SelectedItem.ToString())
+                        {
+                            MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
+                            gymDBService.Add(match);
+                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
+                        }
+                    }
+                }
                 //MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
                 //gymDBService.Add(mainmatch);
-                List<Judge> judges = db.judge.ToList();
-                foreach (String groupjudge in g_judgeids)
-                {
-                    Judge judge = gymDBService.GetJudgeByJudgeID(Convert.ToInt32(groupjudge));
-                    MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
-                    gymDBService.Add(match);
-                }
                 ShowMessageInfo("已提交！");
             }
             else

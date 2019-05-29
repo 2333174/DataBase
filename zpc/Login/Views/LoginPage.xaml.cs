@@ -38,7 +38,7 @@ namespace Login.Views
             { Content = new ChosePage() };
         }
 
-        private void Loginf()
+        private void Loginf(object sender, RoutedEventArgs e)
         {
             var db = new GymDBService();
             Client client = new Client();

@@ -350,16 +350,6 @@ namespace DB
                 return db.personalresult.ToList();
         }
 
-        public List<PersonalResult> GetPersonalResultsBySportEventAndRole(string _sportEvent, int role)
-        {
-            using (var db = new GymDB())
-                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role).ToList();
-        }
-        public List<PersonalResult> GetPersonalResults()
-        {
-            using (var db = new GymDB())
-                return db.personalresult.ToList();
-        }
 
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
@@ -858,26 +848,7 @@ namespace DB
             else
                 throw new Exception("There are empty items in the personalresult");
         }
-        public void Ranking(List<TeamResult> _teamResults)
-        {
-            if (IsResultNotNull(_teamResults))
-            {
-                var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
-                using (var db = new GymDB())
-                {
-                    GymDBService dbs = new GymDBService();
-                    foreach (var t in query)
-                    {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        if (query.IndexOf(t) != 0 && t.Grade == query[query.IndexOf(t) - 1].Grade)
-                            t.Ranking = query[query.IndexOf(t) - 1].Ranking;
-                        dbs.Update(t);
-                    }
-                }
-            }
-            else
-                throw new Exception("There are empty items in the teamresult");
-        }
+     
 
         public void Grouping(int n)
         {
