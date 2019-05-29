@@ -45,7 +45,11 @@ namespace DB
             Grade = grade;
             Ranking = ranking;
         }
-
+        public PersonalResult(string atheleteID, int atheletegrade)
+        {
+            AthleteID = atheleteID;
+            Grade = (short)atheletegrade;
+        }
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }

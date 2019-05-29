@@ -8,9 +8,9 @@ namespace Login
 {
     class ShowGradeGridItem
     {
-        private string v;
-        private string athleteID;
-        private float grade;
+        //private string v;
+        //private string athleteID;
+        //private float grade;
 
         //排名 姓名 号码 年龄 分数
         public short? rank { get; set; }
@@ -63,9 +63,9 @@ namespace Login
 
             this.name = name;
             this.atheleteID = atheleteID;
-            this.game = game;
             this.atheletegrade = atheletegrade;
             this.rank = rank;
         }
+        
     }
 }
