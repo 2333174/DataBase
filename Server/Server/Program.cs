@@ -176,7 +176,12 @@ namespace Server
                             }
                             if(CheckSEIsJudgesOver(introductions[1].Substring(0, 4)))
                             {
-                                Promote(introductions[1].Substring(0, 4));
+                                var prs = Ranking(introductions[1].Substring(0, 4));
+                                if (introductions[1].Substring(3, 1) == "0")
+                                {
+                                    GymDBService dbs = new GymDBService();
+                                    dbs.Promote(prs, 8, 8);
+                                }
                             }
                         }
                     }
@@ -240,7 +245,7 @@ namespace Server
             return false;
         }
 
-        private static void Promote(string se)
+        private static List<PersonalResult> Ranking(string se)
         {
             List<string> targetMGids = SEJudgedGroup[se];
             GymDBService dbs = new GymDBService();
@@ -251,7 +256,8 @@ namespace Server
                 prs.AddRange(tpr);
             }
             dbs.Ranking(prs);
-            dbs.Promote(prs, 8, 8);
+            return prs;
+            //dbs.Promote(prs, 8, 8);
         }
     }
 }
