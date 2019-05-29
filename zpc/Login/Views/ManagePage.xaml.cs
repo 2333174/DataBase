@@ -25,7 +25,7 @@ namespace Login.Views
     {
         //记录是否编排过赛事表的变量
         bool isPreArrange=false;
-        //bool isFinalArrange = false;
+        bool isFinalArrange = false;
         bool isAddAccount = false;
         Account account;
         public List<Account> accounts;
@@ -166,7 +166,7 @@ namespace Login.Views
                     //获得队名
                     string tName = team.TName;
                     Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
-                    preMatch.Add(manage_DataGridRow);
+                    finalMatch.Add(manage_DataGridRow);
                 }
                 i++;
             }

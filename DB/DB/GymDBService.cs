@@ -350,6 +350,17 @@ namespace DB
                 return db.personalresult.ToList();
         }
 
+        public List<PersonalResult> GetPersonalResultsBySportEventAndRole(string _sportEvent, int role)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role).ToList();
+        }
+        public List<PersonalResult> GetPersonalResults()
+        {
+            using (var db = new GymDB())
+                return db.personalresult.ToList();
+        }
+
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
             using (var db = new GymDB())
@@ -494,6 +505,12 @@ namespace DB
         {
             using (var db = new GymDB())
                 return db.judge.Find(_judgeID);
+        }
+
+        public int GetGroupKeyByJG(int _judgeID,string Groupid)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(s=>s.JudgeID==_judgeID&&s.GroupID==Groupid).First().Key;
         }
 
         public int GetSettingPone()
@@ -824,12 +841,17 @@ namespace DB
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    foreach(var t in query)
+                    //foreach(var t in query)
+                    //{
+                    //    t.Ranking = (short?)(query.IndexOf(t) + 1);
+                    //    dbs.Update(t);
+                    //}
+                    for (int i = 0; i < query.Count(); i++)
                     {
-                        t.Ranking = (short?)(query.IndexOf(t) + 1);
-                        if (query.IndexOf(t) != 0 && t.Grade == query[query.IndexOf(t) - 1].Grade)
-                            t.Ranking = query[query.IndexOf(t) - 1].Ranking;
-                        dbs.Update(t);
+                        query[i].Ranking = (short?)(i + 1);
+                        if (i != 0 && query[i - 1].Grade == query[i].Grade)
+                            query[i].Ranking = query[i - 1].Ranking;
+                        dbs.Update(query[i]);
                     }
                 }
             }
@@ -880,6 +902,31 @@ namespace DB
                 }
             }
         }
+        public void Ranking(List<TeamResult> _teamResults)
+        {
+            if (IsResultNotNull(_teamResults))
+            {
+                var query = (from tr in _teamResults orderby tr.Grade descending select tr).ToList();
+                using (var db = new GymDB())
+                {
+                    GymDBService dbs = new GymDBService();
+                    //foreach (var t in query)
+                    //{
+                    //    t.Ranking = (short?)(query.IndexOf(t) + 1);
+                    //    dbs.Update(t);
+                    //}
+                    for (int i = 0; i < query.Count(); i++)
+                    {
+                        query[i].Ranking = (short?)(i + 1);
+                        if (i != 0 && query[i - 1].Grade == query[i].Grade)
+                            query[i].Ranking = query[i - 1].Ranking;
+                        dbs.Update(query[i]);
+                    }
+                }
+            }
+            else
+                throw new Exception("There are empty items in the teamresult");
+        }
 
         public bool IsRankingNotNull(List<PersonalResult> _personalResults)
         {
@@ -897,12 +944,26 @@ namespace DB
                 using (var db = new GymDB())
                 {
                     GymDBService dbs = new GymDBService();
-                    // Create a new match group
-                    foreach(var q in query)
+                    if (query.Count() < GroupSize)
                     {
-                        // the Groupid of prs should be reset
-                        //var prs = new PersonalResult(q.AthleteID, q.SportsEvent, q.Groupid, 2);
-                        //dbs.Add(prs);
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0, 3) + 11.ToString());
+                        dbs.Add(mg);
+                        for (int j = 0; j < query.Count(); j++)
+                        {
+                            PersonalResult pr = new PersonalResult(query[j].AthleteID, query[j].SportsEvent,mg.GroupID, 1);
+                            dbs.Add(pr);
+                        }
+                    }
+                    for (int i = 0; i < query.Count() / GroupSize; i++)
+                    {
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0,3)+1.ToString()+(i+1).ToString());
+                        dbs.Add(mg);
+                        for (int j = 0; j < GroupSize; j++)
+                        {
+                            PersonalResult pr = new PersonalResult(query[i * GroupSize + j].AthleteID, query[i * GroupSize + j].SportsEvent,
+                                mg.GroupID, 1);
+                            dbs.Add(pr);
+                        }
                     }
                 }
             }
@@ -919,7 +980,7 @@ namespace DB
                 if (account == null)
                     return -1;
                 else
-                     return 0;
+                     return 0;                
             }
         }
 
@@ -950,7 +1011,12 @@ namespace DB
             }
 
         }
-        
+        public PersonalResult GetPersonalResultsBySportEventAndRoleAndAID(string _sportEvent, int role, string _AthleteID)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent) && p.Role == role && p.AthleteID.Equals(_AthleteID)).Single();
+        }
+
         //设置三个参数:代表队男/女各年龄组最大报名人数
         public void Set(string POne, string PTwo, string PThree)
         {
@@ -974,5 +1040,18 @@ namespace DB
             }
         }
 
+        public List<string> GetGroupidBySportsEvent(string _SportsEvent)
+        {
+            using (var db = new GymDB())
+            {
+                List<MatchGroup> mgs = db.matchgroup.Where(mg => mg.GroupID.Substring(0, 4) == _SportsEvent).ToList();
+                HashSet<string> res = new HashSet<string>();
+                foreach (var item in mgs)
+                {
+                    res.Add(item.GroupID);
+                }
+                return res.ToList();
+            }
+        }
     }
 }

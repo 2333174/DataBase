@@ -42,9 +42,10 @@ namespace Login.ViewModels
 
         public DelegateCommand PreviewCommand { set; get; }
         public DelegateCommand SubmitCommand { set; get; }
-
+        public string groupid;
         public GSFMPViewModel(string groupid)
         {
+            this.groupid = groupid;
             GymDBService dbs = new GymDBService();
             List<PersonalResult> prs = dbs.GetPersonalResultsByGroupID(groupid);
             GridItems = new ObservableCollection<PRItemsViewModel>();
@@ -73,8 +74,11 @@ namespace Login.ViewModels
                 {
                     scores.Add(pR.TBDScores);
                 }
-                scores.Remove(scores.Max());
-                scores.Remove(scores.Min());
+                if(scores.Count() >= 3)
+                {
+                    scores.Remove(scores.Max());
+                    scores.Remove(scores.Min());
+                }
 
                 pRItems.TotalScores = (int)scores.Average() * pRItems.Details.Count() + pRItems.Bouns - pRItems.Punishment;
             }
@@ -94,6 +98,7 @@ namespace Login.ViewModels
                 prs.Add(pr);
             }
             dbs.Ranking(prs);
+            Client1.ClientSendMsg("主裁判打完分:"+groupid);
         }
     }
 }

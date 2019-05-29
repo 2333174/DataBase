@@ -15,7 +15,7 @@ namespace Login.ViewModels
             SubmitCommand = new Commands.DelegateCommand();
             SubmitCommand.ExecuteAction = new Action<object>(Submit);
             GymDBService dbs = new GymDBService();
-            var target = dbs.GetMatchGroupByKey(groupKey);
+            target = dbs.GetMatchGroupByKey(groupKey);
             var judge = dbs.GetJudgeByJudgeID(judgeID);
             JudgeName = judge.Name;
             List<PersonalResult> personalResults = dbs.GetPersonalResultsByGroupID(target.GroupID);
@@ -28,7 +28,9 @@ namespace Login.ViewModels
                 RefereeScoresItems.Add(tmp);
             }
         }
-        
+
+        public MatchGroup target;
+
         public Commands.DelegateCommand SubmitCommand { set; get; }
 
         private ObservableCollection<RefereeScoresItemsViewModel> _refereeScoresItems;
@@ -75,6 +77,7 @@ namespace Login.ViewModels
                 dbs.Update(tmp);
             }
             ShowMessageInfo("打分成功！");
+            Client1.ClientSendMsg("分裁判打完分:"+ target.GroupID);
         }
 
         private async void ShowMessageInfo(string message)

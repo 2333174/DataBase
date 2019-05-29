@@ -1,8 +1,10 @@
-﻿using Login.Views;
+﻿using Custom;
+using DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,24 +16,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login
+namespace Login.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// welcomePage.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class welcomePage : Page
     {
-        public MainWindow()
+        public int GudgeID { get; set; }
+        Thread thread = null;
+        public welcomePage(int GudgeID)
         {
+            this.GudgeID = GudgeID;
             InitializeComponent();
-            ChangePage.Content = new Frame()
-            { Content = new ChosePage()};
-        }
-        
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            System.Windows.Application.Current.Shutdown();
+            Client1._welcomePage = this;
+            Client1.run(GudgeID.ToString());
         }
     }
 }

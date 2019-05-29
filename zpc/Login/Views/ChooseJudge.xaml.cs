@@ -29,16 +29,18 @@ namespace Login.Views
         ChooseJudgeGridItem item { get; set; }
         GymDB db = new GymDB();
         GymDBService gymDBService = new GymDBService();
-        public ChooseJudge(String project,string group)
+        private readonly string groupid;
+        public ChooseJudge(string project,string group)
         {
             InitializeComponent();
             items = new ObservableCollection<ChooseJudgeGridItem>();
             g_judges = new ObservableCollection<string>();
             g_judgeids = new ObservableCollection<string>();
             //根据所选行初始化datagrid
-            this.item = new ChooseJudgeGridItem(project, group, null, null);
-            this.items.Add(item);
+            item = new ChooseJudgeGridItem(project, group, null, null);
+            items.Add(item);
             judgegrid.ItemsSource = items;
+            groupid = group;
 
             //获取全部的裁判信息
             List<Judge> judges = db.judge.ToList();
@@ -50,26 +52,24 @@ namespace Login.Views
             }
         }
 
-        //判添加按钮
+        //分裁判添加按钮
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (GroupJudgeName.SelectedItem!=null)
             {
-                if(g_judgeids.Contains(GroupID.Text))
+                if (g_judges.Contains(GroupJudgeName.Text))
                 {
-                    MessageBox.Show("已经添加过该裁判了哦~");
+                    ShowMessageInfo("已存在该教练!");
                     return;
                 }
                 g_judges.Add(GroupJudgeName.Text);
-                g_judgeids.Add(GroupID.Text);
-                items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last<string>(); 
+                items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last(); 
                 items[0].mainJudge = MainJudgeName.Text;
-                mainjudgeid = Convert.ToInt32(MainID.Text);
                 judgegrid.ItemsSource = null;
                 judgegrid.ItemsSource = items;
             }
             else
-                MessageBox.Show("未选择");
+                ShowMessageInfo("未选择");
         }
 
         //分裁判删除按钮
@@ -89,17 +89,24 @@ namespace Login.Views
         {
             if ( mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
-                //添加裁判信息到数据库
-                List<MatchGroup> mgs=gymDBService.GetMatchGroupsByGroupID(item.groupID);
-                foreach(MatchGroup gp in mgs)
+                MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
+                gymDBService.Add(mainmatch);
+                List<Judge> judges = db.judge.ToList();
+                foreach (string groupjudge in g_judges)
                 {
                     if (gp.JudgeID != null)
                     {
                         ShowMessageInfo("已经添加过裁判信息！");
                         return;
+                    }else  if (judge.Name == GroupJudgeName.SelectedItem.ToString())
+                    {
+                            MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
+                            gymDBService.Add(match);
+                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
                     }
                         
                 }
+                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) +","+ groupid);
                 //先添加总裁判
                 MatchGroup group = mgs.First();
                 group.Weight = 0;
@@ -153,7 +160,7 @@ namespace Login.Views
 
         private async void ShowMessageInfo(string message)
         {
-            Views.MessageDialog samMessageDialog = new Views.MessageDialog
+            MessageDialog samMessageDialog = new MessageDialog
             {
                 Message = { Text = message }
             };

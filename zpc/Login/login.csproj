@@ -87,9 +87,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
-    <Compile Include="Models\Account.cs" />
     <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="TeamResultGridItem.cs" />
+    <Compile Include="Client\Client1.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\GSFMPViewModel.cs" />
@@ -151,6 +153,9 @@
     </Compile>
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddAccountDialog.xaml">
       <SubType>Designer</SubType>
@@ -228,6 +233,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -272,6 +281,10 @@
     <ProjectReference Include="..\..\DB\DB\DB.csproj">
       <Project>{764be4f0-31e4-48b5-9419-47c3d20f541c}</Project>
       <Name>DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Custom\Custom.csproj">
+      <Project>{79e7c88e-6c76-4413-8a60-809259b83375}</Project>
+      <Name>Custom</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
