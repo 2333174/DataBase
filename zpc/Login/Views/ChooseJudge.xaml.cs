@@ -22,7 +22,7 @@ namespace Login.Views
     /// </summary>
     public partial class ChooseJudge : Page
     {
-        int mainjudgeid;
+        int mainjudgeid=-1;
         ObservableCollection<string> g_judges { get; set; }
         ObservableCollection<string> g_judgeids { get; set; }
         ObservableCollection<ChooseJudgeGridItem> items { get; set; }
@@ -55,6 +55,11 @@ namespace Login.Views
         {
             if (GroupJudgeName.SelectedItem!=null)
             {
+                if(g_judgeids.Contains(GroupID.Text))
+                {
+                    MessageBox.Show("已经添加过该裁判了哦~");
+                    return;
+                }
                 g_judges.Add(GroupJudgeName.Text);
                 g_judgeids.Add(GroupID.Text);
                 items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last<string>(); 
@@ -82,23 +87,25 @@ namespace Login.Views
         //确认按钮
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (MainID.Text != null && item.groupID != null && mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
+            if ( mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
                 //添加裁判信息到数据库
                 List<MatchGroup> mgs=gymDBService.GetMatchGroupsByGroupID(item.groupID);
-                if(mgs.Count>1)
+                foreach(MatchGroup gp in mgs)
                 {
-                    ShowMessageInfo("已经添加过裁判信息！");
+                    if (gp.JudgeID != null)
+                    {
+                        ShowMessageInfo("已经添加过裁判信息！");
+                        return;
+                    }
+                        
                 }
-                else
-                {
-                    //先添加总裁判
-                    MatchGroup group = mgs.First();
-                    group.Weight = 0;
-                    group.JudgeID = mainjudgeid;
-                    gymDBService.Update(group);
-                }
-           
+                //先添加总裁判
+                MatchGroup group = mgs.First();
+                group.Weight = 0;
+                group.JudgeID = mainjudgeid;
+                gymDBService.Update(group);
+
                 //MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
                 //gymDBService.Add(mainmatch);
                 List<Judge> judges = db.judge.ToList();
@@ -108,6 +115,7 @@ namespace Login.Views
                     MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
                     gymDBService.Add(match);
                 }
+                ShowMessageInfo("已提交！");
             }
             else
                 ShowMessageInfo("信息未填写完整！");

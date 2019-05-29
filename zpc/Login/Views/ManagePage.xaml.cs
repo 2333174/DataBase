@@ -127,19 +127,20 @@ namespace Login.Views
            if(isPreArrange==true)
             {
                 ShowMessageInfo("不可重复生成预赛赛事表！",prehost);
+                return;
             }
             GymDBService gymDBService = new GymDBService();
             //存放预赛表信息的List
             List<Manage_DataGridRow> preMatch = new List<Manage_DataGridRow>();
             //自动分组
-            gymDBService.Grouping(2);
+            gymDBService.Grouping(3);
             //获得所有的小组
             List<MatchGroup> groups = gymDBService.GetMatchGroups();
             //获得预赛小组
             SortedSet<string> groupids = new SortedSet<string>();
             foreach (MatchGroup group in groups)
             {
-                if(group.GroupID.Substring(3)=="0")
+                if(group.GroupID[3]=='0')
                     groupids.Add(group.GroupID);
 
             }
@@ -169,7 +170,7 @@ namespace Login.Views
                 }
                 i++;
             }
-            
+
             //数据绑定
             preMatchGrid.ItemsSource = preMatch;
             isPreArrange = true;
