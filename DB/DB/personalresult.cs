@@ -38,7 +38,7 @@ namespace DB
             Suq = (sbyte)suq;
         }
 
-        public PersonalResult(string athleteID, string sportsEvent, float grade, short ranking)
+        public PersonalResult(string athleteID, string sportsEvent, short grade, short ranking)
         {
             AthleteID = athleteID;
             SportsEvent = sportsEvent;
@@ -63,7 +63,7 @@ namespace DB
 
         public short? Punishment { get; set; }
 
-        public float? Grade { get; set; }
+        public short? Grade { get; set; }
 
         public short? Ranking { get; set; }
 

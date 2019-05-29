@@ -16,7 +16,7 @@ namespace DB
         [StringLength(20)]
         public string Event { get; set; }
 
-        public float? Grade { get; set; }
+        public short? Grade { get; set; }
 
         public short? Ranking { get; set; }
 
@@ -34,7 +34,7 @@ namespace DB
             this.Event=Event;
             this.team = team;
         }
-        public TeamResult(int tid, string _event,float? grade,Team team)
+        public TeamResult(int tid, string _event,short? grade,Team team)
         {
             this.TID = tid;
             this.Event = Event;

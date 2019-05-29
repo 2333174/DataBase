@@ -135,5 +135,12 @@ namespace Login.Views
             await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
 
         }
+
+        //返回按钮
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ChangePage.Content = new Frame()
+            { Content = new ManagePage() };
+        }
     }
 }

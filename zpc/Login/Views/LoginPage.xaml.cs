@@ -43,7 +43,6 @@ namespace Login.Views
             {
                 case -1:
                     ShowMessageInfo("账户或密码有误");
-
                     break;
                 case 0:
                     if (select==0){
@@ -64,10 +63,10 @@ namespace Login.Views
                     }
                     break;
                 case 1:
-                    ChangePage.Content = new Frame()
-                    {
-                        Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
-                    };
+                    //ChangePage.Content = new Frame()
+                    //{
+                    //    Content = new GradePage(db.GetJudgeID(user.Text, password.Password))
+                    //};
                     break;
                 default:
                     ChangePage.Content = new Frame()
@@ -96,8 +95,8 @@ namespace Login.Views
                     Task.Delay(TimeSpan.FromSeconds(1))
                     .ContinueWith((t, _) => 
                     {
-                        args.Session.Close(false);
                         Loginf();
+                        args.Session.Close(false);
                     }, null,
                     TaskScheduler.FromCurrentSynchronizationContext());
                 }));
