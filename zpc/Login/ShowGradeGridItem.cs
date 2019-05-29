@@ -58,9 +58,9 @@ namespace Login
             this.atheletegrade = atheletegrade;
             this.rank = rank;
         }
-        public ShowGradeGridItem(string name, string atheleteID, int atheletegrade, short rank)
-        {
 
+        public ShowGradeGridItem(string name, string athleteID, short? grade1, short rank)
+        {
             this.name = name;
             this.atheleteID = atheleteID;
             this.atheletegrade = atheletegrade;

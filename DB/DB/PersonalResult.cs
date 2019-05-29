@@ -9,6 +9,9 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class PersonalResult
     {
+        private string atheleteID;
+        private int atheletegrade;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PersonalResult()
         {
@@ -45,11 +48,13 @@ namespace DB
             Grade = grade;
             Ranking = ranking;
         }
+
         public PersonalResult(string atheleteID, int atheletegrade)
         {
             AthleteID = atheleteID;
             Grade = (short)atheletegrade;
         }
+
         [Required]
         [StringLength(18)]
         public string AthleteID { get; set; }
