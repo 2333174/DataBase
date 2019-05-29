@@ -147,53 +147,53 @@ namespace Login.Views
         //7、8或9个运动员晋级五个，四、五或六个运动员晋级4个，三个及三个一下不进行决赛
         public void ComputeFinalSuq()
         {
-            foreach (string s in events)
-            {
-                string game = gymDBService.GetFullSportName(s);
-                string sportsevent = s.Substring(0,3) + "1";
-                List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 0).ToList();
-                int athnum = personalResults.Count;
-                gymDBService.Ranking(personalResults);
-                if (athnum >= 10)
-                {
-                    for (int i = 1; i <= athnum / 2; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                        gymDBService.Grouping(3);
-                    }
+            //foreach (string s in events)
+            //{
+            //    string game = gymDBService.GetFullSportName(s);
+            //    string sportsevent = s.Substring(0,3) + "1";
+            //    List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 0).ToList();
+            //    int athnum = personalResults.Count;
+            //    gymDBService.Ranking(personalResults);
+            //    if (athnum >= 10)
+            //    {
+            //        for (int i = 1; i <= athnum / 2; i++)
+            //        {
+            //            PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+            //            PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+            //            ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+            //            f_items.Add(item);
+            //            f_prs.Add(pr1);
+            //            gymDBService.Add(pr1);
+            //            gymDBService.Grouping(3);
+            //        }
 
-                }
-                else if (athnum >= 7 && athnum < 10)
-                {
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                        gymDBService.Grouping(3);
-                    }
-                }
-                else if (athnum >= 4 && athnum <= 7)
-                {
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
-                        PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
-                        ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
-                        f_items.Add(item);
-                        f_prs.Add(pr1);
-                        gymDBService.Add(pr1);
-                    }
-                }
-            }
+            //    }
+            //    else if (athnum >= 7 && athnum < 10)
+            //    {
+            //        for (int i = 1; i <= 5; i++)
+            //        {
+            //            PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+            //            PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+            //            ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+            //            f_items.Add(item);
+            //            f_prs.Add(pr1);
+            //            gymDBService.Add(pr1);
+            //            gymDBService.Grouping(3);
+            //        }
+            //    }
+            //    else if (athnum >= 4 && athnum <= 7)
+            //    {
+            //        for (int i = 1; i <= 4; i++)
+            //        {
+            //            PersonalResult pr = dB.personalresult.Where(p => p.Ranking == i).Single();
+            //            PersonalResult pr1 = new PersonalResult(pr.AthleteID, sportsevent, 1, i);
+            //            ShowGradeGridItem item = new ShowGradeGridItem(pr.Ranking, pr.athlete.Name, (sbyte)i, game);
+            //            f_items.Add(item);
+            //            f_prs.Add(pr1);
+            //            gymDBService.Add(pr1);
+            //        }
+            //    }
+            //}
         }
 
        //个人全能成绩:将运动员总成绩算出来
@@ -216,8 +216,8 @@ namespace Login.Views
                     atheletegrade += (float)pr.Grade;                        
                 }
 
-                //PersonalResult presult = new PersonalResult(atheleteID, athName, atheletegrade);
-                //prs2.Add(presult);
+                PersonalResult presult = new PersonalResult(atheleteID, atheletegrade);
+                prs2.Add(presult);
                                 
             }
             //给个人全能成绩排序
@@ -226,8 +226,8 @@ namespace Login.Views
             foreach(PersonalResult pr in prs2)
             {
                 rank++;
-                //ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(pr.AthelteName, pr.AthleteID, (float)pr.Grade,rank);
-                //p_items.Add(showGradeGridItem);
+                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(null, pr.AthleteID, (int)pr.Grade,rank);
+                p_items.Add(showGradeGridItem);
             }
         }
 
