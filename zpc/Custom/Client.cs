@@ -20,7 +20,7 @@ namespace Custom
             try
             {
                 int port = 6000;
-                string host = "127.0.0.1";//服务器端ip地址
+                string host = "10.135.2.12";//服务器端ip地址
 
                 IPAddress ip = IPAddress.Parse(host);
                 IPEndPoint ipe = new IPEndPoint(ip, port);
