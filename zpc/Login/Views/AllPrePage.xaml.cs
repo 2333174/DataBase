@@ -79,7 +79,7 @@ namespace Login.Views
                     {
                         try
                         {
-                            PersonalResult result = gymDBService.GetPersonalResultsBySportEventAndRoleAndAID(a,0,ath.IDNumber);
+                            PersonalResult result = gymDBService.GetPersonalResultsBySportEventAndRoleAndAID(a, 0, ath.IDNumber);
                             if (result == null)
                                 continue;
                             else
@@ -87,7 +87,7 @@ namespace Login.Views
                         }
                         catch (Exception e)
                         {
-                            System.Console.WriteLine("无结果");
+                            Console.WriteLine(e.Message);
                         }
 
                     }
@@ -100,20 +100,14 @@ namespace Login.Views
                     {
                         for (int i = 0; i < num; i++)
                         {
-                            grade += (short)prs1.Where(p => p.Ranking==(i + 1)).Single().Grade;
+                            grade += (short)prs1.Where(p => p.Ranking == (i + 1)).Single().Grade;
                         }
                     }
                     else
                     {
                         for (int i = 0; i < prs1.Count; i++)
                         {
-                            try
-                            {
-                                grade += (short)prs1.ElementAt(i).Grade;
-                            }catch(Exception e)
-                            {
-
-                            }
+                            grade += (short)prs1.ElementAt(i).Grade;
                         }
                     }
                     //int TID,string Event,short? Grade,short? Ranking,int TRid,Team team
@@ -135,7 +129,7 @@ namespace Login.Views
                     }
                     catch (Exception e)
                     {
-                        System.Console.WriteLine("无结果");
+                        Console.WriteLine(e.Message);
                     }
 
                 }
@@ -149,9 +143,9 @@ namespace Login.Views
             {
                 string game = gymDBService.GetFullSportName(s);
                 List<PersonalResult> personalResults = gymDBService.GetPersonalResultsBySportEventAndRole(s, 1).ToList();
-                foreach(PersonalResult pr in personalResults)
+                foreach (PersonalResult pr in personalResults)
                 {
-                    ShowGradeGridItem item = new ShowGradeGridItem(game, pr.athlete.Name,pr.GroupID,(sbyte)pr.Suq);
+                    ShowGradeGridItem item = new ShowGradeGridItem(game, pr.athlete.Name, pr.GroupID, (sbyte)pr.Suq);
                     f_items.Add(item);
                 }
             }
@@ -222,27 +216,27 @@ namespace Login.Views
                 personalResults = gymDBService.GetPersonalResultsByAthleteID(a.AthleteID);
                 string athName = a.Name;
                 string atheleteID = a.AthleteID;
-                int atheletegrade=0;
+                int atheletegrade = 0;
                 //将单个运动员成绩相加
                 foreach (PersonalResult pr in personalResults)
-                {                     
-                    atheletegrade += (int)pr.Grade;                        
+                {
+                    atheletegrade += (int)pr.Grade;
                 }
 
                 PersonalResult presult = new PersonalResult(atheleteID, atheletegrade);
                 prs2.Add(presult);
-                                
+
             }
             //给个人全能成绩排序
             if (prs2.Count == 0)
                 return;
             gymDBService.Ranking(prs2);
             short rank = 0;
-            foreach(PersonalResult pr in prs2)
+            foreach (PersonalResult pr in prs2)
             {
                 rank++;
                 Athlete athe = gymDBService.GetAthleteByID(pr.AthleteID);
-                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athe.Name, pr.AthleteID, pr.Grade,rank);
+                ShowGradeGridItem showGradeGridItem = new ShowGradeGridItem(athe.Name, pr.AthleteID, pr.Grade, rank);
                 p_items.Add(showGradeGridItem);
             }
 

@@ -13,7 +13,7 @@ namespace Login.ViewModels
             List<RefereeScore> refereeScores = dbs.GetRefereeScoresByPRid(prid);
             this.index = index;
             AthleteName = dbs.GetAthleteByID(pr.AthleteID).Name;
-            SportEvent = dbs.GetRealSportName(pr);
+            SportEvent = dbs.GetRealSportName(pr.SportsEvent);
             MatchType = dbs.GetMatchType(pr);
             Details = new ObservableCollection<PRDetailsViewModel>();
             foreach (var rs in refereeScores)

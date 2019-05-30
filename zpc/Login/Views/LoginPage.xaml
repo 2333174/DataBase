@@ -26,7 +26,7 @@
                         Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Height="37" Margin="10,20,0,10" IsTabStop="False">
                             <materialDesign:PackIcon Kind="KeyboardBackspace" Height="37" Width="37"/>
                         </Button>
-                        <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Loginf"
+                        <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Click="Button_Click" IsDefault="True"
                         Width="37" Padding="0 0 0 0" materialDesign:RippleAssist.IsCentered="True" Height="37" Margin="0,20,25,10" IsTabStop="False">
                             <materialDesign:PackIcon Kind="Check" Width="37" Height="37" />
                         </Button>
@@ -34,6 +34,7 @@
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:DialogHost CloseOnClickAway="True" x:Name="Login" IsTabStop="False"/>
+            <materialDesign:DialogHost CloseOnClickAway="True" x:Name="Login2" IsTabStop="False"/>
         </Grid>
     </ContentControl>
 </Page>

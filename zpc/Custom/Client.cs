@@ -34,11 +34,10 @@ namespace Custom
                     SocketClient.Connect(ipe);
                     ClientSendMsg(message);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     Console.WriteLine("连接失败！\r\n");
-                    Console.ReadLine();
-                    return;
+                    throw e;
                 }
 
                 ThreadClient = new Thread(Recv);
@@ -94,7 +93,7 @@ namespace Custom
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                throw ex;
             }
         }
 
@@ -129,7 +128,7 @@ namespace Custom
                 catch (Exception ex)
                 {
                     Console.WriteLine("远程服务器已经中断连接！" + ex.Message + "\r\n");
-                    break;
+                    throw ex;
                 }
             }
         }

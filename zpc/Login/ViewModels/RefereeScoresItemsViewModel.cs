@@ -12,7 +12,7 @@ namespace Login.ViewModels
             Athlete athlete = dbs.GetAthleteByID(target.AthleteID);
             AthleteName = athlete.Name;
             AthleteID = athlete.AthleteID;
-            SportsEvent = dbs.GetRealSportName(target);
+            SportsEvent = dbs.GetRealSportName(target.SportsEvent);
             MatchType = dbs.GetMatchType(target);
         }
 

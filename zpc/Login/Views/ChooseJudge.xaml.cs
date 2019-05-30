@@ -107,7 +107,7 @@ namespace Login.Views
                 group.Weight = 0;
                 group.JudgeID = mainjudgeid;
                 gymDBService.Update(group);
-                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) + "," + groupid);
+                Client.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) + "," + groupid);
                 foreach (string groupjudge in g_judges)
                 {
                     foreach (Judge judge in judges)
@@ -116,7 +116,7 @@ namespace Login.Views
                         {
                             MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
                             gymDBService.Add(match);
-                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
+                            Client.ClientSendMsg(judge.JudgeID + "," + groupid);
                         }
                     }
                 }

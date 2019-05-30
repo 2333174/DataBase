@@ -20,7 +20,7 @@ namespace Login.ViewModels
             {
                 try
                 {
-                    string tmpSport = dbs.GetRealSportName(pr);
+                    string tmpSport = dbs.GetRealSportName(pr.SportsEvent);
                     PersonalResults.Add(tmpSport);
                 }
                 catch (Exception e)

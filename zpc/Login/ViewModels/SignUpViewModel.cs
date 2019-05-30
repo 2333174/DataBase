@@ -317,8 +317,7 @@ namespace Login.ViewModels
             {
                 Message = { Text = message }
             };
-           await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
-           
+           await DialogHost.Show(samMessageDialog);
         }
 
         //显示添加框 并进行处理

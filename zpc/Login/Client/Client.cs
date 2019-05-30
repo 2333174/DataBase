@@ -13,7 +13,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace Login
 {
-    class Client1
+    class Client
     {
         public static welcomePage _welcomePage=null;
         //创建1个客户端套接字和1个负责监听服务端请求的线程  
@@ -25,7 +25,7 @@ namespace Login
             try
             {
                 int port = 6000;
-                string host = "127.0.0.1";//服务器端ip地址
+                string host = "10.135.2.12";//服务器端ip地址
                 IPAddress ip = IPAddress.Parse(host);
                 IPEndPoint ipe = new IPEndPoint(ip, port);
                 //定义一个套接字监听  

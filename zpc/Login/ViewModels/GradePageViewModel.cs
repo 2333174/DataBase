@@ -77,7 +77,7 @@ namespace Login.ViewModels
                 dbs.Update(tmp);
             }
             ShowMessageInfo("打分成功！");
-            Client1.ClientSendMsg("分裁判打完分:"+ target.GroupID);
+            Client.ClientSendMsg("分裁判打完分:"+ target.GroupID);
         }
 
         private async void ShowMessageInfo(string message)

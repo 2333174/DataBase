@@ -25,7 +25,6 @@ namespace Login.Views
     {
         //记录是否编排过赛事表的变量
         bool isPreArrange=false;
-        bool isFinalArrange = false;
         bool isAddAccount = false;
         Account account;
         public List<Account> accounts;
@@ -297,9 +296,7 @@ namespace Login.Views
         }
         private async void ShowAddAccount()
         {
-            AddAccountDialog samMessageDialog = new AddAccountDialog
-            {
-            };
+            AddAccountDialog samMessageDialog = new AddAccountDialog{ };
             isAddAccount = Equals(await add.ShowDialog(samMessageDialog), true);
             if (isAddAccount)
             {

@@ -191,10 +191,10 @@ namespace DB
             return tmpType;
         }
 
-        public string GetRealSportName(PersonalResult _personalResult)
+        public string GetRealSportName(string sportsevent)
         {
             string tmpSport = null;
-            switch (_personalResult.SportsEvent.Substring(1, 2))
+            switch (sportsevent.Substring(1, 2))
             {
                 case "01":
                     tmpSport = "男子单杠";
@@ -839,6 +839,7 @@ namespace DB
                     for (int i = 0; i < query.Count(); i++)
                     {
                         query[i].Ranking = (short?)(i + 1);
+                        query[i].Suq = (sbyte?)(i + i);
                         if (i != 0 && query[i - 1].Grade == query[i].Grade)
                             query[i].Ranking = query[i - 1].Ranking;
                         dbs.Update(query[i]);
