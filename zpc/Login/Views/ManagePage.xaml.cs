@@ -24,7 +24,8 @@ namespace Login.Views
     public partial class ManagePage : Page
     {
         //记录是否编排过赛事表的变量
-        bool isPreArrange=false;
+        bool isPreArrange = false;
+        bool isFinalArrange = false;
         bool isAddAccount = false;
         Account account;
         public List<Account> accounts;
@@ -39,10 +40,10 @@ namespace Login.Views
             gymDBService = new GymDBService();
             GymDB db = new GymDB();
             logins = db.login.ToList();
-            List <PersonalResult> personalResults = gymDBService.GetPersonalResults();
-            foreach(PersonalResult p in personalResults)
+            List<PersonalResult> personalResults = gymDBService.GetPersonalResults();
+            foreach (PersonalResult p in personalResults)
             {
-                if(p.Role==0&&p.SportsEvent[3]=='0')
+                if (p.Role == 0 && p.SportsEvent[3] == '0')
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
@@ -56,9 +57,10 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID,tName,athName);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
                     prerows.Add(manage_DataGridRow);
-                }else if(p.Role == 1 && p.SportsEvent[3] == '1')
+                }
+                else if (p.Role == 1 && p.SportsEvent[3] == '1')
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
@@ -84,7 +86,7 @@ namespace Login.Views
 
 
 
-        private async void ShowMessageInfo(string message,DialogHost dialog)
+        private async void ShowMessageInfo(string message, DialogHost dialog)
         {
             MessageDialog samMessageDialog = new MessageDialog
             {
@@ -92,7 +94,7 @@ namespace Login.Views
             };
             await dialog.ShowDialog(samMessageDialog);
         }
-        
+
 
         //预赛-添加裁判按钮
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -103,15 +105,28 @@ namespace Login.Views
             var row = preMatchGrid.SelectedItem as Manage_DataGridRow;
             if (row == null)
             {
-                ShowMessageInfo("未选中行！",prehost);
+                ShowMessageInfo("未选中行！", prehost);
                 return;
             }
             else
             {
+
                 if (row.groupID == null)
                 {
                     ShowMessageInfo("请先生成赛事表再添加裁判！", prehost);
                     return;
+                }
+                else
+                {
+                    List<MatchGroup> mgs = gymDBService.GetMatchGroupsByGroupID(row.groupID);
+                    foreach (MatchGroup gp in mgs)
+                    {
+                        if (gp.JudgeID != null)
+                        {
+                            ShowMessageInfo("已经添加过裁判信息！", prehost);
+                            return;
+                        }
+                    }
                 }
                 project = row.project;
                 group = row.groupID;
@@ -123,9 +138,9 @@ namespace Login.Views
         //生成预赛赛事表
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-           if(isPreArrange==true)
+            if (isPreArrange == true)
             {
-                ShowMessageInfo("不可重复生成预赛赛事表！",prehost);
+                ShowMessageInfo("不可重复生成预赛赛事表！", prehost);
                 return;
             }
             GymDBService gymDBService = new GymDBService();
@@ -139,14 +154,14 @@ namespace Login.Views
             SortedSet<string> groupids = new SortedSet<string>();
             foreach (MatchGroup group in groups)
             {
-                if(group.GroupID[3]=='0')
+                if (group.GroupID[3] == '0')
                     groupids.Add(group.GroupID);
 
             }
             //创建存放每个组的personalResult的数组
             List<PersonalResult>[] personalResult = new List<PersonalResult>[groupids.Count];
             int i = 0;
-            foreach(string groupid in groupids)
+            foreach (string groupid in groupids)
             {
                 personalResult[i] = gymDBService.GetPersonalResultsByGroupID(groupid);
                 //对于每个组
@@ -187,8 +202,8 @@ namespace Login.Views
             SortedSet<string> groupids = new SortedSet<string>();
             foreach (MatchGroup group in groups)
             {
-                if(group.GroupID.Substring(3,1)=="1")
-                groupids.Add(group.GroupID);
+                if (group.GroupID.Substring(3, 1) == "1")
+                    groupids.Add(group.GroupID);
 
             }
             //创建存放每个组的personalResult的数组
@@ -225,8 +240,8 @@ namespace Login.Views
         //决赛-添加裁判
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            string project=null;
-            string group=null;
+            string project = null;
+            string group = null;
             //获取当前选中行
             var row = finalMatchGrid.SelectedItem as Manage_DataGridRow;
             if (row == null)
@@ -249,7 +264,7 @@ namespace Login.Views
             var db = new GymDBService();
             GymDBService gymDBService = new GymDBService();
             gymDBService.Set(baomingCount.Text, playerCount.Text, qianjimingCount.Text);
-            ShowMessageInfo("保存成功",sethost);
+            ShowMessageInfo("保存成功", sethost);
         }
 
         private void deleteGrid_Click(object sender, RoutedEventArgs e)
@@ -263,7 +278,7 @@ namespace Login.Views
         {
             ShowAddAccount();
         }
- 
+
         private void addAccount_Click(object sender, RoutedEventArgs e)
         {
             foreach (var acc in accounts)
@@ -272,13 +287,13 @@ namespace Login.Views
                 switch (acc.accountRole)
                 {
                     case "代表队":
-                        userRole = 1;
+                        userRole = 0;
                         break;
                     default:
                         userRole = 2;
                         break;
                 }
-                if (userRole == 1)
+                if (userRole == 0)
                 {
                     gymDBService.Add(new Team(acc.name));
                     gymDBService.Add(new DB.Login(acc.userName, acc.password, userRole, acc.name));
@@ -296,7 +311,9 @@ namespace Login.Views
         }
         private async void ShowAddAccount()
         {
-            AddAccountDialog samMessageDialog = new AddAccountDialog{ };
+            AddAccountDialog samMessageDialog = new AddAccountDialog
+            {
+            };
             isAddAccount = Equals(await add.ShowDialog(samMessageDialog), true);
             if (isAddAccount)
             {
@@ -304,7 +321,7 @@ namespace Login.Views
                 foreach (var login in logins)
                 {
                     if (login.UName == samMessageDialog.UserName.Text) { ShowMessageInfo("用户名重复", addFail); isNotExist = false; }
-                    else if (login.TName == samMessageDialog.Name.Text && login.Role == 1 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
+                    else if (login.TName == samMessageDialog.Name.Text && login.Role == 0 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
                     else if (login.JudgeID.ToString() == samMessageDialog.Name.Text && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
                 }
                 if (isNotExist)
