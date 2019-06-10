@@ -98,7 +98,14 @@
                                 <Grid  Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <materialDesign:PackIcon VerticalAlignment="Top" HorizontalAlignment="Center" Width="20" Height="20" Kind="Run" />
                                 </Grid>
-                                <ListView Grid.Column="1" ItemsSource="{Binding PersonalResults}" />
+                                <ListView Grid.Column="1" ItemsSource="{Binding PersonalResults}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding SportEvent}" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Grade}" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
                             </Grid>
                         </Grid>
                     </Grid>

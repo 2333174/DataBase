@@ -23,7 +23,7 @@ namespace Login.ViewModels
 
         public BaseShrinkViewModel()
         {
-            this.IsVisibility = Visibility.Collapsed;
+            IsVisibility = Visibility.Collapsed;
         }
     }
 }

@@ -91,6 +91,7 @@
     <Compile Include="TeamResultGridItem.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="ViewModels\AthletePRViewModel.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\GSFMPViewModel.cs" />

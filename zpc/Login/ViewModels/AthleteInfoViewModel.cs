@@ -1,9 +1,7 @@
 ﻿using DB;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Login.ViewModels
 {
@@ -15,13 +13,12 @@ namespace Login.ViewModels
             GymDBService dbs = new GymDBService();
             TeamName = dbs.GetTeamNameByTID(athlete.TID);
             var prs = dbs.GetPersonalResultsByAthleteID(athlete.IDNumber);
-            PersonalResults = new List<string>();
+            PersonalResults = new ObservableCollection<AthletePRViewModel>();
             foreach (var pr in prs)
             {
                 try
                 {
-                    string tmpSport = dbs.GetRealSportName(pr.SportsEvent);
-                    PersonalResults.Add(tmpSport);
+                    PersonalResults.Add(new AthletePRViewModel(pr));
                 }
                 catch (Exception e)
                 {
@@ -33,7 +30,17 @@ namespace Login.ViewModels
 
         public string TeamName { set; get; }
 
-        public List<string> PersonalResults { set; get; }
+        private ObservableCollection<AthletePRViewModel> _PersonalResults;
+
+        public ObservableCollection<AthletePRViewModel> PersonalResults
+        {
+            get { return _PersonalResults; }
+            set
+            {
+                _PersonalResults = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Athlete AnAthlete { set; get; }
 
