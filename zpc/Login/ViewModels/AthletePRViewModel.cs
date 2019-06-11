@@ -16,9 +16,9 @@ namespace Login.ViewModels
             }
         }
 
-        private short? _Grade;
+        private string _Grade;
 
-        public short? Grade
+        public string Grade
         {
             get { return _Grade; }
             set
@@ -41,7 +41,11 @@ namespace Login.ViewModels
                     SportEvent += "决赛";
                     break;
             }
-            Grade = pr.Grade;
+            if (pr.Grade != null)
+            {
+                Grade = pr.Grade.ToString();
+                Grade += "(" + pr.Ranking.ToString() + ")";
+            }
         }
     }
 }

@@ -10,7 +10,7 @@
     <ContentControl x:Name="ChangePage" IsTabStop="False">
         <Grid>
             <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" IsTabStop="False"
-            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Height="210" Margin="237,153,230,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.5,0.5"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Height="210" VerticalAlignment="Center" Width="333" RenderTransformOrigin="0.5,0.5"
                              Opacity="0.5">
                 <StackPanel>
                     <Grid Height="142" Margin="0,0,0,0">

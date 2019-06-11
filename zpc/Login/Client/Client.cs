@@ -16,6 +16,8 @@ namespace Login
     class Client
     {
         public static welcomePage _welcomePage=null;
+        public static AthleteInfoPage _athleteInfoPage = null;
+        public static int Tid;
         //创建1个客户端套接字和1个负责监听服务端请求的线程  
         public static Thread ThreadClient = null;
         public static Socket SocketClient = null;
@@ -25,7 +27,7 @@ namespace Login
             try
             {
                 int port = 6000;
-                string host = "10.135.2.12";//服务器端ip地址
+                string host = "127.0.0.1";//服务器端ip地址
                 IPAddress ip = IPAddress.Parse(host);
                 IPEndPoint ipe = new IPEndPoint(ip, port);
                 //定义一个套接字监听  
@@ -120,11 +122,14 @@ namespace Login
                     //将套接字获取到的字符数组转换为人可以看懂的字符串 
 
                     string strRevMsg = Encoding.UTF8.GetString(arrRecvmsg, 0, length);
+                    if (strRevMsg == "更新界面") {
+                        _athleteInfoPage.Dispatcher.Invoke(new Action(jumpToAthlete));
+                    }
                     string []introductions=strRevMsg.Split(':');
                     if (introductions[0] == "打分")
                     {
                         GroupID = introductions[1];
-                        _welcomePage.Dispatcher.Invoke(new Action(jumpTo));
+                        _welcomePage.Dispatcher.Invoke(new Action(jumpToJudge));
                     }
                     if (x == 1)
                         {
@@ -148,7 +153,7 @@ namespace Login
                 }
             }
         }
-        public static void jumpTo()
+        public static void jumpToJudge()
         {
             GymDBService dBService = new GymDBService();
             int key = dBService.GetGroupKeyByJG(_welcomePage.GudgeID, GroupID);
@@ -166,6 +171,18 @@ namespace Login
                 {
                     Content = new GradePage(_welcomePage.GudgeID, key)
                 };
+            }
+        }
+
+        public static void jumpToAthlete()
+        {
+            GymDBService dBService = new GymDBService();
+            List<Athlete> athletes = dBService.GetAthletesByTID(Tid);
+            _athleteInfoPage.dockpanel.Children.Clear();
+            foreach (var athlete in athletes)
+            {
+                AthleteInfoControl athleteInfo = new AthleteInfoControl(athlete);
+                _athleteInfoPage.dockpanel.Children.Add(athleteInfo);
             }
         }
         //发送字符信息到服务端的方法  

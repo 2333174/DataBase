@@ -11,7 +11,7 @@
 
     <ContentControl x:Name="ChangePage">
         <Grid>
-            <Grid HorizontalAlignment="Left" Height="289" Margin="269,89,0,0" VerticalAlignment="Top" Width="276" Background="#FFB6B6B3" Opacity="0.6">
+            <Grid HorizontalAlignment="Center" Height="289" VerticalAlignment="Center" Width="276" Background="#FFB6B6B3" Opacity="0.6">
                 <Label Content="您好，请选择" HorizontalAlignment="Left" Margin="71,43,0,0" VerticalAlignment="Top" Foreground="#FF146581" FontSize="20" FontFamily="MisterEarl BT"/>
                 <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content=" 报 名 系 统" Name="radio_sign" HorizontalAlignment="Center" Margin="73,102,75,165" VerticalAlignment="Center" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20" Padding="5,-2.5,0,0" Width="128"/>
                 <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Content=" 管 理 系 统" Name="radio_manage" HorizontalAlignment="Left" Margin="73,129,0,0" VerticalAlignment="Top" Foreground="#FFA23E12" FontWeight="Bold" FontFamily="Pump LET Plain" FontSize="20" Padding="5,-2.5,0,0" Height="23" Width="128"/>

@@ -42,10 +42,12 @@ namespace Login.Views
                         {
                             ChangePage.Content = new Frame()
                             { Content = new SignUpPage(_TName) };
+                            base.Title = "队伍注册";
                         }
                         else
                         {
                             ChangePage.Content = new Frame() { Content = new AthleteInfoPage(db.GetTIDByTName(_TName)) };
+                            Title = "队伍信息";
                         }
                     }
                     else if (select==1){
@@ -54,6 +56,7 @@ namespace Login.Views
                             Client.run("管理");
                             ChangePage.Content = new Frame()
                             { Content = new ManagePage() };
+                            Title = "管理系统";
                         }
                         catch (Exception e)
                         {
@@ -67,6 +70,7 @@ namespace Login.Views
                         try
                         {
                             Client.run(db.GetJudgeID(user.Text, password.Password).ToString());
+                            Title = "打分系统";
                             ChangePage.Content = new Frame()
                             {
                                 Content = new welcomePage(db.GetJudgeID(user.Text, password.Password))
