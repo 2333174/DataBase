@@ -1025,5 +1025,23 @@ namespace DB
                 return res.ToList();
             }
         }
+
+        public List<Judge> GetUnLoginJudges()
+        {
+            using (var db = new GymDB())
+            {
+                List<Judge> judges = db.judge.ToList();
+                List<Login> logins = db.login.ToList();
+                foreach (var lo in logins)
+                {
+                    if (lo.JudgeID != null)
+                    {
+                        Judge ju = db.judge.Find(lo.JudgeID);
+                        judges.Remove(ju);
+                    }
+                }
+                return judges;
+            }
+        }
     }
 }

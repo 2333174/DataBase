@@ -6,46 +6,61 @@
              xmlns:local="clr-namespace:Login.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Login.Views.AddAccountDialog"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800"
-             MaxWidth="900">
+             Height="260" Width="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <TextBlock
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-                   TextAlignment="Center"
-                   Margin="0 6 0 0"
-                   FontSize="20"
-                   FontWeight="Bold"><Run Text="添加账号"/></TextBlock>
-        
-        <TextBox  x:Name="UserName" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="41,28,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账户名" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />
-        <TextBox  x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="231,29,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />
-        <ComboBox x:Name="AccountRole" Grid.Row="1" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账户类型"  Margin="434,39,246,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
-            <ComboBoxItem  Content="裁判"/>
-            <ComboBoxItem  Content="代表队"/>
-        </ComboBox>
-        <TextBox  x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="677,28,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="队名/裁判ID" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />
-        <Button
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 6 0 0"
+            FontSize="20" FontWeight="Bold"><Run Text="添加账号"/></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" x:Name="UserName" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Height="40" Width="150"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账户名" VerticalAlignment="Center" Opacity="0.7" />
+                <ComboBox x:Name="AccountRole" Grid.Row="1" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账户类型" VerticalAlignment="Center" Height="27" Width="150" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
+                    <ComboBoxItem  Content="裁判"/>
+                    <ComboBoxItem  Content="代表队"/>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <PasswordBox Grid.Row="0" x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center" Height="40" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Center" Width="150" Opacity="0.7" />
+                <ComboBox x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Height="27" materialDesign:HintAssist.Hint="裁判名" VerticalAlignment="Center" Width="150" Opacity="0.7" Grid.Row="1" SelectionChanged="Name_SelectionChanged" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
             Style="{StaticResource MaterialDesignFlatButton}"
-            IsDefault="True"
-            Margin="290,39,450,29"
+            IsDefault="True" Width="150"
             Command="materialDesign:DialogHost.CloseDialogCommand" Content="添加" Grid.Row="2">
-            <Button.CommandParameter>
-                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">True</system:Boolean>
-            </Button.CommandParameter>
-        </Button>
-        <Button
+                <Button.CommandParameter>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">True</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button Grid.Column="1" Width="150"
             Style="{StaticResource MaterialDesignFlatButton}"
             IsCancel="True"
-            Margin="444,39,296,29"
             Command="materialDesign:DialogHost.CloseDialogCommand" Content="取消" Grid.Row="2">
-            <Button.CommandParameter>
-                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">False</system:Boolean>
-            </Button.CommandParameter>
-        </Button>
+                <Button.CommandParameter>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">False</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
