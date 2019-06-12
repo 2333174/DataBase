@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using DB;
 using Login.Models;
 using MaterialDesignThemes.Wpf;
@@ -322,11 +312,11 @@ namespace Login.Views
                 {
                     if (login.UName == samMessageDialog.UserName.Text) { ShowMessageInfo("用户名重复", addFail); isNotExist = false; }
                     else if (login.TName == samMessageDialog.Name.Text && login.Role == 0 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
-                    else if (login.JudgeID.ToString() == samMessageDialog.Name.Text && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
+                    else if (login.JudgeID.ToString() == samMessageDialog.Name.SelectedValue.ToString() && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
                 }
                 if (isNotExist)
                 {
-                    account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.Name.Text);
+                    account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Password, samMessageDialog.AccountRole.Text, samMessageDialog.Name.SelectedValue.ToString());
                     accounts.Add(account);
                     accountGrid.ItemsSource = null;
                     accountGrid.ItemsSource = accounts;

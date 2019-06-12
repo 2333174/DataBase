@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="Models\ComboItem.cs" />
     <Compile Include="ShowGradeGridItem.cs" />
     <Compile Include="TeamResultGridItem.cs" />
     <Compile Include="Client\Client.cs" />

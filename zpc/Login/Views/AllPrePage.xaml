@@ -9,63 +9,47 @@
       Title="AllPrePage">
 
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="424" Margin="0,0,-6.667,-3.333" VerticalAlignment="Top" Width="800" RenderTransformOrigin="0.5,0.498" >
+        <TabControl HorizontalAlignment="Left" Height="424" VerticalAlignment="Top" Width="800" RenderTransformOrigin="0.5,0.498" >
             <TabItem Header="团体成绩">
                 <Grid>
-                    <Grid Height="397" VerticalAlignment="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="187*"/>
-                            <ColumnDefinition Width="607*"/>
-                        </Grid.ColumnDefinitions>
-                        <DataGrid Name="teamgrid"   AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="361" Margin="110,93,0,0" Grid.ColumnSpan="2">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="项目名"/>
-                                <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="排名"/>
-                                <DataGridTextColumn Binding="{Binding Path=tname}" ClipboardContentBinding="{x:Null}" Header="队伍名称"/>
-                                <DataGridTextColumn Binding="{Binding Path=teamgrade}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                    <DataGrid Name="teamgrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="250" VerticalAlignment="Center" Width="Auto" Margin="150,0,0,0" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="项目名"/>
+                            <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="排名"/>
+                            <DataGridTextColumn Binding="{Binding Path=tname}" ClipboardContentBinding="{x:Null}" Header="队伍名称"/>
+                            <DataGridTextColumn Binding="{Binding Path=teamgrade}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="个人全能成绩">
                 <Grid>
-                    <Grid Height="397" VerticalAlignment="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="31*"/>
-                            <ColumnDefinition Width="153*"/>
-                            <ColumnDefinition Width="6*"/>
-                            <ColumnDefinition Width="604*"/>
-                        </Grid.ColumnDefinitions>
-                        <DataGrid Name="athletegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="355" Margin="70,81,0,0" Grid.ColumnSpan="3" Grid.Column="1">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
-                                <DataGridTextColumn Binding="{Binding Path=athleteID}" ClipboardContentBinding="{x:Null}" Header="编号"/>
-                                <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="项目"/>
-                                <DataGridTextColumn Binding="{Binding Path=atheletegrade}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
-                                <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="排名"/>
-
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="771*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="athletegrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="250" VerticalAlignment="Center" Width="Auto" Margin="126.8,73,0,73" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
+                            <DataGridTextColumn Binding="{Binding Path=athleteID}" ClipboardContentBinding="{x:Null}" Header="编号"/>
+                            <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="项目"/>
+                            <DataGridTextColumn Binding="{Binding Path=atheletegrade}" ClipboardContentBinding="{x:Null}" Header="总成绩"/>
+                            <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="排名"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="单项决赛名次">
                 <Grid>
-                    <Grid Height="397" VerticalAlignment="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="109*"/>
-                            <ColumnDefinition Width="685*"/>
-                        </Grid.ColumnDefinitions>
-                        <DataGrid Name="rankgrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="470" Margin="95,91,0,0" Grid.ColumnSpan="2">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="比赛项目"/>
-                                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
-                                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
-                                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="决赛次序"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                    <DataGrid Name="rankgrid"  ItemsSource="{Binding Path=items,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="250" VerticalAlignment="Center" Width="Auto" Margin="150,0,0,0" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=game}" ClipboardContentBinding="{x:Null}" Header="比赛项目"/>
+                            <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="运动员姓名"/>
+                            <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="小组号"/>
+                            <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="决赛次序"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
