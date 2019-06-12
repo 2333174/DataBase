@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using DB;
 using Login.Models;
+using System.Windows;
 
 namespace Login.Views
 {
@@ -21,6 +22,18 @@ namespace Login.Views
             Name.ItemsSource = items;
             Name.DisplayMemberPath = "JudgeName";
             Name.SelectedValuePath = "JudgeID";
+        }
+
+        private void choosejudge(object sender, RoutedEventArgs e)
+        {
+            Name.Visibility = Visibility.Visible;
+            TeamName.Visibility = Visibility.Hidden;
+        }
+
+        private void chooseTeam(object sender, RoutedEventArgs e)
+        {
+            Name.Visibility = Visibility.Hidden;
+            TeamName.Visibility = Visibility.Visible;
         }
     }
 }

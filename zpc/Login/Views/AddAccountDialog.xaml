@@ -27,8 +27,8 @@
                 </Grid.RowDefinitions>
                 <TextBox Grid.Row="0" x:Name="UserName" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Center" Height="40" Width="150"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账户名" VerticalAlignment="Center" Opacity="0.7" />
                 <ComboBox x:Name="AccountRole" Grid.Row="1" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账户类型" VerticalAlignment="Center" Height="27" Width="150" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
-                    <ComboBoxItem  Content="裁判"/>
-                    <ComboBoxItem  Content="代表队"/>
+                    <ComboBoxItem  Content="裁判" Selected="choosejudge"/>
+                    <ComboBoxItem  Content="代表队" Selected="chooseTeam"/>
                 </ComboBox>
             </Grid>
             <Grid Grid.Column="1">
@@ -36,8 +36,9 @@
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-                <PasswordBox Grid.Row="0" x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" HorizontalAlignment="Center" Height="40" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Center" Width="150" Opacity="0.7" />
-                <ComboBox x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Height="27" materialDesign:HintAssist.Hint="裁判名" VerticalAlignment="Center" Width="150" Opacity="0.7" Grid.Row="1" SelectionChanged="Name_SelectionChanged" />
+                <TextBox Grid.Row="0" x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3"  HorizontalAlignment="Center" Height="40" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Center" Width="150" Opacity="0.7" />
+                <ComboBox x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Center" Height="27" materialDesign:HintAssist.Hint="裁判名" VerticalAlignment="Center" Width="150" Opacity="0.7" Grid.Row="1"  />
+                <TextBox Grid.Row="1" x:Name="TeamName" materialDesign:ShadowAssist.ShadowDepth="Depth3"  HorizontalAlignment="Center" Height="40" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="队名" VerticalAlignment="Center" Width="150" Opacity="0.7" Margin="25,10,25,20" Visibility="Hidden" />
             </Grid>
         </Grid>
         <Grid Grid.Row="2">

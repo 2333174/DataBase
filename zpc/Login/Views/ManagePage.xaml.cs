@@ -311,12 +311,13 @@ namespace Login.Views
                 foreach (var login in logins)
                 {
                     if (login.UName == samMessageDialog.UserName.Text) { ShowMessageInfo("用户名重复", addFail); isNotExist = false; }
-                    else if (login.TName == samMessageDialog.Name.Text && login.Role == 0 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
+                    else if (login.TName == samMessageDialog.TeamName.Text && login.Role == 0 && samMessageDialog.AccountRole.Text == "代表队") { ShowMessageInfo("代表队名重复", addFail); isNotExist = false; }
                     else if (login.JudgeID.ToString() == samMessageDialog.Name.SelectedValue.ToString() && login.Role == 2 && samMessageDialog.AccountRole.Text == "教练") { ShowMessageInfo("教练名重复", addFail); isNotExist = false; }
                 }
                 if (isNotExist)
                 {
-                    account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Password, samMessageDialog.AccountRole.Text, samMessageDialog.Name.SelectedValue.ToString());
+                   if (samMessageDialog.AccountRole.Text == "裁判") account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.Name.SelectedValue.ToString());
+                    else account = new Account(samMessageDialog.UserName.Text, samMessageDialog.Password.Text, samMessageDialog.AccountRole.Text, samMessageDialog.TeamName.Text);
                     accounts.Add(account);
                     accountGrid.ItemsSource = null;
                     accountGrid.ItemsSource = accounts;
