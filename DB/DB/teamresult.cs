@@ -9,6 +9,7 @@ namespace DB
     [Table("gymdb.teamresult")]
     public partial class TeamResult
     {
+      
         public int TID { get; set; }
 
         [Required]
@@ -23,5 +24,22 @@ namespace DB
         public int TRid { get; set; }
 
         public virtual Team team { get; set; }
+        public TeamResult()
+        {
+
+        }
+        public TeamResult(int tid,string _event)
+        {
+            this.TID=tid;
+            this.Event=Event;
+            this.team = team;
+        }
+        public TeamResult(int tid, string _event,short? grade,Team team)
+        {
+            this.TID = tid;
+            this.Event = _event;
+            this.Grade=grade;
+            this.team = team;
+        }
     }
 }

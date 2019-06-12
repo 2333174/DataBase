@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using DB;
 using Login.Commands;
+using Login.Views;
 
 namespace Login.ViewModels
 {
@@ -43,9 +45,11 @@ namespace Login.ViewModels
         public DelegateCommand PreviewCommand { set; get; }
         public DelegateCommand SubmitCommand { set; get; }
         public string groupid;
-        public GSFMPViewModel(string groupid)
+        private GSForMajorJudgePage page;
+        public GSFMPViewModel(string groupid, GSForMajorJudgePage page)
         {
             this.groupid = groupid;
+            this.page = page;
             GymDBService dbs = new GymDBService();
             List<PersonalResult> prs = dbs.GetPersonalResultsByGroupID(groupid);
             GridItems = new ObservableCollection<PRItemsViewModel>();
@@ -98,7 +102,20 @@ namespace Login.ViewModels
                 prs.Add(pr);
             }
             dbs.Ranking(prs);
-            Client1.ClientSendMsg("主裁判打完分:"+groupid);
+            Client.ClientSendMsg("主裁判打完分:"+groupid);
+            ShowMessageInfo("打分成功!");
+            string type = groupid.Substring(3, 1) == "0" ? "预赛" : "决赛";
+            page.MajorJudgePage.Content = new Frame
+            { Content = new ShowGrade(groupid,dbs.GetRealSportName(groupid.Substring(0,4)), type) };
+        }
+
+        private async void ShowMessageInfo(string message)
+        {
+            Views.MessageDialog samMessageDialog = new Views.MessageDialog
+            {
+                Message = { Text = message }
+            };
+            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
         }
     }
 }

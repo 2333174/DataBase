@@ -12,6 +12,9 @@ namespace Login.Views
         public AthleteInfoPage(int TID)
         {
             InitializeComponent();
+            Client.run("报名:"+TID);
+            Client._athleteInfoPage = this;
+            Client.Tid = TID;
             GymDBService dbs = new GymDBService();
             List<Athlete> athletes = dbs.GetAthletesByTID(TID);
             foreach (var athlete in athletes)

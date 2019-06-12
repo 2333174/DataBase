@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
-using Custom;
 using Login.ViewModels;
 
 namespace Login.Views
@@ -16,7 +15,7 @@ namespace Login.Views
         public GSForMajorJudgePage(string groupid)
         {
             InitializeComponent();
-            viewModel = new GSFMPViewModel(groupid);
+            viewModel = new GSFMPViewModel(groupid,this);
             DataContext = viewModel;
            
         }

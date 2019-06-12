@@ -64,14 +64,16 @@ namespace DB
         }
 
         // Add a teamresult to the team
-        public void Add(TeamResult _teamresult)
+        public bool Add(TeamResult _teamresult)
         {
             using (var db = new GymDB())
             {
+                if (!CheckDuplicateTeamResult(_teamresult)) return false;
                 var targetTeam = db.team.Find(_teamresult.TID);
-                targetTeam.teamresult.Add(_teamresult);
                 db.teamresult.Add(_teamresult);
+                targetTeam.teamresult.Add(_teamresult);
                 db.SaveChanges();
+                return true;
             }
         }
 
@@ -132,7 +134,24 @@ namespace DB
                 else return false;
             }
         }
-
+        private bool CheckDuplicateTeamResult(TeamResult tr)
+        {
+            using (var db = new GymDB())
+            {
+                var rss = db.teamresult.Where(rs => rs.TID == tr.TID && rs.Event == tr.Event);
+                if (rss.Count() == 0) return true;
+                else return false;
+            }
+        }
+        public bool CheckDuplicateTeamResult(int tid,string _event)
+        {
+            using (var db = new GymDB())
+            {
+                var rss = db.teamresult.Where(rs => rs.TID == tid && rs.Event == _event);
+                if (rss.Count() == 0) return true;
+                else return false;
+            }
+        }
         public bool Add(RefereeScore _refereeScore)
         {
             using (var db = new GymDB())
@@ -172,10 +191,10 @@ namespace DB
             return tmpType;
         }
 
-        public string GetRealSportName(PersonalResult _personalResult)
+        public string GetRealSportName(string sportsevent)
         {
             string tmpSport = null;
-            switch (_personalResult.SportsEvent.Substring(1, 2))
+            switch (sportsevent.Substring(1, 2))
             {
                 case "01":
                     tmpSport = "男子单杠";
@@ -218,7 +237,65 @@ namespace DB
             }
             return tmpSport;
         }
-
+        public string GetFullSportName(string sportsevent)
+        {
+            string age = null;
+            string tmpSport = null;
+            switch(sportsevent.Substring(0, 1))
+            {
+                case "0":
+                     age = "7-8岁";
+                     break;
+                case "1":
+                     age = "9-10岁";
+                    break;
+                case "2":
+                    age = "11-12岁";
+                    break;
+            }
+            switch (sportsevent.Substring(1, 2))
+            {
+                case "01":
+                    tmpSport = "男子单杠";
+                    break;
+                case "02":
+                    tmpSport = "男子双杠";
+                    break;
+                case "03":
+                    tmpSport = "男子吊环";
+                    break;
+                case "04":
+                    tmpSport = "男子跳马";
+                    break;
+                case "05":
+                    tmpSport = "男子自由体操";
+                    break;
+                case "06":
+                    tmpSport = "男子鞍马";
+                    break;
+                case "07":
+                    tmpSport = "男子蹦床";
+                    break;
+                case "08":
+                    tmpSport = "女子跳马";
+                    break;
+                case "09":
+                    tmpSport = "女子高低杠";
+                    break;
+                case "10":
+                    tmpSport = "女子平衡木";
+                    break;
+                case "11":
+                    tmpSport = "女子自由体操";
+                    break;
+                case "12":
+                    tmpSport = "女子蹦床";
+                    break;
+                default:
+                    throw new Exception("未找到相关项目。");
+            }
+            return age+tmpSport;
+        }
         // Get the judgeid by comparing username and role
         public int GetJudgeID(string _username, string password)
         {
@@ -261,7 +338,7 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.Where(p => p.SportsEvent.Equals(_sportEvent)).ToList();
         }
-
+       
         public List<PersonalResult> GetPersonalResultsBySportEventAndRole(string _sportEvent, int role)
         {
             using (var db = new GymDB())
@@ -272,6 +349,7 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.ToList();
         }
+
 
         public PersonalResult GetPersonalResultByAthleteIDAndGroupid(string _AthleteID, string _Groupid)
         {
@@ -311,7 +389,11 @@ namespace DB
             using (var db = new GymDB())
                 return db.matchgroup.Where(mg => mg.JudgeID == _JudgeID).ToList();
         }
-
+        public List<MatchGroup> GetMatchGroupsByGroupID(string _groupID)
+        {
+            using (var db = new GymDB())
+                return db.matchgroup.Where(mg => mg.GroupID == _groupID).ToList();
+        }
         public List<MatchGroup> GetMatchGroups()
         {
             using (var db = new GymDB())
@@ -329,7 +411,11 @@ namespace DB
             using (var db = new GymDB())
                 return db.personalresult.Find(_PRid);
         }
-
+        public PersonalResult GetPersonalResultsBySportEventAndRoleAndAID(string _sportsevent,sbyte _role,string _aid)
+        {
+            using (var db = new GymDB())
+                return db.personalresult.Where(p => (p.SportsEvent == _sportsevent)&&(p.Role==_role)&&p.AthleteID==_aid).Single();
+        }
         public Team GetTeamByTName(string _name)
         {
             using (var db = new GymDB())
@@ -358,6 +444,18 @@ namespace DB
         {
             using (var db = new GymDB())
                 return db.athlete.ToList();
+        }
+
+        public List<TeamResult> GetTeamResults()
+        {
+            using (var db = new GymDB())
+                return db.teamresult.ToList();
+        }
+
+        public List<TeamResult> GetTeamResultsByEvent(string _event)
+        {
+            using (var db = new GymDB())
+                return db.teamresult.Where(p=>p.Event.Equals(_event)).ToList();
         }
 
         public MatchGroup GetMatchGroupByKey(int _key)
@@ -741,6 +839,7 @@ namespace DB
                     for (int i = 0; i < query.Count(); i++)
                     {
                         query[i].Ranking = (short?)(i + 1);
+                        query[i].Suq = (sbyte?)(i + i);
                         if (i != 0 && query[i - 1].Grade == query[i].Grade)
                             query[i].Ranking = query[i - 1].Ranking;
                         dbs.Update(query[i]);
@@ -750,6 +849,7 @@ namespace DB
             else
                 throw new Exception("There are empty items in the personalresult");
         }
+     
 
         public void Grouping(int n)
         {

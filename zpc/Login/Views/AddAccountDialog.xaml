@@ -25,7 +25,7 @@
         <TextBox  x:Name="UserName" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="41,28,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="账户名" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />
         <TextBox  x:Name="Password" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="231,29,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="密码" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />
         <ComboBox x:Name="AccountRole" Grid.Row="1" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth3" materialDesign:HintAssist.Hint="账户类型"  Margin="434,39,246,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.087,0.547" Opacity="0.7">
-            <ComboBoxItem  Content="教练"/>
+            <ComboBoxItem  Content="裁判"/>
             <ComboBoxItem  Content="代表队"/>
         </ComboBox>
         <TextBox  x:Name="Name" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="677,28,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="队名/裁判ID" VerticalAlignment="Top" Width="101" Opacity="0.7" Grid.Row="1" />

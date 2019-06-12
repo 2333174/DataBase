@@ -87,9 +87,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChooseJudgeGridItem.cs" />
-    <Compile Include="Client\Client1.cs" />
-    <Compile Include="Models\Account.cs" />
     <Compile Include="ShowGradeGridItem.cs" />
+    <Compile Include="TeamResultGridItem.cs" />
+    <Compile Include="Client\Client.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="ViewModels\AthletePRViewModel.cs" />
     <Compile Include="ViewModels\BaseShrinkViewModel.cs" />
     <Compile Include="ViewModels\GradePageViewModel.cs" />
     <Compile Include="ViewModels\GSFMPViewModel.cs" />
@@ -109,6 +111,9 @@
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Views\AddAthleteDialog.xaml.cs">
       <DependentUpon>AddAthleteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllPrePage.xaml.cs">
+      <DependentUpon>AllPrePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AthleteInfoControl.xaml.cs">
       <DependentUpon>AthleteInfoControl.xaml</DependentUpon>
@@ -157,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddAthleteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllPrePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,10 +281,6 @@
     <ProjectReference Include="..\..\DB\DB\DB.csproj">
       <Project>{764be4f0-31e4-48b5-9419-47c3d20f541c}</Project>
       <Name>DB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Custom\Custom.csproj">
-      <Project>{79e7c88e-6c76-4413-8a60-809259b83375}</Project>
-      <Name>Custom</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

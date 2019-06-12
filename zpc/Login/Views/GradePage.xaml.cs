@@ -23,7 +23,7 @@ namespace Login.Views
         public GradePage(int _judgeID, int _groupKey)
         {
             InitializeComponent();
-            DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey);
+            DataContext = new ViewModels.GradePageViewModel(_judgeID, _groupKey,this);
         }
 
 

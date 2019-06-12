@@ -24,17 +24,21 @@
             <TabItem Header="添加账号" HorizontalAlignment="Left" Width="112" Margin="-2,-2,-40.667,0.333" Background="{x:Null}" Opacity="0.7">
                 <Grid>
                     <Grid Height="397" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="185*"/>
+                            <ColumnDefinition Width="212*"/>
+                        </Grid.ColumnDefinitions>
                         <materialDesign:Card
                          Background="{DynamicResource PrimaryHueLightBrush}"
                          Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-                          Padding="8" Margin="205,26,289,0">
+                          Padding="8" Margin="205,26,289,0" Grid.ColumnSpan="2">
                             <TextBlock FontSize="16" HorizontalAlignment="Center">
                                   请确认账号信息后再提交
                             </TextBlock>
                         </materialDesign:Card>
-                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="add" Identifier="addAccount" IsTabStop="False"/>
-                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="addFail" Identifier="addAccount" IsTabStop="False"/>
-                        <DataGrid Name="accountGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="190,77,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" >
+                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="add" Identifier="addAccount" IsTabStop="False" Grid.ColumnSpan="2"/>
+                        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="addFail" Identifier="addAccount" IsTabStop="False" Grid.ColumnSpan="2"/>
+                        <DataGrid Name="accountGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="190,77,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Path=userName}" ClipboardContentBinding="{x:Null}" Header="  账号  "/>
                                 <DataGridTextColumn Binding="{Binding Path=password}" ClipboardContentBinding="{x:Null}" Header="  密码  "/>
@@ -42,14 +46,14 @@
                                 <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="  队名/裁判ID  "/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button  Content="添加" HorizontalAlignment="Left" Margin="641,245,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addGrid_Click"/>
-                        <Button  Content="删除" HorizontalAlignment="Left" Margin="641,304,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="deleteGrid_Click"/>
+                        <Button  Content="添加" HorizontalAlignment="Left" Margin="270.833,245,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addGrid_Click" Grid.Column="1"/>
+                        <Button  Content="删除" HorizontalAlignment="Left" Margin="270.833,304,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="deleteGrid_Click" Grid.Column="1"/>
                         <TextBlock
                              TextAlignment="Center"
-                             Margin="0,26,32,376"
+                             Margin="0,26,32,371"
                             FontSize="15"
-                            FontWeight="Bold" Text="添加账号信息"/>
-                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="确定" HorizontalAlignment="Left" Margin="321,341,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addAccount_Click"/>
+                            FontWeight="Bold" Text="添加账号信息" Grid.ColumnSpan="2"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="确定" HorizontalAlignment="Left" Margin="321,341,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addAccount_Click" Grid.ColumnSpan="2"/>
 
                     </Grid>
 
@@ -92,26 +96,15 @@
             </TabItem>
             <TabItem Header="预赛" Margin="0,-2,-88,0" Background="{x:Null}" Opacity="0.7" HorizontalAlignment="Left" Width="112">
                 <Grid>
-                    <materialDesign:DialogHost Name="prehost" Identifier="prehost"></materialDesign:DialogHost>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="503,259,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_5"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="503,178,0,0" VerticalAlignment="Top" Width="130" Height="29" Foreground="White" Click="Button_Click_4"/>
-                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="73,67,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
-                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  出场顺序  "/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="决赛" Margin="0,-2,-131,0.333" Opacity="0.7" Background="{x:Null}" HorizontalAlignment="Left" Width="112"  RenderTransformOrigin="-0.376,0.595">
-                <Grid>
-
-                    <materialDesign:DialogHost Name="finalhost" Identifier="finalhost" Grid.Column="3"></materialDesign:DialogHost>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成决赛赛事表" HorizontalAlignment="Left" Margin="532,253,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_3"/>
-                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="139,58,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="307*"/>
+                        <ColumnDefinition Width="98*"/>
+                        <ColumnDefinition Width="389*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:DialogHost Name="prehost" Identifier="prehost" Grid.ColumnSpan="3" Margin="0,0,0.001,-0.333"></materialDesign:DialogHost>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="118.666,259,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_5" Grid.Column="2"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="118.666,178,0,0" VerticalAlignment="Top" Width="130" Height="32" Foreground="White" Click="Button_Click_4" Grid.Column="2"/>
+                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="109,67,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
@@ -119,7 +112,27 @@
                             <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="添加裁判" HorizontalAlignment="Left" Margin="532,182,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_6"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="决赛" Margin="0,-2,-131,0.333" Opacity="0.7" Background="{x:Null}" HorizontalAlignment="Left" Width="112"  RenderTransformOrigin="-0.376,0.595">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="176*"/>
+                        <ColumnDefinition Width="159*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:DialogHost Name="finalhost" Identifier="finalhost" Grid.ColumnSpan="3" Margin="0,0,0,-0.333"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="显示决赛赛事表" HorizontalAlignment="Left" Margin="56,253,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_3" Grid.Column="2"/>
+                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="109,58,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
+                            <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
+                            <DataGridTextColumn Binding="{Binding Path=team}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
+                            <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="添加裁判" HorizontalAlignment="Left" Margin="56,182,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_6" Grid.Column="2"/>
                 </Grid>
             </TabItem>
 

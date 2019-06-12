@@ -9,20 +9,23 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShowGrade">
 
+    <ContentControl x:Name="ChangePage">
     <Grid>
-        <DataGrid Name="gradegrid" HorizontalAlignment="Left" Height="269" Margin="106,132,0,0" VerticalAlignment="Top" Width="435" Opacity="0.7"  BorderBrush="#FFB37580" Foreground="#FF060001"
+        <DataGrid Name="gradegrid" HorizontalAlignment="Left" Height="269" Margin="106,135,0,0" VerticalAlignment="Top" Width="419" Opacity="0.7"  BorderBrush="#FFB37580" Foreground="#FF060001"
             ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  排名 "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>                
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
-                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
+                <DataGridTextColumn Binding="{Binding Path=rank}" ClipboardContentBinding="{x:Null}" Header="  排名 "/>
+                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Header="  运动员姓名  "/>                
+                <DataGridTextColumn Binding="{Binding Path=suq}" ClipboardContentBinding="{x:Null}" Header="  号码  "/>
+                <DataGridTextColumn Binding="{Binding  Path=tname}" ClipboardContentBinding="{x:Null}" Header="  队名  "/>
+                <DataGridTextColumn Binding="{Binding Path=atheletegrade}" ClipboardContentBinding="{x:Null}" Header="  分数  "/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox  x:Name="Game" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="106,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="项目" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541" TextChanged="Item_TextChanged" />
-        <TextBox  x:Name="Type" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="292,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="比赛类型" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541" TextChanged="Type_TextChanged" />
+        <TextBox  x:Name="Game" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="106,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="项目" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541" />
+        <TextBox  x:Name="Type" materialDesign:ShadowAssist.ShadowDepth="Depth3"  Margin="292,53,0,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="比赛类型" VerticalAlignment="Top" Width="101" Opacity="0.7" RenderTransformOrigin="-0.252,0.541"/>
+        <Button Content="返回" HorizontalAlignment="Left" Margin="652,383,0,0" VerticalAlignment="Top" Width="99" AutomationProperties.Name="Back" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_4"/>
 
     </Grid>
+    </ContentControl>
 </Page>

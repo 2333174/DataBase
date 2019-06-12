@@ -22,7 +22,9 @@ namespace Server
         static Dictionary<string, int> MajorJudge = new Dictionary<string, int>();//小组主裁判 
         static List<Socket> ManagerSockets = new List<Socket>();//管理员
         static Dictionary<string, List<string>> SEJudgedGroup = new Dictionary<string, List<string>>(); // 项目被打分过的数目
-
+        static List<Socket> TeamSockets = new List<Socket>();
+        static Dictionary<Socket, int> TeamIDs = new Dictionary<Socket, int>();
+        //static Dictionary<int, Socket> TeamIDSockets = new Dictionary<int, Socket>();
         static void Main(string[] args)
         {
             //端口号（用来监听的）
@@ -84,9 +86,16 @@ namespace Server
                 int length = connection.Receive(arrServerRecMsg);
                 //将机器接受到的字节数组转换为人可以读懂的字符串     
                 string strSRecMsg = Encoding.UTF8.GetString(arrServerRecMsg, 0, length);
+                string[] teamMessage = strSRecMsg.Split(':');
                 if (strSRecMsg == "管理")
                 {
                     ManagerSockets.Add(connection);
+                }
+                else if (teamMessage[0] == "报名")
+                {
+                    TeamSockets.Add(connection);
+                    //TeamIDSockets.Add(int.Parse(teamMessage[1]),connection);
+                    TeamIDs.Add(connection, int.Parse(teamMessage[1]));
                 }
                 else
                 {
@@ -176,7 +185,30 @@ namespace Server
                             }
                             if(CheckSEIsJudgesOver(introductions[1].Substring(0, 4)))
                             {
-                                Promote(introductions[1].Substring(0, 4));
+                                var prs = Ranking(introductions[1].Substring(0, 4));
+                                if (introductions[1].Substring(3, 1) == "0")
+                                {
+                                    GymDBService dbs = new GymDBService();
+                                    dbs.Promote(prs, 8, 8);
+                                }
+                                SortedSet<Socket> sockets = new SortedSet<Socket>();
+                                foreach (var pr in prs)
+                                {
+                                    GymDBService dbs = new GymDBService();
+                                    var targetathlete = dbs.GetAthleteByID(pr.AthleteID);
+                                    if (TeamIDs.ContainsValue((int)targetathlete.TID))
+                                    {
+                                        foreach (var kvp in TeamIDs)
+                                        {
+                                            if(kvp.Value.Equals((int)targetathlete.TID))
+                                                sockets.Add(kvp.Key);
+                                        }
+                                    }
+                                }
+                                foreach(var socket in sockets)
+                                {
+                                    socket.Send(Encoding.UTF8.GetBytes("更新界面"));
+                                }
                             }
                         }
                     }
@@ -198,6 +230,12 @@ namespace Server
                     Console.WriteLine(e.Message);
                     int t = -1;
                     if (ManagerSockets.IndexOf(socketServer) != -1) ManagerSockets.Remove(socketServer);
+                    if (TeamSockets.IndexOf(socketServer) != -1)
+                    {
+                        TeamSockets.Remove(socketServer);
+                        //TeamIDSockets.Remove(TeamIDs[socketServer]);
+                        TeamIDs.Remove(socketServer);
+                    }
                     foreach (var socketTemp in Judges)
                     {
                         if (socketTemp.Value == socketServer)
@@ -240,7 +278,7 @@ namespace Server
             return false;
         }
 
-        private static void Promote(string se)
+        private static List<PersonalResult> Ranking(string se)
         {
             List<string> targetMGids = SEJudgedGroup[se];
             GymDBService dbs = new GymDBService();
@@ -251,7 +289,8 @@ namespace Server
                 prs.AddRange(tpr);
             }
             dbs.Ranking(prs);
-            dbs.Promote(prs, 8, 8);
+            return prs;
+            //dbs.Promote(prs, 8, 8);
         }
     }
 }

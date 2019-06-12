@@ -22,7 +22,9 @@ namespace Login.Views
     /// </summary>
     public partial class ChooseJudge : Page
     {
+        int mainjudgeid=-1;
         ObservableCollection<string> g_judges { get; set; }
+        ObservableCollection<string> g_judgeids { get; set; }
         ObservableCollection<ChooseJudgeGridItem> items { get; set; }
         ChooseJudgeGridItem item { get; set; }
         GymDB db = new GymDB();
@@ -33,6 +35,7 @@ namespace Login.Views
             InitializeComponent();
             items = new ObservableCollection<ChooseJudgeGridItem>();
             g_judges = new ObservableCollection<string>();
+            g_judgeids = new ObservableCollection<string>();
             //根据所选行初始化datagrid
             item = new ChooseJudgeGridItem(project, group, null, null);
             items.Add(item);
@@ -62,6 +65,7 @@ namespace Login.Views
                 g_judges.Add(GroupJudgeName.Text);
                 items[0].groupJudges= items[0].groupJudges+" "+g_judges.Last(); 
                 items[0].mainJudge = MainJudgeName.Text;
+                mainjudgeid = Convert.ToInt32(MainID.Text);
                 judgegrid.ItemsSource = null;
                 judgegrid.ItemsSource = items;
             }
@@ -73,6 +77,8 @@ namespace Login.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             g_judges.Clear();
+            g_judgeids.Clear();
+            mainjudgeid = -1;
             items[0].groupJudges = null;
             judgegrid.ItemsSource = null;
             judgegrid.ItemsSource = items;
@@ -82,12 +88,26 @@ namespace Login.Views
         //确认按钮
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (MainID.Text != null && item.groupID != null && g_judges != null && GroupJudgeName.SelectedItem != null)
+            if ( mainjudgeid!=-1 && g_judges != null && GroupJudgeName.SelectedItem != null)
             {
                 MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
-                Client1.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) +","+ groupid);
-                gymDBService.Add(mainmatch);
                 List<Judge> judges = db.judge.ToList();
+                //先添加总裁判
+                List<MatchGroup> mgs = gymDBService.GetMatchGroupsByGroupID(item.groupID);
+                foreach(MatchGroup gp in mgs)
+                {
+                    if (gp.JudgeID != null)
+                    {
+                        ShowMessageInfo("已经添加过裁判信息！");
+                        return;
+                    }
+                }
+                gymDBService.Add(mainmatch);
+                MatchGroup group = mgs.First();
+                group.Weight = 0;
+                group.JudgeID = mainjudgeid;
+                gymDBService.Update(group);
+                Client.ClientSendMsg("主裁判" + "," + Convert.ToInt32(MainID.Text) + "," + groupid);
                 foreach (string groupjudge in g_judges)
                 {
                     foreach (Judge judge in judges)
@@ -96,17 +116,16 @@ namespace Login.Views
                         {
                             MatchGroup match = new MatchGroup(item.groupID, judge.JudgeID, 1);
                             gymDBService.Add(match);
-                            Client1.ClientSendMsg(judge.JudgeID + "," + groupid);
+                            Client.ClientSendMsg(judge.JudgeID + "," + groupid);
                         }
                     }
                 }
+                //MatchGroup mainmatch = new MatchGroup(item.groupID, Convert.ToInt32(MainID.Text), 0);
+                //gymDBService.Add(mainmatch);
+                ShowMessageInfo("已提交！");
             }
             else
-            {
                 ShowMessageInfo("信息未填写完整！");
-            }
-
-
         }
 
         private void MainJudgeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -146,6 +165,14 @@ namespace Login.Views
                 Message = { Text = message }
             };
             await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+
+        }
+
+        //返回按钮
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ChangePage.Content = new Frame()
+            { Content = new ManagePage() };
         }
     }
 }

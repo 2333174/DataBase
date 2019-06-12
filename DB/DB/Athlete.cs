@@ -22,6 +22,11 @@ namespace DB
             Gender = athleteGender;
             personalresult = new HashSet<PersonalResult>();
         }
+        public Athlete(string athleteName, string athleteIDnum)
+        {
+            Name = athleteName;
+            IDNumber = athleteIDnum;
+        }
 
         [Required]
         [StringLength(20)]

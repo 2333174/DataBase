@@ -9,6 +9,7 @@ namespace DB
     [Table("gymdb.personalresult")]
     public partial class PersonalResult
     {
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PersonalResult()
         {
@@ -28,6 +29,28 @@ namespace DB
             AthleteID = athleteID;
             SportsEvent = sportsEvent;
             Role = (sbyte)role;
+        }
+
+        public PersonalResult(string athleteID, string sportsEvent, int role,int suq)
+        {
+            AthleteID = athleteID;
+            SportsEvent = sportsEvent;
+            Role = (sbyte)role;
+            Suq = (sbyte)suq;
+        }
+
+        public PersonalResult(string athleteID, string sportsEvent, short grade, short ranking)
+        {
+            AthleteID = athleteID;
+            SportsEvent = sportsEvent;
+            Grade = grade;
+            Ranking = ranking;
+        }
+
+        public PersonalResult(string atheleteID, int atheletegrade)
+        {
+            AthleteID = atheleteID;
+            Grade = (short)atheletegrade;
         }
 
         [Required]

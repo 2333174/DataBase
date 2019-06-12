@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using DB;
+using Login.Views;
+using System.Windows.Controls;
 
 namespace Login.ViewModels
 {
     class GradePageViewModel:BaseViewModel
     {
-        public GradePageViewModel(int judgeID, int groupKey)
+        public GradePage gradePage;
+        public int judgeID;
+        public GradePageViewModel(int judgeID, int groupKey,GradePage page)
         {
+            this.judgeID = judgeID;
+            gradePage = page;
             SubmitCommand = new Commands.DelegateCommand();
             SubmitCommand.ExecuteAction = new Action<object>(Submit);
             GymDBService dbs = new GymDBService();
@@ -76,8 +82,8 @@ namespace Login.ViewModels
                 GymDBService dbs = new GymDBService();
                 dbs.Update(tmp);
             }
+            Client.ClientSendMsg("分裁判打完分:" + target.GroupID);
             ShowMessageInfo("打分成功！");
-            Client1.ClientSendMsg("分裁判打完分:"+ target.GroupID);
         }
 
         private async void ShowMessageInfo(string message)
@@ -86,7 +92,14 @@ namespace Login.ViewModels
             {
                 Message = { Text = message }
             };
-            await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+            var result = await MaterialDesignThemes.Wpf.DialogHost.Show(samMessageDialog);
+            if (Equals(result,true))
+            {
+                gradePage.GradePage1.Content = new Frame
+                {
+                    Content = new welcomePage(judgeID)
+                };
+            }
         }
 
         private async void ShowWarningInfo(string message)
