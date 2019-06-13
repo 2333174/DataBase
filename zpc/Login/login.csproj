@@ -86,10 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChooseJudgeGridItem.cs" />
+    <Compile Include="Models\ChooseJudgeGridItem.cs" />
     <Compile Include="Models\ComboItem.cs" />
-    <Compile Include="ShowGradeGridItem.cs" />
-    <Compile Include="TeamResultGridItem.cs" />
+    <Compile Include="Models\ShowGradeGridItem.cs" />
+    <Compile Include="Models\TeamResultGridItem.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="ViewModels\AthletePRViewModel.cs" />
@@ -104,7 +104,7 @@
       <DependentUpon>AddAccountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Manage_DataGridRow.cs" />
+    <Compile Include="Models\Manage_DataGridRow.cs" />
     <Compile Include="Models\DataGridItem.cs" />
     <Compile Include="ViewModels\AthleteEntryViewModel.cs" />
     <Compile Include="ViewModels\AthleteInfoViewModel.cs" />
