@@ -25,8 +25,8 @@ namespace Login.Views
         {
             InitializeComponent();
             accounts = new List<Account>();
-            HashSet<Manage_DataGridRow> prerows = new HashSet<Manage_DataGridRow>();
-            HashSet<Manage_DataGridRow> finalrows = new HashSet<Manage_DataGridRow>();
+            List<Manage_DataGridRow> prerows = new List<Manage_DataGridRow>();
+            List<Manage_DataGridRow> finalrows = new List<Manage_DataGridRow>();
             gymDBService = new GymDBService();
             GymDB db = new GymDB();
             logins = db.login.ToList();
@@ -37,6 +37,8 @@ namespace Login.Views
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
@@ -45,18 +47,15 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName);
-                    bool isIn = false;
-                    foreach (var dgi in prerows)
-                        if (dgi.Equals(manage_DataGridRow))
-                            isIn = true;
-                    if(!isIn)
-                        prerows.Add(manage_DataGridRow);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    prerows.Add(manage_DataGridRow);
                 }
                 else if (p.Role == 1 && p.SportsEvent[3] == '1')
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
@@ -65,13 +64,8 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName);
-                    bool isIn = false;
-                    foreach (var dgi in finalrows)
-                        if (dgi.Equals(manage_DataGridRow))
-                            isIn = true;
-                    if (!isIn)
-                        finalrows.Add(manage_DataGridRow);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    finalrows.Add(manage_DataGridRow);
                 }
             }
             preMatchGrid.ItemsSource = prerows;
@@ -140,7 +134,7 @@ namespace Login.Views
             }
             GymDBService gymDBService = new GymDBService();
             //存放预赛表信息的List
-            HashSet<Manage_DataGridRow> preMatch = new HashSet<Manage_DataGridRow>();
+            List<Manage_DataGridRow> preMatch = new List<Manage_DataGridRow>();
             //自动分组
             gymDBService.Grouping(3);
             //获得所有的小组
@@ -164,6 +158,8 @@ namespace Login.Views
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
@@ -172,13 +168,8 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName);
-                    bool isIn = false;
-                    foreach (var dgi in preMatch)
-                        if (dgi.Equals(manage_DataGridRow))
-                            isIn = true;
-                    if (!isIn)
-                        preMatch.Add(manage_DataGridRow);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    preMatch.Add(manage_DataGridRow);
                 }
                 i++;
             }
@@ -215,6 +206,8 @@ namespace Login.Views
                 {
                     //获得Athlete
                     Athlete athlete = gymDBService.GetAthleteByID(p.AthleteID);
+                    //获得运动员姓名
+                    string athName = athlete.Name;
                     //获得小组编号
                     string groupID = p.GroupID;
                     //得到项目名称
@@ -223,13 +216,8 @@ namespace Login.Views
                     Team team = gymDBService.GetTeamByTID((int)athlete.TID);
                     //获得队名
                     string tName = team.TName;
-                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName);
-                    bool isIn = false;
-                    foreach (var dgi in finalMatch)
-                        if (dgi.Equals(manage_DataGridRow))
-                            isIn = true;
-                    if (!isIn)
-                        finalMatch.Add(manage_DataGridRow);
+                    Manage_DataGridRow manage_DataGridRow = new Manage_DataGridRow(pName, groupID, tName, athName);
+                    finalMatch.Add(manage_DataGridRow);
                 }
                 i++;
             }
