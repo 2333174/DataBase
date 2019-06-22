@@ -100,6 +100,7 @@ namespace Login.Views
             }
             else
             {
+
                 if (row.groupID == null)
                 {
                     ShowMessageInfo("请先生成赛事表再添加裁判！", prehost);

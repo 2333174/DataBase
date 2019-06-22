@@ -177,9 +177,9 @@ namespace Server
                             }
                             else
                             {
-                                bool res = IsMatchGroupIn(introductions[1]);
-                                if (!res)
-                                    SEJudgedGroup[introductions[1].Substring(0,4)].Add(introductions[1]);
+                                string res = IsMatchGroupIn(introductions[1]);
+                                if (res != null)
+                                    SEJudgedGroup[res].Add(introductions[1]);
                                 else
                                     throw new Exception("重复打分!");
                             }
@@ -189,7 +189,7 @@ namespace Server
                                 if (introductions[1].Substring(3, 1) == "0")
                                 {
                                     GymDBService dbs = new GymDBService();
-                                    dbs.Promote(prs, 3, 3);
+                                    dbs.Promote(prs, 8, 8);
                                 }
                                 SortedSet<Socket> sockets = new SortedSet<Socket>();
                                 foreach (var pr in prs)
@@ -255,15 +255,15 @@ namespace Server
             }
         }
 
-        private static bool IsMatchGroupIn(string mgid)
+        private static string IsMatchGroupIn(string mgid)
         {
             List<string> keys = SEJudgedGroup.Keys.ToList();
             for (int i = 0; i < keys.Count(); i++)
             {
                 if (SEJudgedGroup[keys[i]].Contains(mgid))
-                    return true;
+                    return keys[i];
             }
-            return false;
+            return null;
         }
 
         private static bool CheckSEIsJudgesOver(string se)
