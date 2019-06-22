@@ -35,7 +35,7 @@
                     </materialDesign:Flipper>
                     <materialDesign:DialogHost CloseOnClickAway="True" x:Name="add" Identifier="addAccount" IsTabStop="False" Grid.ColumnSpan="2" Margin="0,0,0.4,-0.2"/>
                     <materialDesign:DialogHost CloseOnClickAway="True" x:Name="addFail" Identifier="addAccount" IsTabStop="False"/>
-                    <DataGrid Name="accountGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Width="350" BorderBrush="#FF527C72" Opacity="0.7" Margin="216,68,228.4,78.8" >
+                    <DataGrid Name="accountGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Width="350" BorderBrush="#FF527C72" Opacity="0.7" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=userName}" ClipboardContentBinding="{x:Null}" Header="  账号  "/>
                             <DataGridTextColumn Binding="{Binding Path=password}" ClipboardContentBinding="{x:Null}" Header="  密码  "/>
@@ -45,7 +45,7 @@
                     </DataGrid>
                     <Button  Content="添加" HorizontalAlignment="Right" Margin="0,0,75.4,200" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addGrid_Click" Grid.Column="1"/>
                     <Button  Content="删除" HorizontalAlignment="Right" Margin="0,0,75.4,150" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="deleteGrid_Click" Grid.Column="1"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="确定" Margin="0,0,0,40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addAccount_Click" Grid.Column="1"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="确定" Margin="0,0,0,80" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.969,0.583" Height="32" Click="addAccount_Click" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="设置比赛类型" HorizontalAlignment="Left"  Margin="-2,-2,-40.667,0.333" Background="{x:Null}" Opacity="0.7" Width="112">
@@ -85,46 +85,32 @@
             </TabItem>
             <TabItem Header="预赛" Margin="0,-2,-88,0" Background="{x:Null}" Opacity="0.7" HorizontalAlignment="Left" Width="112">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="307*"/>
-                        <ColumnDefinition Width="98*"/>
-                        <ColumnDefinition Width="389*"/>
-                    </Grid.ColumnDefinitions>
-                    <materialDesign:DialogHost Name="prehost" Identifier="prehost" Grid.ColumnSpan="3" Margin="0,0,0.001,-0.333"></materialDesign:DialogHost>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Left" Margin="118.666,259,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_5" Grid.Column="2"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="添加裁判" HorizontalAlignment="Left" Margin="118.666,178,0,0" VerticalAlignment="Top" Width="130" Height="32" Foreground="White" Click="Button_Click_4" Grid.Column="2"/>
-                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="109,67,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="3" >
+                    <materialDesign:DialogHost Name="prehost" Identifier="prehost" Grid.ColumnSpan="2" Margin="0,0,0.4,-0.2"></materialDesign:DialogHost>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="生成预赛赛事表" HorizontalAlignment="Right" Margin="0,185,80.4,255.8" VerticalAlignment="Center" Width="130" Height="32" Click="Button_Click_5" Grid.Column="1"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="添加裁判" HorizontalAlignment="Right" Margin="0,255,80.4,185.8" VerticalAlignment="Center" Width="130" Height="32" Foreground="White" Click="Button_Click_4" Grid.Column="1"/>
+                    <DataGrid Name="preMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="259" Margin="150,0,0,0" VerticalAlignment="Center" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
                             <DataGridTextColumn Binding="{Binding Path=team}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
-                            <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="决赛" Margin="0,-2,-131,0.333" Opacity="0.7" Background="{x:Null}" HorizontalAlignment="Left" Width="112"  RenderTransformOrigin="-0.376,0.595">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="176*"/>
-                        <ColumnDefinition Width="159*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <materialDesign:DialogHost Name="finalhost" Identifier="finalhost" Grid.ColumnSpan="3" Margin="0,0,0,-0.333"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="显示决赛赛事表" HorizontalAlignment="Left" Margin="56,253,0,0" VerticalAlignment="Top" Width="130" Height="28" Click="Button_Click_3" Grid.Column="2"/>
-                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="109,58,0,0" VerticalAlignment="Top" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2">
+                    <materialDesign:DialogHost Name="finalhost" Identifier="finalhost" Grid.ColumnSpan="2" Margin="0,0,0.4,-0.2"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="显示决赛赛事表" HorizontalAlignment="Right" Margin="0,186,80,256.8" VerticalAlignment="Center" Width="150" Height="30" Click="Button_Click_3" Grid.Column="1"/>
+                    <DataGrid Name="finalMatchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="287" Margin="150,93,0,92.8" VerticalAlignment="Center" Width="auto" BorderBrush="#FF527C72" Opacity="0.7" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=project}" ClipboardContentBinding="{x:Null}" Header="  项目  "/>
                             <DataGridTextColumn Binding="{Binding Path=groupID}" ClipboardContentBinding="{x:Null}" Header="  小组编号  "/>
                             <DataGridTextColumn Binding="{Binding Path=team}" ClipboardContentBinding="{x:Null}" Header="  代表队  "/>
-                            <DataGridTextColumn Binding="{Binding Path=athlete}" ClipboardContentBinding="{x:Null}" Header="  运动员  "/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="添加裁判" HorizontalAlignment="Left" Margin="56,182,0,0" VerticalAlignment="Top" Width="130" Height="32" Click="Button_Click_6" Grid.Column="2"/>
+                    <Button Content="添加裁判" Style="{StaticResource MaterialDesignRaisedDarkButton}" HorizontalAlignment="Right" Margin="0,256,80,186.8" VerticalAlignment="Center" Width="150" Height="30" Click="Button_Click_6" Grid.Column="1"/>
                 </Grid>
             </TabItem>
-
         </TabControl>
     </ContentControl>
 </Page>
