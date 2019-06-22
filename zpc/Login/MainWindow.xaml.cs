@@ -24,10 +24,8 @@ namespace Login
         public MainWindow()
         {
             InitializeComponent();
-            //ChangePage.Content = new Frame()
-            //{ Content = new ChosePage() };
             ChangePage.Content = new Frame()
-            { Content = new ManagePage() };
+            { Content = new ChosePage() };
         }
         
         protected override void OnClosed(EventArgs e)

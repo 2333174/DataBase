@@ -918,7 +918,7 @@ namespace DB
                     GymDBService dbs = new GymDBService();
                     if (query.Count() < GroupSize)
                     {
-                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0, 3) + 11.ToString());
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0, 3) + 10.ToString());
                         dbs.Add(mg);
                         for (int j = 0; j < query.Count(); j++)
                         {
@@ -928,7 +928,7 @@ namespace DB
                     }
                     for (int i = 0; i < query.Count() / GroupSize; i++)
                     {
-                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0,3)+1.ToString()+(i+1).ToString());
+                        MatchGroup mg = new MatchGroup(query[0].GroupID.Substring(0,3)+1.ToString()+i.ToString());
                         dbs.Add(mg);
                         for (int j = 0; j < GroupSize; j++)
                         {
